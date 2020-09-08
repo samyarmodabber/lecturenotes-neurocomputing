@@ -1,0 +1,24 @@
+- file: intro
+  numbered: true
+  expand_sections: true
+
+- part: Introduction
+  chapters:
+    - file: 1-intro/1-Introduction
+    - file: 1-intro/2-Neurons
+
+- part: Linear models
+  chapters:
+    - file: 2-linear/1-Optimization
+
+- part: Deep learning
+  chapters:
+    - file: 3-deeplearning/1-NN
+
+- part: Neurocomputing
+  chapters:
+    - file: 4-neurocomputing/1-Limits
+
+- part: Exercises
+  chapters:
+    - file: 5-exercises/1-Python
