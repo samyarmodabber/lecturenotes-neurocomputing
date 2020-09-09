@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Introduction &#8212; Neurocomputing</title>
+    <title>2. My simple notebook &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -34,21 +34,20 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/1-Introduction.html" />
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/2-Numpy.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Neurons" href="2-Neurons.html" />
-    <link rel="prev" title="Neurocomputing" href="../intro.html" />
+    <link rel="prev" title="1. Introduction To Python" href="1-Python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/1-Introduction.html" />
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/2-Numpy.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Introduction" />
-<meta property="og:description" content="Introduction" />
+<meta property="og:title"       content="My simple notebook" />
+<meta property="og:description" content="My simple notebook  Some intro markdown!  print(&#34;A python cell&#34;)  A python cell   A section  And some more markdown…A section  And some more markdown…" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -92,14 +91,14 @@
   Introduction
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
    1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2-Neurons.html">
+  <a class="reference internal" href="../1-intro/2-Neurons.html">
    2. Neurons
   </a>
  </li>
@@ -145,14 +144,14 @@
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../5-exercises/1-Python.html">
+  <a class="reference internal" href="1-Python.html">
    1. Introduction To Python
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../5-exercises/2-Numpy.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    2. My simple notebook
   </a>
  </li>
@@ -196,9 +195,12 @@
     
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/5-exercises/2-Numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/1-intro/1-Introduction.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/5-exercises/2-Numpy.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -217,6 +219,23 @@
 
         <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/2-Numpy.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
     </div>
 
     <!-- Table of contents -->
@@ -225,7 +244,14 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-section">
+   2.1. A section
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -234,8 +260,25 @@
         
               <div>
                 
-  <div class="section" id="introduction">
-<h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="my-simple-notebook">
+<h1><span class="section-number">2. </span>My simple notebook<a class="headerlink" href="#my-simple-notebook" title="Permalink to this headline">¶</a></h1>
+<p>Some <strong>intro markdown</strong>!</p>
+<div class="cell tag_mytag docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;A python cell&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A python cell
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="a-section">
+<h2><span class="section-number">2.1. </span>A section<a class="headerlink" href="#a-section" title="Permalink to this headline">¶</a></h2>
+<p>And some more markdown…</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -251,7 +294,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./1-intro"
+            path: "./5-exercises"
         },
         predefinedOutput: true
     }
@@ -266,8 +309,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Neurocomputing</a>
-    <a class='right-next' id="next-link" href="2-Neurons.html" title="next page"><span class="section-number">2. </span>Neurons</a>
+    <a class='left-prev' id="prev-link" href="1-Python.html" title="previous page"><span class="section-number">1. </span>Introduction To Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
