@@ -22,3 +22,4 @@
 - part: Exercises
   chapters:
     - file: 5-exercises/1-Python
+    - file: 5-exercises/2-Numpy
