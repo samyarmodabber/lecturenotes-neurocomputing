@@ -37,8 +37,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/1-Optimization.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Neural networks" href="../3-deeplearning/1-NN.html" />
-    <link rel="prev" title="2. Neurons" href="../1-intro/2-Neurons.html" />
+    <link rel="next" title="2. Linear Regression" href="2-LinearRegression.html" />
+    <link rel="prev" title="3. Math basics" href="../1-intro/3-Math.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -48,7 +48,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/1-Optimization.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Optimization" />
-<meta property="og:description" content="Optimization  Test video  &lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container" />
+<meta property="og:description" content="Optimization  &lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .em" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -103,6 +103,11 @@
    2. Neurons
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Math.html">
+   3. Math basics
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -113,6 +118,36 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-MaximumLikelihoodEstimation.html">
+   5. Maximum Likelihood Estimation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-MultiClassification.html">
+   6. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-LearningTheory.html">
+   7. Learning theory
   </a>
  </li>
 </ul>
@@ -147,13 +182,20 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../5-exercises/1-Python.html">
-   1. Introduction To Python
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
   </a>
  </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../5-exercises/2-Numpy.html">
-   2. My simple notebook
+  <a class="reference internal" href="../zreferences.html">
+   1. References
   </a>
  </li>
 </ul>
@@ -236,8 +278,7 @@
                 
   <div class="section" id="optimization">
 <h1><span class="section-number">1. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
-<p>Test video</p>
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/ySG_iKk7nq8' frameborder='0' allowfullscreen></iframe></div>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -268,17 +309,20 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../1-intro/2-Neurons.html" title="previous page"><span class="section-number">2. </span>Neurons</a>
-    <a class='right-next' id="next-link" href="../3-deeplearning/1-NN.html" title="next page"><span class="section-number">1. </span>Neural networks</a>
+    <a class='left-prev' id="prev-link" href="../1-intro/3-Math.html" title="previous page"><span class="section-number">3. </span>Math basics</a>
+    <a class='right-next' id="next-link" href="2-LinearRegression.html" title="next page"><span class="section-number">2. </span>Linear Regression</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         
-          By Julien Vitay<br/>
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
         
             &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
       </p>
     </div>
   </footer>
