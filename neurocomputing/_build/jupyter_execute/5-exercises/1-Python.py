@@ -1,4 +1,4 @@
-# Introduction To Python
+# Introduction To Python (notebook)
 
 ## Introduction
 
@@ -100,7 +100,7 @@ text = 'Hello World!'
 print(text)
 ```
 
-print("Hello World!")
+
 
 There are three types of cells:
 

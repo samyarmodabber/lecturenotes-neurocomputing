@@ -1,6 +1,6 @@
 # Book settings
 title: Neurocomputing
-author: Julien Vitay
+author: Julien Vitay - julien.vitay@informatik.tu-chemnitz.de
 logo: img/tuc.svg
 
 latex:
@@ -11,6 +11,7 @@ latex:
 sphinx:
   config:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  extra_extensions: ['IPython.sphinxext.ipython_console_highlighting']
 
 # Information about where the book exists on the web
 repository:
@@ -24,18 +25,11 @@ launch_buttons:
 
 # HTML-specific settings
 html:
-  favicon                   : ""  # A path to a favicon image
-  use_edit_page_button      : false  # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
-  use_repository_button     : false  # Whether to add a link to your repository button
-  use_issues_button         : false  # Whether to add an "open an issue" button
   extra_navbar              : Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
-  extra_footer              : ""  # Will be displayed underneath the footer.
-  google_analytics_id       : ""  # A GA id that can be used to track book views.
+  extra_footer              : "Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence"  # Will be displayed underneath the footer.
   home_page_in_navbar       : true  # Whether to include your home page in the left Navigation Bar
   baseurl                   : "https://julien-vitay.net/lecturenotes-neurocomputing"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
-  comments:
-    hypothesis              : false
-    utterances              : false
 
-  execute:
-    execute_notebooks         : off  # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")
+
+execute:
+  execute_notebooks         : "off"  # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")

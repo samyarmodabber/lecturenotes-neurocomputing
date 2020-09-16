@@ -6,10 +6,17 @@
   chapters:
     - file: 1-intro/1-Introduction
     - file: 1-intro/2-Neurons
+    - file: 1-intro/3-Math
 
 - part: Linear models
   chapters:
     - file: 2-linear/1-Optimization
+    - file: 2-linear/2-LinearRegression
+    - file: 2-linear/3-Regularization
+    - file: 2-linear/4-LinearClassification
+    - file: 2-linear/5-MaximumLikelihoodEstimation
+    - file: 2-linear/6-MultiClassification
+    - file: 2-linear/7-LearningTheory
 
 - part: Deep learning
   chapters:
@@ -21,5 +28,12 @@
 
 - part: Exercises
   chapters:
-    - file: 5-exercises/1-Python
-    - file: 5-exercises/2-Numpy
+    - file: 5-exercises/ex1-Python
+      sections:
+        - file: 5-exercises/1-Python
+        - file: 5-exercises/1-Python-solution
+
+
+- part: References
+  chapters:
+    - file: zreferences
