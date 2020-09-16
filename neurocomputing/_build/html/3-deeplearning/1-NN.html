@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Neural networks &#8212; Neurocomputing</title>
+    <title>1. Backpropagation &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,7 +37,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/1-NN.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Limits of deep Learning" href="../4-neurocomputing/1-Limits.html" />
+    <link rel="next" title="2. Deep neural networks" href="2-DNN.html" />
     <link rel="prev" title="7. Learning theory" href="../2-linear/7-LearningTheory.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,8 +47,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/1-NN.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Neural networks" />
-<meta property="og:description" content="Neural networks  &lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, " />
+<meta property="og:title"       content="Backpropagation" />
+<meta property="og:description" content="Backpropagation  &lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, " />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -111,7 +111,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Linear models
+  1 - Linear models
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -153,19 +153,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Deep learning
+  2 - Deep learning
  </span>
 </p>
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Neural networks
+   1. Backpropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-CNN.html">
+   3. Convolutional neural networks
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Neurocomputing
+  3 - Neurocomputing
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -276,9 +286,10 @@
         
               <div>
                 
-  <div class="section" id="neural-networks">
-<h1><span class="section-number">1. </span>Neural networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="backpropagation">
+<h1><span class="section-number">1. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h1>
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
+<p><a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[2]</a></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -310,7 +321,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../2-linear/7-LearningTheory.html" title="previous page"><span class="section-number">7. </span>Learning theory</a>
-    <a class='right-next' id="next-link" href="../4-neurocomputing/1-Limits.html" title="next page"><span class="section-number">1. </span>Limits of deep Learning</a>
+    <a class='right-next' id="next-link" href="2-DNN.html" title="next page"><span class="section-number">2. </span>Deep neural networks</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

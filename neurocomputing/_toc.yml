@@ -8,7 +8,7 @@
     - file: 1-intro/2-Neurons
     - file: 1-intro/3-Math
 
-- part: Linear models
+- part: 1 - Linear models
   chapters:
     - file: 2-linear/1-Optimization
     - file: 2-linear/2-LinearRegression
@@ -18,20 +18,34 @@
     - file: 2-linear/6-MultiClassification
     - file: 2-linear/7-LearningTheory
 
-- part: Deep learning
+- part: 2 - Deep learning
   chapters:
     - file: 3-deeplearning/1-NN
+    - file: 3-deeplearning/2-DNN
+    - file: 3-deeplearning/3-CNN
+    - file: 3-deeplearning/4-ObjectDetection
+    - file: 3-deeplearning/5-Autoencoders
+    - file: 3-deeplearning/6-RBM
+    - file: 3-deeplearning/7-Segnets
+    - file: 3-deeplearning/8-GAN
+    - file: 3-deeplearning/9-RNN
 
-- part: Neurocomputing
+- part: 3 - Neurocomputing
   chapters:
     - file: 4-neurocomputing/1-Limits
+    - file: 4-neurocomputing/2-Hopfield
+    - file: 4-neurocomputing/3-NeuralFields
+    - file: 4-neurocomputing/4-Hebbian
+    - file: 4-neurocomputing/5-Spiking
 
 - part: Exercises
   chapters:
     - file: 5-exercises/ex1-Python
       sections:
         - file: 5-exercises/1-Python
+          title: Notebook
         - file: 5-exercises/1-Python-solution
+          title: Solution
 
 
 - part: References

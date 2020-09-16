@@ -1,0 +1,2 @@
+# Neurocomputing exercises
+
