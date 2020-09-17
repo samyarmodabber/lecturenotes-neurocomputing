@@ -27,6 +27,8 @@
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -172,6 +174,36 @@
    3. Convolutional neural networks
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-Autoencoders.html">
+   5. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-RBM.html">
+   6. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-Segnets.html">
+   7. Segmentation networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative Adversarial Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -182,6 +214,31 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
    1. Limits of deep Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
+   4. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
+   5. Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
+   6. Spiking networks
   </a>
  </li>
 </ul>
@@ -277,7 +334,60 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-neurocomputing">
+   1.1. What is neurocomputing?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications-of-deep-learning">
+   1.2. Applications of deep learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supervised-learning">
+     1.2.1. Supervised learning
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#feedforward-neural-networks">
+       1.2.1.1. Feedforward neural networks
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#recurrent-neural-networks">
+       1.2.1.2. Recurrent neural networks
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unsupervised-learning">
+     1.2.2. Unsupervised learning
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#feature-extraction">
+       1.2.2.1. Feature extraction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generative-networks">
+       1.2.2.2. Generative networks
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reinforcement-learning">
+     1.2.3. Reinforcement learning
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -289,6 +399,107 @@
   <div class="section" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/1.1-Introduction.html">html</a>, <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf">pdf</a></p>
+<div class="section" id="what-is-neurocomputing">
+<h2><span class="section-number">1.1. </span>What is neurocomputing?<a class="headerlink" href="#what-is-neurocomputing" title="Permalink to this headline">¶</a></h2>
+<p>Let’s first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.</p>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/aimldl.png"><img alt="../_images/aimldl.png" src="../_images/aimldl.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Source: <a class="reference external" href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>The term <strong>Artificial Intelligence</strong> was coined by John McCarthy at the Dartmouth Summer Research Project on Artificial Intelligence in <strong>1956</strong>:</p>
+<blockquote>
+<div><p>The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.</p>
+</div></blockquote>
+<p>Good old-fashion AI (GOFAI) approaches were purely symbolic (logical systems, knowledge-based systems) or using linear neural networks. They were able to play checkers, prove mathematical theorems, make simple conversations (ELIZA), translate languages…</p>
+<p><strong>Machine learning</strong> (ML) is a branch of AI that focuses on <strong>learning from examples</strong> (data-driven AI). It is sometimes also referred to as big data, data science, operational research, pattern recognition… ML algorithms include:</p>
+<ul class="simple">
+<li><p>Artificial Neural Networks (multi-layer perceptrons)</p></li>
+<li><p>Statistical analysis (Bayesian modeling, PCA)</p></li>
+<li><p>Clustering algorithms (k-means, GMM, spectral clustering)</p></li>
+<li><p>Support vector machines</p></li>
+<li><p>Decision trees, random forests</p></li>
+</ul>
+<p><strong>Deep Learning</strong> is a recent re-branding of artificial neural networks. It focuses on learning high-level representations of the data, using highly non-linear neural networks. Many architectures have been developped, including:</p>
+<ul class="simple">
+<li><p>Deep neural networks (DNN)</p></li>
+<li><p>Convolutional neural networks (CNN)</p></li>
+<li><p>Recurrent neural networks (RNN)</p></li>
+<li><p>Generative models (GAN, VAE)</p></li>
+<li><p>Deep reinforcement learning (DQN, A3C, PPO)</p></li>
+</ul>
+<p><img alt="" src="../_images/neurocomputing.svg" /></p>
+<p><strong>Neurocomputing</strong> is at the intersection between computational neuroscience and artificial neural networks (deep learning). <strong>Computational neuroscience</strong> studies the functioning of the brain (human or animal) through biologically detailed models, either at the functional level (e.g. visual attention, decision-making) or cellular level (individual neurons, synapses, neurotransmitters, etc). The goal of computational neuroscience is 1) to provide theoretical explanations to the experimental observations made by neuroscientists and 2) make predictions that can be verified experimentally. Moreover, understanding how the brain solves real-life problems might allow to design better AI algorithms. If you are interested in computational neuroscience, make sure to visit the courses <strong>Neurokognition</strong> I and II taught by Prof. Dr. Hamker:</p>
+<p><a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurokognition/">https://www.tu-chemnitz.de/informatik/KI/edu/neurokognition/</a></p>
+<p>Neurocomputing aims at bringing the mechanisms underlying human cognition into artificial intelligence. The first part of this course focuses on deep learning, while the second will discuss how more biologically realistic neural networks could help designing better AI systems.</p>
+</div>
+<div class="section" id="applications-of-deep-learning">
+<h2><span class="section-number">1.2. </span>Applications of deep learning<a class="headerlink" href="#applications-of-deep-learning" title="Permalink to this headline">¶</a></h2>
+<p>Machine Learning applications are generally divided into three main branches:</p>
+<ul class="simple">
+<li><p><strong>Supervised learning</strong>: The program is trained on a pre-defined set of training examples and used to make correct predictions when given new data.</p></li>
+<li><p><strong>Unsupervised learning</strong>: The program is given a bunch of data and must find patterns and relationships therein.</p></li>
+<li><p><strong>Reinforcement learning</strong>: The program explores its environment by producing actions and receiving rewards.</p></li>
+</ul>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/ml-areas.png"><img alt="../_images/ml-areas.png" src="../_images/ml-areas.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Source: <a class="reference external" href="http://www.isaziconsulting.co.za/machinelearning.html">http://www.isaziconsulting.co.za/machinelearning.html</a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Deep learning has recently revolutionized these types of machine learning, so let’s have a look at some concrete examples for motivation. At the end of the course, if you also perform all exercises, you should be able to reproduce these applications.</p>
+<div class="section" id="supervised-learning">
+<h3><span class="section-number">1.2.1. </span>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/supervisedlearning.png"><img alt="../_images/supervisedlearning.png" src="../_images/supervisedlearning.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Source: Andrew Ng, Stanford CS229, <a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math notranslate nohighlight">\(N\)</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
+<p>What we want to learn is <strong>parameterized model</strong> <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e. the discrepancy between the prediction <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> and the desired output <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
+<p>Depending on the nature of the outputs <span class="math notranslate nohighlight">\(t\)</span>, we have two different supervised problems:</p>
+<ul class="simple">
+<li><p>In <strong>regression</strong> tasks, the outputs can take an infinity of values (e.g. real numbers). The following figure shows how examples of flat surfaces (input <span class="math notranslate nohighlight">\(x_i\)</span>)  and prices (output <span class="math notranslate nohighlight">\(t_i\)</span>) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform <strong>linear regression</strong>, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price <span class="math notranslate nohighlight">\(y_i\)</span> is never far from the ground truth <span class="math notranslate nohighlight">\(t_i\)</span>. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.</p></li>
+</ul>
+<p><img alt="" src="../_images/regression-animation3.png" /></p>
+<ul class="simple">
+<li><p>In <strong>classification</strong> tasks, the outputs are discrete, i.e. take only a finite number of different values (called classes or labels). When there are only two classes, they are called the positive and negative classes and the problem is a <strong>binary classification</strong>. The two classes can represent yes/no binary values, such as when when a test is positive or negative. When there are more than two classes, they can for example represent different objects (car / bike / dog / cat…) that can be recognized on an image. The following figure depicts a binary classifiation problem, where two input features <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> (temperature and blood pressure) are used to predict the occurence of an illness (yes = ill, no = sane). The linear model is a line that separates the input space into two separate regions: all points above the line are categorized (classified) as ill, all points below as sane, even if they were not in the training data.</p></li>
+</ul>
+<p><img alt="" src="../_images/classification-animation3.png" /></p>
+<p>In practice, when using neural networks, the distinction between classification and regression is not very important, but it can be relevant for other ML techniques (decision trees only work for classification problems, for example).</p>
+<div class="section" id="feedforward-neural-networks">
+<h4><span class="section-number">1.2.1.1. </span>Feedforward neural networks<a class="headerlink" href="#feedforward-neural-networks" title="Permalink to this headline">¶</a></h4>
+<p>As we will see later, an <strong>artificial neuron</strong> is a mathematical model able to perform <strong>linear</strong> classification or regression using weighted sums of inputs:</p>
+<div class="math notranslate nohighlight">
+\[y = f(\sum_{i=1}^d w_i \, x_i + b)\]</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/artificialneuron.svg"><img alt="../_images/artificialneuron.svg" src="../_images/artificialneuron.svg" width="60%" /></a>
+</div>
+<p>By stacking layers of artificial neurons, we obtain a <strong>feedforward neural network</strong> able to solve non-linear classification and regression problems.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/deep.svg"><img alt="../_images/deep.svg" src="../_images/deep.svg" width="60%" /></a>
+</div>
+<p><em>Fully-connected layers</em> of neurons can be replaced by <em>convolutional layers</em> when dealing with images as inputs, leading to the very successful <strong>convolutional neural networks</strong> (CNN).</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/dcn.png"><img alt="../_images/dcn.png" src="../_images/dcn.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>The “only” thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm <a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[RHW86]</a> (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60’s, with a resurgence in the 80’s thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id2">[LBBH98]</a> to automatically classify single digits on ZIP postal codes.</p>
+</div>
+<div class="section" id="recurrent-neural-networks">
+<h4><span class="section-number">1.2.1.2. </span>Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="unsupervised-learning">
+<h3><span class="section-number">1.2.2. </span>Unsupervised learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="feature-extraction">
+<h4><span class="section-number">1.2.2.1. </span>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="generative-networks">
+<h4><span class="section-number">1.2.2.2. </span>Generative networks<a class="headerlink" href="#generative-networks" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="reinforcement-learning">
+<h3><span class="section-number">1.2.3. </span>Reinforcement learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
