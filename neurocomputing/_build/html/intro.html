@@ -27,6 +27,8 @@
     <script src="_static/copybutton.js"></script>
     <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -213,6 +215,31 @@
    1. Limits of deep Learning
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-neurocomputing/2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-neurocomputing/4-Reservoir.html">
+   4. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-neurocomputing/5-Hebbian.html">
+   5. Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-neurocomputing/6-Spiking.html">
+   6. Spiking networks
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -318,11 +345,11 @@
   <div class="section" id="neurocomputing">
 <h1>Neurocomputing<a class="headerlink" href="#neurocomputing" title="Permalink to this headline">¶</a></h1>
 <p>These are the lecture notes for the module <strong>Neurocomputing</strong> taught by Dr. Julien Vitay at the Technische Universität Chemnitz, Faculty of Computer Science, Professorship for Artificial Intelligence.</p>
-<p>The content will be uploaded on a regular basis. Registration to the course happens on OPAL:</p>
+<p>The content will be uploaded on a regular basis during the semester. Registration to the course happens on OPAL:</p>
 <p><a class="reference external" href="https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/21637267460">https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/21637267460</a></p>
-<p>Each lecture is accompanied by a video (the slides are also available) and followed by some lecture notes which summarize the most important points to understand.</p>
+<p>Each section is accompanied by a video (the slides are also available) and followed by some lecture notes which summarize the most important points to understand. Some sections are optional in the sense that no questions will be asked at the exam, but those interested in becoming neural network experts should feel free to study them.</p>
 <p>Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and learn to use machine learning libraries such as <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, <code class="docutils literal notranslate"><span class="pre">keras</span></code> and <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>.</p>
-<p><strong>Recommended readings</strong>: <a class="bibtex reference internal" href="zreferences.html#goodfellow2016" id="id1">[1]</a>, <a class="bibtex reference internal" href="zreferences.html#haykin2009" id="id2">[3]</a>, <a class="bibtex reference internal" href="zreferences.html#chollet2017a" id="id3">[4]</a>, <a class="bibtex reference internal" href="zreferences.html#gerstner2014a" id="id4">[5]</a></p>
+<p><strong>Recommended readings</strong>: <a class="bibtex reference internal" href="zreferences.html#goodfellow2016" id="id1">[GBC16]</a>, <a class="bibtex reference internal" href="zreferences.html#haykin2009" id="id2">[Hay09]</a>, <a class="bibtex reference internal" href="zreferences.html#chollet2017a" id="id3">[Cho17]</a>, <a class="bibtex reference internal" href="zreferences.html#gerstner2014a" id="id4">[GKNP14]</a></p>
 <div class="tableofcontents-wrapper compound">
 <p class="caption"><span class="caption-text">Introduction</span></p>
 <ul>
@@ -355,6 +382,11 @@
 <p class="caption"><span class="caption-text">3 - Neurocomputing</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/1-Limits.html">1. Limits of deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/2-Hopfield.html">2. Hopfield networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/3-NeuralFields.html">3. Neural Fields (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/4-Reservoir.html">4. Reservoir computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/5-Hebbian.html">5. Hebbian learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-neurocomputing/6-Spiking.html">6. Spiking networks</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Exercises</span></p>
 <ul>
