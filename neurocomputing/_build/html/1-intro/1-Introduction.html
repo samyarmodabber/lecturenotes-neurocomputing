@@ -39,7 +39,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/1-Introduction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Neurons" href="2-Neurons.html" />
+    <link rel="next" title="2. Math basics" href="2-Math.html" />
     <link rel="prev" title="Neurocomputing" href="../intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/1-Introduction.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Introduction" />
-<meta property="og:description" content="Introduction  &lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .em" />
+<meta property="og:description" content="Introduction  &lt;style&gt;.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-c" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -101,13 +101,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="2-Neurons.html">
-   2. Neurons
+  <a class="reference internal" href="2-Math.html">
+   2. Math basics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="3-Math.html">
-   3. Math basics
+  <a class="reference internal" href="3-Neurons.html">
+   3. Neurons
   </a>
  </li>
 </ul>
@@ -368,13 +368,18 @@
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#feature-extraction">
-       1.2.2.1. Feature extraction
+      <a class="reference internal nav-link" href="#clustering-and-feature-extraction">
+       1.2.2.1. Clustering and feature extraction
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generative-networks">
-       1.2.2.2. Generative networks
+      <a class="reference internal nav-link" href="#dimensionality-reduction">
+       1.2.2.2. Dimensionality reduction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generative-models">
+       1.2.2.3. Generative models
       </a>
      </li>
     </ul>
@@ -398,14 +403,14 @@
                 
   <div class="section" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
 <p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/1.1-Introduction.html">html</a>, <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf">pdf</a></p>
 <div class="section" id="what-is-neurocomputing">
 <h2><span class="section-number">1.1. </span>What is neurocomputing?<a class="headerlink" href="#what-is-neurocomputing" title="Permalink to this headline">¶</a></h2>
 <p>Let’s first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.</p>
-<div class="figure align-default" id="id3">
+<div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/aimldl.png"><img alt="../_images/aimldl.png" src="../_images/aimldl.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Source: <a class="reference external" href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Source: <a class="reference external" href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <p>The term <strong>Artificial Intelligence</strong> was coined by John McCarthy at the Dartmouth Summer Research Project on Artificial Intelligence in <strong>1956</strong>:</p>
 <blockquote>
@@ -441,16 +446,16 @@
 <li><p><strong>Unsupervised learning</strong>: The program is given a bunch of data and must find patterns and relationships therein.</p></li>
 <li><p><strong>Reinforcement learning</strong>: The program explores its environment by producing actions and receiving rewards.</p></li>
 </ul>
-<div class="figure align-default" id="id4">
+<div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/ml-areas.png"><img alt="../_images/ml-areas.png" src="../_images/ml-areas.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Source: <a class="reference external" href="http://www.isaziconsulting.co.za/machinelearning.html">http://www.isaziconsulting.co.za/machinelearning.html</a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Source: <a class="reference external" href="http://www.isaziconsulting.co.za/machinelearning.html">http://www.isaziconsulting.co.za/machinelearning.html</a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 <p>Deep learning has recently revolutionized these types of machine learning, so let’s have a look at some concrete examples for motivation. At the end of the course, if you also perform all exercises, you should be able to reproduce these applications.</p>
 <div class="section" id="supervised-learning">
 <h3><span class="section-number">1.2.1. </span>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-default" id="id5">
+<div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/supervisedlearning.png"><img alt="../_images/supervisedlearning.png" src="../_images/supervisedlearning.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Source: Andrew Ng, Stanford CS229, <a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math notranslate nohighlight">\(N\)</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
 <p>What we want to learn is <strong>parameterized model</strong> <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e. the discrepancy between the prediction <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> and the desired output <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
@@ -469,35 +474,107 @@
 <p>As we will see later, an <strong>artificial neuron</strong> is a mathematical model able to perform <strong>linear</strong> classification or regression using weighted sums of inputs:</p>
 <div class="math notranslate nohighlight">
 \[y = f(\sum_{i=1}^d w_i \, x_i + b)\]</div>
-<div class="figure align-default">
+<div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/artificialneuron.svg"><img alt="../_images/artificialneuron.svg" src="../_images/artificialneuron.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Artificial neuron.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <p>By stacking layers of artificial neurons, we obtain a <strong>feedforward neural network</strong> able to solve non-linear classification and regression problems.</p>
-<div class="figure align-default">
+<div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/deep.svg"><img alt="../_images/deep.svg" src="../_images/deep.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Feedforward neural network.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p><em>Fully-connected layers</em> of neurons can be replaced by <em>convolutional layers</em> when dealing with images as inputs, leading to the very successful <strong>convolutional neural networks</strong> (CNN).</p>
-<div class="figure align-default" id="id6">
+<div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/dcn.png"><img alt="../_images/dcn.png" src="../_images/dcn.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
-<p>The “only” thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm <a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[RHW86]</a> (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60’s, with a resurgence in the 80’s thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id2">[LBBH98]</a> to automatically classify single digits on ZIP postal codes.</p>
+<p>The “only” thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm <a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[RHW86]</a> (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60’s, with a resurgence in the 80’s thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id2">[LBBH98]</a> by Yann LeCun in 1998 to automatically classify single digits on ZIP postal codes (what led to the development of the MNIST dataset, the “Hello World!” of machine learning which we will use in the exercises).</p>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/lenet5.gif"><img alt="../_images/lenet5.gif" src="../_images/lenet5.gif" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.7 </span><span class="caption-text">LeNet5 CNN trained on MNIST. Source: <a class="reference external" href="http://yann.lecun.com/exdb/lenet/">http://yann.lecun.com/exdb/lenet/</a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>The revival of artificial neural networks marketed as <strong>deep learning</strong> at the end of the 2000’s was principally due the availability of massive amounts of training data (thanks to search engines and social networks) and the availability of consumer graphics GPUs able to perform scientific computations, especially using Nvidia’s CUDA programming framework.</p>
+<p>The first badge of honour obtained by deep learning methods happened during the <a class="reference external" href="https://image-net.org">ImageNet</a> challenge in 2012. The challenge was made for computer vision (CV) scientists to compare their algorithms on a huge dataset of 14 billion annotated images for object recognition (what is on the image?), object detection (which objects are in the image and where?) and object segmentation (which pixels belong to which object?). The object recognition challenge was indeed quite hard, with 1000 different classes (sometimes exotic, such as “ladle” or “porcupine”) with a great variety of backgrounds or lightning conditions. Classical CV methods based on feature extraction and simple classifiers performed reasonably well, with an error rate around 30%.</p>
+<p>However, Krizhevsky, Sutskever and Hinton <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id3">[KSH12]</a> trained a CNN entirely on the images, without any form of preprocessing, and obtained an error rate of 15%, half of the other methods. This achievement marked the beginning of the deep learning era, attracted the attention of the major industrial players (Google, Facebook and soon the rest of the world) who have already invested hundreds of billions on AI research.</p>
+<p>The whole field of computer vision was taken by storm, and CNNs were able to outperform the state-of-the-art of many vision-related tasks, such as object detection with the YOLO (You Only Look Once) network <a class="bibtex reference internal" href="../zreferences.html#redmon2016" id="id4">[RDGF16]</a>:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
+<p>or semantic segmention with SegNet <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2015" id="id5">[BHC15]</a> or its variants such as Mask RCNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id6">[HGDollarG18]</a>:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
+<p>CNNs can even be used to control autonomous cars, by learning to reproduce human commands for a given input image <a class="bibtex reference internal" href="../zreferences.html#bojarski2016" id="id7">[BDTD+16]</a>:</p>
+<style>.embed-container { position: relative; padding-bottom: 100%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qhUvQiKec2U' frameborder='0' allowfullscreen></iframe></div>
+<p>CNNs are also gaining an increasing importance in medical applications, for example to help histologists detect cancerous cells:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/9Mz84cwVmS0' frameborder='0' allowfullscreen></iframe></div>
 </div>
 <div class="section" id="recurrent-neural-networks">
 <h4><span class="section-number">1.2.1.2. </span>Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h4>
+<p>Another field that was heavily transformed by deep learning is <strong>natural language processing</strong> (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.</p>
+<p>The key neural network involved in this paradigmatic change is the <strong>recurrent neural network</strong> (RNN), with the most prominent model being the <strong>long short-term memory</strong> (LSTM) network <a class="bibtex reference internal" href="../zreferences.html#hochreiter1997" id="id8">[HS97]</a>.</p>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/LSTM3-chain.png"><img alt="../_images/LSTM3-chain.png" src="../_images/LSTM3-chain.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.8 </span><span class="caption-text">LSTM cell. Source: <a class="reference external" href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+<p>The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events.</p>
+<p>More recent advances furthermore introduce the concept of <strong>attention</strong> for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/google-nmt-lstm.png"><img alt="../_images/google-nmt-lstm.png" src="../_images/google-nmt-lstm.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Google Neural Machine Translation. Source: <a class="reference external" href="https://ai.google/research/pubs/pub45610">https://ai.google/research/pubs/pub45610</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 </div>
 <div class="section" id="unsupervised-learning">
 <h3><span class="section-number">1.2.2. </span>Unsupervised learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="feature-extraction">
-<h4><span class="section-number">1.2.2.1. </span>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h4>
+<p>In supervised learning, we use <strong>annotated data</strong>, i.e. pairs <span class="math notranslate nohighlight">\((x_i, t_i)\)</span> of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it.</p>
+<p>In <strong>unsupervised learning</strong>, we only have inputs. The goal of the algorithms is to make sense out of the data: extract regularities, model the underlying distribution, group examples into clusters, etc… It may seem much harder than supervised learning, as there is no ground truth to measure performance, but data is very cheap to obtain.</p>
+<div class="section" id="clustering-and-feature-extraction">
+<h4><span class="section-number">1.2.2.1. </span>Clustering and feature extraction<a class="headerlink" href="#clustering-and-feature-extraction" title="Permalink to this headline">¶</a></h4>
+<p><strong>Clustering</strong> is a classical machine technique allowing to group examples in clusters based on their respective distances: close examples should belong to the same cluster. The most well-know algorithms are k-means and Gaussian mixture models (GMM). But the quality of the clustering depends on the space in which the inputs are represented: two images may be similar not because their pixels are similar (e.g. two dark images), but because they contain similar objects (fishes, birds). Neural networks can be used to learn a <strong>feature space</strong> where distances between inputs are meaningful.</p>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/unsupervised-learning.png"><img alt="../_images/unsupervised-learning.png" src="../_images/unsupervised-learning.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Clustering. Source: <a class="reference external" href="https://learn.g2.com/supervised-vs-unsupervised-learning">https://learn.g2.com/supervised-vs-unsupervised-learning</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
-<div class="section" id="generative-networks">
-<h4><span class="section-number">1.2.2.2. </span>Generative networks<a class="headerlink" href="#generative-networks" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="dimensionality-reduction">
+<h4><span class="section-number">1.2.2.2. </span>Dimensionality reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="generative-models">
+<h4><span class="section-number">1.2.2.3. </span>Generative models<a class="headerlink" href="#generative-models" title="Permalink to this headline">¶</a></h4>
 </div>
 </div>
 <div class="section" id="reinforcement-learning">
 <h3><span class="section-number">1.2.3. </span>Reinforcement learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">¶</a></h3>
+<p>Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:</p>
+<p><a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/">https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/</a></p>
+<p>but it has recently gained a lot of importance when coupled with deep learning principles. Here we just present a couple of application of <strong>deep reinforcement learning</strong> to motivate you to also assist to this course.</p>
+<p>RL models the sequential interaction between an <strong>agent</strong> (algorithm, robot) and its <strong>environment</strong>. At each time step <span class="math notranslate nohighlight">\(t\)</span>, the agent is a state <span class="math notranslate nohighlight">\(s_t\)</span> and selects an action <span class="math notranslate nohighlight">\(a_t\)</span> according to its policy (or strategy) <span class="math notranslate nohighlight">\(\pi\)</span>. This brings the agent in a new state <span class="math notranslate nohighlight">\(s_{t+1}\)</span> and provides a reward <span class="math notranslate nohighlight">\(r_{t+1}\)</span>. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives <strong>on the long-term</strong>. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.</p>
+<div class="figure align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/rl-loop.png"><img alt="../_images/rl-loop.png" src="../_images/rl-loop.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Agent-environment interaction in RL. Source: <a class="reference external" href="https://ieeexplore.ieee.org/document/7839568">https://ieeexplore.ieee.org/document/7839568</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<p>In deep RL, the policy <span class="math notranslate nohighlight">\(\pi\)</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
+<ul class="simple">
+<li><p>The first achievement of deep RL was the <strong>deep Q-network</strong> of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:</p></li>
+</ul>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
+<ul class="simple">
+<li><p>Deep RL methods have since then been applied to more complex games, such as <strong>Starcraft II</strong>:</p></li>
+</ul>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/UuhECwm31dM' frameborder='0' allowfullscreen></iframe></div>
+<p>or <strong>DotA 2</strong>:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eHipy_j29Xw' frameborder='0' allowfullscreen></iframe></div>
+<ul class="simple">
+<li><p>Another famous achievement of deep RL is when Google Deepmind’s <strong>AlphaGo</strong> beat Lee Sedol, 19 times world champion, in 2016:</p></li>
+</ul>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/8tq1C8spV_g' frameborder='0' allowfullscreen></iframe></div>
+<ul class="simple">
+<li><p>Deep RL is also a very promising to <strong>robotics</strong>, be it in simulation:</p></li>
+</ul>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/faDKMMwOS2Q' frameborder='0' allowfullscreen></iframe></div>
+<p>or in reality:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/jwSbzNHGflM' frameborder='0' allowfullscreen></iframe></div>
+<ul class="simple">
+<li><p>It is also promising for <strong>autonomous driving</strong>:</p></li>
+</ul>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eRwTbRtnT1I' frameborder='0' allowfullscreen></iframe></div>
 </div>
 </div>
 </div>
@@ -531,7 +608,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Neurocomputing</a>
-    <a class='right-next' id="next-link" href="2-Neurons.html" title="next page"><span class="section-number">2. </span>Neurons</a>
+    <a class='right-next' id="next-link" href="2-Math.html" title="next page"><span class="section-number">2. </span>Math basics</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

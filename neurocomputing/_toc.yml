@@ -5,8 +5,8 @@
 - part: Introduction
   chapters:
     - file: 1-intro/1-Introduction
-    - file: 1-intro/2-Neurons
-    - file: 1-intro/3-Math
+    - file: 1-intro/2-Math
+    - file: 1-intro/3-Neurons
 
 - part: 1 - Linear models
   chapters:

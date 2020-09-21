@@ -1,6 +1,6 @@
 # Introduction
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
 
 Slides: [html](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/1.1-Introduction.html), [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf)
 
@@ -77,7 +77,7 @@ Deep learning has recently revolutionized these types of machine learning, so le
 ---
 width: 50%
 ---
-Source: Andrew Ng, Stanford CS229, <https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf>
+Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf>
 ```
 
 In a supervised learning, we have a **training set** (or training data) consisting of $N$ samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an **input** $\mathbf{x}_i$ and an **output** (also called ground truth, desired output or target) $t_i$. 
@@ -106,6 +106,7 @@ $$y = f(\sum_{i=1}^d w_i \, x_i + b)$$
 ---
 width: 60%
 ---
+Artificial neuron.
 ```
 
 By stacking layers of artificial neurons, we obtain a **feedforward neural network** able to solve non-linear classification and regression problems.
@@ -114,6 +115,7 @@ By stacking layers of artificial neurons, we obtain a **feedforward neural netwo
 ---
 width: 60%
 ---
+Feedforward neural network.
 ```
 
 *Fully-connected layers* of neurons can be replaced by *convolutional layers* when dealing with images as inputs, leading to the very successful **convolutional neural networks** (CNN).
@@ -122,19 +124,136 @@ width: 60%
 ---
 width: 90%
 ---
-Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242
+Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242
 ```
 
-The "only" thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm {cite}`Rumelhart1986a` (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60's, with a resurgence in the 80's thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN {cite}`LeCun1998` to automatically classify single digits on ZIP postal codes. 
+The "only" thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm {cite}`Rumelhart1986a` (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60's, with a resurgence in the 80's thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN {cite}`LeCun1998` by Yann LeCun in 1998 to automatically classify single digits on ZIP postal codes (what led to the development of the MNIST dataset, the "Hello World!" of machine learning which we will use in the exercises). 
+
+```{figure} img/lenet5.gif
+---
+width: 50%
+---
+LeNet5 CNN trained on MNIST. Source: <http://yann.lecun.com/exdb/lenet/>
+```
+
+The revival of artificial neural networks marketed as **deep learning** at the end of the 2000's was principally due the availability of massive amounts of training data (thanks to search engines and social networks) and the availability of consumer graphics GPUs able to perform scientific computations, especially using Nvidia's CUDA programming framework.
+
+The first badge of honour obtained by deep learning methods happened during the [ImageNet](https://image-net.org) challenge in 2012. The challenge was made for computer vision (CV) scientists to compare their algorithms on a huge dataset of 14 billion annotated images for object recognition (what is on the image?), object detection (which objects are in the image and where?) and object segmentation (which pixels belong to which object?). The object recognition challenge was indeed quite hard, with 1000 different classes (sometimes exotic, such as "ladle" or "porcupine") with a great variety of backgrounds or lightning conditions. Classical CV methods based on feature extraction and simple classifiers performed reasonably well, with an error rate around 30%. 
+
+However, Krizhevsky, Sutskever and Hinton {cite}`Krizhevsky2012` trained a CNN entirely on the images, without any form of preprocessing, and obtained an error rate of 15%, half of the other methods. This achievement marked the beginning of the deep learning era, attracted the attention of the major industrial players (Google, Facebook and soon the rest of the world) who have already invested hundreds of billions on AI research. 
+
+The whole field of computer vision was taken by storm, and CNNs were able to outperform the state-of-the-art of many vision-related tasks, such as object detection with the YOLO (You Only Look Once) network {cite}`Redmon2016`:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
+
+or semantic segmention with SegNet {cite}`Badrinarayanan2015` or its variants such as Mask RCNN {cite}`He2018`:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
+
+
+CNNs can even be used to control autonomous cars, by learning to reproduce human commands for a given input image {cite}`Bojarski2016`:
+
+<style>.embed-container { position: relative; padding-bottom: 100%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qhUvQiKec2U' frameborder='0' allowfullscreen></iframe></div>
+
+CNNs are also gaining an increasing importance in medical applications, for example to help histologists detect cancerous cells:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/9Mz84cwVmS0' frameborder='0' allowfullscreen></iframe></div>
+
 
 
 
 #### Recurrent neural networks
 
+Another field that was heavily transformed by deep learning is **natural language processing** (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.
+
+The key neural network involved in this paradigmatic change is the **recurrent neural network** (RNN), with the most prominent model being the **long short-term memory** (LSTM) network {cite}`Hochreiter1997`.
+
+```{figure} img/LSTM3-chain.png
+---
+width: 90%
+---
+LSTM cell. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs/>
+```
+
+The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events. 
+
+More recent advances furthermore introduce the concept of **attention** for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.
+
+```{figure} img/google-nmt-lstm.png
+---
+width: 100%
+---
+Google Neural Machine Translation. Source: <https://ai.google/research/pubs/pub45610>
+```
+
 ### Unsupervised learning
 
-#### Feature extraction
+In supervised learning, we use **annotated data**, i.e. pairs $(x_i, t_i)$ of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it. 
 
-#### Generative networks
+In **unsupervised learning**, we only have inputs. The goal of the algorithms is to make sense out of the data: extract regularities, model the underlying distribution, group examples into clusters, etc... It may seem much harder than supervised learning, as there is no ground truth to measure performance, but data is very cheap to obtain.
+
+
+#### Clustering and feature extraction
+
+**Clustering** is a classical machine technique allowing to group examples in clusters based on their respective distances: close examples should belong to the same cluster. The most well-know algorithms are k-means and Gaussian mixture models (GMM). But the quality of the clustering depends on the space in which the inputs are represented: two images may be similar not because their pixels are similar (e.g. two dark images), but because they contain similar objects (fishes, birds). Neural networks can be used to learn a **feature space** where distances between inputs are meaningful.
+
+```{figure} img/unsupervised-learning.png
+---
+width: 100%
+---
+Clustering. Source: <https://learn.g2.com/supervised-vs-unsupervised-learning>
+```
+
+#### Dimensionality reduction
+
+#### Generative models
 
 ### Reinforcement learning
+
+Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:
+
+<https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/>
+
+but it has recently gained a lot of importance when coupled with deep learning principles. Here we just present a couple of application of **deep reinforcement learning** to motivate you to also assist to this course. 
+
+RL models the sequential interaction between an **agent** (algorithm, robot) and its **environment**. At each time step $t$, the agent is a state $s_t$ and selects an action $a_t$ according to its policy (or strategy) $\pi$. This brings the agent in a new state $s_{t+1}$ and provides a reward $r_{t+1}$. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives **on the long-term**. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.
+
+
+```{figure} img/rl-loop.png
+---
+width: 100%
+---
+Agent-environment interaction in RL. Source: <https://ieeexplore.ieee.org/document/7839568>
+```
+
+In deep RL, the policy $\pi$ is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let's have a look at some applications:
+
+* The first achievement of deep RL was the **deep Q-network** of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
+
+* Deep RL methods have since then been applied to more complex games, such as **Starcraft II**:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/UuhECwm31dM' frameborder='0' allowfullscreen></iframe></div>
+
+or **DotA 2**:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eHipy_j29Xw' frameborder='0' allowfullscreen></iframe></div>
+
+* Another famous achievement of deep RL is when Google Deepmind's **AlphaGo** beat Lee Sedol, 19 times world champion, in 2016:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/8tq1C8spV_g' frameborder='0' allowfullscreen></iframe></div>
+
+* Deep RL is also a very promising to **robotics**, be it in simulation:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/faDKMMwOS2Q' frameborder='0' allowfullscreen></iframe></div>
+
+or in reality:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/jwSbzNHGflM' frameborder='0' allowfullscreen></iframe></div>
+
+* It is also promising for **autonomous driving**:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eRwTbRtnT1I' frameborder='0' allowfullscreen></iframe></div>
+
+
