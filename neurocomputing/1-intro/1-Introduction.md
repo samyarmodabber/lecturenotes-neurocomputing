@@ -204,9 +204,60 @@ width: 100%
 Clustering. Source: <https://learn.g2.com/supervised-vs-unsupervised-learning>
 ```
 
-#### Dimensionality reduction
+#### Dimensionality reduction and autoencoders
+
+
+Data such as images have a lot of dimensions (one per pixel), most of which are redundant. **Dimensionality reduction** techniques allow to reduce this number of dimensions by projecting the data into a **latent space** while keeping the information.
+
+**Autoencoders** (AE) are neural networks that learn to reproduce their inputs (unsupervised learning, as there are no labels) by compressing information through a bottleneck. The **encoder** projects the input data onto the latent space, while the **decoder** recreates the input. The latent space has much less dimensions than the input images, but must contain enough information in order to reconstruct the image. 
+
+
+```{figure} img/latent-space.png
+---
+width: 100%
+---
+Autoencoders. Source: <https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g>
+```
+
+Apart from compression, one important application of dimensionality reduction is **visualization** when the latent space has 2 or 3 dimensions: you can visualize the distribution of your data and estimate how hard the classification/regression will be. Classical ML techniques include PCA (principal component analysis) and t-SNE, but autoencoders can also be used, for example the **UMAP** (Uniform Manifold Approximation and Projection for Dimension Reduction) architecture {cite}`McInnes2020`.
+
+Another application of autoencoders is the **pretraining** (feature extraction) of neural networks on unsupervised data before **fine-tuning** the resulting classifier on supervised data. This allows **self-taught learning** or **semi-supervised learning**, when the annotated data available for supervised learning is scarce, but a lot of unsupervised data from the same domain is available.
 
 #### Generative models
+
+The other major advantage of autoencoders is their **decoder**: from a low-dimensional latent representation, it is able after training to generate high-dimensional data such as images. By **sampling** the latent space, one could in principle generate an infinity of new images.
+
+One particular form of autoencoder which is very useful for data generation is the **variational autoencoder** (VAE) {cite}`Kingma2013`. The main difference with a regular AE is that the latent encodes a **probability distribution** instead of a single latent vector, what allows to sample new but realistic outputs. For example, a VAE trained to reproduce faces can generate new hybrid faces depending on how the sampling is done:
+
+```{figure} img/vae-faces.jpg
+---
+width: 100%
+---
+Sampling the latent space of a VAE trained on faces allows to generate new but realistic faces. Source: <https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df>
+```
+
+VAE are in particular central to **DeepFakes** which have widely reached the media because of their impressive possibilities but also ethical issues:
+
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/JbzVhzNaTdI' frameborder='0' allowfullscreen></iframe></div>
+
+Another class of generative models are **generative adversarial networks** (GAN) {cite}`Goodfellow2014` which consist of a **generator** (decoder) and a **discriminator** that compete to produce realistic images while trying to discriminate generated from real images. 
+
+```{figure} img/gan.jpg
+---
+width: 100%
+---
+Generative adversarial network.
+```
+
+Several evolutions of GANs have allowed to produce increasingly realistic images, such as conditional GANs who permit to generate images of a desired class, or CycleGAN which allows to replace an object with another:
+
+
+```{figure} img/cycleGAN4.jpg
+---
+width: 100%
+---
+CycleGAN. <https://github.com/junyanz/CycleGAN>
+```
 
 ### Reinforcement learning
 
