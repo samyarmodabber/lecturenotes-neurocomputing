@@ -50,7 +50,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/2-Math.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Math basics" />
-<meta property="og:description" content="Math basics  Reference: Part I of (Goodfellow et al., 2016) [GBC16]." />
+<meta property="og:description" content="Math basics  This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the import" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -222,23 +222,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
-   3. Neural Fields (optional)
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
-   4. Reservoir computing
+   3. Reservoir computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
-   5. Hebbian learning
+   4. Hebbian learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
-   6. Spiking networks
+   5. Spiking networks
   </a>
  </li>
 </ul>
@@ -334,7 +329,34 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-algebra">
+   2.1. Linear algebra
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculus">
+   2.2. Calculus
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-theory">
+   2.3. Probability theory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistics">
+   2.4. Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#information-theory">
+   2.5. Information theory
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -345,7 +367,42 @@
                 
   <div class="section" id="math-basics">
 <h1><span class="section-number">2. </span>Math basics<a class="headerlink" href="#math-basics" title="Permalink to this headline">¶</a></h1>
-<p><strong>Reference:</strong> Part I of (Goodfellow et al., 2016) <a class="bibtex reference internal" href="../zreferences.html#goodfellow2016" id="id1">[GBC16]</a>.</p>
+<p>This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the important mathematical notions that are needed to understand this course. Students who have studied mathematics as a major can safely skip this part, as there is nothing fancy (although the section on information theory could be worth a read).</p>
+<p>It is not supposed to replace any course in mathematics (we won’t show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.</p>
+<p><strong>References:</strong> Part I of Goodfellow et al. (2016) <a class="bibtex reference internal" href="../zreferences.html#goodfellow2016" id="id1">[GBC16]</a>. Any mathematics textbook can be used in addition.</p>
+<div class="section" id="linear-algebra">
+<h2><span class="section-number">2.1. </span>Linear algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h2>
+<p>Several mathematical objects are manipulated in linear algebra:</p>
+<ul class="simple">
+<li><p><strong>Scalars</strong> <span class="math notranslate nohighlight">\(x\)</span> are 0-dimensional values (single numbers, so to speak). They can either take real values (<span class="math notranslate nohighlight">\(x \in \Re\)</span>, e.g. <span class="math notranslate nohighlight">\(x = 1.4573\)</span>, floats in CS) or natural values (<span class="math notranslate nohighlight">\(x \in \mathbb{N}\)</span>, e.g. <span class="math notranslate nohighlight">\(x = 3\)</span>, integers in CS).</p></li>
+<li><p><strong>Vectors</strong> <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are 1-dimensional arrays of length <span class="math notranslate nohighlight">\(d\)</span>. The bold notation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> will be used in this course, but you may also be accustomed to the arrow notation <span class="math notranslate nohighlight">\(\overrightarrow{x}\)</span> used on the blackboard. Vectors are typically represented vertically to outline its <span class="math notranslate nohighlight">\(d\)</span> elements <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_d\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}\end{split}\]</div>
+<p>When using real numbers, the <strong>vector space</strong> with <span class="math notranslate nohighlight">\(d\)</span> dimensions is noted <span class="math notranslate nohighlight">\(\Re^d\)</span>, so we can note <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^d\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Matrices</strong> <span class="math notranslate nohighlight">\(A\)</span> are 2-dimensional arrays of size (or shape) <span class="math notranslate nohighlight">\(m \times n\)</span> (<span class="math notranslate nohighlight">\(m\)</span> rows, <span class="math notranslate nohighlight">\(n\)</span> columns). They are represented by a capital letter to distinguished them from scalars. The element <span class="math notranslate nohighlight">\(A_{i,j}\)</span> of a matrix <span class="math notranslate nohighlight">\(A\)</span> is the value on the <span class="math notranslate nohighlight">\(i\)</span>-th row and <span class="math notranslate nohighlight">\(j\)</span>-th column. For example with a <span class="math notranslate nohighlight">\(3 \times 3\)</span> matrix::</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{bmatrix}
+A_{1, 1} &amp; A_{1, 2} &amp; A_{1, 3} \\
+A_{2, 1} &amp; A_{2, 2} &amp; A_{2, 3} \\
+A_{3, 1} &amp; A_{3, 2} &amp; A_{3, 3} \\
+\end{bmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="calculus">
+<h2><span class="section-number">2.2. </span>Calculus<a class="headerlink" href="#calculus" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="probability-theory">
+<h2><span class="section-number">2.3. </span>Probability theory<a class="headerlink" href="#probability-theory" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="statistics">
+<h2><span class="section-number">2.4. </span>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="information-theory">
+<h2><span class="section-number">2.5. </span>Information theory<a class="headerlink" href="#information-theory" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a">https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a</a></p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

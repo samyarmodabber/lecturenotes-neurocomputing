@@ -222,23 +222,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
-   3. Neural Fields (optional)
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
-   4. Reservoir computing
+   3. Reservoir computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
-   5. Hebbian learning
+   4. Hebbian learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
-   6. Spiking networks
+   5. Spiking networks
   </a>
  </li>
 </ul>
@@ -262,7 +257,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../zreferences.html">
-   1. References
+   1. Bibliography
   </a>
  </li>
 </ul>
@@ -373,8 +368,8 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#dimensionality-reduction">
-       1.2.2.2. Dimensionality reduction
+      <a class="reference internal nav-link" href="#dimensionality-reduction-and-autoencoders">
+       1.2.2.2. Dimensionality reduction and autoencoders
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -408,9 +403,9 @@
 <div class="section" id="what-is-neurocomputing">
 <h2><span class="section-number">1.1. </span>What is neurocomputing?<a class="headerlink" href="#what-is-neurocomputing" title="Permalink to this headline">¶</a></h2>
 <p>Let’s first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.</p>
-<div class="figure align-default" id="id9">
+<div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/aimldl.png"><img alt="../_images/aimldl.png" src="../_images/aimldl.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Source: <a class="reference external" href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Source: <a class="reference external" href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <p>The term <strong>Artificial Intelligence</strong> was coined by John McCarthy at the Dartmouth Summer Research Project on Artificial Intelligence in <strong>1956</strong>:</p>
 <blockquote>
@@ -446,16 +441,16 @@
 <li><p><strong>Unsupervised learning</strong>: The program is given a bunch of data and must find patterns and relationships therein.</p></li>
 <li><p><strong>Reinforcement learning</strong>: The program explores its environment by producing actions and receiving rewards.</p></li>
 </ul>
-<div class="figure align-default" id="id10">
+<div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/ml-areas.png"><img alt="../_images/ml-areas.png" src="../_images/ml-areas.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Source: <a class="reference external" href="http://www.isaziconsulting.co.za/machinelearning.html">http://www.isaziconsulting.co.za/machinelearning.html</a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Source: <a class="reference external" href="http://www.isaziconsulting.co.za/machinelearning.html">http://www.isaziconsulting.co.za/machinelearning.html</a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p>Deep learning has recently revolutionized these types of machine learning, so let’s have a look at some concrete examples for motivation. At the end of the course, if you also perform all exercises, you should be able to reproduce these applications.</p>
 <div class="section" id="supervised-learning">
 <h3><span class="section-number">1.2.1. </span>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-default" id="id11">
+<div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/supervisedlearning.png"><img alt="../_images/supervisedlearning.png" src="../_images/supervisedlearning.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 <p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math notranslate nohighlight">\(N\)</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
 <p>What we want to learn is <strong>parameterized model</strong> <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e. the discrepancy between the prediction <span class="math notranslate nohighlight">\(y_i = f_\theta (\mathbf{x}_i)\)</span> and the desired output <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
@@ -474,24 +469,24 @@
 <p>As we will see later, an <strong>artificial neuron</strong> is a mathematical model able to perform <strong>linear</strong> classification or regression using weighted sums of inputs:</p>
 <div class="math notranslate nohighlight">
 \[y = f(\sum_{i=1}^d w_i \, x_i + b)\]</div>
-<div class="figure align-default" id="id12">
+<div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/artificialneuron.svg"><img alt="../_images/artificialneuron.svg" src="../_images/artificialneuron.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Artificial neuron.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Artificial neuron.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>By stacking layers of artificial neurons, we obtain a <strong>feedforward neural network</strong> able to solve non-linear classification and regression problems.</p>
-<div class="figure align-default" id="id13">
+<div class="figure align-default" id="id16">
 <a class="reference internal image-reference" href="../_images/deep.svg"><img alt="../_images/deep.svg" src="../_images/deep.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Feedforward neural network.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Feedforward neural network.</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 <p><em>Fully-connected layers</em> of neurons can be replaced by <em>convolutional layers</em> when dealing with images as inputs, leading to the very successful <strong>convolutional neural networks</strong> (CNN).</p>
-<div class="figure align-default" id="id14">
+<div class="figure align-default" id="id17">
 <a class="reference internal image-reference" href="../_images/dcn.png"><img alt="../_images/dcn.png" src="../_images/dcn.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>The “only” thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm <a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[RHW86]</a> (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60’s, with a resurgence in the 80’s thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id2">[LBBH98]</a> by Yann LeCun in 1998 to automatically classify single digits on ZIP postal codes (what led to the development of the MNIST dataset, the “Hello World!” of machine learning which we will use in the exercises).</p>
-<div class="figure align-default" id="id15">
+<div class="figure align-default" id="id18">
 <a class="reference internal image-reference" href="../_images/lenet5.gif"><img alt="../_images/lenet5.gif" src="../_images/lenet5.gif" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.7 </span><span class="caption-text">LeNet5 CNN trained on MNIST. Source: <a class="reference external" href="http://yann.lecun.com/exdb/lenet/">http://yann.lecun.com/exdb/lenet/</a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.7 </span><span class="caption-text">LeNet5 CNN trained on MNIST. Source: <a class="reference external" href="http://yann.lecun.com/exdb/lenet/">http://yann.lecun.com/exdb/lenet/</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
 <p>The revival of artificial neural networks marketed as <strong>deep learning</strong> at the end of the 2000’s was principally due the availability of massive amounts of training data (thanks to search engines and social networks) and the availability of consumer graphics GPUs able to perform scientific computations, especially using Nvidia’s CUDA programming framework.</p>
 <p>The first badge of honour obtained by deep learning methods happened during the <a class="reference external" href="https://image-net.org">ImageNet</a> challenge in 2012. The challenge was made for computer vision (CV) scientists to compare their algorithms on a huge dataset of 14 billion annotated images for object recognition (what is on the image?), object detection (which objects are in the image and where?) and object segmentation (which pixels belong to which object?). The object recognition challenge was indeed quite hard, with 1000 different classes (sometimes exotic, such as “ladle” or “porcupine”) with a great variety of backgrounds or lightning conditions. Classical CV methods based on feature extraction and simple classifiers performed reasonably well, with an error rate around 30%.</p>
@@ -509,15 +504,15 @@
 <h4><span class="section-number">1.2.1.2. </span>Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h4>
 <p>Another field that was heavily transformed by deep learning is <strong>natural language processing</strong> (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.</p>
 <p>The key neural network involved in this paradigmatic change is the <strong>recurrent neural network</strong> (RNN), with the most prominent model being the <strong>long short-term memory</strong> (LSTM) network <a class="bibtex reference internal" href="../zreferences.html#hochreiter1997" id="id8">[HS97]</a>.</p>
-<div class="figure align-default" id="id16">
+<div class="figure align-default" id="id19">
 <a class="reference internal image-reference" href="../_images/LSTM3-chain.png"><img alt="../_images/LSTM3-chain.png" src="../_images/LSTM3-chain.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.8 </span><span class="caption-text">LSTM cell. Source: <a class="reference external" href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.8 </span><span class="caption-text">LSTM cell. Source: <a class="reference external" href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 <p>The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events.</p>
 <p>More recent advances furthermore introduce the concept of <strong>attention</strong> for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.</p>
-<div class="figure align-default" id="id17">
+<div class="figure align-default" id="id20">
 <a class="reference internal image-reference" href="../_images/google-nmt-lstm.png"><img alt="../_images/google-nmt-lstm.png" src="../_images/google-nmt-lstm.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Google Neural Machine Translation. Source: <a class="reference external" href="https://ai.google/research/pubs/pub45610">https://ai.google/research/pubs/pub45610</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Google Neural Machine Translation. Source: <a class="reference external" href="https://ai.google/research/pubs/pub45610">https://ai.google/research/pubs/pub45610</a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -528,16 +523,42 @@
 <div class="section" id="clustering-and-feature-extraction">
 <h4><span class="section-number">1.2.2.1. </span>Clustering and feature extraction<a class="headerlink" href="#clustering-and-feature-extraction" title="Permalink to this headline">¶</a></h4>
 <p><strong>Clustering</strong> is a classical machine technique allowing to group examples in clusters based on their respective distances: close examples should belong to the same cluster. The most well-know algorithms are k-means and Gaussian mixture models (GMM). But the quality of the clustering depends on the space in which the inputs are represented: two images may be similar not because their pixels are similar (e.g. two dark images), but because they contain similar objects (fishes, birds). Neural networks can be used to learn a <strong>feature space</strong> where distances between inputs are meaningful.</p>
-<div class="figure align-default" id="id18">
+<div class="figure align-default" id="id21">
 <a class="reference internal image-reference" href="../_images/unsupervised-learning.png"><img alt="../_images/unsupervised-learning.png" src="../_images/unsupervised-learning.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Clustering. Source: <a class="reference external" href="https://learn.g2.com/supervised-vs-unsupervised-learning">https://learn.g2.com/supervised-vs-unsupervised-learning</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Clustering. Source: <a class="reference external" href="https://learn.g2.com/supervised-vs-unsupervised-learning">https://learn.g2.com/supervised-vs-unsupervised-learning</a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<div class="section" id="dimensionality-reduction">
-<h4><span class="section-number">1.2.2.2. </span>Dimensionality reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="dimensionality-reduction-and-autoencoders">
+<h4><span class="section-number">1.2.2.2. </span>Dimensionality reduction and autoencoders<a class="headerlink" href="#dimensionality-reduction-and-autoencoders" title="Permalink to this headline">¶</a></h4>
+<p>Data such as images have a lot of dimensions (one per pixel), most of which are redundant. <strong>Dimensionality reduction</strong> techniques allow to reduce this number of dimensions by projecting the data into a <strong>latent space</strong> while keeping the information.</p>
+<p><strong>Autoencoders</strong> (AE) are neural networks that learn to reproduce their inputs (unsupervised learning, as there are no labels) by compressing information through a bottleneck. The <strong>encoder</strong> projects the input data onto the latent space, while the <strong>decoder</strong> recreates the input. The latent space has much less dimensions than the input images, but must contain enough information in order to reconstruct the image.</p>
+<div class="figure align-default" id="id22">
+<a class="reference internal image-reference" href="../_images/latent-space.png"><img alt="../_images/latent-space.png" src="../_images/latent-space.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Autoencoders. Source: <a class="reference external" href="https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g">https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g</a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<p>Apart from compression, one important application of dimensionality reduction is <strong>visualization</strong> when the latent space has 2 or 3 dimensions: you can visualize the distribution of your data and estimate how hard the classification/regression will be. Classical ML techniques include PCA (principal component analysis) and t-SNE, but autoencoders can also be used, for example the <strong>UMAP</strong> (Uniform Manifold Approximation and Projection for Dimension Reduction) architecture <a class="bibtex reference internal" href="../zreferences.html#mcinnes2020" id="id9">[MHM20]</a>.</p>
+<p>Another application of autoencoders is the <strong>pretraining</strong> (feature extraction) of neural networks on unsupervised data before <strong>fine-tuning</strong> the resulting classifier on supervised data. This allows <strong>self-taught learning</strong> or <strong>semi-supervised learning</strong>, when the annotated data available for supervised learning is scarce, but a lot of unsupervised data from the same domain is available.</p>
 </div>
 <div class="section" id="generative-models">
 <h4><span class="section-number">1.2.2.3. </span>Generative models<a class="headerlink" href="#generative-models" title="Permalink to this headline">¶</a></h4>
+<p>The other major advantage of autoencoders is their <strong>decoder</strong>: from a low-dimensional latent representation, it is able after training to generate high-dimensional data such as images. By <strong>sampling</strong> the latent space, one could in principle generate an infinity of new images.</p>
+<p>One particular form of autoencoder which is very useful for data generation is the <strong>variational autoencoder</strong> (VAE) <a class="bibtex reference internal" href="../zreferences.html#kingma2013" id="id10">[KW13]</a>. The main difference with a regular AE is that the latent encodes a <strong>probability distribution</strong> instead of a single latent vector, what allows to sample new but realistic outputs. For example, a VAE trained to reproduce faces can generate new hybrid faces depending on how the sampling is done:</p>
+<div class="figure align-default" id="id23">
+<a class="reference internal image-reference" href="../_images/vae-faces.jpg"><img alt="../_images/vae-faces.jpg" src="../_images/vae-faces.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.12 </span><span class="caption-text">Sampling the latent space of a VAE trained on faces allows to generate new but realistic faces. Source: <a class="reference external" href="https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df">https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df</a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+<p>VAE are in particular central to <strong>DeepFakes</strong> which have widely reached the media because of their impressive possibilities but also ethical issues:</p>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/JbzVhzNaTdI' frameborder='0' allowfullscreen></iframe></div>
+<p>Another class of generative models are <strong>generative adversarial networks</strong> (GAN) <a class="bibtex reference internal" href="../zreferences.html#goodfellow2014" id="id11">[GPougetAbadieM+14]</a> which consist of a <strong>generator</strong> (decoder) and a <strong>discriminator</strong> that compete to produce realistic images while trying to discriminate generated from real images.</p>
+<div class="figure align-default" id="id24">
+<a class="reference internal image-reference" href="../_images/gan.jpg"><img alt="../_images/gan.jpg" src="../_images/gan.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.13 </span><span class="caption-text">Generative adversarial network.</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+<p>Several evolutions of GANs have allowed to produce increasingly realistic images, such as conditional GANs who permit to generate images of a desired class, or CycleGAN which allows to replace an object with another:</p>
+<div class="figure align-default" id="id25">
+<a class="reference internal image-reference" href="../_images/cycleGAN4.jpg"><img alt="../_images/cycleGAN4.jpg" src="../_images/cycleGAN4.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.14 </span><span class="caption-text">CycleGAN. <a class="reference external" href="https://github.com/junyanz/CycleGAN">https://github.com/junyanz/CycleGAN</a></span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
 </div>
 </div>
 <div class="section" id="reinforcement-learning">
@@ -546,9 +567,9 @@
 <p><a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/">https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/</a></p>
 <p>but it has recently gained a lot of importance when coupled with deep learning principles. Here we just present a couple of application of <strong>deep reinforcement learning</strong> to motivate you to also assist to this course.</p>
 <p>RL models the sequential interaction between an <strong>agent</strong> (algorithm, robot) and its <strong>environment</strong>. At each time step <span class="math notranslate nohighlight">\(t\)</span>, the agent is a state <span class="math notranslate nohighlight">\(s_t\)</span> and selects an action <span class="math notranslate nohighlight">\(a_t\)</span> according to its policy (or strategy) <span class="math notranslate nohighlight">\(\pi\)</span>. This brings the agent in a new state <span class="math notranslate nohighlight">\(s_{t+1}\)</span> and provides a reward <span class="math notranslate nohighlight">\(r_{t+1}\)</span>. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives <strong>on the long-term</strong>. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.</p>
-<div class="figure align-default" id="id19">
+<div class="figure align-default" id="id26">
 <a class="reference internal image-reference" href="../_images/rl-loop.png"><img alt="../_images/rl-loop.png" src="../_images/rl-loop.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Agent-environment interaction in RL. Source: <a class="reference external" href="https://ieeexplore.ieee.org/document/7839568">https://ieeexplore.ieee.org/document/7839568</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 1.15 </span><span class="caption-text">Agent-environment interaction in RL. Source: <a class="reference external" href="https://ieeexplore.ieee.org/document/7839568">https://ieeexplore.ieee.org/document/7839568</a></span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
 </div>
 <p>In deep RL, the policy <span class="math notranslate nohighlight">\(\pi\)</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
 <ul class="simple">
