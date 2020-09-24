@@ -54,11 +54,11 @@ The two important dimensions of the information exchanged by neurons are:
 * The precise **timing** of the spike trains.
 
 
-```{figure} img/spiketrain.jpg
+```{figure} img/oscillations.png
 ---
-width: 60%
+width: 80%
 ---
-Spike trains. Source: Rossant et al. (2011). Fitting Neuron Models to Spike Trains. Front. Neurosci. 5. doi:10.3389/fnins.2011.00009
+Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <https://en.wikipedia.org/wiki/Neural_oscillation>
 ```
 
 The shape of the spike (amplitude, duration) does not matter much for synaptic transission: spikes can be considered as binary signals (0 or 1) occuring at precise moments of time.
