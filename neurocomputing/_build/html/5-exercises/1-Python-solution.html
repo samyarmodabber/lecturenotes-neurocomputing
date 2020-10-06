@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/sphinx-book-theme.js"></script>
@@ -39,7 +40,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/1-Python-solution.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Bibliography" href="../zreferences.html" />
+    <link rel="next" title="2. Numpy and matplotlib" href="ex2-Numpy.html" />
     <link rel="prev" title="1.1. Introduction To Python" href="1-Python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -222,18 +223,23 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
-   3. Reservoir computing
+   4. Reservoir computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
-   4. Hebbian learning
+   5. Hebbian learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
-   5. Spiking networks
+   6. Spiking networks
   </a>
  </li>
 </ul>
@@ -259,6 +265,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and matplotlib
+  </a>
  </li>
 </ul>
 <p class="caption">
@@ -963,7 +974,7 @@ b : [9, 2, 3]
 <li><p><code class="docutils literal notranslate"><span class="pre">a.sort()</span></code>: Sort the items of the list, in place.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">a.reverse()</span></code>: Reverse the elements of the list, in place.</p></li>
 </ul>
-<p><strong>Q:</strong> Try out quickly these methods.</p>
+<p><strong>Q:</strong> Try out quickly these methods, in particular <code class="docutils literal notranslate"><span class="pre">append()</span></code> which we will use quite often.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
@@ -1082,7 +1093,17 @@ dict_values([4098, 4139, 4127])
 </div>
 </div>
 </div>
-<p><strong>Important!</strong> The main particularity of the Python syntax is that the scope of the different structures (functions, for, if, while, etc…) is defined by the indentation.</p>
+<p><strong>Important!</strong> The main particularity of the Python syntax is that the scope of the different structures (functions, for, if, while, etc…) is defined by the indentation, not by curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>. As long as the code stays at the same level, it is in the same scope:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is negative&#39;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is now positive&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is zero&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is positive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>A reasonable choice is to use four spaces for the indentation instead of tabs (configure your text editor if you are not using Jupyter).</p>
 <p>When the scope is terminated, you need to come back at <strong>exactly</strong> the same level of indentation. Try this misaligned structure and observe what happens:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">:</span>
@@ -1419,11 +1440,6 @@ Hello Jack! I am Julien!
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wait, what does it have to do with deep learning??
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1457,7 +1473,7 @@ Hello Jack! I am Julien!
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="1-Python.html" title="previous page"><span class="section-number">1.1. </span>Introduction To Python</a>
-    <a class='right-next' id="next-link" href="../zreferences.html" title="next page"><span class="section-number">1. </span>Bibliography</a>
+    <a class='right-next' id="next-link" href="ex2-Numpy.html" title="next page"><span class="section-number">2. </span>Numpy and matplotlib</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

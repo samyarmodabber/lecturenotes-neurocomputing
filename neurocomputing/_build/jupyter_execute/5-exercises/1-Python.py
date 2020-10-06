@@ -336,7 +336,7 @@ Lists are objects, with a lot of different built-in methods (type `help(list)` i
 -   `a.sort()`: Sort the items of the list, in place.
 -   `a.reverse()`: Reverse the elements of the list, in place.
 
-**Q:** Try out quickly these methods.
+**Q:** Try out quickly these methods, in particular `append()` which we will use quite often.
 
 
 
@@ -405,7 +405,18 @@ else:
 
 
 
-**Important!** The main particularity of the Python syntax is that the scope of the different structures (functions, for, if, while, etc...) is defined by the indentation.
+**Important!** The main particularity of the Python syntax is that the scope of the different structures (functions, for, if, while, etc...) is defined by the indentation, not by curly braces `{}`. As long as the code stays at the same level, it is in the same scope:
+
+```python
+if x < 0 :
+    print('x =', x, 'is negative')
+    x = -x
+    print('x =', x, 'is now positive')
+elif x == 0:
+    print('x =', x, 'is zero')
+else:
+    print('x =', x, 'is positive')
+```
 
 A reasonable choice is to use four spaces for the indentation instead of tabs (configure your text editor if you are not using Jupyter).
 

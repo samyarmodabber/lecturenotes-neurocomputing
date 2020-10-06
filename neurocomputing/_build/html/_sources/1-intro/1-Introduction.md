@@ -2,7 +2,7 @@
 
 <style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
 
-Slides: [html](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/1.1-Introduction.html), [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf)
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf)
 
 
 
@@ -11,7 +11,7 @@ Slides: [html](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectu
 Let's first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.
 
 
-```{figure} img/aimldl.png
+```{figure} ../img/aimldl.png
 ---
 width: 60%
 ---
@@ -41,7 +41,7 @@ Good old-fashion AI (GOFAI) approaches were purely symbolic (logical systems, kn
 * Generative models (GAN, VAE)
 * Deep reinforcement learning (DQN, A3C, PPO)
 
-![](img/neurocomputing.svg)
+![](../img/neurocomputing.svg)
 
 **Neurocomputing** is at the intersection between computational neuroscience and artificial neural networks (deep learning). **Computational neuroscience** studies the functioning of the brain (human or animal) through biologically detailed models, either at the functional level (e.g. visual attention, decision-making) or cellular level (individual neurons, synapses, neurotransmitters, etc). The goal of computational neuroscience is 1) to provide theoretical explanations to the experimental observations made by neuroscientists and 2) make predictions that can be verified experimentally. Moreover, understanding how the brain solves real-life problems might allow to design better AI algorithms. If you are interested in computational neuroscience, make sure to visit the courses **Neurokognition** I and II taught by Prof. Dr. Hamker:
 
@@ -60,7 +60,7 @@ Machine Learning applications are generally divided into three main branches:
 * **Reinforcement learning**: The program explores its environment by producing actions and receiving rewards.
 
 
-```{figure} img/ml-areas.png
+```{figure} ../img/ml-areas.png
 ---
 width: 100%
 ---
@@ -73,7 +73,7 @@ Deep learning has recently revolutionized these types of machine learning, so le
 ### Supervised learning
 
 
-```{figure} img/supervisedlearning.png
+```{figure} ../img/supervisedlearning.png
 ---
 width: 50%
 ---
@@ -88,11 +88,19 @@ Depending on the nature of the outputs $t$, we have two different supervised pro
 
 * In **regression** tasks, the outputs can take an infinity of values (e.g. real numbers). The following figure shows how examples of flat surfaces (input $x_i$)  and prices (output $t_i$) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform **linear regression**, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price $y_i$ is never far from the ground truth $t_i$. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.
 
-![](img/regression-animation3.png)
+````{figure} ../img/regression-animation3.png
+---
+width: 80%
+---
+````
 
 * In **classification** tasks, the outputs are discrete, i.e. take only a finite number of different values (called classes or labels). When there are only two classes, they are called the positive and negative classes and the problem is a **binary classification**. The two classes can represent yes/no binary values, such as when when a test is positive or negative. When there are more than two classes, they can for example represent different objects (car / bike / dog / cat...) that can be recognized on an image. The following figure depicts a binary classifiation problem, where two input features $x_1$ and $x_2$ (temperature and blood pressure) are used to predict the occurence of an illness (yes = ill, no = sane). The linear model is a line that separates the input space into two separate regions: all points above the line are categorized (classified) as ill, all points below as sane, even if they were not in the training data.
 
-![](img/classification-animation3.png)
+````{figure} ../img/classification-animation3.png
+---
+width: 80%
+---
+````
 
 In practice, when using neural networks, the distinction between classification and regression is not very important, but it can be relevant for other ML techniques (decision trees only work for classification problems, for example). 
 
@@ -102,7 +110,7 @@ As we will see later, an **artificial neuron** is a mathematical model able to p
 
 $$y = f(\sum_{i=1}^d w_i \, x_i + b)$$
 
-```{figure} img/artificialneuron.svg
+```{figure} ../img/artificialneuron.svg
 ---
 width: 60%
 ---
@@ -111,7 +119,7 @@ Artificial neuron.
 
 By stacking layers of artificial neurons, we obtain a **feedforward neural network** able to solve non-linear classification and regression problems.
 
-```{figure} img/deep.svg
+```{figure} ../img/deep.svg
 ---
 width: 60%
 ---
@@ -120,7 +128,7 @@ Feedforward neural network.
 
 *Fully-connected layers* of neurons can be replaced by *convolutional layers* when dealing with images as inputs, leading to the very successful **convolutional neural networks** (CNN).
 
-```{figure} img/dcn.png
+```{figure} ../img/dcn.png
 ---
 width: 90%
 ---
@@ -129,7 +137,7 @@ Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for De
 
 The "only" thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm {cite}`Rumelhart1986a` (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60's, with a resurgence in the 80's thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN {cite}`LeCun1998` by Yann LeCun in 1998 to automatically classify single digits on ZIP postal codes (what led to the development of the MNIST dataset, the "Hello World!" of machine learning which we will use in the exercises). 
 
-```{figure} img/lenet5.gif
+```{figure} ../img/lenet5.gif
 ---
 width: 50%
 ---
@@ -168,7 +176,7 @@ Another field that was heavily transformed by deep learning is **natural languag
 
 The key neural network involved in this paradigmatic change is the **recurrent neural network** (RNN), with the most prominent model being the **long short-term memory** (LSTM) network {cite}`Hochreiter1997`.
 
-```{figure} img/LSTM3-chain.png
+```{figure} ../img/LSTM3-chain.png
 ---
 width: 90%
 ---
@@ -179,7 +187,7 @@ The main difference with feedforward neural networks is that RNNs can be applied
 
 More recent advances furthermore introduce the concept of **attention** for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.
 
-```{figure} img/google-nmt-lstm.png
+```{figure} ../img/google-nmt-lstm.png
 ---
 width: 100%
 ---
@@ -197,7 +205,7 @@ In **unsupervised learning**, we only have inputs. The goal of the algorithms is
 
 **Clustering** is a classical machine technique allowing to group examples in clusters based on their respective distances: close examples should belong to the same cluster. The most well-know algorithms are k-means and Gaussian mixture models (GMM). But the quality of the clustering depends on the space in which the inputs are represented: two images may be similar not because their pixels are similar (e.g. two dark images), but because they contain similar objects (fishes, birds). Neural networks can be used to learn a **feature space** where distances between inputs are meaningful.
 
-```{figure} img/unsupervised-learning.png
+```{figure} ../img/unsupervised-learning.png
 ---
 width: 100%
 ---
@@ -212,7 +220,7 @@ Data such as images have a lot of dimensions (one per pixel), most of which are 
 **Autoencoders** (AE) are neural networks that learn to reproduce their inputs (unsupervised learning, as there are no labels) by compressing information through a bottleneck. The **encoder** projects the input data onto the latent space, while the **decoder** recreates the input. The latent space has much less dimensions than the input images, but must contain enough information in order to reconstruct the image. 
 
 
-```{figure} img/latent-space.png
+```{figure} ../img/latent-space.png
 ---
 width: 100%
 ---
@@ -229,7 +237,7 @@ The other major advantage of autoencoders is their **decoder**: from a low-dimen
 
 One particular form of autoencoder which is very useful for data generation is the **variational autoencoder** (VAE) {cite}`Kingma2013`. The main difference with a regular AE is that the latent encodes a **probability distribution** instead of a single latent vector, what allows to sample new but realistic outputs. For example, a VAE trained to reproduce faces can generate new hybrid faces depending on how the sampling is done:
 
-```{figure} img/vae-faces.jpg
+```{figure} ../img/vae-faces.jpg
 ---
 width: 100%
 ---
@@ -242,7 +250,7 @@ VAE are in particular central to **DeepFakes** which have widely reached the med
 
 Another class of generative models are **generative adversarial networks** (GAN) {cite}`Goodfellow2014` which consist of a **generator** (decoder) and a **discriminator** that compete to produce realistic images while trying to discriminate generated from real images. 
 
-```{figure} img/gan.jpg
+```{figure} ../img/gan.jpg
 ---
 width: 100%
 ---
@@ -252,7 +260,7 @@ Generative adversarial network.
 Several evolutions of GANs have allowed to produce increasingly realistic images, such as conditional GANs who permit to generate images of a desired class, or CycleGAN which allows to replace an object with another:
 
 
-```{figure} img/cycleGAN4.jpg
+```{figure} ../img/cycleGAN4.jpg
 ---
 width: 100%
 ---
@@ -270,7 +278,7 @@ but it has recently gained a lot of importance when coupled with deep learning p
 RL models the sequential interaction between an **agent** (algorithm, robot) and its **environment**. At each time step $t$, the agent is a state $s_t$ and selects an action $a_t$ according to its policy (or strategy) $\pi$. This brings the agent in a new state $s_{t+1}$ and provides a reward $r_{t+1}$. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives **on the long-term**. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.
 
 
-```{figure} img/rl-loop.png
+```{figure} ../img/rl-loop.png
 ---
 width: 100%
 ---

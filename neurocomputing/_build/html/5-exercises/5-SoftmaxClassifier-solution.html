@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Softmax classification &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/5-SoftmaxClassifier-solution.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/5-SoftmaxClassifier-solution.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Softmax classification" />
+<meta property="og:description" content="Softmax classification  Softmax classifier  In this part, you will implement a softmax classifier for multi-class classification.  Loading the data  Let’s first" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1 - Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-MaximumLikelihoodEstimation.html">
+   5. Maximum Likelihood Estimation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-MultiClassification.html">
+   6. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/7-LearningTheory.html">
+   7. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2 - Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Backpropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-Autoencoders.html">
+   5. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-RBM.html">
+   6. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-Segnets.html">
+   7. Segmentation networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative Adversarial Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3 - Neurocomputing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
+   1. Limits of deep Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
+   4. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
+   5. Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
+   6. Spiking networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and matplotlib
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/5-exercises/5-SoftmaxClassifier-solution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/5-SoftmaxClassifier-solution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/5-SoftmaxClassifier-solution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#softmax-classifier">
+   Softmax classifier
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-the-data">
+     Loading the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#softmax-linear-classifier">
+     Softmax linear classifier
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="softmax-classification">
+<h1>Softmax classification<a class="headerlink" href="#softmax-classification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="softmax-classifier">
+<h2>Softmax classifier<a class="headerlink" href="#softmax-classifier" title="Permalink to this headline">¶</a></h2>
+<p>In this part, you will implement a softmax classifier for multi-class classification.</p>
+<div class="section" id="loading-the-data">
+<h3>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h3>
+<p>Let’s first import the usual stuff:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now import the <code class="docutils literal notranslate"><span class="pre">digits</span></code> dataset provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html</a></p>
+<p>It contains 1797 small (8x8) black and white images of digits between 0 and 9.</p>
+<p>The two following cells load the data and visualize 16 images chosen randomly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+
+<span class="n">N</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">h</span> <span class="c1"># number of pixels</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span> <span class="c1"># number of classes</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5-SoftmaxClassifier-solution_5_0.png" src="../_images/5-SoftmaxClassifier-solution_5_0.png" />
+</div>
+</div>
+<p>Digits are indeed to be recognized, the hope being that they are linearly separable and we can apply a softmax classifier directly on the pixels.</p>
+<p>The only</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="softmax-linear-classifier">
+<h3>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h3>
+<p>Let’s remember the structure of the softmax linear classifier: the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is transformed into a <strong>logit score</strong> vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> using a weight matrix <span class="math notranslate nohighlight">\(W\)</span> and a bias vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<p>This logit score has one element per class, so the weight matrix must have a size <span class="math notranslate nohighlight">\((c, d)\)</span>, where <span class="math notranslate nohighlight">\(c\)</span> is the number of classes (3) and <span class="math notranslate nohighlight">\(d\)</span> is the number of dimensions of the input space (2). The bias vector has 3 elements (one per class).</p>
+<p>The logit score is turned into probabilities using the <strong>softmax</strong> operation:</p>
+<div class="math notranslate nohighlight">
+\[
+    y_j = P(\text{class = j}) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</div>
+<p>The following Python function allows to turn any vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> (as a numpy array) into softmax probabilities:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">e</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q1:</strong> Experiment with the <code class="docutils literal notranslate"><span class="pre">softmax()</span></code> to understand its function. Pass it different numpy arrays (e.g. [-1, 0, 2]) and print the corresponding probabilities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.04201007 0.1141952  0.84379473]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The loss function to use is the <strong>cross-entropy</strong> or <strong>negative log-likelihood</strong>, defined for a single example as:</p>
+<div class="math notranslate nohighlight">
+\[
+    L(W, \mathbf{b}) =   - &lt; \mathbf{t} . \log \mathbf{y} &gt; = - \log y_j 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is a one-hot encoding of the class of the example and <span class="math notranslate nohighlight">\(j\)</span> is the index of the corresponding class (0, 1 or 2).</p>
+<p>After doing the derivations, we obtain the following learning rules for <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to minimize the loss function:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta W = \eta \, (\mathbf{t} - \mathbf{y}) \, \mathbf{x}^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y})
+\]</div>
+<p>Note that because <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\((c, d)\)</span> matrix, <span class="math notranslate nohighlight">\(\Delta W\)</span> too. <span class="math notranslate nohighlight">\((\mathbf{t} - \mathbf{y}) \, \mathbf{x}^T\)</span> is therefore the <strong>outer product</strong> between the error vector <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}\)</span> (<span class="math notranslate nohighlight">\(c\)</span> elements) and the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (<span class="math notranslate nohighlight">\(d\)</span> elements).</p>
+</div>
+<div class="section" id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>You will now modify your implementation of the online Perceptron algorithm from last week.</p>
+<p>Some things to keep in mind:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> must now be defined as a <span class="math notranslate nohighlight">\((c, d)\)</span> matrix (numpy array) and <code class="docutils literal notranslate"><span class="pre">b</span></code> as a vector with <span class="math notranslate nohighlight">\(c\)</span> elements. Both can be initialized to 0.</p></li>
+<li><p>When computing the logit score <span class="math notranslate nohighlight">\(\mathbf{z} = W \times \mathbf{x} + \mathbf{b}\)</span>, remember that <code class="docutils literal notranslate"><span class="pre">W</span></code> is now a matrix, so its position will matter in the dot product <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">softmax()</span></code> function define above instead of <code class="docutils literal notranslate"><span class="pre">np.sign()</span></code> to get the prediction <code class="docutils literal notranslate"><span class="pre">\mathbf{y}</span></code>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(\Delta W\)</span>, you will need the <strong>outer</strong> product between the vectors <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Check the doc for <code class="docutils literal notranslate"><span class="pre">np.outer()</span></code>.</p></li>
+<li><p>The one-hot encoding of the class of the example <span class="math notranslate nohighlight">\(i\)</span> is now a vector with 3 elements <code class="docutils literal notranslate"><span class="pre">Y[i,</span> <span class="pre">:]</span></code>. You can get the index of the corresponding class by looking at the position of its maximum with <code class="docutils literal notranslate"><span class="pre">t[i,</span> <span class="pre">:].argmax()</span></code>.</p></li>
+<li><p>Similarly, the predicted class by the model can be identified by the class with the maximum probability: <code class="docutils literal notranslate"><span class="pre">y.argmax()</span></code>.</p></li>
+<li><p>Do not forget to record and plot the evolution of the training error and of the loss function.</p></li>
+</ul>
+<p><strong>Q:</strong> Let’s do it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Initialize the weight matrix and bias vector</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># Perceptron algorithm</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+    
+    <span class="c1"># Iterate over all training examples</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># Probability</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        
+        <span class="c1"># Update the weight</span>
+        <span class="n">W</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">((</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+        
+        <span class="c1"># Update the bias</span>
+        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> 
+        
+        <span class="c1"># Increment the error if the maximum probability is different from the class</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">():</span>
+            <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># Accumulate the loss</span>
+        <span class="n">loss</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()])</span>
+        
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final loss:&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cross-entropy loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final error: 0.0077907623817473565
+Final loss: 0.07258671496001251
+</pre></div>
+</div>
+<img alt="../_images/5-SoftmaxClassifier-solution_15_1.png" src="../_images/5-SoftmaxClassifier-solution_15_1.png" />
+</div>
+</div>
+<p><strong>Q:</strong> What is the final training error of the model and the final loss? Is it what you expected? Why do they evolve like this?</p>
+<p><strong>Q:</strong> By looking at the final hyperplanes, do all training examples seem correctly classified? Why does it work anyway?</p>
+<p><strong>Answers:</strong></p>
+<p>Q3: The training error is soon 0, but the loss still decreases for a long number of epochs. This is because the probability vector <code class="docutils literal notranslate"><span class="pre">y</span></code> [0.6, 0.4, 0.4] is a correct prediction for the class 0 (0.6 is the maximum probability), while the target is [1, 0, 0]. The loss continues to evolve even when there is no error, as it wants to bring the probability vector as close as possible to [1, 0, 0].</p>
+<p>This is the main difference with the mean square error (mse) loss function: as soon as there are no errors, the mse loss becomes 0 and learning stops. In classification problems, one should therefore track the loss function, not the training error.</p>
+<p>Q4: Some points may appear on the wrong side of a single hyperplane, as if they were badly classified (some red points are on the wrong side of the green hyperplane in this example).</p>
+<p>The “green” logit score for these examples is positive, as they are above the hyperplane. However, the “red” logit score will be much higher. The softmax function will in the end attribute a very small probability to the red clas, as the green one will dominate.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./5-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

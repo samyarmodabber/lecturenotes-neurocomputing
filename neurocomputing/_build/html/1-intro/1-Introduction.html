@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/sphinx-book-theme.js"></script>
@@ -222,18 +223,23 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
-   3. Reservoir computing
+   4. Reservoir computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
-   4. Hebbian learning
+   5. Hebbian learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
-   5. Spiking networks
+   6. Spiking networks
   </a>
  </li>
 </ul>
@@ -246,6 +252,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and matplotlib
   </a>
  </li>
 </ul>
@@ -399,7 +410,7 @@
   <div class="section" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
-<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/1.1-Introduction.html">html</a>, <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf">pdf</a></p>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf">pdf</a></p>
 <div class="section" id="what-is-neurocomputing">
 <h2><span class="section-number">1.1. </span>What is neurocomputing?<a class="headerlink" href="#what-is-neurocomputing" title="Permalink to this headline">¶</a></h2>
 <p>Let’s first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.</p>
@@ -458,11 +469,15 @@
 <ul class="simple">
 <li><p>In <strong>regression</strong> tasks, the outputs can take an infinity of values (e.g. real numbers). The following figure shows how examples of flat surfaces (input <span class="math notranslate nohighlight">\(x_i\)</span>)  and prices (output <span class="math notranslate nohighlight">\(t_i\)</span>) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform <strong>linear regression</strong>, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price <span class="math notranslate nohighlight">\(y_i\)</span> is never far from the ground truth <span class="math notranslate nohighlight">\(t_i\)</span>. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.</p></li>
 </ul>
-<p><img alt="" src="../_images/regression-animation3.png" /></p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/regression-animation3.png"><img alt="../_images/regression-animation3.png" src="../_images/regression-animation3.png" style="width: 80%;" /></a>
+</div>
 <ul class="simple">
 <li><p>In <strong>classification</strong> tasks, the outputs are discrete, i.e. take only a finite number of different values (called classes or labels). When there are only two classes, they are called the positive and negative classes and the problem is a <strong>binary classification</strong>. The two classes can represent yes/no binary values, such as when when a test is positive or negative. When there are more than two classes, they can for example represent different objects (car / bike / dog / cat…) that can be recognized on an image. The following figure depicts a binary classifiation problem, where two input features <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> (temperature and blood pressure) are used to predict the occurence of an illness (yes = ill, no = sane). The linear model is a line that separates the input space into two separate regions: all points above the line are categorized (classified) as ill, all points below as sane, even if they were not in the training data.</p></li>
 </ul>
-<p><img alt="" src="../_images/classification-animation3.png" /></p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/classification-animation3.png"><img alt="../_images/classification-animation3.png" src="../_images/classification-animation3.png" style="width: 80%;" /></a>
+</div>
 <p>In practice, when using neural networks, the distinction between classification and regression is not very important, but it can be relevant for other ML techniques (decision trees only work for classification problems, for example).</p>
 <div class="section" id="feedforward-neural-networks">
 <h4><span class="section-number">1.2.1.1. </span>Feedforward neural networks<a class="headerlink" href="#feedforward-neural-networks" title="Permalink to this headline">¶</a></h4>
