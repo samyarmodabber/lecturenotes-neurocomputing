@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cross-validation &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-Crossvalidation-solution.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-Crossvalidation-solution.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Cross-validation" />
+<meta property="og:description" content="Cross-validation  Polynomial regression  Polynomial regression consists of fitting some data (x, y) to a n-order polynomial of the form:    y = f(x) = w_0 + w_1" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1 - Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-MaximumLikelihoodEstimation.html">
+   5. Maximum Likelihood Estimation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-MultiClassification.html">
+   6. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/7-LearningTheory.html">
+   7. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  2 - Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Backpropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-Autoencoders.html">
+   5. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-RBM.html">
+   6. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-Segnets.html">
+   7. Segmentation networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative Adversarial Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  3 - Neurocomputing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
+   1. Limits of deep Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
+   4. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
+   5. Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
+   6. Spiking networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and matplotlib
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/5-exercises/6-Crossvalidation-solution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/6-Crossvalidation-solution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/6-Crossvalidation-solution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polynomial-regression">
+   Polynomial regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-hold-out-cross-validation">
+   Simple hold-out cross-validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-fold-cross-validation">
+   k-fold cross-validation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="cross-validation">
+<h1>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="polynomial-regression">
+<h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<p>Polynomial regression consists of fitting some data <span class="math notranslate nohighlight">\((x, y)\)</span> to a <span class="math notranslate nohighlight">\(n\)</span>-order polynomial of the form:</p>
+<div class="math notranslate nohighlight">
+\[
+ y = f(x) = w_0 + w_1 \cdot x + w_2 \cdot x^2 + ... + w_n \cdot x^n
+\]</div>
+<p>By rewriting the unidimensional input <span class="math notranslate nohighlight">\(x\)</span> into the following vector:</p>
+<div class="math notranslate nohighlight">
+\[
+ \mathbf{x} = \begin{bmatrix} 1 &amp; x &amp; x^2 &amp; ... &amp; x^n \end{bmatrix}
+\]</div>
+<p>and the weight vector as:</p>
+<div class="math notranslate nohighlight">
+\[
+ \mathbf{w} = \begin{bmatrix} w_0 &amp; w_1 &amp; w_2 &amp; ... &amp; w_n \end{bmatrix}
+\]</div>
+<p>the problem can be reduced to linear regression:</p>
+<div class="math notranslate nohighlight">
+\[
+ y = \langle \mathbf{w} \cdot \mathbf{x} \rangle
+\]</div>
+<p>and we can apply the delta learning rule to find <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+ \Delta \mathbf{w} =  \eta \cdot (t_i - y_i ) \cdot \mathbf{x_i}
+\]</div>
+<p>A first method to perform polynomial regression would be to adapt the code you wrote in the last exercise session for linear classification. However, you saw that properly setting the correct learning rate and stop criteria can be quite tricky.</p>
+<p>The solution retained for this exercise is to use the built-in functions of Numpy which can already perform polynomial regression in an optimized and proved-sure manner (Note: NumPy does not use gradient descent, but rather directly minimizes the error-function by inversing the Gram matrix).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function takes the inputs <span class="math notranslate nohighlight">\(X\)</span>, the desired outputs <span class="math notranslate nohighlight">\(t\)</span> and the desired degree of the polynomial <code class="docutils literal notranslate"><span class="pre">deg</span></code>, performs the polynomial regression and returns the adequate set of weights (beware: the higher-order coefficient comes first).</p>
+<p>Once the weights are obtained, one can use them to predict the value of an example with the function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s start by importing the usual stuff, define a visualization method and load the data <code class="docutils literal notranslate"><span class="pre">polynome.data</span></code> (16 samples):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+ 
+<span class="c1"># Load the data set</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;polynome.data&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="c1"># Plot the data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;r.&#39;</span><span class="p">)</span>
+    <span class="c1"># Plot the fitted curve </span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Polynomial regression with order &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q1:</strong> Apply the <code class="docutils literal notranslate"><span class="pre">np.polyfit()</span></code> function on the data and visualize the result for different degrees of the polynomial (from 1 to 10 or even more). What do you observe? Find a polynomial degree which clearly overfits.</p>
+<p><em>Bonus question:</em> make sense of the warning you get when the degree of the polynomial is too high.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deg</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+<span class="n">visualize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q2:</strong> Plot the mean square error on the training set for all polynomial regressions from 1 to 10. How does the training error evolve when the degree of the polynomial is increased? What is the risk by taking the hypothesis with the smallest training error?</p>
+<p><em>Hint:</em> use <code class="docutils literal notranslate"><span class="pre">np.polyval()</span></code> for the prediction, and compute the mse with <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_mse</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">training_mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree&quot;</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="s2">&quot;: training error&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">training_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Order of the polynomial&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Training mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Answer:</strong> the more complex the model, the smaller the training error.</p>
+</div>
+<div class="section" id="simple-hold-out-cross-validation">
+<h2>Simple hold-out cross-validation<a class="headerlink" href="#simple-hold-out-cross-validation" title="Permalink to this headline">¶</a></h2>
+<p>You will now apply <strong>simple hold-out cross-validation</strong> to find the optimal degree for the polynomial regression. You will need to separate the data set into a training set <span class="math notranslate nohighlight">\(S_{\text{train}}\)</span> (70% of the data) and a test set <span class="math notranslate nohighlight">\(S_{\text{test}}\)</span> (the remaining 30%).</p>
+<p>The data (X, t) could be easily split into two sets of arrays using slices of indices, as the data is already randomized:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.7</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">t_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">N_train</span><span class="p">],</span> <span class="n">t</span><span class="p">[:</span><span class="n">N_train</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">t_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">N_train</span><span class="p">:],</span> <span class="n">t</span><span class="p">[</span><span class="n">N_train</span><span class="p">:]</span>
+</pre></div>
+</div>
+<p>A much more generic approach is to use the library <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> (<a class="reference external" href="https://www.scikit-learn.org">https://www.scikit-learn.org</a>), which provides a method able to split any dataset randomly.</p>
+<p>You can import the method <code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code> from its module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+<p>The doc of the function is available at: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>.</p>
+<p><strong>Q3:</strong> Use scikit-learn to split the data into the corresponding training and test sets.</p>
+<p><strong>Q4:</strong> Train each polynomial from degree 1 to 10 on <span class="math notranslate nohighlight">\(S_{\text{train}}\)</span> and plot the generalization error on <span class="math notranslate nohighlight">\(S_{\text{test}}\)</span>. Which degree of the polynomial gives the minimal empirical error? Why?</p>
+<p><strong>Q5:</strong> Run the cross-validation split multiple times. Do you always obtain the same optimal degree?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">t_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">test_mse</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t_test</span><span class="o">-</span><span class="n">y_test</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">test_mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree&quot;</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="s2">&quot;: empirical error&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Order of the polynomial&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Answer:</strong> depending on the split, the optimal degree is either 4, 5, or 6. This is because some samples of the test set might better fit with a given polynomial, depending on how the split was made.</p>
+</div>
+<div class="section" id="k-fold-cross-validation">
+<h2>k-fold cross-validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this headline">¶</a></h2>
+<p>As we only have 16 samples, it is quite annoying to “lose” 5 of them for the test set. Here we can afford to use <strong>k-fold cross-validation</strong>, where the cross-validation split is performed <span class="math notranslate nohighlight">\(k\)</span> times:</p>
+<ul class="simple">
+<li><p>The dataset is split into <span class="math notranslate nohighlight">\(k\)</span> subsets of equal size (if possible).</p></li>
+<li><p>Each subset is iteratively used as the test set, while the <span class="math notranslate nohighlight">\(k-1\)</span> other ones are used as a training set.</p></li>
+<li><p>The final empirical error is the average of the mse on all subsets.</p></li>
+</ul>
+<p>It would be possible to make the splits using indices too. But it is much easier to use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> once again. You can import the <code class="docutils literal notranslate"><span class="pre">KFold</span></code> class like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">n_splits</span></code> corresponds to <span class="math notranslate nohighlight">\(k\)</span>: how many times the dataset is split. Takes <span class="math notranslate nohighlight">\(k=4\)</span> for example (4 subsets of 4 samples).</p>
+<p><strong>Q6:</strong> Check the doc of <code class="docutils literal notranslate"><span class="pre">KFold</span></code> (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html</a>). Print the indices of the examples of the training and test sets for each iteration of the algorithm. Change the value of <span class="math notranslate nohighlight">\(k\)</span> to understand how it works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">train_index</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">test_index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q7:</strong> Apply k-fold cross-validation on the polynomial regression problem. Which polynomial degree is the best? Run the split multiple times: does the best polynomial degree change?</p>
+<p><strong>Q8:</strong> Change <span class="math notranslate nohighlight">\(k\)</span> to 16. How stable are the results between two runs?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">test_mse</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    
+    <span class="n">split_mse</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">deg</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">])</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">split_mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    
+    <span class="n">test_mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">split_mse</span><span class="p">)</span>
+        
+<span class="n">test_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_mse</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Degree of the polynome&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;k-fold cross-validated mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Answer:</strong> a polynomial of order 4 seems the best (it was indeed used to generate the data). With <span class="math notranslate nohighlight">\(k=16\)</span> (one sample in the test set every time), the results are the most stable. It is called <strong>leave-one-out cross-validation</strong> (LOOCV). It is the best cross-validation you can make in terms of bias (you use almost all your data to learn), but it is very expensive (you have to retrain your algorithm for each sample) and the empirical error has a high variance.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./5-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

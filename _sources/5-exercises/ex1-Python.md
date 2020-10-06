@@ -1,3 +1,2 @@
 # Introduction to Python
 
-Coucou

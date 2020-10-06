@@ -7,7 +7,7 @@
 
 The human brain is composed of 100 billion **neurons**. A biological neuron is a cell, composed of a cell body (**soma**), multiple **dendrites** and an **axon**. The axon of a neuron can contact the dendrites of another through **synapses** to transmit information. There are hundreds of different types of neurons, each with different properties.
 
-```{figure} img/biologicalneuron.png
+```{figure} ../img/biologicalneuron.png
 ---
 width: 100%
 ---
@@ -17,7 +17,7 @@ Biological neuron. Source: <https://en.wikipedia.org/wiki/Neuron>
 Neurons are negatively charged: they have a resting potential at around -70 mV. When a neuron receives enough input currents, its **membrane potential** can exceed a threshold and the neuron emits an **action potential** (or **spike**) along its axon. 
 
 
-```{figure} img/actionpotential.gif
+```{figure} ../img/actionpotential.gif
 ---
 width: 100%
 ---
@@ -26,7 +26,7 @@ Propagation of an action potential along the axon. Source: <https://en.wikipedia
 
 A spike has a very small duration (1 or 2 ms) and its amplitude is rather constant. It is followed by a **refractory period** where the neuron is hyperpolarized, limiting the number of spikes per second to 200.
 
-```{figure} img/actionpotential.png
+```{figure} ../img/actionpotential.png
 ---
 width: 50%
 ---
@@ -36,7 +36,7 @@ Action potential or spike. Source: <https://en.wikipedia.org/wiki/Action_potenti
 The action potential arrives at the synapses and releases **neurotransmitters** in the synaptic cleft: glutamate (AMPA, NMDA), GABA, dopamine, serotonin, nicotin, etc...
 Neurotransmitters can enter the receiving neuron through **receptors** and change its potential: the neuron may emit a spike too. Synaptic currents change the membrane potential of the post.synaptic neuron. The change depends on the strength of the synapse called the **synaptic efficiency** or **weight**. Some synapses are stronger than others, and have a larger influence on the post-synaptic cell.
 
-```{figure} img/chemicalsynapse.jpg
+```{figure} ../img/chemicalsynapse.jpg
 ---
 width: 60%
 ---
@@ -54,7 +54,7 @@ The two important dimensions of the information exchanged by neurons are:
 * The precise **timing** of the spike trains.
 
 
-```{figure} img/oscillations.png
+```{figure} ../img/oscillations.png
 ---
 width: 80%
 ---
@@ -103,8 +103,13 @@ $$
 
 These equations allow to describe very precisely how an action potential is created from external currents.
 
-![](img/hodgkinhuxley-data.png)
 
+```{figure} ../img/hodgkinhuxley-data.png
+---
+width: 100%
+---
+Action potential for a Hodgkin-Huxley neuron.
+```
 
 
 ## Spiking neurons
@@ -122,7 +127,13 @@ $$
     \text{if} \; v > V_T \; \text{emit a spike and reset.}
 $$
 
-![](img/LIF-data.png)
+
+```{figure} ../img/LIF-data.png
+---
+width: 70%
+---
+Spike emission for a LIF neuron.
+```
 
 Other well-known spiking neuron models include:
 
@@ -147,7 +158,7 @@ $$
     \tau_w \, \frac{dw}{dt} = a \, (v - E_L) - w
 $$
 
-```{figure} img/LIF-Izhi-AdEx.png
+```{figure} ../img/LIF-Izhi-AdEx.png
 ---
 width: 100%
 ---
@@ -157,7 +168,7 @@ Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron mode
 Contrary to the simple LIF model, these realistic neuron models can reproduce a variety of dynamics, as biological neurons do not all respond the same to an input current. Some fire regularly, some slow down with time, while others emit bursts of spikes. Modern spiking neuron models allow to recreate these variety of dynamics by changing a few parameters.
 
 
-```{figure} img/adex.png
+```{figure} ../img/adex.png
 ---
 width: 100%
 ---
@@ -169,7 +180,7 @@ Different parameters of the AdEx neuron model produce different spiking patterns
 
 At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the **firing rate** of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the **firing rate** of (a population of) neuron(s): the **rate-coded** neuron.
 
-```{figure} img/ratecoded-izhikevich.png
+```{figure} ../img/ratecoded-izhikevich.png
 ---
 width: 60%
 ---
@@ -191,7 +202,7 @@ $$
 $$
 
 
-```{figure} img/ratecoded-neuron.svg
+```{figure} ../img/ratecoded-neuron.svg
 ---
 width: 70%
 ---
@@ -200,8 +211,12 @@ Rate-coded neuron.
 
 The membrane potential uses a weighted sum of inputs (the firing rates $r_i(t)$ of other neurons) by multiplying each rate with a **weight** $w_i$ and adds a constant value $b$ (the **bias**). The activation function can be any non-linear function, usually making sure that the firing rate is positive.
 
-![](img/ratecoded-simple.png)
-
+```{figure} ../img/ratecoded-simple.png
+---
+width: 70%
+---
+Firing rate of a rate-coded neuron for a step input.
+```
 
 **Remarks on ODEs**
 
@@ -224,17 +239,25 @@ $$
 When $v(t)$ is quite different from $I(t)$, the membrane potential "accelerates" to reduce the difference. When $v(t)$ is similar to $I(t)$, the membrane potential stays constant.
 
 
-![](img/ratecoded-simple-multiple.png)
-
+```{figure} ../img/ratecoded-simple-multiple.png
+---
+width: 70%
+---
+The time constant $\tau$ of a rate-coded neuron influences the speed at which it reacts to inputs.
+```
 
 The membrane potential follows an exponential function which tries to "match" its input with a speed determined by the **time constant** $\tau$. The time constant $\tau$ determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.
 
 There exists a significant number of transfer functions that can be used:
 
-![](img/ratecoded-transferfunctions.png)
+```{figure} ../img/ratecoded-transferfunctions.png
+---
+width: 70%
+---
+Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..
+```
 
-
-When using the rectifier activation function
+When using the rectifier activation function (ReLU):
 
 $$
     f(x) = \max(0, x)
@@ -242,9 +265,14 @@ $$
 
 the membrane potential $v(t)$ can take any value, but the firing rate $r(t)$ is only positive.
 
-![](img/ratecoded-simple2.png)
+```{figure} ../img/ratecoded-simple2.png
+---
+width: 80%
+---
+The rectifier function only keeps the positive part of the membrane potential.
+```
 
-When using the logistic (or sigmoid) activation function
+When using the logistic (or sigmoid) activation function:
 
 $$
     f(x) = \frac{1}{1 + \exp(-x)}
@@ -252,14 +280,18 @@ $$
 
 the firing rate $r(t)$ is bounded between 0 and 1, but responds for negative membrane potentials.
 
-![](img/ratecoded-simple3.png)
-
+```{figure} ../img/ratecoded-simple3.png
+---
+width: 80%
+---
+The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.
+```
 
 ## Artificial neurons
 
 By omitting the dynamics of the rate-coded neuron, one obtains the very simple **artificial neuron** (McCulloch and Pitts, 1943):
 
-```{figure} img/artificialneuron.svg
+```{figure} ../img/artificialneuron.svg
 ---
 width: 70%
 ---
@@ -289,7 +321,7 @@ $$
 
 
 
-```{figure} img/artificialneuron-simple.png
+```{figure} ../img/artificialneuron-simple.png
 ---
 width: 50%
 ---
@@ -299,7 +331,7 @@ The net activation represents an hyperplane in 2D.
 
 The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an **hyperplane** in the input space with $d$ dimensions $(x_1, x_2, \ldots, x_d)$.  An hyperplane has one dimension less than the space.
 
-```{figure} img/hyperplane.gif
+```{figure} ../img/hyperplane.gif
 ---
 width: 50%
 ---
@@ -330,7 +362,7 @@ The weight vector is orthogonal to the hyperplane $(\mathbf{w}, b)$ and defines 
 By looking at the **sign** of the net activation, we can separate the input space into two classes. This will be the main principle of **linear classification**.
 
 
-```{figure} img/projection.svg
+```{figure} ../img/projection.svg
 ---
 width: 80%
 ---

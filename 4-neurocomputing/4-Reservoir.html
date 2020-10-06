@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Reservoir computing &#8212; Neurocomputing</title>
+    <title>4. Reservoir computing &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/sphinx-book-theme.js"></script>
@@ -39,8 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/4-Reservoir.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Hebbian learning" href="5-Hebbian.html" />
-    <link rel="prev" title="2. Hopfield networks" href="2-Hopfield.html" />
+    <link rel="next" title="5. Hebbian learning" href="5-Hebbian.html" />
+    <link rel="prev" title="3. Neural Fields (optional)" href="3-NeuralFields.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -221,19 +222,24 @@
    2. Hopfield networks
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-NeuralFields.html">
+   3. Neural Fields (optional)
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Reservoir computing
+   4. Reservoir computing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="5-Hebbian.html">
-   4. Hebbian learning
+   5. Hebbian learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6-Spiking.html">
-   5. Spiking networks
+   6. Spiking networks
   </a>
  </li>
 </ul>
@@ -246,6 +252,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and matplotlib
   </a>
  </li>
 </ul>
@@ -339,7 +350,7 @@
               <div>
                 
   <div class="section" id="reservoir-computing">
-<h1><span class="section-number">3. </span>Reservoir computing<a class="headerlink" href="#reservoir-computing" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Reservoir computing<a class="headerlink" href="#reservoir-computing" title="Permalink to this headline">¶</a></h1>
 </div>
 
     <script type="text/x-thebe-config">
@@ -370,8 +381,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="2-Hopfield.html" title="previous page"><span class="section-number">2. </span>Hopfield networks</a>
-    <a class='right-next' id="next-link" href="5-Hebbian.html" title="next page"><span class="section-number">4. </span>Hebbian learning</a>
+    <a class='left-prev' id="prev-link" href="3-NeuralFields.html" title="previous page"><span class="section-number">3. </span>Neural Fields (optional)</a>
+    <a class='right-next' id="next-link" href="5-Hebbian.html" title="next page"><span class="section-number">5. </span>Hebbian learning</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
