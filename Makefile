@@ -13,3 +13,6 @@ export:
 
 clean:
 	rm -rf ./neurocomputing/_build/html
+
+pdf:
+	jupyter-book build neurocomputing --builder pdfhtml
