@@ -412,18 +412,36 @@ The delta learning rule is always of the form: $\Delta w$ = eta * error * input.
 
 Let's suppose you have 13971 measurements in some Excel file, linking engine size, number of cylinders, fuel consumption and CO2 emissions of various cars. You want to predict fuel consumption and CO2 emissions when you know the engine size and the number of cylinders.
 
-Engine size | Cylinders | Fuel consumption | CO2 emissions
----- | ---- | ---- | ----
-2 | 4 | 8.5 | 196
-2.4 | 4 | 9.6 | 221
-1.5 | 4 | 5.9 | 136
-3.5 | 6 | 11 | 255
-3.5 | 6 | 11 | 244
-3.5 | 6 | 10 | 230
-3.5 | 6 | 10 | 232
-3.7 | 6 | 11 | 255
-3.7 | 6 | 12 | 267
-... | ... | ... | ...
+
+```{list-table}
+:header-rows: 1
+:name: example-table
+
+* - Engine size
+  - Cylinders
+  - Fuel consumption
+  - CO2 emissions
+* - 2
+  - 4
+  - 8.5
+  - 196
+* - 2.4
+  - 4
+  - 9.6
+  - 221
+* - 1.5
+  - 4
+  - 5.9
+  - 136
+* - 3.5
+  - 6
+  - 11
+  - 255
+* - ...
+  - ...
+  - ...
+  - ...
+```
 
 
 ```{figure} ../img/MLR-example-data.png

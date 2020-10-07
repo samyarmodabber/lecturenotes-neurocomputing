@@ -401,7 +401,7 @@
 <h2><span class="section-number">2.1. </span>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/regression-animation2.png"><img alt="../_images/regression-animation2.png" src="../_images/regression-animation2.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.23 </span><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s consider a training set of N examples <span class="math notranslate nohighlight">\(\mathcal{D} = (x_i, t_i)_{i=1..N}\)</span>. In <strong>linear regression</strong>, we want to learn a linear model (hypothesis) <span class="math notranslate nohighlight">\(y\)</span> that is linearly dependent on the input <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -422,7 +422,7 @@
 </ul>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.24 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:</p>
 <div class="math notranslate nohighlight">
@@ -437,7 +437,7 @@
 <p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math notranslate nohighlight">\(y_i = f_{w, b}(x_i)\)</span> is equal to the <strong>true value</strong> <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples. In other words, we want to minimize the <strong>residual error</strong> of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.</p>
 <div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/regression-animation-mse-dual.png"><img alt="../_images/regression-animation-mse-dual.png" src="../_images/regression-animation-mse-dual.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.7 </span><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.25 </span><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="gradient-descent-for-linear-regression">
@@ -560,12 +560,12 @@
 </ul>
 <div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/regression-animation.gif"><img alt="../_images/regression-animation.gif" src="../_images/regression-animation.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.26 </span><span class="caption-text">Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
 <div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/regression-animation-loss.png"><img alt="../_images/regression-animation-loss.png" src="../_images/regression-animation-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.27 </span><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="delta-learning-rule">
@@ -593,11 +593,11 @@
 <p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is higher at the end of learning.</p>
 <div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/regression-animation-online.gif"><img alt="../_images/regression-animation-online.gif" src="../_images/regression-animation-online.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.10 </span><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.28 </span><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/regression-animation-online-loss.png"><img alt="../_images/regression-animation-online-loss.png" src="../_images/regression-animation-online-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.11 </span><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.29 </span><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -631,7 +631,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>The problem is exactly the same as before, except that we use vectors and matrices instead of scalars. <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> can have any number of dimensions, the same procedure will apply. This corresponds to a <strong>linear neural network</strong> (also called <strong>linear perceptron</strong>), with one output neuron per predicted value <span class="math notranslate nohighlight">\(y_i\)</span> using the linear activation function.</p>
 <div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/linearperceptron.svg"><img alt="../_images/linearperceptron.svg" src="../_images/linearperceptron.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.12 </span><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.30 </span><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the prediction error <strong>vector</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -732,7 +732,13 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <div class="section" id="mlr-example-fuel-consumption-and-co2-emissions">
 <h3><span class="section-number">2.3.1. </span>MLR example: fuel consumption and CO2 emissions<a class="headerlink" href="#mlr-example-fuel-consumption-and-co2-emissions" title="Permalink to this headline">¶</a></h3>
 <p>Let’s suppose you have 13971 measurements in some Excel file, linking engine size, number of cylinders, fuel consumption and CO2 emissions of various cars. You want to predict fuel consumption and CO2 emissions when you know the engine size and the number of cylinders.</p>
-<table class="colwidths-auto table">
+<table class="table" id="example-table">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Engine size</p></th>
 <th class="head"><p>Cylinders</p></th>
@@ -761,32 +767,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <td><p>11</p></td>
 <td><p>255</p></td>
 </tr>
-<tr class="row-even"><td><p>3.5</p></td>
-<td><p>6</p></td>
-<td><p>11</p></td>
-<td><p>244</p></td>
-</tr>
-<tr class="row-odd"><td><p>3.5</p></td>
-<td><p>6</p></td>
-<td><p>10</p></td>
-<td><p>230</p></td>
-</tr>
-<tr class="row-even"><td><p>3.5</p></td>
-<td><p>6</p></td>
-<td><p>10</p></td>
-<td><p>232</p></td>
-</tr>
-<tr class="row-odd"><td><p>3.7</p></td>
-<td><p>6</p></td>
-<td><p>11</p></td>
-<td><p>255</p></td>
-</tr>
-<tr class="row-even"><td><p>3.7</p></td>
-<td><p>6</p></td>
-<td><p>12</p></td>
-<td><p>267</p></td>
-</tr>
-<tr class="row-odd"><td><p>…</p></td>
+<tr class="row-even"><td><p>…</p></td>
 <td><p>…</p></td>
 <td><p>…</p></td>
 <td><p>…</p></td>
@@ -795,11 +776,11 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 </table>
 <div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/MLR-example-data.png"><img alt="../_images/MLR-example-data.png" src="../_images/MLR-example-data.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.13 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.31 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/MLR-example-data-3d.png"><img alt="../_images/MLR-example-data-3d.png" src="../_images/MLR-example-data-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.14 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.32 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can notice that the output variables seem to linearly depend on the inputs.</p>
 <p>Noting the input variables <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> and the output ones <span class="math notranslate nohighlight">\(y_1\)</span>, <span class="math notranslate nohighlight">\(y_2\)</span>, we can define our problem as a mulitple linear regression:</p>
@@ -822,7 +803,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>We can check that the model correctly explains the data by visualizing it:</p>
 <div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/MLR-example-fit-3d.png"><img alt="../_images/MLR-example-fit-3d.png" src="../_images/MLR-example-fit-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.15 </span><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.33 </span><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -843,7 +824,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \]</div>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/sigmoid.png"><img alt="../_images/sigmoid.png" src="../_images/sigmoid.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.16 </span><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.34 </span><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p>By definition of the logistic function, the prediction <span class="math notranslate nohighlight">\(y\)</span> will be bounded between 0 and 1, what matches the targets <span class="math notranslate nohighlight">\(t\)</span>. Let’s now apply gradient descent on the <strong>mse</strong> loss using this new model. The individual loss will be:</p>
 <div class="math notranslate nohighlight">
@@ -897,7 +878,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p><strong>Generalized form of the delta learning rule</strong></p>
 <div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.17 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.35 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 <p>For a linear perceptron with parameters <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and any activation function <span class="math notranslate nohighlight">\(f\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -924,7 +905,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <h2><span class="section-number">2.5. </span>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/polynomialregression.png"><img alt="../_images/polynomialregression.png" src="../_images/polynomialregression.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.18 </span><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.36 </span><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:</p>
 <div class="math notranslate nohighlight">
