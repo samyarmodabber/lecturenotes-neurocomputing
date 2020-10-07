@@ -928,7 +928,7 @@ We could repeatedly take 100 random samples of the thermometer and see how the d
 
 ```{figure} ../img/estimators-temperature2.png
 ---
-width: 100%
+width: 60%
 ---
 Sampled measurements.
 ```
