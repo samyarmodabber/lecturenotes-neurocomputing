@@ -421,9 +421,6 @@
 <span class="n">N</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">h</span> <span class="c1"># number of pixels</span>
 <span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span> <span class="c1"># number of classes</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
 </div>
 </div>
@@ -445,13 +442,50 @@
 </div>
 </div>
 <p>Digits are indeed to be recognized, the hope being that they are linearly separable and we can apply a softmax classifier directly on the pixels.</p>
-<p>The only</p>
+<p>The only problem is that each image is a 8x8 matrix, while we want vectors for our model. Fortunately, that is very easy with <code class="docutils literal notranslate"><span class="pre">reshape</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s know have a look at the targets, i.e. the ground truth / labels of each digit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 ... 8 9 8]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each label is an integer between 0 and 9, while our softmax classifier expects a <strong>one-hot-encoded</strong> vector of 10 classes, with only one non-zero element, for example for digit 3:</p>
+<div class="math notranslate nohighlight">
+\[[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]\]</div>
+<p>To do the conversion, we can once again use the built-in method of <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. ... 0. 0. 0.]
+ [0. 1. 0. ... 0. 0. 0.]
+ [0. 0. 1. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 1. 0.]
+ [0. 0. 0. ... 0. 0. 1.]
+ [0. 0. 0. ... 0. 1. 0.]]
+(1797, 10)
 </pre></div>
 </div>
 </div>
@@ -587,7 +621,7 @@
 Final loss: 0.07258671496001251
 </pre></div>
 </div>
-<img alt="../_images/5-SoftmaxClassifier-solution_15_1.png" src="../_images/5-SoftmaxClassifier-solution_15_1.png" />
+<img alt="../_images/5-SoftmaxClassifier-solution_19_1.png" src="../_images/5-SoftmaxClassifier-solution_19_1.png" />
 </div>
 </div>
 <p><strong>Q:</strong> What is the final training error of the model and the final loss? Is it what you expected? Why do they evolve like this?</p>

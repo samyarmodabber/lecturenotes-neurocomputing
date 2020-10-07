@@ -18,7 +18,7 @@ $$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}$$
 
  
 
-* **Matrices** $A$ are 2-dimensional arrays of size (or shape) $m \times n$ ($m$ rows, $n$ columns, $A \in \Re^{m \times n}$). They are represented by a capital letter to distinguish them from scalars. The element $a_{ij}$ of a matrix $A$ is the element on the $i$-th row and $j$-th column.
+* **Matrices** $A$ are 2-dimensional arrays of size (or shape) $m \times n$ ($m$ rows, $n$ columns, $A \in \Re^{m \times n}$). They are represented by a capital letter to distinguish them from scalars (classically also in bold $\mathbf{A}$ but not here). The element $a_{ij}$ of a matrix $A$ is the element on the $i$-th row and $j$-th column.
 
 $$A = \begin{bmatrix}
  a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -276,19 +276,290 @@ $$\mathbf{x} = A^{-1} \times \mathbf{b}$$
 
 ## Calculus
 
-### Univariate functions
+### Functions
 
-### Multivariate functions
+A **univariate function** $f$ associates to any real number $x \in \Re$ (or a subset of $\Re$ called the support of the function) another (unique) real number $f(x)$:
 
-### Derivatives, gradient
+$$
+\begin{align}
+f\colon \quad \Re &\to \Re\\
+x &\mapsto f(x),\end{align}
+$$
 
-Chain rule
+```{figure} ../img/function.png
+---
+width: 60%
+---
+Example of univariate function, here the quadratic function $f(x) = x^2 - 2 \, x + 1$.
+```
+
+
+A **multivariate function** $f$ associates to any vector $\mathbf{x} \in \Re^n$ (or a subset) a real number $f(\mathbf{x})$:
+
+$$
+\begin{align}
+f\colon \quad \Re^n &\to \Re\\
+\mathbf{x} &\mapsto f(\mathbf{x}),\end{align}
+$$
+
+The variables of the function are the elements of the vector. For low-dimensional vector spaces, it is possible to represent each element explicitly, for example:
+
+$$
+\begin{align}
+f\colon \quad\Re^3 &\to \Re\\
+x, y, z &\mapsto f(x, y, z),\end{align}
+$$
+
+```{figure} ../img/multivariatefunction.png
+---
+width: 60%
+---
+Example of a multivariate function $f(x_1, x_2)$ mapping $\Re^2$ to $\Re$. Source: <https://en.wikipedia.org/wiki/Function_of_several_real_variables>
+```
+
+
+**Vector fields** associate to any vector $\mathbf{x} \in \Re^n$ (or a subset) another vector (possibly of different size):
+
+$$
+\begin{align}
+\overrightarrow{f}\colon \quad \Re^n &\to \Re^m\\
+\mathbf{x} &\mapsto \overrightarrow{f}(\mathbf{x}),\end{align}
+$$
+
+```{figure} ../img/vectorfield.png
+---
+width: 40%
+---
+Vector field associating to each point of $\Re^2$ another vector. Source: <https://en.wikipedia.org/wiki/Vector_field>
+```
+
+```{note}
+The matrix-vector multiplication $\mathbf{y} = A \times \mathbf{x}$ is a linear vector field, mapping any vector $\mathbf{x}$ into another vector $\mathbf{y}$.
+```
+
+### Differentiation
+
+#### Derivatives
+
+
+
+Differential calculus deals with the **derivative** of a function, a process called differentiation.
+
+The derivative $f'(x)$ or $\displaystyle\frac{d f(x)}{dx}$ of a univariate function $f(x)$ is defined as the local *slope* of the tangent to the function for a given value of $x$:
+
+$$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+
+The line passing through the points $(x, f(x))$ and $(x + h, f(x + h))$ becomes tangent to the function when $h$ becomes very small:
+
+```{figure} ../img/derivative-approx.png
+---
+width: 60%
+---
+The derivative of the function $f(x)$ can be approximated by the slope of the line passing through $(x, f(x))$ and $(x + h, f(x + h))$ when $h$ becomes very small.
+```
+
+The sign of the derivative tells you how the function behaves locally:
+
+* If the derivative is positive, increasing a little bit $x$ increases the function $f(x)$, so the function is **locally increasing**.
+* If the derivative is negative, increasing a little bit $x$ decreases the function $f(x)$, so the function is **locally decreasing**.
+
+It basically allows you to measure the local influence of $x$ on $f(x)$: if I change a little bit the value $x$, what happens to $f(x)$? This will be very useful in machine learning.
+
+A special case is when the derivative is equal to 0 in $x$: $x$ is then called an **extremum** (or optimum) of the function, i.e. it can be a maximum or minimum. 
+
+```{note}
+If you differentiate $f'(x)$ itself, you obtain the **second-order derivative** $f''(x)$. You can repeat that process and obtain higher order derivatives. 
+
+For example, if $x(t)$ represents the position $x$ of an object depending on time $t$, the first-order derivative $x'(t)$ denotes the **speed** of the object and the second-order derivative $x''(t)$ its **acceleration**.
+```
+
+You can tell whether an extremum is a maximum or a minimum by looking at its second-order derivative:
+
+* If $f''(x) > 0$, the extremum is a **minimum**.
+* If $f''(x) < 0$, the extremum is a **maximum**.
+* If $f''(x) = 0$, the extremum is a **saddle point**.
+
+```{figure} ../img/optimization-example.png
+---
+width: 80%
+---
+Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.
+```
+
+The derivative of a **multivariate function** $f(\mathbf{x})$ is a vector of partial derivatives called the **gradient of the function** $\nabla_\mathbf{x} \, f(\mathbf{x})$:
+
+$$
+    \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix}
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_1} \\
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_2} \\
+        \ldots \\
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_n} \\
+    \end{bmatrix}
+$$
+
+
+The subscript to the $\nabla$ operator denotes *with respect to* (w.r.t) which variable the differentiation is done.
+
+A **partial derivative** w.r.t. to particular variable (or element of the vector) is simply achieved by differentiating the function while considering all other variables to be **constant**. For example the function:
+
+$$f(x, y) = x^2 + 3 \, x \, y + 4 \, x \, y^2 - 1$$
+
+can be partially differentiated w.r.t. $x$ and $y$ as:
+
+$$\begin{cases}
+\displaystyle\frac{\partial f(x, y)}{\partial x} = 2 \, x + 3\, y + 4 \, y^2 \\
+\\
+\displaystyle\frac{\partial f(x, y)}{\partial y} = 3 \, x + 8\, x \, y
+\end{cases}$$
+
+The gradient can be generalized to **vector fields**, where the **Jacobian** or **Jacobi matrix** is a matrix containing all partial derivatives.
+
+$$
+J = \begin{bmatrix}
+    \dfrac{\partial \mathbf{f}}{\partial x_1} & \cdots & \dfrac{\partial \mathbf{f}}{\partial x_n} \end{bmatrix}
+= \begin{bmatrix}
+    \dfrac{\partial f_1}{\partial x_1} & \cdots & \dfrac{\partial f_1}{\partial x_n}\\
+    \vdots & \ddots & \vdots\\
+    \dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n} \end{bmatrix}
+$$
+
+#### Analytical properties
+
+The analytical form of the derivative of most standard mathematical functions is known. The following table lists the most useful ones in this course:
+
+```{list-table}
+:header-rows: 1
+:name: example-table
+
+* - $f(x)$
+  - $f'(x)$
+* - $x$
+  - $1$
+* - $x^p$
+  - $p \, x^{p-1}$
+* - $\displaystyle\frac{1}{x}$
+  - $- \displaystyle\frac{1}{x^2}$
+* - $e^x$
+  - $e^x$
+* - $\ln x$
+  - $\displaystyle\frac{1}{x}$
+```
+
+Differentiation is linear, which means that if we define the function:
+
+$$h(x) = a \, f(x) + b \, g(x)$$
+
+its derivative is:
+
+$$h'(x) = a \, f'(x) + b \, g'(x)$$
+
+A product of functions can also be differentiated analytically:
+
+$$(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)$$
+
+
+```{admonition} Example
+$$f(x) = x^2 \, e^x$$
+
+$$f'(x) = 2 \, x \, e^x + x^2 \cdot e^x$$
+```
+
+#### Chain rule
+
+A very important concept for neural networks is the **chain rule**, which tells how to differentiate **function compositions** (functions of a function) of the form:
+
+$$(f \circ g) (x) = f(g(x))$$
+
+The derivative of $f \circ g$ is:
+
+$$(f \circ g)' (x) = (f' \circ g) (x) \times g'(x)$$
+
+The chain rule may be more understandable using Leibniz's notation:
+
+$$\frac{d f \circ g (x)}{dx} = \frac{d f (g (x))}{d g(x)} \times \frac{d g (x)}{dx}$$
+
+By posing $y = g(x)$ as an intermediary variable, it becomes:
+
+
+$$\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}$$
+
+
+```{admonition} Example
+The function :
+
+$$h(x) = \frac{1}{2 \, x + 1}$$
+
+is the function composition of $g(x) = 2 \, x + 1$ and $f(x) = \displaystyle\frac{1}{x}$, whose derivatives are known:
+
+$$g'(x) = 2$$
+$$f'(x) = -\displaystyle\frac{1}{x^2}$$
+
+Its derivative is according to the **chain rule**:
+
+$$h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2$$
+```
+
+The chain rule also applies to partial derivatives:
+
+$$
+    \displaystyle\frac{\partial f \circ g (x, y)}{\partial x} = \frac{\partial f \circ g (x, y)}{\partial g (x, y)} \times \frac{\partial g (x, y)}{\partial x}
+$$
+
+and gradients:
+
+$$
+    \nabla_\mathbf{x} \, f \circ g (\mathbf{x}) = \nabla_{g(\mathbf{x})} \, f \circ g (\mathbf{x}) \times \nabla_\mathbf{x} \, g (\mathbf{x})
+$$
+
+### Integration
+
+The opposite operation of differentation is **integration**. Given a function $f(x)$, we search a function $F(x)$ whose *derivative* is $f(x)$:
+
+$$F'(x) = f(x)$$
+
+The **integral** of $f$ is noted:
+
+$$F(x) = \int f(x) \, dx$$
+
+$dx$ being an infinitesimal interval (similar $h$ in the definition of the derivative). There are tons of formal definitions of integrals (Riemann, Lebesgue, Darboux...) and we will not get into details here as we will not use integrals a lot.
+
+The most important to understand for now is maybe that the integral of a function is the **area under the curve**. The area under the curve of a function $f$ on the interval $[a, b]$ is:
+
+$$\mathcal{A} = \int_a^b f(x) \, dx$$
+
+```{figure} ../img/riemann-sum1.svg
+---
+width: 60%
+---
+The integral of $f$ on $[a, b]$ is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on $[a, b]$. Source: <https://www.math24.net/riemann-sums-definite-integral/>
+```
+
+One way to approximate this surface is split the interval $[a, b]$ into $n$ intervals of width $dx$ with the points $x_1, x_2, \ldots, x_n$. This defines $n$ rectangles of width $dx$ and height $f(x_i)$, so their surface is $f(x_i) \, dx$. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.
+
+```{figure} ../img/riemann-sum.svg
+---
+width: 60%
+---
+The interval$[a, b]$ can be split in $n$ small intervals of width $dx$, defining $n$ rectangles whose sum is close to the area under the curve. Source: <https://www.math24.net/riemann-sums-definite-integral/>
+```
+
+When $n \to \infty$, or equivalently $dx \to 0$, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:
+
+$$\int_a^b f(x) \, dx = \lim_{dx \to 0} \sum_{i=1}^n f(x_i) \, dx$$
+
+Very roughly speaking, the integral can be considered as the equivalent of a sum for continuous functions.
+
 
 ## Probability theory
 
 ### Discrete probability distributions
 
-Let's note $X$ a **discrete random variable** with $n$ realizations $x_1, \ldots, x_n$. The **probability** that $X$ takes the value $x_i$ is defined by the **relative frequency of occurrence**, i.e. the proportion of samples having the value $x_i$, when the total number $N$ of samples tends to infinity:
+Let's note $X$ a **discrete random variable** with $n$ realizations (or outcomes) $x_1, \ldots, x_n$. 
+
+* A coin has two outcomes: head and tails.
+* A dice has six outcomes: 1, 2, 3, 4, 5, 6.
+
+The **probability** that $X$ takes the value $x_i$ is defined in the frequentist sense by the **relative frequency of occurrence**, i.e. the proportion of samples having the value $x_i$, when the total number $N$ of samples tends to infinity:
 
 $$
     P(X = x_i) = \frac{\text{Number of favorable cases}}{\text{Total number of samples}}
@@ -344,7 +615,14 @@ $$
 
 **Continuous random variables** can take an infinity of continuous values, e.g. $\Re$ or some subset. The closed set of values they can take is called the **support** $\mathcal{D}_X$ of the probability distribution. The probability distribution is described by a **probability density function** (pdf) $f(x)$.
 
-The pdf of a distribution must be positive ($f(x) \geq 0 \, \forall x \in \mathcal{D}_X$) and its integral must be equal to 1:
+```{figure} ../img/normaldistribution.png
+---
+width: 60%
+---
+Normal distributions are continuous distributions. The area under the curve is always 1.
+```
+
+The pdf of a distribution must be positive ($f(x) \geq 0 \, \forall x \in \mathcal{D}_X$) and its integral (area under the curve) must be equal to 1:
 
 $$
     \int_{x \in \mathcal{D}_X} f(x) \, dx = 1
@@ -356,7 +634,9 @@ $$
     P(a \leq X \leq b) = \int_{a}^b f(x) \, dx 
 $$
 
+
 One can however think of the pdf as the **likelihood** that a value $x$ comes from that distribution.
+
 
 For continuous distributions, the mathematical expectation is now defined by an integral instead of a sum:
 
@@ -466,9 +746,13 @@ $$
 
 **Example**
 
-![](../img/conditionalprobability.png)
 
-<https://www.elevise.co.uk/g-e-m-h-5-u.html>
+```{figure} ../img/conditionalprobability.png
+---
+width: 60%
+---
+Source: <https://www.elevise.co.uk/g-e-m-h-5-u.html>.
+```
 
 You ask 50 people whether they like cats or dogs:
 
@@ -479,14 +763,15 @@ You ask 50 people whether they like cats or dogs:
 
 We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities...). Among the 23 who love cats, which proportion also loves dogs?
 
-We have $P(\text{dog}) = \frac{18+21}{50}$ and $P(\text{cat}) = \frac{18+5}{50}$.
+```{dropdown} Answer
+We have $P(\text{dog}) = \displaystyle\frac{18+21}{50}= \displaystyle\frac{139}{50}$ and $P(\text{cat}) = \displaystyle\frac{18+5}{50} = \frac{23}{50}$.
 
-The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \frac{18}{50}$.
+The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \displaystyle\frac{18}{50}$.
 
 The conditional probability of loving dogs given one loves cats is:
 
-$$P(\text{dog} | \text{cat}) = \frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}$$
-
+$$P(\text{dog} | \text{cat}) = \displaystyle\frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}$$
+```
 
 
 ### Bayes' rule
@@ -530,8 +815,8 @@ $$P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9$$
 
 Given that the test is positive, what is the probability that the patient is ill?
 
-**Answer:**
 
+```{dropdown} Answer
 $$
 \begin{aligned}
     P(D=1|T=1) &= \frac{P(T=1 | D=1) \, P(D=1)}{P(T=1)} \\
@@ -543,7 +828,7 @@ $$
                & = 0.47 \\
 \end{aligned}
 $$
-
+```
 
 ## Statistics
 
@@ -555,7 +840,12 @@ $$
     \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
 $$
 
-![](../img/normaldistribution.svg)
+```{figure} ../img/normaldistribution.svg
+---
+width: 60%
+---
+Samples taken from a normal distribution will mostly be around the mean.
+```
 
 More samples will be obtained where $f(x)$ is high ($x$ is probable), so the average of the sampled data will be close to the expected value of the distribution.
 
@@ -580,19 +870,13 @@ $$
     \mathbb{E}[f(X)] = \mathbb{E}_{x \sim X} [f(x)] \approx \frac{1}{N} \, \sum_{i=1}^N f(x_i)
 $$
 
-Example of Monte Carlo sampling to estimate $\pi/4$:
+```{figure} ../img/montecarlo.svg
+---
+width: 100%
+---
+Sampling can be used to estimate $\pi$: when sampling $x$ and $y$ uniformly in $[0, 1]$, the proportion of points with a norm smaller than tends to $\pi/4$. Source: <https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694>
+```
 
-
-![](../img/montecarlo-1.jpeg)
-
-![](../img/montecarlo-2.jpeg)
-
-
-![](../img/montecarlo-3.jpeg)
-
-![](../img/montecarlo-4.jpeg)
-
-Credit <https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694>
 
 ### Central limit theorem
 
@@ -610,9 +894,12 @@ $$S_N \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{N}})$$
 
 If we perform the sampling multiple times, even with few samples, the average of the sampling averages will be very close to the expected value. The more samples we get, the smaller the variance of the estimates. Although the distribution $X$ can be anything, the sampling averages are normally distributed.
 
-![](../img/IllustrationCentralTheorem.png)
-
-Credit: <https://en.wikipedia.org/wiki/Central_limit_theorem>
+```{figure} ../img/IllustrationCentralTheorem.png
+---
+width: 100%
+---
+Source: <https://en.wikipedia.org/wiki/Central_limit_theorem>
+```
 
 ### Estimators
 
@@ -628,13 +915,23 @@ $$
     M = 0.95 \, T + 0.65
 $$
 
-![](../img/estimators-temperature.png)
+```{figure} ../img/estimators-temperature.png
+---
+width: 100%
+---
+Left: measurement as a function of the temperature. Right: distribution of temperature.
+```
 
 The thermometer is not perfect, but do random measurements allow us to estimate the expected value of the temperature?
 
 We could repeatedly take 100 random samples of the thermometer and see how the distribution of sample averages look like:
 
-![](../img/estimators-temperature2.png)
+```{figure} ../img/estimators-temperature2.png
+---
+width: 100%
+---
+Sampled measurements.
+```
 
 But, as the expectation is linear, we actually have:
 
@@ -665,7 +962,12 @@ Ideally, we would like estimators with:
 * **low variance**: we do not need many estimates to get a correct estimate (CLT: $\frac{\sigma}{\sqrt{N}}$)
 
 
-![](../img/biasvariance.png)
+```{figure} ../img/biasvariance3.png
+---
+width: 60%
+---
+Bias-variance trade-off.
+```
 
 Unfortunately, the perfect estimator does not exist in practice.  One usually talks of a **bias/variance** trade-off: if you have a small bias, you will have a high variance, or vice versa. In machine learning, bias corresponds to underfitting, variance to overfitting.
 
@@ -673,7 +975,6 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 ## Information theory
 
-<https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a>
 
 ### Entropy
 
@@ -683,13 +984,19 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 * Almost impossible outcomes ($P \sim 0$) are very surprising because they are very rare.
 
-![](../img/selfinformation.png)
+```{figure} ../img/selfinformation.png
+---
+width: 80%
+---
+Self-information.
+```
 
 A useful measurement of how surprising is an outcome $x$ is the **self-information**:
 
 $$
     I (x) = - \log P(X = x)
 $$
+
 Depending on which log is used, self-information has different units, but it is just a rescaling, the base never matters:
 
 * $\log_2$: bits or shannons.
@@ -719,7 +1026,12 @@ $$
 The entropy of a Bernouilli variable is maximal when both outcomes are **equiprobable**. If a variable is **deterministic**, its entropy is minimal and equal to zero.
 
 
-![](../img/entropy-binomial.png)
+```{figure} ../img/entropy-binomial.png
+---
+width: 80%
+---
+The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.
+```
 
 The **joint entropy** of two random variables $X$ and $Y$ is defined by:
 
@@ -790,21 +1102,20 @@ $$
 Beware that the notation $H(X, Y)$ is the same as the joint entropy, but it is a different concept!
 ```
 
-The cross-entropy measures the **negative log-likelihood** that a sample $x$ taken from the distribution $X$ could also come from the distribution $Y$. More exactly, it measures how many bits of information one would need to distinguish the two distributions $X$ and $Y$.
+```{figure} ../img/crossentropy.svg
+---
+width: 100%
+---
+The cross-entropy measures the overlap between two probability distributions.
+```
 
-![](../img/crossentropy.svg)
+The cross-entropy measures the **negative log-likelihood** that a sample $x$ taken from the distribution $X$ could also come from the distribution $Y$. More exactly, it measures how many bits of information one would need to distinguish the two distributions $X$ and $Y$.
 
 $$
     H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
 $$
 
-If the two distributions are the same *almost anywhere*, one cannot distinguish samples from the two distributions:
-
-* The cross-entropy is the same as the entropy of $X$.
-
-If the two distributions are completely different, one can tell whether a sample $Z$ comes from $X$ or $Y$:
-
-* The cross-entropy is higher than the entropy of $X$.
+If the two distributions are the same *almost anywhere*, one cannot distinguish samples from the two distributions, the cross-entropy is the same as the entropy of $X$. If the two distributions are completely different, one can tell whether a sample $Z$ comes from $X$ or $Y$, the cross-entropy is higher than the entropy of $X$.
 
 
 In practice, the **Kullback-Leibler divergence** $\text{KL}(X ||Y)$ is a better measurement of the similarity (statistical distance) between two probability distributions:
@@ -819,13 +1130,9 @@ $$
     \text{KL}(X ||Y) = H(X, Y) - H(X)
 $$
 
-If the two distributions are the same *almost anywhere*:
+If the two distributions are the same *almost anywhere*, the KL divergence is zero. If the two distributions are different, the KL divergence is positive. Minimizing the KL between two distributions is the same as making the two distributions "equal". But remember: the KL is not a metric, as it is not symmetric.
 
-* The KL divergence is zero.
-
-If the two distributions are different:
-
-* The KL divergence is positive.
-
-Minimizing the KL between two distributions is the same as making the two distributions "equal".
-The KL is not a metric, as it is not symmetric.
+```{note}
+Refer 
+<https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a> for nice visual explanantions of the cross-entropy.
+```
