@@ -366,7 +366,7 @@
 </ul>
 <div class="section" id="vectors">
 <h3><span class="section-number">2.1.1. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h3>
-<p>A vector can be thought of as the <strong>coordinates of a point</strong> in an Euclidian space (such the 2D space), relative to the origin. A vector space relies on two fundamental operations, which are that:</p>
+<p>A vector can be thought of as the <strong>coordinates of a point</strong> in an Euclidean space (such the 2D space), relative to the origin. A vector space relies on two fundamental operations, which are that:</p>
 <ul class="simple">
 <li><p>Vectors can be added:</p></li>
 </ul>
@@ -381,7 +381,7 @@
 <a class="reference internal image-reference" href="../_images/vectorspace.png"><img alt="../_images/vectorspace.png" src="../_images/vectorspace.png" style="width: 50%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Vector spaces allow additions of vectors. Source: <a class="reference external" href="https://mathinsight.org/image/vector_2d_add">https://mathinsight.org/image/vector_2d_add</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
-<p>These two operations generate of lot of nice properties (see <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_space">https://en.wikipedia.org/wiki/Vector_space</a> for a full list), including:</p>
+<p>These two operations generate a lot of nice properties (see <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_space">https://en.wikipedia.org/wiki/Vector_space</a> for a full list), including:</p>
 <ul class="simple">
 <li><p>associativity: <span class="math notranslate nohighlight">\(\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}\)</span></p></li>
 <li><p>commutativity: <span class="math notranslate nohighlight">\(\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}\)</span></p></li>
@@ -389,13 +389,13 @@
 <li><p>inversion: <span class="math notranslate nohighlight">\(\mathbf{x} + (-\mathbf{x}) = \mathbf{0}\)</span></p></li>
 <li><p>distributivity: <span class="math notranslate nohighlight">\(a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}\)</span></p></li>
 </ul>
-<p>Vectors have a <strong>norm</strong> (or length) <span class="math notranslate nohighlight">\(||\mathbf{x}||\)</span>. The most intuive one (if you know the Pythagoras theorem) is the <strong>Euclidian norm</strong> or <span class="math notranslate nohighlight">\(L^2\)</span>-norm, which sums the square of each element:</p>
+<p>Vectors have a <strong>norm</strong> (or length) <span class="math notranslate nohighlight">\(||\mathbf{x}||\)</span>. The most intuitive one (if you know the Pythagoras theorem) is the <strong>Euclidean norm</strong> or <span class="math notranslate nohighlight">\(L^2\)</span>-norm, which sums the square of each element:</p>
 <div class="math notranslate nohighlight">
 \[||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}\]</div>
 <p>Other norms exist, distinguished by the subscript. The <strong><span class="math notranslate nohighlight">\(L^1\)</span>-norm</strong> (also called Taxicab or Manhattan norm) sums the absolute value of each element:</p>
 <div class="math notranslate nohighlight">
 \[||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|\]</div>
-<p>The <strong>p-norm</strong> generalizes the Euclidian norm to other powers <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<p>The <strong>p-norm</strong> generalizes the Euclidean norm to other powers <span class="math notranslate nohighlight">\(p\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}\]</div>
 <p>The <strong>infinity norm</strong> (or maximum norm) <span class="math notranslate nohighlight">\(L^\infty\)</span> returns the maximum element of the vector:</p>
@@ -635,7 +635,7 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <li><p>If the derivative is negative, increasing a little bit <span class="math notranslate nohighlight">\(x\)</span> decreases the function <span class="math notranslate nohighlight">\(f(x)\)</span>, so the function is <strong>locally decreasing</strong>.</p></li>
 </ul>
 <p>It basically allows you to measure the local influence of <span class="math notranslate nohighlight">\(x\)</span> on <span class="math notranslate nohighlight">\(f(x)\)</span>: if I change a little bit the value <span class="math notranslate nohighlight">\(x\)</span>, what happens to <span class="math notranslate nohighlight">\(f(x)\)</span>? This will be very useful in machine learning.</p>
-<p>A special case is when the derivative is equal to 0 in <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(x\)</span> is then called an <strong>extremum</strong> (or optimum) of the function, i.e. it can be a maximum or minimum.</p>
+<p>A special case is when the derivative is equal to 0 in <span class="math notranslate nohighlight">\(x\)</span>. <span class="math notranslate nohighlight">\(x\)</span> is then called an <strong>extremum</strong> (or optimum) of the function, i.e. it can be a maximum or minimum.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you differentiate <span class="math notranslate nohighlight">\(f'(x)\)</span> itself, you obtain the <strong>second-order derivative</strong> <span class="math notranslate nohighlight">\(f''(x)\)</span>. You can repeat that process and obtain higher order derivatives.</p>
@@ -755,7 +755,7 @@ J = \begin{bmatrix}
 \[g'(x) = 2\]</div>
 <div class="math notranslate nohighlight">
 \[f'(x) = -\displaystyle\frac{1}{x^2}\]</div>
-<p>Its derivative is according to the <strong>chain rule</strong>:</p>
+<p>Its derivative according to the <strong>chain rule</strong> is:</p>
 <div class="math notranslate nohighlight">
 \[h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2\]</div>
 </div>
@@ -782,12 +782,12 @@ J = \begin{bmatrix}
 <p><span class="math notranslate nohighlight">\(dx\)</span> being an infinitesimal interval (similar <span class="math notranslate nohighlight">\(h\)</span> in the definition of the derivative). There are tons of formal definitions of integrals (Riemann, Lebesgue, Darboux…) and we will not get into details here as we will not use integrals a lot.</p>
 <p>The most important to understand for now is maybe that the integral of a function is the <strong>area under the curve</strong>. The area under the curve of a function <span class="math notranslate nohighlight">\(f\)</span> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{A} = \int_a^b f(x) \, dx\]</div>
+\[\mathcal{S} = \int_a^b f(x) \, dx\]</div>
 <div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/riemann-sum1.svg"><img alt="../_images/riemann-sum1.svg" src="../_images/riemann-sum1.svg" width="60%" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.10 </span><span class="caption-text">The integral of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([a, b]\)</span> is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on <span class="math notranslate nohighlight">\([a, b]\)</span>. Source: <a class="reference external" href="https://www.math24.net/riemann-sums-definite-integral/">https://www.math24.net/riemann-sums-definite-integral/</a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
-<p>One way to approximate this surface is split the interval <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(n\)</span> intervals of width <span class="math notranslate nohighlight">\(dx\)</span> with the points <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_n\)</span>. This defines <span class="math notranslate nohighlight">\(n\)</span> rectangles of width <span class="math notranslate nohighlight">\(dx\)</span> and height <span class="math notranslate nohighlight">\(f(x_i)\)</span>, so their surface is <span class="math notranslate nohighlight">\(f(x_i) \, dx\)</span>. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.</p>
+<p>One way to approximate this surface is to split the interval <span class="math notranslate nohighlight">\([a, b]\)</span> into <span class="math notranslate nohighlight">\(n\)</span> intervals of width <span class="math notranslate nohighlight">\(dx\)</span> with the points <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_n\)</span>. This defines <span class="math notranslate nohighlight">\(n\)</span> rectangles of width <span class="math notranslate nohighlight">\(dx\)</span> and height <span class="math notranslate nohighlight">\(f(x_i)\)</span>, so their surface is <span class="math notranslate nohighlight">\(f(x_i) \, dx\)</span>. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.</p>
 <div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/riemann-sum.svg"><img alt="../_images/riemann-sum.svg" src="../_images/riemann-sum.svg" width="60%" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.11 </span><span class="caption-text">The interval<span class="math notranslate nohighlight">\([a, b]\)</span> can be split in <span class="math notranslate nohighlight">\(n\)</span> small intervals of width <span class="math notranslate nohighlight">\(dx\)</span>, defining <span class="math notranslate nohighlight">\(n\)</span> rectangles whose sum is close to the area under the curve. Source: <a class="reference external" href="https://www.math24.net/riemann-sums-definite-integral/">https://www.math24.net/riemann-sums-definite-integral/</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
@@ -854,7 +854,7 @@ J = \begin{bmatrix}
 </div>
 <div class="section" id="continuous-probability-distributions">
 <h3><span class="section-number">2.3.2. </span>Continuous probability distributions<a class="headerlink" href="#continuous-probability-distributions" title="Permalink to this headline">¶</a></h3>
-<p><strong>Continuous random variables</strong> can take an infinity of continuous values, e.g. <span class="math notranslate nohighlight">\(\Re\)</span> or some subset. The closed set of values they can take is called the <strong>support</strong> <span class="math notranslate nohighlight">\(\mathcal{D}_X\)</span> of the probability distribution. The probability distribution is described by a <strong>probability density function</strong> (pdf) <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p><strong>Continuous random variables</strong> can take infinitely many values in a continuous interval, e.g. <span class="math notranslate nohighlight">\(\Re\)</span> or some subset. The closed set of values they can take is called the <strong>support</strong> <span class="math notranslate nohighlight">\(\mathcal{D}_X\)</span> of the probability distribution. The probability distribution is described by a <strong>probability density function</strong> (pdf) <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/normaldistribution.png"><img alt="../_images/normaldistribution.png" src="../_images/normaldistribution.png" style="width: 60%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.12 </span><span class="caption-text">Normal distributions are continuous distributions. The area under the curve is always 1.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
@@ -1052,7 +1052,7 @@ Answer<div class="summary-down docutils">
 <h2><span class="section-number">2.4. </span>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="monte-carlo-sampling">
 <h3><span class="section-number">2.4.1. </span>Monte Carlo sampling<a class="headerlink" href="#monte-carlo-sampling" title="Permalink to this headline">¶</a></h3>
-<p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> consists of taking <span class="math notranslate nohighlight">\(N\)</span> samples <span class="math notranslate nohighlight">\(x_i\)</span> out of the distribution <span class="math notranslate nohighlight">\(X\)</span> (discrete or continuous) and computing the <strong>sample average</strong>:</p>
+<p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> (MC) consists of taking <span class="math notranslate nohighlight">\(N\)</span> samples <span class="math notranslate nohighlight">\(x_i\)</span> out of the distribution <span class="math notranslate nohighlight">\(X\)</span> (discrete or continuous) and computing the <strong>sample average</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
@@ -1109,7 +1109,7 @@ Answer<div class="summary-down docutils">
 <h3><span class="section-number">2.4.3. </span>Estimators<a class="headerlink" href="#estimators" title="Permalink to this headline">¶</a></h3>
 <p>CLT shows that the sampling average is an <strong>unbiased estimator</strong> of the expected value of a distribution:</p>
 <div class="math notranslate nohighlight">
-\[\mathbb{E}(S_N) = \mathbb{E}(X)\]</div>
+\[\mathbb{E}[S_N] = \mathbb{E}[X]\]</div>
 <p>An estimator is a random variable used to measure parameters of a distribution (e.g. its expectation). The problem is that estimators can generally be <strong>biased</strong>.</p>
 <p>Take the example of a thermometer <span class="math notranslate nohighlight">\(M\)</span> measuring the temperature <span class="math notranslate nohighlight">\(T\)</span>. <span class="math notranslate nohighlight">\(T\)</span> is a random variable (normally distributed with <span class="math notranslate nohighlight">\(\mu=20\)</span> and <span class="math notranslate nohighlight">\(\sigma=10\)</span>) and the measurements <span class="math notranslate nohighlight">\(M\)</span> relate to the temperature with the relation:</p>
 <div class="math notranslate nohighlight">
