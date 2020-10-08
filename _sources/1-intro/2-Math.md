@@ -6,6 +6,7 @@ It is not supposed to replace any course in mathematics (we won't show any proof
 
 **References:** Part I of Goodfellow et al. (2016) {cite}`Goodfellow2016`. Any mathematics textbook can be used in addition.
 
+
 ## Linear algebra
 
 Several mathematical objects are manipulated in linear algebra:
