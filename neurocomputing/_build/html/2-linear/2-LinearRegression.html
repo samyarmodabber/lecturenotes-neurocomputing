@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Linear Regression &#8212; Neurocomputing</title>
+    <title>Linear Regression &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,8 +40,6 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/2-LinearRegression.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Regularization" href="3-Regularization.html" />
-    <link rel="prev" title="1. Optimization" href="1-Optimization.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -106,142 +104,6 @@
    2. Math basics
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../1-intro/3-Neurons.html">
-   3. Neurons
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  1 - Linear models
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="1-Optimization.html">
-   1. Optimization
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Linear Regression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="3-Regularization.html">
-   3. Regularization
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="4-LinearClassification.html">
-   4. Linear classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="5-MaximumLikelihoodEstimation.html">
-   5. Maximum Likelihood Estimation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="6-MultiClassification.html">
-   6. Multi-class classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="7-LearningTheory.html">
-   7. Learning theory
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  2 - Deep learning
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/1-NN.html">
-   1. Backpropagation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
-   2. Deep neural networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
-   3. Convolutional neural networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
-   4. Object detection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/5-Autoencoders.html">
-   5. Autoencoders
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/6-RBM.html">
-   6. Restricted Boltzmann machines (optional)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/7-Segnets.html">
-   7. Segmentation networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
-   8. Generative Adversarial Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
-   9. Recurrent neural networks
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  3 - Neurocomputing
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
-   1. Limits of deep Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/2-Hopfield.html">
-   2. Hopfield networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/3-NeuralFields.html">
-   3. Neural Fields (optional)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
-   4. Reservoir computing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
-   5. Hebbian learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
-   6. Spiking networks
-  </a>
- </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -252,11 +114,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
-   2. Numpy and matplotlib
   </a>
  </li>
 </ul>
@@ -343,46 +200,46 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   2.1. Linear regression
+   Linear regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-descent-for-linear-regression">
-   2.2. Gradient descent for linear regression
+   Gradient descent for linear regression
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#least-mean-squares">
-     2.2.1. Least Mean Squares
+     Least Mean Squares
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#delta-learning-rule">
-     2.2.2. Delta learning rule
+     Delta learning rule
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-linear-regression">
-   2.3. Multiple linear regression
+   Multiple linear regression
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mlr-example-fuel-consumption-and-co2-emissions">
-     2.3.1. MLR example: fuel consumption and CO2 emissions
+     MLR example: fuel consumption and CO2 emissions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#logistic-regression">
-   2.4. Logistic regression
+   Logistic regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polynomial-regression">
-   2.5. Polynomial regression
+   Polynomial regression
   </a>
  </li>
 </ul>
@@ -396,12 +253,12 @@
               <div>
                 
   <div class="section" id="linear-regression">
-<h1><span class="section-number">2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">2.1. </span>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/regression-animation2.png"><img alt="../_images/regression-animation2.png" src="../_images/regression-animation2.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.23 </span><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s consider a training set of N examples <span class="math notranslate nohighlight">\(\mathcal{D} = (x_i, t_i)_{i=1..N}\)</span>. In <strong>linear regression</strong>, we want to learn a linear model (hypothesis) <span class="math notranslate nohighlight">\(y\)</span> that is linearly dependent on the input <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -422,7 +279,7 @@
 </ul>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.24 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:</p>
 <div class="math notranslate nohighlight">
@@ -437,13 +294,13 @@
 <p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math notranslate nohighlight">\(y_i = f_{w, b}(x_i)\)</span> is equal to the <strong>true value</strong> <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples. In other words, we want to minimize the <strong>residual error</strong> of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.</p>
 <div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/regression-animation-mse-dual.png"><img alt="../_images/regression-animation-mse-dual.png" src="../_images/regression-animation-mse-dual.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.25 </span><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="gradient-descent-for-linear-regression">
-<h2><span class="section-number">2.2. </span>Gradient descent for linear regression<a class="headerlink" href="#gradient-descent-for-linear-regression" title="Permalink to this headline">¶</a></h2>
+<h2>Gradient descent for linear regression<a class="headerlink" href="#gradient-descent-for-linear-regression" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="least-mean-squares">
-<h3><span class="section-number">2.2.1. </span>Least Mean Squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h3>
+<h3>Least Mean Squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h3>
 <p>We search for <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(b\)</span> which minimize the mean square error:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -560,16 +417,16 @@
 </ul>
 <div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/regression-animation.gif"><img alt="../_images/regression-animation.gif" src="../_images/regression-animation.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.26 </span><span class="caption-text">Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
 <div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/regression-animation-loss.png"><img alt="../_images/regression-animation-loss.png" src="../_images/regression-animation-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.27 </span><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="delta-learning-rule">
-<h3><span class="section-number">2.2.2. </span>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h3>
+<h3>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h3>
 <p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\Delta w = \eta \, (t_i - y_i) \, x_i\]</div>
@@ -593,16 +450,16 @@
 <p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is higher at the end of learning.</p>
 <div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/regression-animation-online.gif"><img alt="../_images/regression-animation-online.gif" src="../_images/regression-animation-online.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.28 </span><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/regression-animation-online-loss.png"><img alt="../_images/regression-animation-online-loss.png" src="../_images/regression-animation-online-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.29 </span><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="multiple-linear-regression">
-<h2><span class="section-number">2.3. </span>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h2>
+<h2>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h2>
 <p>The key idea of linear regression (one input <span class="math notranslate nohighlight">\(x\)</span>, one output <span class="math notranslate nohighlight">\(y\)</span>) can be generalized to multiple inputs and outputs.</p>
 <p><strong>Multiple Linear Regression</strong> (MLR) predicts several output variables based on several explanatory variables:</p>
 <div class="math notranslate nohighlight">
@@ -631,7 +488,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>The problem is exactly the same as before, except that we use vectors and matrices instead of scalars. <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> can have any number of dimensions, the same procedure will apply. This corresponds to a <strong>linear neural network</strong> (also called <strong>linear perceptron</strong>), with one output neuron per predicted value <span class="math notranslate nohighlight">\(y_i\)</span> using the linear activation function.</p>
 <div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/linearperceptron.svg"><img alt="../_images/linearperceptron.svg" src="../_images/linearperceptron.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.30 </span><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the prediction error <strong>vector</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -730,7 +587,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>The delta learning rule is always of the form: <span class="math notranslate nohighlight">\(\Delta w\)</span> = eta * error * input. Biases have an input of 1.</p>
 </div>
 <div class="section" id="mlr-example-fuel-consumption-and-co2-emissions">
-<h3><span class="section-number">2.3.1. </span>MLR example: fuel consumption and CO2 emissions<a class="headerlink" href="#mlr-example-fuel-consumption-and-co2-emissions" title="Permalink to this headline">¶</a></h3>
+<h3>MLR example: fuel consumption and CO2 emissions<a class="headerlink" href="#mlr-example-fuel-consumption-and-co2-emissions" title="Permalink to this headline">¶</a></h3>
 <p>Let’s suppose you have 13971 measurements in some Excel file, linking engine size, number of cylinders, fuel consumption and CO2 emissions of various cars. You want to predict fuel consumption and CO2 emissions when you know the engine size and the number of cylinders.</p>
 <table class="table" id="example-table">
 <colgroup>
@@ -776,11 +633,11 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 </table>
 <div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/MLR-example-data.png"><img alt="../_images/MLR-example-data.png" src="../_images/MLR-example-data.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.31 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/MLR-example-data-3d.png"><img alt="../_images/MLR-example-data-3d.png" src="../_images/MLR-example-data-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.32 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can notice that the output variables seem to linearly depend on the inputs.</p>
 <p>Noting the input variables <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> and the output ones <span class="math notranslate nohighlight">\(y_1\)</span>, <span class="math notranslate nohighlight">\(y_2\)</span>, we can define our problem as a mulitple linear regression:</p>
@@ -803,7 +660,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>We can check that the model correctly explains the data by visualizing it:</p>
 <div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/MLR-example-fit-3d.png"><img alt="../_images/MLR-example-fit-3d.png" src="../_images/MLR-example-fit-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.33 </span><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -816,7 +673,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 </div>
 </div>
 <div class="section" id="logistic-regression">
-<h2><span class="section-number">2.4. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
 <p>Let’s suppose we want to perform a regression, but where the outputs <span class="math notranslate nohighlight">\(t_i\)</span> are bounded between 0 and 1. We could use a logistic (or sigmoid) function instead of a linear function in order to transform the input into an output:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -824,7 +681,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \]</div>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/sigmoid.png"><img alt="../_images/sigmoid.png" src="../_images/sigmoid.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.34 </span><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p>By definition of the logistic function, the prediction <span class="math notranslate nohighlight">\(y\)</span> will be bounded between 0 and 1, what matches the targets <span class="math notranslate nohighlight">\(t\)</span>. Let’s now apply gradient descent on the <strong>mse</strong> loss using this new model. The individual loss will be:</p>
 <div class="math notranslate nohighlight">
@@ -878,7 +735,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p><strong>Generalized form of the delta learning rule</strong></p>
 <div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.35 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 <p>For a linear perceptron with parameters <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and any activation function <span class="math notranslate nohighlight">\(f\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -902,10 +759,10 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>In the linear case, <span class="math notranslate nohighlight">\(f'(x) = 1\)</span>. One can use any non-linear function, e.g hyperbolic tangent tanh(), ReLU, etc. Transfer functions are chosen for neural networks so that we can compute their derivative easily.</p>
 </div>
 <div class="section" id="polynomial-regression">
-<h2><span class="section-number">2.5. </span>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/polynomialregression.png"><img alt="../_images/polynomialregression.png" src="../_images/polynomialregression.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2.36 </span><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:</p>
 <div class="math notranslate nohighlight">
@@ -968,8 +825,6 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="1-Optimization.html" title="previous page"><span class="section-number">1. </span>Optimization</a>
-    <a class='right-next' id="next-link" href="3-Regularization.html" title="next page"><span class="section-number">3. </span>Regularization</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
