@@ -32,7 +32,7 @@ $$A = \begin{bmatrix}
 
 ### Vectors
 
-A vector can be thought of as the **coordinates of a point** in an Euclidian space (such the 2D space), relative to the origin. A vector space relies on two fundamental operations, which are that:
+A vector can be thought of as the **coordinates of a point** in an Euclidean space (such the 2D space), relative to the origin. A vector space relies on two fundamental operations, which are that:
 
 * Vectors can be added:
 
@@ -49,7 +49,7 @@ width: 50%
 Vector spaces allow additions of vectors. Source: <https://mathinsight.org/image/vector_2d_add>
 ```
 
-These two operations generate of lot of nice properties (see <https://en.wikipedia.org/wiki/Vector_space> for a full list), including:
+These two operations generate a lot of nice properties (see <https://en.wikipedia.org/wiki/Vector_space> for a full list), including:
 
 * associativity: $\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}$
 * commutativity: $\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}$
@@ -57,7 +57,7 @@ These two operations generate of lot of nice properties (see <https://en.wikiped
 * inversion: $\mathbf{x} + (-\mathbf{x}) = \mathbf{0}$
 * distributivity: $a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}$
 
-Vectors have a **norm** (or length) $||\mathbf{x}||$. The most intuive one (if you know the Pythagoras theorem) is the **Euclidian norm** or $L^2$-norm, which sums the square of each element:
+Vectors have a **norm** (or length) $||\mathbf{x}||$. The most intuitive one (if you know the Pythagoras theorem) is the **Euclidean norm** or $L^2$-norm, which sums the square of each element:
 
 $$||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}$$
 
@@ -65,7 +65,7 @@ Other norms exist, distinguished by the subscript. The **$L^1$-norm** (also call
 
 $$||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|$$
 
-The **p-norm** generalizes the Euclidian norm to other powers $p$: 
+The **p-norm** generalizes the Euclidean norm to other powers $p$: 
 
 $$||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}$$
 
@@ -366,7 +366,7 @@ The sign of the derivative tells you how the function behaves locally:
 
 It basically allows you to measure the local influence of $x$ on $f(x)$: if I change a little bit the value $x$, what happens to $f(x)$? This will be very useful in machine learning.
 
-A special case is when the derivative is equal to 0 in $x$: $x$ is then called an **extremum** (or optimum) of the function, i.e. it can be a maximum or minimum. 
+A special case is when the derivative is equal to 0 in $x$. $x$ is then called an **extremum** (or optimum) of the function, i.e. it can be a maximum or minimum. 
 
 ```{note}
 If you differentiate $f'(x)$ itself, you obtain the **second-order derivative** $f''(x)$. You can repeat that process and obtain higher order derivatives. 
@@ -495,7 +495,7 @@ is the function composition of $g(x) = 2 \, x + 1$ and $f(x) = \displaystyle\fra
 $$g'(x) = 2$$
 $$f'(x) = -\displaystyle\frac{1}{x^2}$$
 
-Its derivative is according to the **chain rule**:
+Its derivative according to the **chain rule** is:
 
 $$h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2$$
 ```
@@ -526,7 +526,7 @@ $dx$ being an infinitesimal interval (similar $h$ in the definition of the deriv
 
 The most important to understand for now is maybe that the integral of a function is the **area under the curve**. The area under the curve of a function $f$ on the interval $[a, b]$ is:
 
-$$\mathcal{A} = \int_a^b f(x) \, dx$$
+$$\mathcal{S} = \int_a^b f(x) \, dx$$
 
 ```{figure} ../img/riemann-sum1.svg
 ---
@@ -535,7 +535,7 @@ width: 60%
 The integral of $f$ on $[a, b]$ is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on $[a, b]$. Source: <https://www.math24.net/riemann-sums-definite-integral/>
 ```
 
-One way to approximate this surface is split the interval $[a, b]$ into $n$ intervals of width $dx$ with the points $x_1, x_2, \ldots, x_n$. This defines $n$ rectangles of width $dx$ and height $f(x_i)$, so their surface is $f(x_i) \, dx$. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.
+One way to approximate this surface is to split the interval $[a, b]$ into $n$ intervals of width $dx$ with the points $x_1, x_2, \ldots, x_n$. This defines $n$ rectangles of width $dx$ and height $f(x_i)$, so their surface is $f(x_i) \, dx$. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.
 
 ```{figure} ../img/riemann-sum.svg
 ---
@@ -614,7 +614,7 @@ $$
 
 ### Continuous probability distributions
 
-**Continuous random variables** can take an infinity of continuous values, e.g. $\Re$ or some subset. The closed set of values they can take is called the **support** $\mathcal{D}_X$ of the probability distribution. The probability distribution is described by a **probability density function** (pdf) $f(x)$.
+**Continuous random variables** can take infinitely many values in a continuous interval, e.g. $\Re$ or some subset. The closed set of values they can take is called the **support** $\mathcal{D}_X$ of the probability distribution. The probability distribution is described by a **probability density function** (pdf) $f(x)$.
 
 ```{figure} ../img/normaldistribution.png
 ---
@@ -835,7 +835,7 @@ $$
 
 ### Monte Carlo sampling
 
-**Random sampling** or **Monte Carlo sampling** consists of taking $N$ samples $x_i$ out of the distribution $X$ (discrete or continuous) and computing the **sample average**:
+**Random sampling** or **Monte Carlo sampling** (MC) consists of taking $N$ samples $x_i$ out of the distribution $X$ (discrete or continuous) and computing the **sample average**:
 
 $$
     \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
@@ -906,7 +906,7 @@ Source: <https://en.wikipedia.org/wiki/Central_limit_theorem>
 
 CLT shows that the sampling average is an **unbiased estimator** of the expected value of a distribution:
 
-$$\mathbb{E}(S_N) = \mathbb{E}(X)$$
+$$\mathbb{E}[S_N] = \mathbb{E}[X]$$
 
 An estimator is a random variable used to measure parameters of a distribution (e.g. its expectation). The problem is that estimators can generally be **biased**.
 
