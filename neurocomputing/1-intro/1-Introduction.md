@@ -2,12 +2,11 @@
 
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf)
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/3Ze2EZE2Pko' frameborder='0' allowfullscreen></iframe></div>
-
-
-
 
 ##  What is neurocomputing?
+
+
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/Hy0FpFjdJGI' frameborder='0' allowfullscreen></iframe></div>
 
 Let's first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.
 
@@ -73,6 +72,7 @@ Deep learning has recently revolutionized these types of machine learning, so le
 
 ### Supervised learning
 
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/pbbzwFohH3I' frameborder='0' allowfullscreen></iframe></div>
 
 ```{figure} ../img/supervisedlearning.png
 ---
@@ -173,6 +173,8 @@ CNNs are also gaining an increasing importance in medical applications, for exam
 
 #### Recurrent neural networks
 
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/_809brCJaTM' frameborder='0' allowfullscreen></iframe></div>
+
 Another field that was heavily transformed by deep learning is **natural language processing** (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.
 
 The key neural network involved in this paradigmatic change is the **recurrent neural network** (RNN), with the most prominent model being the **long short-term memory** (LSTM) network {cite}`Hochreiter1997`.
@@ -196,6 +198,8 @@ Google Neural Machine Translation. Source: <https://ai.google/research/pubs/pub4
 ```
 
 ### Unsupervised learning
+
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/Hy0FpFjdJGI' frameborder='0' allowfullscreen></iframe></div>
 
 In supervised learning, we use **annotated data**, i.e. pairs $(x_i, t_i)$ of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it. 
 
@@ -270,6 +274,8 @@ CycleGAN. <https://github.com/junyanz/CycleGAN>
 
 ### Reinforcement learning
 
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/fczritSOcSM' frameborder='0' allowfullscreen></iframe></div>
+
 Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:
 
 <https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/>
@@ -317,3 +323,7 @@ or in reality:
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eRwTbRtnT1I' frameborder='0' allowfullscreen></iframe></div>
 
 
+## Outlook
+
+
+<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/KAE5mn7WFgU' frameborder='0' allowfullscreen></iframe></div>
