@@ -2,12 +2,11 @@
 
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.1-Introduction.pdf)
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/lqJ-2Wrc5SI' frameborder='0' allowfullscreen></iframe></div>
 
 ##  What is neurocomputing?
 
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/Hy0FpFjdJGI' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/Hy0FpFjdJGI' frameborder='0' allowfullscreen></iframe></div>
 
 Let's first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.
 
@@ -73,7 +72,7 @@ Deep learning has recently revolutionized these types of machine learning, so le
 
 ### Supervised learning
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/pbbzwFohH3I' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/pbbzwFohH3I' frameborder='0' allowfullscreen></iframe></div>
 
 ```{figure} ../img/supervisedlearning.png
 ---
@@ -154,27 +153,27 @@ However, Krizhevsky, Sutskever and Hinton {cite}`Krizhevsky2012` trained a CNN e
 
 The whole field of computer vision was taken by storm, and CNNs were able to outperform the state-of-the-art of many vision-related tasks, such as object detection with the YOLO (You Only Look Once) network {cite}`Redmon2016`:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
 
 or semantic segmention with SegNet {cite}`Badrinarayanan2015` or its variants such as Mask RCNN {cite}`He2018`:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
 
 
 CNNs can even be used to control autonomous cars, by learning to reproduce human commands for a given input image {cite}`Bojarski2016`:
 
-<style>.embed-container { position: relative; padding-bottom: 100%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/qhUvQiKec2U' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/qhUvQiKec2U' frameborder='0' allowfullscreen></iframe></div>
 
 CNNs are also gaining an increasing importance in medical applications, for example to help histologists detect cancerous cells:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/9Mz84cwVmS0' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/9Mz84cwVmS0' frameborder='0' allowfullscreen></iframe></div>
 
 
 
 
 #### Recurrent neural networks
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/_809brCJaTM' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/_809brCJaTM' frameborder='0' allowfullscreen></iframe></div>
 
 Another field that was heavily transformed by deep learning is **natural language processing** (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.
 
@@ -200,7 +199,7 @@ Google Neural Machine Translation. Source: <https://ai.google/research/pubs/pub4
 
 ### Unsupervised learning
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/Hy0FpFjdJGI' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/uIrBgz4OPlM' frameborder='0' allowfullscreen></iframe></div>
 
 In supervised learning, we use **annotated data**, i.e. pairs $(x_i, t_i)$ of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it. 
 
@@ -252,7 +251,7 @@ Sampling the latent space of a VAE trained on faces allows to generate new but r
 
 VAE are in particular central to **DeepFakes** which have widely reached the media because of their impressive possibilities but also ethical issues:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/JbzVhzNaTdI' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/JbzVhzNaTdI' frameborder='0' allowfullscreen></iframe></div>
 
 Another class of generative models are **generative adversarial networks** (GAN) {cite}`Goodfellow2014` which consist of a **generator** (decoder) and a **discriminator** that compete to produce realistic images while trying to discriminate generated from real images. 
 
@@ -275,7 +274,7 @@ CycleGAN. <https://github.com/junyanz/CycleGAN>
 
 ### Reinforcement learning
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/fczritSOcSM' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/fczritSOcSM' frameborder='0' allowfullscreen></iframe></div>
 
 Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:
 
@@ -297,34 +296,33 @@ In deep RL, the policy $\pi$ is implemented using a deep neural network whose jo
 
 * The first achievement of deep RL was the **deep Q-network** of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
 
 * Deep RL methods have since then been applied to more complex games, such as **Starcraft II**:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/UuhECwm31dM' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/UuhECwm31dM' frameborder='0' allowfullscreen></iframe></div>
 
 or **DotA 2**:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eHipy_j29Xw' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/eHipy_j29Xw' frameborder='0' allowfullscreen></iframe></div>
 
 * Another famous achievement of deep RL is when Google Deepmind's **AlphaGo** beat Lee Sedol, 19 times world champion, in 2016:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/8tq1C8spV_g' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/8tq1C8spV_g' frameborder='0' allowfullscreen></iframe></div>
 
 * Deep RL is also a very promising to **robotics**, be it in simulation:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/faDKMMwOS2Q' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/faDKMMwOS2Q' frameborder='0' allowfullscreen></iframe></div>
 
 or in reality:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/jwSbzNHGflM' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/jwSbzNHGflM' frameborder='0' allowfullscreen></iframe></div>
 
 * It is also promising for **autonomous driving**:
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/eRwTbRtnT1I' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/eRwTbRtnT1I' frameborder='0' allowfullscreen></iframe></div>
 
 
 ## Outlook
 
-
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/KAE5mn7WFgU' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/KAE5mn7WFgU' frameborder='0' allowfullscreen></iframe></div>

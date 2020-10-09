@@ -6,7 +6,16 @@ The next files are the notebook (which you have to fill) and the solution (which
 
 To download the notebook, there is a link on the top right where you can download the `.ipynb` file. Alternatively, you can run it directly on Colab (<https://colab.research.google.com/>) if you have a Google account. 
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/lqJ-2Wrc5SI' frameborder='0' allowfullscreen></iframe></div>
+## Presentation 
 
-<style>.embed-container { position: relative; margin-bottom: 1%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/pBTwkxOSlpU' frameborder='0' allowfullscreen></iframe></div>
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/lqJ-2Wrc5SI" frameborder="0" allowfullscreen></iframe>
+</div>
+
+## Commented solution
+
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/pBTwkxOSlpU" frameborder="0" allowfullscreen></iframe>
+</div>
+
 

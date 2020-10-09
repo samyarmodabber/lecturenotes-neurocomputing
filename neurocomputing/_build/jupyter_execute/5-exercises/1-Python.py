@@ -82,34 +82,37 @@ To exit Python call the `exit()` function (or `Ctrl+d`):
 ```
 
 
-### Scripting
+## Working With Python
 
-Instead of using the interpreter, you can run scripts which can be executed sequentially. Simply edit a text file called `MyScript.py` containing for example:
+There are basically three ways to program in Python: the interpreter for small commands, scripts for longer programs and notebooks (as here) for interactive programming.
 
-```python
-# MyScript.py
-# Implements the Hello World example.
+### Python Interpreter
 
-text = 'Hello World!' # define a string variable
-
-print(text)
-```
-
-The `#` character is used for comments. Execute this script by typing in a Terminal:
+To start the Python interpreter, simply type its name in a terminal under Linux:
 
 ```bash
-python MyScript.py
+user@machine ~ $ python
 ```
 
-As it is a scripted language, each instruction in the script is executed from the beginning to the end, except for the declared functions or classes which can be used later.
+```python
+Python 3.7.4 (default, Jul 16 2019, 07:12:58) 
+[GCC 9.1.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
 
-There are many text editors or IDEs that work very well with Python, including:
+You can then type anything at the prompt, for example a print statement:
 
-* Spyder <https://www.spyder-ide.org/>
-* PyCharm <https://www.jetbrains.com/pycharm/>
-* Atom <https://atom.io/>
-* Visual Studio Code <https://code.visualstudio.com/>
-* SublimeText <http://www.sublimetext.com/>
+```python
+>>> print("Hello World!")
+Hello World!
+```
+
+To exit Python call the `exit()` function (or `Ctrl+d`):
+
+```python
+>>> exit()
+```
 
 ### Jupyter Notebooks
 
@@ -179,7 +182,7 @@ print(value1, value2, ...)
 
 You can give it as many arguments as you want (of whatever type), they will be printed one after another separated by spaces.
 
-**Q:** Try to print "Hello World!" using two different strings "Hello" and "world!":
+**Q:** Try to print "Hello World!" using two different strings "Hello" and "World!":
 
 
 
@@ -278,7 +281,7 @@ a = ['spam', 'eggs', 100, 1234]
 
 
 
-The length of a list is available through the `len()` function applied to the list:
+The number of items in a list is available through the `len()` function applied to the list:
 
 ```python
 len(a)
