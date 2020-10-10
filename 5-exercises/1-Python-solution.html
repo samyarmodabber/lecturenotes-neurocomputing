@@ -323,6 +323,11 @@
      1.2.2.3.9. Functions
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes">
+     1.2.2.3.10. Classes
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -359,7 +364,7 @@
 <li><p>Scipy lectures note <a class="reference external" href="http://www.scipy-lectures.org/">http://www.scipy-lectures.org</a></p></li>
 <li><p>An Introduction to Interactive Programming in Python on <a class="reference external" href="https://www.coursera.org/course/interactivepython">Coursera</a>.</p></li>
 </ul>
-<p>This notebook only introduces you to the basics and skips functionalities such as classes, as we will not need them in the exercises, so feel free to study additional resources if you want to master Python programming.</p>
+<p>This notebook only introduces you to the basics, so feel free to study additional resources if you want to master Python programming.</p>
 <div class="section" id="installation">
 <h2><span class="section-number">1.2.2.1. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Python should be already installed if you use Linux, a very old version if you use MacOS, and probably nothing under Windows. Moreover, Python 2.7 became obsolete in December 2019 but is still the default on some distributions.</p>
@@ -1231,6 +1236,122 @@ Hello Gill! I am Jack!
 Hello Jack! I am Gill!
 Hello, I am Jack!
 Hello Jack! I am Julien!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="classes">
+<h3><span class="section-number">1.2.2.3.10. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<p>Classes are structures allowing to:</p>
+<ol class="simple">
+<li><p>Store information in an object.</p></li>
+<li><p>Apply functions on this information.</p></li>
+</ol>
+<p>In a nutshell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+   
+    <span class="k">def</span> <span class="nf">set_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+        
+<span class="n">a</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This defines the <strong>class</strong> <code class="docutils literal notranslate"><span class="pre">Foo</span></code>. The first (obligatory) method of the class is the <strong>constructor</strong> <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. This determines how the <strong>instance</strong> <code class="docutils literal notranslate"><span class="pre">a</span></code> will be instantiated after the call to <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">Foo(42)</span></code>. The first argument is <code class="docutils literal notranslate"><span class="pre">self</span></code>, which represents the current instance of the class. We can specify other arguments to the constructor (here <code class="docutils literal notranslate"><span class="pre">val</span></code>), which can be processed or stored.</p>
+<p>Here we store <code class="docutils literal notranslate"><span class="pre">val</span></code> as an <strong>attribute</strong> of the class <code class="docutils literal notranslate"><span class="pre">Foo</span></code> with <code class="docutils literal notranslate"><span class="pre">self.val</span></code>. It is data that will be specific to each created object: if you create <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">Foo(&quot;deep</span> <span class="pre">learning&quot;)</span></code>, the attribute <code class="docutils literal notranslate"><span class="pre">self.val</span></code> will have different values between the two instances. As always in Python, the type does not matter, it can be a float, a string, a numpy array, another object…</p>
+<p>Attributes are accessible from each object as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+<p>You can set its value by:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p>Classes can define <strong>methods</strong> that can manipulate class attributes like any regular function. The first argument <strong>must</strong> always be <code class="docutils literal notranslate"><span class="pre">self</span></code>. With the <code class="docutils literal notranslate"><span class="pre">self</span></code> object, you can access all attributes (or other methods) of the instance.</p>
+<p>With our toy class, <code class="docutils literal notranslate"><span class="pre">a.set_val(34)</span></code> does exactly the same as <code class="docutils literal notranslate"><span class="pre">a.val</span> <span class="pre">=</span> <span class="pre">34</span></code>, or <code class="docutils literal notranslate"><span class="pre">a.print()</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">print(a.val)</span></code>.</p>
+<p><em>For C++/Java experts:</em> attributes and methods are always public in Python. If you want to make an attribute private, preprend its name with an underscore, e.g. <code class="docutils literal notranslate"><span class="pre">self._val</span></code>. It will then not be part of the API of the class (but can be read or written publicly anyway…).</p>
+<p><strong>Q:</strong> Play around with this basic class, create different objects with different attributes, print them, change them, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+    
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">set_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+42
+32
+32
+</pre></div>
+</div>
+</div>
+</div>
+<p>A major concept in <strong>object-oriented programming</strong> (OOP) is <strong>class inheritance</strong>. We will not use it much in these exercises, but let’s talk shortly about it.</p>
+<p>Inheriting a class is creating a new class that inherits from the attributes and methods of another class (a kind of “copy” of the definition of the class). You can then add new attributes or methods, or overload existing ones.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="n">Foo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;val =&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Bar</span></code> is a child class of <code class="docutils literal notranslate"><span class="pre">Foo</span></code>. It inherits all attributes and methods, including <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code> and <code class="docutils literal notranslate"><span class="pre">set_val</span></code>. It creates a new method <code class="docutils literal notranslate"><span class="pre">add</span></code> and <strong>overloads</strong> <code class="docutils literal notranslate"><span class="pre">print</span></code>: the old definition of <code class="docutils literal notranslate"><span class="pre">print</span></code> in <code class="docutils literal notranslate"><span class="pre">Foo</span></code> does not exist anymore for instances of the <code class="docutils literal notranslate"><span class="pre">Bar</span></code> class (but does for instances of the <code class="docutils literal notranslate"><span class="pre">Foo</span></code> class). The constructor can also be overloaded, for example to add new arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="n">Foo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">val2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val2</span> <span class="o">=</span> <span class="n">val2</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;val =&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">super().__init__(val)</span></code> calls the constructor of the <code class="docutils literal notranslate"><span class="pre">Foo</span></code> class (the “super” class of <code class="docutils literal notranslate"><span class="pre">bar</span></code>), so it sets the value of <code class="docutils literal notranslate"><span class="pre">self.val</span></code>.</p>
+<p><strong>Q:</strong> Play around with inheritance to understand the concept.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="n">Foo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">val2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val2</span> <span class="o">=</span> <span class="n">val2</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;val =&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        
+<span class="n">b</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val = 42
 </pre></div>
 </div>
 </div>
