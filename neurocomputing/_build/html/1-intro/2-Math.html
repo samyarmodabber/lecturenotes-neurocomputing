@@ -51,7 +51,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/1-intro/2-Math.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Math basics" />
-<meta property="og:description" content="Math basics  This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the import" />
+<meta property="og:description" content="Math basics  Slides: pdf  This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder " />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -339,6 +339,7 @@
                 
   <div class="section" id="math-basics">
 <h1><span class="section-number">2. </span>Math basics<a class="headerlink" href="#math-basics" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.2-Basics.pdf">pdf</a></p>
 <p>This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the important mathematical notions that are needed to understand this course. Students who have studied mathematics as a major can safely skip this part, as there is nothing fancy (although the section on information theory could be worth a read).</p>
 <p>It is not supposed to replace any course in mathematics (we won’t show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.</p>
 <p><strong>References:</strong> Part I of Goodfellow et al. (2016) <a class="bibtex reference internal" href="../zreferences.html#goodfellow2016" id="id1">[GBC16]</a>. Any mathematics textbook can be used in addition.</p>
@@ -537,7 +538,7 @@ C = A \times B =\begin{bmatrix}
  a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 \end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}
 \end{split}\]</div>
-<p>The result <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is a vector of size <span class="math notranslate nohighlight">\(m\)</span>. In that sense, a matrix <span class="math notranslate nohighlight">\(A\)</span> can transform a vector of size <span class="math notranslate nohighlight">\(n\)</span> to a vector of size <span class="math notranslate nohighlight">\(m\)</span>: <span class="math notranslate nohighlight">\(A\)</span> represents a <strong>projection</strong> from <span class="math notranslate nohighlight">\(\Re^n\)</span> to <span class="math notranslate nohighlight">\(\Re^m\)</span>.</p>
+<p>The result <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is a vector of size <span class="math notranslate nohighlight">\(m\)</span>. In that sense, a matrix <span class="math notranslate nohighlight">\(A\)</span> can transform a vector of size <span class="math notranslate nohighlight">\(n\)</span> into a vector of size <span class="math notranslate nohighlight">\(m\)</span>: <span class="math notranslate nohighlight">\(A\)</span> represents a <strong>projection</strong> from <span class="math notranslate nohighlight">\(\Re^n\)</span> to <span class="math notranslate nohighlight">\(\Re^m\)</span>.</p>
 <div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/projection.png"><img alt="../_images/projection.png" src="../_images/projection.png" style="width: 60%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.4 </span><span class="caption-text">A <span class="math notranslate nohighlight">\(2 \times 3\)</span> projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Homogeneous_coordinate">https://en.wikipedia.org/wiki/Homogeneous_coordinate</a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>

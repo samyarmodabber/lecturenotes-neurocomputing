@@ -1,5 +1,8 @@
 # Math basics
 
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.2-Basics.pdf)
+
+
 This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the important mathematical notions that are needed to understand this course. Students who have studied mathematics as a major can safely skip this part, as there is nothing fancy (although the section on information theory could be worth a read). 
 
 It is not supposed to replace any course in mathematics (we won't show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.
@@ -17,7 +20,6 @@ Several mathematical objects are manipulated in linear algebra:
 
 $$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}$$
 
- 
 
 * **Matrices** $A$ are 2-dimensional arrays of size (or shape) $m \times n$ ($m$ rows, $n$ columns, $A \in \Re^{m \times n}$). They are represented by a capital letter to distinguish them from scalars (classically also in bold $\mathbf{A}$ but not here). The element $a_{ij}$ of a matrix $A$ is the element on the $i$-th row and $j$-th column.
 
@@ -237,7 +239,7 @@ $$
 \end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}
 $$
 
-The result $\mathbf{y}$ is a vector of size $m$. In that sense, a matrix $A$ can transform a vector of size $n$ to a vector of size $m$: $A$ represents a **projection** from $\Re^n$ to $\Re^m$.
+The result $\mathbf{y}$ is a vector of size $m$. In that sense, a matrix $A$ can transform a vector of size $n$ into a vector of size $m$: $A$ represents a **projection** from $\Re^n$ to $\Re^m$.
 
 ```{figure} ../img/projection.png
 ---

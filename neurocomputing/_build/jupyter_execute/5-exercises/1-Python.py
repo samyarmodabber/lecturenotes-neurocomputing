@@ -389,9 +389,7 @@ c = tel.values()
 
 
 
-### Flow Control
-
-#### If Statement 
+### If statement 
 
 Perhaps the most well-known conditional statement type is the `if` statement. For example:
 
@@ -451,7 +449,7 @@ if 0 in a:
 
 Note the use of the `in` keyword to know if an element exists in a list.
 
-#### For Loop
+### For loops
 
 The for statement in Python differs a bit from what you may be used to in C, Java or Pascal.
 
@@ -465,6 +463,7 @@ for word in list_words:
 ```
 
 **Q:** Iterate over the list you created previously and print each element.
+
 
 
 
