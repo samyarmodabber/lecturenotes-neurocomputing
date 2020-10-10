@@ -249,92 +249,85 @@
      1.2.1.2.1. Python Interpreter
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   1.2.1.3. Working With Python
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     1.2.1.3.1. Python Interpreter
+    <a class="reference internal nav-link" href="#scripts">
+     1.2.1.2.2. Scripts
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#jupyter-notebooks">
-     1.2.1.3.2. Jupyter Notebooks
+     1.2.1.2.3. Jupyter Notebooks
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basics-in-python">
-   1.2.1.4. Basics In Python
+   1.2.1.3. Basics In Python
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#print-statement">
-     1.2.1.4.1. Print Statement
+     1.2.1.3.1. Print Statement
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-types">
-     1.2.1.4.2. Data Types
+     1.2.1.3.2. Data Types
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#assignment-statement-and-operators">
-     1.2.1.4.3. Assignment Statement And Operators
+     1.2.1.3.3. Assignment Statement And Operators
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#assignment-statement">
-       1.2.1.4.3.1. Assignment Statement
+       1.2.1.3.3.1. Assignment Statement
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#operators">
-       1.2.1.4.3.2. Operators
+       1.2.1.3.3.2. Operators
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#strings">
-     1.2.1.4.4. Strings
+     1.2.1.3.4. Strings
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lists">
-     1.2.1.4.5. Lists
+     1.2.1.3.5. Lists
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dictionaries">
-     1.2.1.4.6. Dictionaries
+     1.2.1.3.6. Dictionaries
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#if-statement">
-     1.2.1.4.7. If statement
+     1.2.1.3.7. If statement
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for-loops">
-     1.2.1.4.8. For loops
+     1.2.1.3.8. For loops
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#functions">
-     1.2.1.4.9. Functions
+     1.2.1.3.9. Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise">
-   1.2.1.5. Exercise
+   1.2.1.4. Exercise
   </a>
  </li>
 </ul>
@@ -410,34 +403,25 @@
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="id1">
-<h2><span class="section-number">1.2.1.3. </span>Working With Python<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>There are basically three ways to program in Python: the interpreter for small commands, scripts for longer programs and notebooks (as here) for interactive programming.</p>
-<div class="section" id="id2">
-<h3><span class="section-number">1.2.1.3.1. </span>Python Interpreter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>To start the Python interpreter, simply type its name in a terminal under Linux:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@machine ~ $ python
+<div class="section" id="scripts">
+<h3><span class="section-number">1.2.1.2.2. </span>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using the interpreter, you can run scripts which can be executed sequentially. Simply edit a text file called <code class="docutils literal notranslate"><span class="pre">MyScript.py</span></code> containing for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># MyScript.py</span>
+<span class="c1"># Implements the Hello World example.</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span> <span class="c1"># define a string variable</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Python</span> <span class="mf">3.7</span><span class="o">.</span><span class="mi">4</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">16</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">07</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">58</span><span class="p">)</span> 
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">9.1</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
-<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> 
+<p>The <code class="docutils literal notranslate"><span class="pre">#</span></code> character is used for comments. Execute this script by typing in a Terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python MyScript.py
 </pre></div>
 </div>
-<p>You can then type anything at the prompt, for example a print statement:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
-<span class="go">Hello World!</span>
-</pre></div>
-</div>
-<p>To exit Python call the <code class="docutils literal notranslate"><span class="pre">exit()</span></code> function (or <code class="docutils literal notranslate"><span class="pre">Ctrl+d</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exit</span><span class="p">()</span>
-</pre></div>
-</div>
+<p>As it is a scripted language, each instruction in the script is executed from the beginning to the end, except for the declared functions or classes which can be used later.</p>
 </div>
 <div class="section" id="jupyter-notebooks">
-<h3><span class="section-number">1.2.1.3.2. </span>Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.2.3. </span>Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this headline">¶</a></h3>
 <p>A third recent (but very useful) option is to use Jupyter notebooks (formerly IPython notebooks).</p>
 <p>Jupyter notebooks allow you to edit Python code in your browser (but also Julia, R, Scala…) and run it locally.</p>
 <p>To launch a Jupyter notebook, type in a terminal:</p>
@@ -472,9 +456,9 @@
 </div>
 </div>
 <div class="section" id="basics-in-python">
-<h2><span class="section-number">1.2.1.4. </span>Basics In Python<a class="headerlink" href="#basics-in-python" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.1.3. </span>Basics In Python<a class="headerlink" href="#basics-in-python" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="print-statement">
-<h3><span class="section-number">1.2.1.4.1. </span>Print Statement<a class="headerlink" href="#print-statement" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.1. </span>Print Statement<a class="headerlink" href="#print-statement" title="Permalink to this headline">¶</a></h3>
 <p>In Python 3, the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function is a regular function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
@@ -483,7 +467,7 @@
 <p><strong>Q:</strong> Try to print “Hello World!” using two different strings “Hello” and “World!”:</p>
 </div>
 <div class="section" id="data-types">
-<h3><span class="section-number">1.2.1.4.2. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.2. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
 <p>As Python is an interpreted language, variables can be assigned without specifying their type: it will be inferred at execution time.</p>
 <p>The only thing that counts is how you initialize them and which operations you perform on them.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">42</span>          <span class="c1"># Integer</span>
@@ -499,9 +483,9 @@
 </div>
 </div>
 <div class="section" id="assignment-statement-and-operators">
-<h3><span class="section-number">1.2.1.4.3. </span>Assignment Statement And Operators<a class="headerlink" href="#assignment-statement-and-operators" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.3. </span>Assignment Statement And Operators<a class="headerlink" href="#assignment-statement-and-operators" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="assignment-statement">
-<h4><span class="section-number">1.2.1.4.3.1. </span>Assignment Statement<a class="headerlink" href="#assignment-statement" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">1.2.1.3.3.1. </span>Assignment Statement<a class="headerlink" href="#assignment-statement" title="Permalink to this headline">¶</a></h4>
 <p>The assignment can be done for a single variable, or for a tuple of variables separated by commas:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">7</span>
 
@@ -513,7 +497,7 @@
 <p><strong>Q:</strong> Try these assignments and print the values of the variables.</p>
 </div>
 <div class="section" id="operators">
-<h4><span class="section-number">1.2.1.4.3.2. </span>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">1.2.1.3.3.2. </span>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h4>
 <p>Most usual operators are available:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">+</span> <span class="p">,</span> <span class="o">-</span> <span class="p">,</span> <span class="o">*</span> <span class="p">,</span> <span class="o">**</span> <span class="p">,</span> <span class="o">/</span> <span class="p">,</span> <span class="o">//</span> <span class="p">,</span> <span class="o">%</span>
 <span class="o">==</span> <span class="p">,</span> <span class="o">!=</span> <span class="p">,</span> <span class="o">&lt;&gt;</span> <span class="p">,</span> <span class="o">&gt;</span> <span class="p">,</span> <span class="o">&gt;=</span> <span class="p">,</span> <span class="o">&lt;</span> <span class="p">,</span> <span class="o">&lt;=</span>
@@ -525,7 +509,7 @@
 </div>
 </div>
 <div class="section" id="strings">
-<h3><span class="section-number">1.2.1.4.4. </span>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.4. </span>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
 <p>A string in Python can be surrounded by either single or double quotes (no difference as long as they match). Three double quotes allow to print new lines directly (equivalent of <code class="docutils literal notranslate"><span class="pre">\n</span></code> in C).</p>
 <p><strong>Q:</strong> Use the function <code class="docutils literal notranslate"><span class="pre">print()</span></code> to see the results of the following statements:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
@@ -545,7 +529,7 @@
 </div>
 </div>
 <div class="section" id="lists">
-<h3><span class="section-number">1.2.1.4.5. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.5. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
 <p>Python knows a number of compound data types, used to group together other values. The most versatile is the list, which can be written as a list of comma-separated values (items) between square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>. List items need not all to have the same type.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spam&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1234</span><span class="p">]</span>
 </pre></div>
@@ -592,7 +576,7 @@
 <p><strong>Q:</strong> Try out quickly these methods, in particular <code class="docutils literal notranslate"><span class="pre">append()</span></code> which we will use quite often.</p>
 </div>
 <div class="section" id="dictionaries">
-<h3><span class="section-number">1.2.1.4.6. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.6. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h3>
 <p>Another useful data type built into Python is the dictionary. Unlike lists, which are indexed by a range of numbers from 0 to length -1, dictionaries are indexed by keys, which can be any <em>immutable</em> type; strings and numbers can always be keys.</p>
 <p>Dictionaries can be defined by curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code> instead of square brackets. The content is defined by <code class="docutils literal notranslate"><span class="pre">key:item</span></code> pairs, the item can be of any type:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tel</span> <span class="o">=</span> <span class="p">{</span>
@@ -622,7 +606,7 @@
 <p><strong>Q:</strong> Do it on your dictionary.</p>
 </div>
 <div class="section" id="if-statement">
-<h3><span class="section-number">1.2.1.4.7. </span>If statement<a class="headerlink" href="#if-statement" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.7. </span>If statement<a class="headerlink" href="#if-statement" title="Permalink to this headline">¶</a></h3>
 <p>Perhaps the most well-known conditional statement type is the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is negative&#39;</span><span class="p">)</span>
@@ -666,7 +650,7 @@
 <p>Note the use of the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword to know if an element exists in a list.</p>
 </div>
 <div class="section" id="for-loops">
-<h3><span class="section-number">1.2.1.4.8. </span>For loops<a class="headerlink" href="#for-loops" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.8. </span>For loops<a class="headerlink" href="#for-loops" title="Permalink to this headline">¶</a></h3>
 <p>The for statement in Python differs a bit from what you may be used to in C, Java or Pascal.</p>
 <p>Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order they appear in the sequence.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">list_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="s1">&#39;defenestrate&#39;</span><span class="p">]</span>
@@ -705,7 +689,7 @@
 <p><strong>Q:</strong> Print one by one all keys and values of your dictionary.</p>
 </div>
 <div class="section" id="functions">
-<h3><span class="section-number">1.2.1.4.9. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.1.3.9. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <p>As in most procedural languages, you can define functions. Functions are defined by the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>. Only the parameters of the function are specified (without type), not the return values.</p>
 <p>The content of the function has to be incremented as with for loops.</p>
 <p>Return values can be specified with the <code class="docutils literal notranslate"><span class="pre">return</span></code> keywork. It is possible to return several values at the same time, separated by commas.</p>
@@ -741,7 +725,7 @@
 </div>
 </div>
 <div class="section" id="exercise">
-<h2><span class="section-number">1.2.1.5. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.1.4. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>In cryptography, a Caesar cipher is a very simple encryption technique in which each letter in the plain text is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it to communicate with his generals. ROT-13 (“rotate by 13 places”) is a widely used example of a Caesar cipher where the shift is 13. In Python, the key for ROT-13 may be represented by means of the following dictionary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

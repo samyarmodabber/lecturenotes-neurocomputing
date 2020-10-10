@@ -82,37 +82,26 @@ To exit Python call the `exit()` function (or `Ctrl+d`):
 ```
 
 
-## Working With Python
+### Scripts
 
-There are basically three ways to program in Python: the interpreter for small commands, scripts for longer programs and notebooks (as here) for interactive programming.
+Instead of using the interpreter, you can run scripts which can be executed sequentially. Simply edit a text file called `MyScript.py` containing for example:
 
-### Python Interpreter
+```python
+# MyScript.py
+# Implements the Hello World example.
 
-To start the Python interpreter, simply type its name in a terminal under Linux:
+text = 'Hello World!' # define a string variable
+
+print(text)
+```
+
+The `#` character is used for comments. Execute this script by typing in a Terminal:
 
 ```bash
-user@machine ~ $ python
+python MyScript.py
 ```
 
-```python
-Python 3.7.4 (default, Jul 16 2019, 07:12:58) 
-[GCC 9.1.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
-```
-
-You can then type anything at the prompt, for example a print statement:
-
-```python
->>> print("Hello World!")
-Hello World!
-```
-
-To exit Python call the `exit()` function (or `Ctrl+d`):
-
-```python
->>> exit()
-```
+As it is a scripted language, each instruction in the script is executed from the beginning to the end, except for the declared functions or classes which can be used later.
 
 ### Jupyter Notebooks
 
