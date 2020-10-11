@@ -12,6 +12,8 @@ It is not supposed to replace any course in mathematics (we won't show any proof
 
 ## Linear algebra
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/gE3W7pymA2k' frameborder='0' allowfullscreen></iframe></div>
+
 Several mathematical objects are manipulated in linear algebra:
 
 * **Scalars** $x$ are 0-dimensional values (single numbers, so to speak). They can either take real values ($x \in \Re$, e.g. $x = 1.4573$, floats in CS) or natural values ($x \in \mathbb{N}$, e.g. $x = 3$, integers in CS). 
@@ -278,6 +280,8 @@ we can multiply both sides to the left with $A^{-1}$ (if it exists) and obtain:
 $$\mathbf{x} = A^{-1} \times \mathbf{b}$$
 
 ## Calculus
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/RsQVNOTgYwk' frameborder='0' allowfullscreen></iframe></div>
 
 ### Functions
 
@@ -554,6 +558,8 @@ Very roughly speaking, the integral can be considered as the equivalent of a sum
 
 
 ## Probability theory
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/X5uSbrFe82Q' frameborder='0' allowfullscreen></iframe></div>
 
 ### Discrete probability distributions
 
@@ -835,6 +841,8 @@ $$
 
 ## Statistics
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/Q7u_iMZ89K8' frameborder='0' allowfullscreen></iframe></div>
+
 ### Monte Carlo sampling
 
 **Random sampling** or **Monte Carlo sampling** (MC) consists of taking $N$ samples $x_i$ out of the distribution $X$ (discrete or continuous) and computing the **sample average**:
@@ -977,6 +985,8 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 
 ## Information theory
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/-WZKHdKDtTY' frameborder='0' allowfullscreen></iframe></div>
 
 
 ### Entropy
