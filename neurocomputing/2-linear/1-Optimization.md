@@ -1,18 +1,21 @@
 # Optimization
 
+
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.1-Optimization.pdf)
+
 ## Analytic optimization
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/1_sPEA6nnIA' frameborder='0' allowfullscreen></iframe></div>
 
 Machine learning is all about optimization:
 
-- Supervised learning minimizes the error between the prediction and the data.
-
-- Unsupervised learning maximizes the fit between the model and the data
-
-- Reinforcement learning maximizes the collection of rewards.
+* Supervised learning minimizes the error between the prediction and the data.
+* Unsupervised learning maximizes the fit between the model and the data
+* Reinforcement learning maximizes the collection of rewards.
 
 The function to be optimized is called the **objective function**, **cost function** or **loss function**. ML searches for the value of **free parameters** which optimize the objective function on the data set. The simplest optimization method is the **gradient descent** (or ascent) method.
 
-The easiest method to find the optima of a function $f(x)$ is to look where its first derivative is equal to 0:
+The easiest method to find the optima of a function $f(x)$ is to look where its first-order derivative is equal to 0:
 
 $$
     x^* = \min_x f(x) \Leftrightarrow f'(x^*) = 0 \; \text{and} \; f''(x^*) > 0
@@ -31,40 +34,6 @@ width: 60%
 Functions (may) have one global minimum but several local minima.
 ```
 
-Let's consider for example the following analytical function:
-
-$$
-    f(x) = x^2 + 2 x - 1
-$$
-
-Its derivative is:
-
-$$
-    f'(x) = 2 x + 2
-$$
-
-$x^* = -1$ is a minimum of $f(x)$ because:
-
-$$
-    f'(-1) =  0
-$$
-
-and
-
-$$
-    f''(-1) = 2 > 0
-$$
-
-```{figure} ../img/optimization-example.png
----
-width: 80%
----
-Quadratic functions have only one optimum, as their derivative is linear and is equal to zero for only one value.
-```
-
-```{note}
-Quadratic functions have only one optimum and it is very easy to find, so we like them a lot...
-```
 
 **Multivariate functions**
 
@@ -80,49 +49,19 @@ $$
 The vector of partial derivatives is called the **gradient of the function**:
 
 $$
-    \nabla_{x, y} \, f(x, y) = \displaystyle\begin{bmatrix} \frac{\partial f(x, y)}{\partial x} \\ \frac{\partial f(x, y)}{\partial y} \end{bmatrix}
+    \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} \dfrac{\partial f(x^*, y^*)}{\partial x} \\ \dfrac{\partial f(x^*, y^*)}{\partial y} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
 $$
-
-Finding the optimum of $f$ is searching for the values of $(x, y)$ where the gradient of the function is zero:
-
-$$
-    \nabla_{x, y} \, f(x^*, y^*) = \displaystyle\begin{bmatrix} 0 \\ 0 \end{bmatrix}
-$$
-
-Let's consider for example this function:
-
-$$
-    f(x, y) = (x - 1)^2 + y^2 + 1
-$$
-
-Its gradient is:
-
-$$
-    \nabla_{x, y} \, f(x, y) = \begin{bmatrix} 2 (x -1) \\ 2 y \end{bmatrix}
-$$
-
-The gradient is equal to 0 when:
-
-$$
-    \begin{cases}
-        2 (x -1) = 0 \\
-        2 y = 0 \\
-    \end{cases}
-$$
-
-$\begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ is the minimum of $f$.
-
 
 ```{figure} ../img/optimization-example-multivariate.png
 ---
 width: 80%
 ---
-Multi-variate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.
+Multivariate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.
 ```
 
-One should check the second order derivative to know whether it is a minimum or maximum...
-
 ## Gradient descent
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/UpJL2M6GKog' frameborder='0' allowfullscreen></iframe></div>
 
 In machine learning, we generally do not have access to the analytical form of the objective function. We can not therefore get its derivative and search where it is 0. However, we have access to its value (and derivative) for certain values, for example:
 
@@ -137,26 +76,31 @@ We can "ask" the model for as many values as we want, but we never get its analy
 ---
 width: 60%
 ---
-Euler method: the derivative of a function can be approximated by its tangent.
+Euler method: the derivative of a function is the slope of its tangent.
 ```
 
-Let's take values of $f$ in two close points $x$ and $x + h$, with $h$ very small. The first order Taylor series expansion of $f$ tells us that:
+Let's remember the definition of the derivative of a function. The derivative $f'(x)$ is defined by the slope of the tangent of the function:
 
 $$
-    f(x + h) \approx f(x) + h \, f'(x) + \text{higher order terms}
+    f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
 $$
 
-The higher order terms ($h^2, h^3$...) become negligible if $h$ is small enough (converges to 0). The first order derivative $f'(x)$ is approximately the slope of the line between $x$ and $x+h$ (**Euler method**):
+If we take $h$ small enough, we have the following approximation:
 
 $$
-    f'(x) = \frac{f(x + h) - f(x)}{x + h - x} = \frac{f(x + h) - f(x)}{h}
+    f(x + h) - f(x) \approx h \, f'(x)
 $$
-
 
 If we want $x+h$ to be closer to the minimum than $x$, we want:
 
 $$
-    f(x +h) < f(x)
+    f(x + h) < f(x)
+$$
+
+or:
+
+$$
+    f(x + h) - f(x) < 0
 $$
 
 We therefore want that:
@@ -165,7 +109,7 @@ $$
     h \, f'(x) < 0
 $$
 
-The **change** in the value of $x$ must have the opposite sign of $f'(x)$. If the function is increasing in $x$, the minimum is smaller than $x$. If the function is decreasing in $x$, the minimum is bigger than $x$.
+The **change** $h$ in the value of $x$ must have the opposite sign of $f'(x)$ in order to get closer to the minimum. If the function is increasing in $x$, the minimum is smaller (to the left) than $x$. If the function is decreasing in $x$, the minimum is bigger than $x$ (to the right).
 
 
 **Gradient descent** (GD) is a first-order method to iteratively find the minimum of a function $f(x)$. It starts with a random estimate $x_0$ and iteratively changes its value so that it becomes closer to the minimum.
@@ -262,6 +206,9 @@ Gradient descent is not optimal: it always finds a local minimum, but there is n
 
 ## Regularization
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/LI5ExC4d9Js' frameborder='0' allowfullscreen></iframe></div>
+
+
 ### L2 - Regularization
 
 Most of the time, there are many minima to a function, if not an infinity. As GD only converges to the "closest" local minimum, you are never sure that you get a good solution. Consider the following function:
@@ -312,7 +259,7 @@ width: 100%
 Gradient descent with L2 regularization, using $\lambda = 0.1$.
 ```
 
-You may notice that the result of the optimization is a bit off, it is not exactly $(1, 0)$. This is because we do not optimize $f(x, y)$ directly, but $\mathcal{L}(x, y)$. Let's look at the landscape of the loss function:
+You may notice that the result of the optimization is a bit off, it is not exactly $(1, 0)$. This is because we do not optimize $f(x, y)$ directly, but $\mathcal{L}(x, y)$. Let's have a look at the landscape of the loss function:
 
 ```{figure} ../img/gradient-descent-animation-regularization3.gif
 ---
@@ -366,7 +313,7 @@ $$
     \mathcal{L}(x, y, \lambda) = f(x, y) + \lambda \, (x^2 + y^2 - \delta)
 $$
 
-Regularization is a special case of Lagrange optimization, as it considers $\lambda$ to be fixed, while it an additional variable in Lagrange optimization. When differentiating this function, $\delta$ disappears anyway, so it is equivalent to our regularized loss function.
+Regularization is a special case of Lagrange optimization, as it considers $\lambda$ to be fixed, while it is an additional variable in Lagrange optimization. When differentiating this function, $\delta$ disappears anyway, so it is equivalent to our regularized loss function.
 ```
 
 ### L1 - Regularization

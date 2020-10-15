@@ -1,8 +1,10 @@
 # Neurons
 
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.3-Neurons.pdf)
 
 ## Biological neurons
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/ALBRu-AK53I' frameborder='0' allowfullscreen></iframe></div>
 
 
 The human brain is composed of 100 billion **neurons**. A biological neuron is a cell, composed of a cell body (**soma**), multiple **dendrites** and an **axon**. The axon of a neuron can contact the dendrites of another through **synapses** to transmit information. There are hundreds of different types of neurons, each with different properties.
@@ -67,6 +69,9 @@ Some neuron models called **rate-coded models** only represent the firing rate o
 
 
 ## Hodgkin-Huxley neurons
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/WAfOUZW4rq8' frameborder='0' allowfullscreen></iframe></div>
+
 
 Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential $V$ of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a **capacitance** $C$ that models the dynamics of the membrane (time constant). The **conductance** $g_L$ allows the membrane potential to relax back to its resting potential $E_L$ in the absence of external currents.  External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential. 
 
@@ -178,6 +183,9 @@ Different parameters of the AdEx neuron model produce different spiking patterns
 
 ## Rate-coded neurons
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/AFzYj1VUnCg' frameborder='0' allowfullscreen></iframe></div>
+
+
 At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the **firing rate** of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the **firing rate** of (a population of) neuron(s): the **rate-coded** neuron.
 
 ```{figure} ../img/ratecoded-izhikevich.png
@@ -288,6 +296,9 @@ The sigmoid/logistic function bounds the firing rate between 0 and 1, even if th
 ```
 
 ## Artificial neurons
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/NVj17dve8B8' frameborder='0' allowfullscreen></iframe></div>
+
 
 By omitting the dynamics of the rate-coded neuron, one obtains the very simple **artificial neuron** (McCulloch and Pitts, 1943):
 

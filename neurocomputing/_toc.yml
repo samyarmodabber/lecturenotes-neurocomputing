@@ -6,11 +6,11 @@
   chapters:
     - file: 1-intro/1-Introduction
     - file: 1-intro/2-Math
-    # - file: 1-intro/3-Neurons
+    - file: 1-intro/3-Neurons
 
-# - part: 1 - Linear models
-#   chapters:
-#     - file: 2-linear/1-Optimization
+- part: 1 - Linear models
+  chapters:
+    - file: 2-linear/1-Optimization
 #     - file: 2-linear/2-LinearRegression
 #     - file: 2-linear/3-Regularization
 #     - file: 2-linear/4-LinearClassification
@@ -47,12 +47,12 @@
           title: Notebook
         - file: 5-exercises/1-Python-solution
           title: Solution
-    #- file: 5-exercises/ex2-Numpy
-    #  sections:
-    #    - file: 5-exercises/2-Numpy
-    #      title: Notebook
-    #    - file: 5-exercises/2-Numpy-solution
-    #      title: Solution
+    - file: 5-exercises/ex2-Numpy
+      sections:
+        - file: 5-exercises/2-Numpy
+          title: Notebook
+        - file: 5-exercises/2-Numpy-solution
+          title: Solution
 
 
 - part: References
