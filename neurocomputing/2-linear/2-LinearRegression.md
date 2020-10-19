@@ -1,6 +1,9 @@
 # Linear Regression
 
 
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.2-LinearRegression.pdf)
+
+
 ## Linear regression
 
 
@@ -17,22 +20,7 @@ $$
     y = f_{w, b}(x) = w \, x + b
 $$
 
-The **free parameters** of the model are:
-    
-* the slope $w$,
-    
-* the intercept $b$. 
-
-
-This model corresponds to a single **artificial neuron** with output $y$, having: 
-
-* one input $x$, 
-
-* one weight $w$, 
-
-* one bias $b$,
-
-* a **linear** activation function $f(x) = x$.
+The **free parameters** of the model are the slope $w$ and the intercept $b$. This model corresponds to a single **artificial neuron** with output $y$, having one input $x$, one weight $w$, one bias $b$ and a **linear** activation function $f(x) = x$.
 
 
 ```{figure} ../img/artificialneuron.svg
@@ -180,11 +168,11 @@ $$
 The parameter changes have to be applied multiple times (**epochs**) in order for the parameters to converge. One can stop when the parameters do not change much, or after a fixed number of epochs.
 
 
-**LMS algorithm**
+```{admonition} LMS algorithm
 
 * $w=0 \quad;\quad b=0$
 
-* **for** N epochs:
+* **for** M epochs:
 
     * $dw=0 \quad;\quad db=0$
 
@@ -199,13 +187,13 @@ The parameter changes have to be applied multiple times (**epochs**) in order fo
     * $\Delta w = \eta \, \frac{1}{N} dw$
 
     * $\Delta b = \eta \, \frac{1}{N} db$
-
+```
 
 ```{figure} ../img/regression-animation.gif
 ---
-width: 100%
+width: 70%
 ---
-Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).
+Visualization of least mean squares applied to a simple regression problem with $\eta=0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).
 ```
 
 During learning, the **mean square error** (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.
@@ -220,18 +208,18 @@ Evolution of the loss function during training.
 
 ### Delta learning rule
 
-LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the **delta learning rule**:
+LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the **delta learning rule**, which is the **online** version of LMS:
 
 $$\Delta w = \eta \, (t_i - y_i) \, x_i$$
 
 $$\Delta b = \eta \, (t_i - y_i)$$
 
 
-**Online version of LMS : delta learning rule**
+```{admonition} Delta learning rule
 
 * $w=0 \quad;\quad b=0$
 
-* **for** N epochs:
+* **for** M epochs:
 
     * **for** each sample $(x_i, t_i)$:
 
@@ -240,20 +228,22 @@ $$\Delta b = \eta \, (t_i - y_i)$$
         * $\Delta w = \eta \, (t_i - y_i ) \, x_i$
 
         * $\Delta b = \eta \, (t_i - y_i)$
+```
 
-The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is higher at the end of learning.
+The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is slightly higher at the end of learning (see Exercise 3 for a deeper discussion).
 
 ```{figure} ../img/regression-animation-online.gif
 ---
-width: 100%
+width: 70%
 ---
-Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).
+Visualization of the delta learning rule applied to a simple regression problem with $\eta = 0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).
 ```
+
 ```{figure} ../img/regression-animation-online-loss.png
 ---
 width: 70%
 ---
-Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.
+Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.
 ```
 
 ## Multiple linear regression
@@ -365,7 +355,7 @@ This allows us apply gradient descent on the mean square error.
 
 **Batch version**
 
-$$\begin{cases}rate
+$$\begin{cases}
     \Delta W = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N  (\mathbf{t}_i - \mathbf{y}_i) \\

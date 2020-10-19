@@ -300,7 +300,7 @@
 \[
  \Delta b =  \eta \cdot (t_i - y_i ) 
 \]</div>
-<p>A first method to perform polynomial regression would be to adapt the code you wrote in the last exercise session for linear classification. However, you saw that properly setting the correct learning rate and stop criteria can be quite tricky.</p>
+<p>A first method to perform polynomial regression would be to adapt the code you wrote in the last exercise session for linear regression. However, you saw that properly setting the correct learning rate can be quite tricky.</p>
 <p>The solution retained for this exercise is to use the built-in functions of Numpy which can already perform polynomial regression in an optimized and proved-sure manner (Note: NumPy does not use gradient descent, but rather directly minimizes the error-function by inversing the Gram matrix).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
 </pre></div>
@@ -310,7 +310,8 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let’s start by importing the usual stuff, define a visualization method and load the data <code class="docutils literal notranslate"><span class="pre">polynome.data</span></code> (16 samples):</p>
+<p><em>Note:</em> if you prefer to use scikit-learn, check <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html">https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html</a> but see <a class="reference external" href="https://towardsdatascience.com/polynomial-regression-with-scikit-learn-what-you-should-know-bed9d3296f2">https://towardsdatascience.com/polynomial-regression-with-scikit-learn-what-you-should-know-bed9d3296f2</a> for why it may be a bad idea.</p>
+<p>Let’s start by importing the usual stuff and create a dataset of 16 samples generated using the function <span class="math notranslate nohighlight">\(x \, \sin x\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -347,8 +348,7 @@
 <img alt="../_images/5-Crossvalidation-solution_3_0.png" src="../_images/5-Crossvalidation-solution_3_0.png" />
 </div>
 </div>
-<p><strong>Q1:</strong> Apply the <code class="docutils literal notranslate"><span class="pre">np.polyfit()</span></code> function on the data and visualize the result for different degrees of the polynomial (from 1 to 10 or even more). What do you observe? Find a polynomial degree which clearly overfits.</p>
-<p><em>Bonus question:</em> make sense of the warning you get when the degree of the polynomial is too high.</p>
+<p><strong>Q:</strong> Apply the <code class="docutils literal notranslate"><span class="pre">np.polyfit()</span></code> function on the data and visualize the result for different degrees of the polynomial (from 1 to 10 or even more). What do you observe? Find a polynomial degree which clearly overfits.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -372,8 +372,7 @@
 <img alt="../_images/5-Crossvalidation-solution_5_1.png" src="../_images/5-Crossvalidation-solution_5_1.png" />
 </div>
 </div>
-<p><strong>Q2:</strong> Plot the mean square error on the training set for all polynomial regressions from 1 to 10. How does the training error evolve when the degree of the polynomial is increased? What is the risk by taking the hypothesis with the smallest training error?</p>
-<p><em>Hint:</em> use <code class="docutils literal notranslate"><span class="pre">np.polyval()</span></code> for the prediction, and compute the mse with <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code>.</p>
+<p><strong>Q:</strong> Plot the mean square error on the training set for all polynomial regressions from 1 to 20. How does the training error evolve when the degree of the polynomial is increased? What is the risk by taking the hypothesis with the smallest training error?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_mse</span> <span class="o">=</span> <span class="p">[]</span>
@@ -389,7 +388,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree&quot;</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="s2">&quot;: training error&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
     
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_mse</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">training_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="n">training_mse</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Order of the polynomial&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Training mse&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -397,26 +396,26 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1 : training error 14.027568469888854
-Degree 2 : training error 2.501196773023784
-Degree 3 : training error 2.477813088214952
-Degree 4 : training error 0.06298513110801794
-Degree 5 : training error 0.043016483242956274
-Degree 6 : training error 0.0007959979608839094
-Degree 7 : training error 5.622726912709866e-05
-Degree 8 : training error 7.433365377767733e-07
-Degree 9 : training error 6.442867830955745e-08
-Degree 10 : training error 9.646625397699714e-10
-Degree 11 : training error 5.450410322443785e-12
-Degree 12 : training error 5.4613018050374776e-14
-Degree 13 : training error 2.7544582358488067e-17
-Degree 14 : training error 3.978815178359746e-21
-Degree 15 : training error 7.12284705018507e-23
-Degree 16 : training error 4.0061254545429947e-22
-Degree 17 : training error 2.555514708971064e-22
-Degree 18 : training error 3.2161211218174016e-22
-Degree 19 : training error 2.6029059216413342e-25
-Degree 20 : training error 9.573114181307858e-25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1 : training error 7.4126671655292835
+Degree 2 : training error 7.114742226529839
+Degree 3 : training error 6.5190913053139035
+Degree 4 : training error 0.5266342658215796
+Degree 5 : training error 0.5249012248246177
+Degree 6 : training error 0.009917924009005732
+Degree 7 : training error 0.00918199773901183
+Degree 8 : training error 0.0001023871659993184
+Degree 9 : training error 7.017172843011724e-06
+Degree 10 : training error 2.8431161049456252e-08
+Degree 11 : training error 1.9662402662740677e-10
+Degree 12 : training error 3.0551291088708e-12
+Degree 13 : training error 6.55262168596695e-17
+Degree 14 : training error 1.0041294133517872e-18
+Degree 15 : training error 1.5553351352650056e-19
+Degree 16 : training error 8.631111297755434e-24
+Degree 17 : training error 1.3128408838556928e-24
+Degree 18 : training error 2.144066626448902e-24
+Degree 19 : training error 2.860522598892999e-24
+Degree 20 : training error 1.6978866041738023e-24
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
@@ -436,7 +435,7 @@ Degree 20 : training error 9.573114181307858e-25
 <img alt="../_images/5-Crossvalidation-solution_7_2.png" src="../_images/5-Crossvalidation-solution_7_2.png" />
 </div>
 </div>
-<p><strong>Answer:</strong> the more complex the model, the smaller the training error.</p>
+<p><strong>A:</strong> the more complex the model, the smaller the training error.</p>
 </div>
 <div class="section" id="simple-hold-out-cross-validation">
 <h2>Simple hold-out cross-validation<a class="headerlink" href="#simple-hold-out-cross-validation" title="Permalink to this headline">¶</a></h2>
@@ -453,9 +452,9 @@ Degree 20 : training error 9.573114181307858e-25
 </pre></div>
 </div>
 <p>The doc of the function is available at: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>.</p>
-<p><strong>Q3:</strong> Use scikit-learn to split the data into the corresponding training and test sets.</p>
-<p><strong>Q4:</strong> Train each polynomial from degree 1 to 10 on <span class="math notranslate nohighlight">\(S_{\text{train}}\)</span> and plot the generalization error on <span class="math notranslate nohighlight">\(S_{\text{test}}\)</span>. Which degree of the polynomial gives the minimal empirical error? Why?</p>
-<p><strong>Q5:</strong> Run the cross-validation split multiple times. Do you always obtain the same optimal degree?</p>
+<p><strong>Q:</strong> Use scikit-learn to split the data into the corresponding training and test sets.</p>
+<p><strong>Q:</strong> Train each polynomial from degree 1 to 20 on <span class="math notranslate nohighlight">\(S_{\text{train}}\)</span> and plot the generalization error on <span class="math notranslate nohighlight">\(S_{\text{test}}\)</span>. Which degree of the polynomial gives the minimal empirical error? Why?</p>
+<p><strong>Q:</strong> Run the cross-validation split multiple times. Do you always obtain the same optimal degree?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -473,7 +472,7 @@ Degree 20 : training error 9.573114181307858e-25
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degree&quot;</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="s2">&quot;: empirical error&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
     
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Order of the polynomial&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test mse&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -481,26 +480,26 @@ Degree 20 : training error 9.573114181307858e-25
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1 : empirical error 29.579757520836456
-Degree 2 : empirical error 3.0204743961785914
-Degree 3 : empirical error 7.003239960085726
-Degree 4 : empirical error 0.5256840031781524
-Degree 5 : empirical error 0.9551029929946132
-Degree 6 : empirical error 0.03141250553249827
-Degree 7 : empirical error 0.004205255913674852
-Degree 8 : empirical error 0.0002649204244489119
-Degree 9 : empirical error 2.2435478449127357e-05
-Degree 10 : empirical error 5.414343778908914e-07
-Degree 11 : empirical error 2.61463521375228e-08
-Degree 12 : empirical error 1.4198856728977622e-07
-Degree 13 : empirical error 4.3875530997047293e-07
-Degree 14 : empirical error 5.19860743939226e-07
-Degree 15 : empirical error 2.6473512064966004e-07
-Degree 16 : empirical error 1.2030234401580705e-08
-Degree 17 : empirical error 6.651128931156383e-07
-Degree 18 : empirical error 3.6843950630774347e-06
-Degree 19 : empirical error 1.0968878875464935e-05
-Degree 20 : empirical error 2.4660396447578793e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1 : empirical error 2.633170764859142
+Degree 2 : empirical error 3.6075190401212325
+Degree 3 : empirical error 3.2204464294438226
+Degree 4 : empirical error 1.3766376495130221
+Degree 5 : empirical error 1.9965181837526706
+Degree 6 : empirical error 0.09820517465951335
+Degree 7 : empirical error 0.08470956035427771
+Degree 8 : empirical error 0.0024226924698089215
+Degree 9 : empirical error 0.00015795004329593042
+Degree 10 : empirical error 8.604593548063071e-06
+Degree 11 : empirical error 7.391716153526405e-07
+Degree 12 : empirical error 2.6438111883296253e-06
+Degree 13 : empirical error 1.6292130689235224e-05
+Degree 14 : empirical error 3.733419198292655e-05
+Degree 15 : empirical error 5.682980556537359e-05
+Degree 16 : empirical error 6.505054711721444e-05
+Degree 17 : empirical error 5.614745204997032e-05
+Degree 18 : empirical error 3.237006143573822e-05
+Degree 19 : empirical error 6.8052094684265545e-06
+Degree 20 : empirical error 4.104060301753484e-06
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
@@ -528,7 +527,7 @@ Degree 20 : empirical error 2.4660396447578793e-05
 <img alt="../_images/5-Crossvalidation-solution_11_2.png" src="../_images/5-Crossvalidation-solution_11_2.png" />
 </div>
 </div>
-<p><strong>Answer:</strong> depending on the split, the optimal degree is either 4, 5, or 6. This is because some samples of the test set might better fit with a given polynomial, depending on how the split was made.</p>
+<p><strong>A:</strong> depending on the split, the optimal degree is either 11, 12, or 13. This is because some samples of the test set might better fit with a given polynomial, depending on how the split was made.</p>
 </div>
 <div class="section" id="k-fold-cross-validation">
 <h2>k-fold cross-validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this headline">¶</a></h2>
@@ -546,7 +545,7 @@ Degree 20 : empirical error 2.4660396447578793e-05
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">n_splits</span></code> corresponds to <span class="math notranslate nohighlight">\(k\)</span>: how many times the dataset is split. Takes <span class="math notranslate nohighlight">\(k=4\)</span> for example (4 subsets of 4 samples).</p>
-<p><strong>Q6:</strong> Check the doc of <code class="docutils literal notranslate"><span class="pre">KFold</span></code> (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html</a>). Print the indices of the examples of the training and test sets for each iteration of the algorithm. Change the value of <span class="math notranslate nohighlight">\(k\)</span> to understand how it works.</p>
+<p><strong>Q:</strong> Check the doc of <code class="docutils literal notranslate"><span class="pre">KFold</span></code> (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html</a>). Print the indices of the examples of the training and test sets for each iteration of the algorithm. Change the value of <span class="math notranslate nohighlight">\(k\)</span> to understand how it works.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
@@ -561,23 +560,23 @@ Degree 20 : empirical error 2.4660396447578793e-05
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  2  3  4  5  6  7  9 11 12 14 15]
-[ 1  8 10 13]
-[ 1  4  5  6  7  8  9 10 12 13 14 15]
-[ 0  2  3 11]
-[ 0  1  2  3  5  7  8  9 10 11 12 13]
-[ 4  6 14 15]
-[ 0  1  2  3  4  6  8 10 11 13 14 15]
-[ 5  7  9 12]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  1  2  3  4  5  7  8 11 13 14 15]
+[ 6  9 10 12]
+[ 0  1  2  4  5  6  7  9 10 11 12 14]
+[ 3  8 13 15]
+[ 0  1  2  3  6  7  8  9 10 12 13 15]
+[ 4  5 11 14]
+[ 3  4  5  6  8  9 10 11 12 13 14 15]
+[0 1 2 7]
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Q7:</strong> Apply k-fold cross-validation on the polynomial regression problem. Which polynomial degree is the best? Run the split multiple times: does the best polynomial degree change?</p>
-<p><strong>Q8:</strong> Change <span class="math notranslate nohighlight">\(k\)</span> to 16. How stable are the results between two runs?</p>
+<p><strong>Q:</strong> Apply k-fold cross-validation on the polynomial regression problem. Which polynomial degree is the best? Run the split multiple times: does the best polynomial degree change?</p>
+<p><strong>Q:</strong> Change <span class="math notranslate nohighlight">\(k\)</span> to 16. How stable are the results between two runs?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">16</span>
 <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">test_mse</span> <span class="o">=</span> <span class="p">[]</span>
@@ -597,10 +596,11 @@ Degree 20 : empirical error 2.4660396447578793e-05
         
 <span class="n">test_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_mse</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">test_mse</span><span class="p">[</span><span class="n">deg</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="n">test_mse</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Degree of the polynome&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;k-fold cross-validated mse&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -608,14 +608,149 @@ Degree 20 : empirical error 2.4660396447578793e-05
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.64174510e+01 3.56565343e+00 6.08287693e+00 3.35954130e-01
- 4.33499867e-01 1.73966860e-02 5.97293252e-03 3.10001851e-04
- 3.35866791e-05 3.94034844e-06 6.83587166e-08 1.70603811e-07
- 1.34729040e-07 9.48058372e-09 2.52625744e-07 1.65169258e-06
- 4.83818544e-06 9.52312286e-06 1.40498942e-05 1.65653272e-05]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 10.449200654815007
+2 13.629828737932232
+3 15.94310540048036
+4 1.9302189209650178
+5 4.185049073673414
+6 0.05999199906577501
+7 1.1527739988762116
+8 0.1258131149070061
+9 0.15262554069943654
+10 0.06303830633085483
+11 0.006846766028020763
+12 0.007412464970762992
+13 0.0001010557570024616
+14 0.0006459483900283297
+15 0.00024019009164297597
+16 7.340108343929356e-05
+17 0.0011903276869576502
+18 0.0012069252577987257
+19 0.001545363544526349
+20 0.06502122305606181
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
+  exec(code_obj, self.user_global_ns, self.user_ns)
+/usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
   exec(code_obj, self.user_global_ns, self.user_ns)
 /usr/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3417: RankWarning: Polyfit may be poorly conditioned
   exec(code_obj, self.user_global_ns, self.user_ns)
@@ -692,7 +827,7 @@ Degree 20 : empirical error 2.4660396447578793e-05
 <img alt="../_images/5-Crossvalidation-solution_17_2.png" src="../_images/5-Crossvalidation-solution_17_2.png" />
 </div>
 </div>
-<p><strong>Answer:</strong> a polynomial of order 3 or 4 seems the best. With <span class="math notranslate nohighlight">\(k=16\)</span> (one sample in the test set every time), the results are the most stable. It is called <strong>leave-one-out cross-validation</strong> (LOOCV). It is the best cross-validation you can make in terms of bias (you use almost all your data to learn), but it is very expensive (you have to retrain your algorithm for each sample) and the empirical error has a high variance.</p>
+<p><strong>A:</strong> a polynomial of order 11 or 12 seems the best. With <span class="math notranslate nohighlight">\(k=16\)</span> (one sample in the test set every time), the results are the most stable. It is called <strong>leave-one-out cross-validation</strong> (LOOCV). It is the best cross-validation you can make in terms of bias (you use almost all your data to learn), but it is very expensive (you have to retrain your algorithm for each sample) and the empirical error has a high variance.</p>
 </div>
 </div>
 

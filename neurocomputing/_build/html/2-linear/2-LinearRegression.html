@@ -49,7 +49,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/2-LinearRegression.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Linear Regression" />
-<meta property="og:description" content="Linear Regression  Linear regression    Simple linear regression. x is the input, y the output. The data is represented by blue dots, the model by the black lin" />
+<meta property="og:description" content="Linear Regression  Slides: pdf  Linear regression    Simple linear regression. x is the input, y the output. The data is represented by blue dots, the model by " />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -276,6 +276,7 @@
                 
   <div class="section" id="linear-regression">
 <h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.2-LinearRegression.pdf">pdf</a></p>
 <div class="section" id="id1">
 <h2>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id2">
@@ -287,18 +288,7 @@
 \[
     y = f_{w, b}(x) = w \, x + b
 \]</div>
-<p>The <strong>free parameters</strong> of the model are:</p>
-<ul class="simple">
-<li><p>the slope <span class="math notranslate nohighlight">\(w\)</span>,</p></li>
-<li><p>the intercept <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
-</ul>
-<p>This model corresponds to a single <strong>artificial neuron</strong> with output <span class="math notranslate nohighlight">\(y\)</span>, having:</p>
-<ul class="simple">
-<li><p>one input <span class="math notranslate nohighlight">\(x\)</span>,</p></li>
-<li><p>one weight <span class="math notranslate nohighlight">\(w\)</span>,</p></li>
-<li><p>one bias <span class="math notranslate nohighlight">\(b\)</span>,</p></li>
-<li><p>a <strong>linear</strong> activation function <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p></li>
-</ul>
+<p>The <strong>free parameters</strong> of the model are the slope <span class="math notranslate nohighlight">\(w\)</span> and the intercept <span class="math notranslate nohighlight">\(b\)</span>. This model corresponds to a single <strong>artificial neuron</strong> with output <span class="math notranslate nohighlight">\(y\)</span>, having one input <span class="math notranslate nohighlight">\(x\)</span>, one weight <span class="math notranslate nohighlight">\(w\)</span>, one bias <span class="math notranslate nohighlight">\(b\)</span> and a <strong>linear</strong> activation function <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
 <p class="caption"><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
@@ -419,10 +409,11 @@
     \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
 \]</div>
 <p>The parameter changes have to be applied multiple times (<strong>epochs</strong>) in order for the parameters to converge. One can stop when the parameters do not change much, or after a fixed number of epochs.</p>
-<p><strong>LMS algorithm</strong></p>
+<div class="admonition-lms-algorithm admonition">
+<p class="admonition-title">LMS algorithm</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
-<li><p><strong>for</strong> N epochs:</p>
+<li><p><strong>for</strong> M epochs:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(dw=0 \quad;\quad db=0\)</span></p></li>
 <li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
@@ -437,9 +428,10 @@
 </ul>
 </li>
 </ul>
+</div>
 <div class="figure align-default" id="id5">
-<a class="reference internal image-reference" href="../_images/regression-animation.gif"><img alt="../_images/regression-animation.gif" src="../_images/regression-animation.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Visualization of least mean squares applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<a class="reference internal image-reference" href="../_images/regression-animation.gif"><img alt="../_images/regression-animation.gif" src="../_images/regression-animation.gif" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Visualization of least mean squares applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta=0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
 <div class="figure align-default" id="id6">
@@ -449,15 +441,16 @@
 </div>
 <div class="section" id="delta-learning-rule">
 <h3>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h3>
-<p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>:</p>
+<p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>, which is the <strong>online</strong> version of LMS:</p>
 <div class="math notranslate nohighlight">
 \[\Delta w = \eta \, (t_i - y_i) \, x_i\]</div>
 <div class="math notranslate nohighlight">
 \[\Delta b = \eta \, (t_i - y_i)\]</div>
-<p><strong>Online version of LMS : delta learning rule</strong></p>
+<div class="admonition-delta-learning-rule admonition">
+<p class="admonition-title">Delta learning rule</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
-<li><p><strong>for</strong> N epochs:</p>
+<li><p><strong>for</strong> M epochs:</p>
 <ul>
 <li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
 <ul>
@@ -469,14 +462,15 @@
 </ul>
 </li>
 </ul>
-<p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is higher at the end of learning.</p>
+</div>
+<p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is slightly higher at the end of learning (see Exercise 3 for a deeper discussion).</p>
 <div class="figure align-default" id="id7">
-<a class="reference internal image-reference" href="../_images/regression-animation-online.gif"><img alt="../_images/regression-animation-online.gif" src="../_images/regression-animation-online.gif" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<a class="reference internal image-reference" href="../_images/regression-animation-online.gif"><img alt="../_images/regression-animation-online.gif" src="../_images/regression-animation-online.gif" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta = 0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/regression-animation-online-loss.png"><img alt="../_images/regression-animation-online-loss.png" src="../_images/regression-animation-online-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -568,7 +562,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>This allows us apply gradient descent on the mean square error.</p>
 <p><strong>Batch version</strong></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}rate
+\[\begin{split}\begin{cases}
     \Delta W = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N  (\mathbf{t}_i - \mathbf{y}_i) \\

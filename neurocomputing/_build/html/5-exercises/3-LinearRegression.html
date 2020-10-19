@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear regression &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/3-LinearRegression.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/3-LinearRegression.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Linear regression" />
+<meta property="og:description" content="Linear regression  The goal of this exercise is to implement the least mean squares algorithm (LMS) for linear regression seen in the course.  We start by impor" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  1 - Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/5-exercises/3-LinearRegression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/3-LinearRegression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/3-LinearRegression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#least-mean-squares">
+   Least mean squares
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scikit-learn">
+   Scikit-learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#delta-learning-rule">
+   Delta learning rule
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="linear-regression">
+<h1>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to implement the least mean squares algorithm (LMS) for linear regression seen in the course.</p>
+<p>We start by importing numpy and matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="least-mean-squares">
+<h2>Least mean squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h2>
+<p>To generate the data for the exercise, we will use the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library <a class="reference external" href="https://scikit-learn.org">https://scikit-learn.org</a>. It provides a huge selection of already implemented machine learning algorithms for classification, regression or clustering.</p>
+<p>If you use Anaconda or Colab, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> should already be installed. Otherwise, install it with <code class="docutils literal notranslate"><span class="pre">pip</span></code> (you may need to restart this notebook afterwards):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
+</pre></div>
+</div>
+<p>We will use the method <code class="docutils literal notranslate"><span class="pre">sklearn.datasets.make_regression</span></code> to generate the data. The documentation of this method is available at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html</a>.</p>
+<p>The following cell imports the method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now generate the data. We start with the simplest case where the inputs have only one dimension. We will generate 100 samples<span class="math notranslate nohighlight">\((x_i, t_i)\)</span> linked by a linear relationship and some noise.</p>
+<p>The following code generates the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">15.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code> is the number of samples generates, <code class="docutils literal notranslate"><span class="pre">n_features</span></code> is the number of input variables and <code class="docutils literal notranslate"><span class="pre">noise</span></code> quantifies how the points deviate from the linear relationship.</p>
+<p><strong>Q:</strong> Print the shape of the arrays <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code> to better understand what is generated. Visualize the dataset using matplotlib (<code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code>). Vary the value of the <code class="docutils literal notranslate"><span class="pre">noise</span></code> argument in the previous cell and visualize the data again.</p>
+<p>Now is the time to implement the LMS algorithm with numpy.</p>
+<p>Remember the LMS algorithm from the course:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
+<li><p><strong>for</strong> M epochs:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(dw=0 \quad;\quad db=0\)</span></p></li>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i = w \, x_i + b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(dw = dw + (t_i - y_i) \, x_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(db = db + (t_i - y_i)\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\Delta w = \eta \, \frac{1}{N} dw\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta b = \eta \, \frac{1}{N} db\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>Our linear model <span class="math notranslate nohighlight">\(y = w \, x + b\)</span> predicts outputs for an input <span class="math notranslate nohighlight">\(x\)</span>. The error <span class="math notranslate nohighlight">\(t-y\)</span> between the prediction and the data is used to adapt the weight <span class="math notranslate nohighlight">\(w\)</span> and the bias <span class="math notranslate nohighlight">\(b\)</span> at the end of each epoch.</p>
+<p><strong>Q:</strong> Implement the LMS algorithm and apply it to the generated data. The Python code that you will write is almost a line-by-line translation of the pseudo-code above. You will use a learning rate <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code> at first, but you will vary this value later. Start by running a single epoch, as it will be easier to debug it, and then increase the number of epochs to 100. Print the value of the weight and bias at the end.</p>
+<p><strong>Q:</strong> Visualize the quality of the fit by superposing the learned model to the data with matplotlib.</p>
+<p><em>Tip</em>: you can get the extreme values of the xaxis with <code class="docutils literal notranslate"><span class="pre">X.min()</span></code> and <code class="docutils literal notranslate"><span class="pre">X.max()</span></code>. To visualize the model, you just need to plot a line between the points <code class="docutils literal notranslate"><span class="pre">(X.min(),</span> <span class="pre">w*X.min()+b)</span></code> and <code class="docutils literal notranslate"><span class="pre">(X.max(),</span> <span class="pre">w*X.max()+b)</span></code>.</p>
+<p>Another option is to predict a value for all inputs and plot this vector <span class="math notranslate nohighlight">\(y\)</span> against the desired values <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>Q:</strong> Make a scatter plot where <span class="math notranslate nohighlight">\(t\)</span> is the x-axis and <span class="math notranslate nohighlight">\(y = w\, x + b\)</span> is the y-axis. How should the points be arranged in the ideal case? Also plot what this ideal relationship should be.</p>
+<p>A much better method to analyse the result of the learning algorithm is to track the <strong>mean squared error</strong> (mse) after each epoch, i.e. the loss function which we actually want to minimize. The MSE is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\text{mse} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2\]</div>
+<p><strong>Q:</strong> Modify your LMS algorithm (either directly or copy it in the next cell) to track the mse after each epoch. After each epoch, append the mse on the training set to a list (initially empty) and plot it at the end. How does the mse evolve? Which value does it get in the end? Why? How many epochs do you actually need?</p>
+<p>Let’s now study the influence of the learning rate <code class="docutils literal notranslate"><span class="pre">eta=0.1</span></code> seemed to work, but is it the best value?</p>
+<p><strong>Q:</strong> Iterate over multiple values of <code class="docutils literal notranslate"><span class="pre">eta</span></code> using a logarithmic scale and plot the final mse after 100 epochs as a function of the learning rate. Conclude.</p>
+<p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math notranslate nohighlight">\(10^{-5}\)</span>, <span class="math notranslate nohighlight">\(10^{-4}\)</span>, <span class="math notranslate nohighlight">\(10^{-3}\)</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>. For the plot, use <code class="docutils literal notranslate"><span class="pre">np.log10(eta)</span></code> to only display the exponent on the X-axis.</p>
+</div>
+<div class="section" id="scikit-learn">
+<h2>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>The code that you have written is functional, but extremely slow, as you use for loops in Python. For so little data samples, it does not make a difference, but if you had millions of samples, this would start to be a problem.</p>
+<p>The solution is to use optimized implementations of the algorithms, running in C++ or FORTRAN under the hood. We will use here the LMS algorithm provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> as you have already installed it and it is very simple to use. Note that one could use tensorflow too, but that would be killing a fly with a sledgehammer.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object that implements LMS. The documentation is at: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html</a>.</p>
+<p>You simply import it with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+<p>You create the object with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">reg</span></code> is now an object with different methods (<code class="docutils literal notranslate"><span class="pre">fit()</span></code>, <code class="docutils literal notranslate"><span class="pre">predict()</span></code>) that accept any kind of data and performs linear regression.</p>
+<p>To train the model on the data <span class="math notranslate nohighlight">\((X, t)\)</span>, simply use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parameters of the model are obtained with <code class="docutils literal notranslate"><span class="pre">reg.coef_</span></code> for <span class="math notranslate nohighlight">\(w\)</span> and <code class="docutils literal notranslate"><span class="pre">reg.intercept_</span></code> for <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>You can predict outputs for new inputs using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong> Apply linear regression on the data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Check the model parameters after learning and compare them to what you obtained previously. Print the mse and make a plot comparing the predictions with the data.</p>
+</div>
+<div class="section" id="delta-learning-rule">
+<h2>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now implement the online version of LMS, the <strong>delta learning rule</strong>. The only difference is that the parameter updates are applied immediately after each example is evaluated, not at the end of training.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
+<li><p><strong>for</strong> M epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i = w \, x_i + b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta w = \eta \, (t_i - y_i ) \, x_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Q:</strong> Implement the delta learning rule for the regression problem with <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code>. Plot the evolution of the mse and compare it to LMS.</p>
+<p><strong>Q:</strong> Vary the learning rate logarithmically as for LMS and conclude.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./5-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

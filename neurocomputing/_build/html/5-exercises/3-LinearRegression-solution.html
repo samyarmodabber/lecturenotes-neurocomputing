@@ -248,8 +248,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multiple-linear-regression">
-   Multiple linear regression
+  <a class="reference internal nav-link" href="#scikit-learn">
+   Scikit-learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#delta-learning-rule">
+   Delta learning rule
   </a>
  </li>
 </ul>
@@ -277,7 +282,7 @@
 <div class="section" id="least-mean-squares">
 <h2>Least mean squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h2>
 <p>To generate the data for the exercise, we will use the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library <a class="reference external" href="https://scikit-learn.org">https://scikit-learn.org</a>. It provides a huge selection of already implemented machine learning algorithms for classification, regression or clustering.</p>
-<p>If you use Anaconda or Colab, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> should already be installed. Otherwise, install it with <code class="docutils literal notranslate"><span class="pre">pip</span></code> (you may need to relaunch this notebook afterwards):</p>
+<p>If you use Anaconda or Colab, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> should already be installed. Otherwise, install it with <code class="docutils literal notranslate"><span class="pre">pip</span></code> (you may need to restart this notebook afterwards):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
 </pre></div>
 </div>
@@ -301,13 +306,13 @@
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code> is the number of samples generates, <code class="docutils literal notranslate"><span class="pre">n_features</span></code> is the number of input variables and <code class="docutils literal notranslate"><span class="pre">noise</span></code> quantifies how the points deviate from the linear relationship.</p>
-<p><strong>Q:</strong> Print the shape of the arrays <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code> to better understand what is generated. Visualize the dataset using matplotlib. Vary the value of the <code class="docutils literal notranslate"><span class="pre">noise</span></code> argument in the previous cell and visualize the data again.</p>
+<p><strong>Q:</strong> Print the shape of the arrays <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code> to better understand what is generated. Visualize the dataset using matplotlib (<code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code>). Vary the value of the <code class="docutils literal notranslate"><span class="pre">noise</span></code> argument in the previous cell and visualize the data again.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
@@ -327,7 +332,7 @@
 <p>Remember the LMS algorithm from the course:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
-<li><p><strong>for</strong> E epochs:</p>
+<li><p><strong>for</strong> M epochs:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(dw=0 \quad;\quad db=0\)</span></p></li>
 <li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
@@ -343,7 +348,7 @@
 </li>
 </ul>
 <p>Our linear model <span class="math notranslate nohighlight">\(y = w \, x + b\)</span> predicts outputs for an input <span class="math notranslate nohighlight">\(x\)</span>. The error <span class="math notranslate nohighlight">\(t-y\)</span> between the prediction and the data is used to adapt the weight <span class="math notranslate nohighlight">\(w\)</span> and the bias <span class="math notranslate nohighlight">\(b\)</span> at the end of each epoch.</p>
-<p><strong>Q:</strong> Implement the LMS algorithm and apply it to the generated data. The Python code that you will write is almost a line-by-line translation of the pseudo-code above. You will use a learning rate <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code> at first, but you can choose another value later. Start by running a single epoch, as it will be easier to debug it, and then increase the number of epochs to 100 or so. Print the value of the weight and bias at the end.</p>
+<p><strong>Q:</strong> Implement the LMS algorithm and apply it to the generated data. The Python code that you will write is almost a line-by-line translation of the pseudo-code above. You will use a learning rate <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code> at first, but you will vary this value later. Start by running a single epoch, as it will be easier to debug it, and then increase the number of epochs to 100. Print the value of the weight and bias at the end.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
@@ -354,19 +359,25 @@
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">dw</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">db</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
-        <span class="n">dw</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># Prediction</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># LMS</span>
+        <span class="n">dw</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">db</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">dw</span><span class="o">/</span><span class="n">N</span>
-    <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">db</span><span class="o">/</span><span class="n">N</span>
+        
+    <span class="c1"># Parameter updates</span>
+    <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">dw</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">db</span> <span class="o">/</span> <span class="n">N</span>
     
 <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[71.82939496] [-0.42363319]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[95.27987845] [-1.42853731]
 </pre></div>
 </div>
 </div>
@@ -375,7 +386,7 @@
 <p><em>Tip</em>: you can get the extreme values of the xaxis with <code class="docutils literal notranslate"><span class="pre">X.min()</span></code> and <code class="docutils literal notranslate"><span class="pre">X.max()</span></code>. To visualize the model, you just need to plot a line between the points <code class="docutils literal notranslate"><span class="pre">(X.min(),</span> <span class="pre">w*X.min()+b)</span></code> and <code class="docutils literal notranslate"><span class="pre">(X.max(),</span> <span class="pre">w*X.max()+b)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
@@ -383,7 +394,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">w</span><span class="o">*</span><span class="n">x_axis</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -393,12 +404,12 @@
 </div>
 </div>
 <p>Another option is to predict a value for all inputs and plot this vector <span class="math notranslate nohighlight">\(y\)</span> against the desired values <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p><strong>Q:</strong> Make a scatter plot where <span class="math notranslate nohighlight">\(t\)</span> is the x-axis and <span class="math notranslate nohighlight">\(y = w*X + b\)</span> is the y-axis. How should the points be arranged in the ideal case? Also plot what this ideal relationship should be.</p>
+<p><strong>Q:</strong> Make a scatter plot where <span class="math notranslate nohighlight">\(t\)</span> is the x-axis and <span class="math notranslate nohighlight">\(y = w\, x + b\)</span> is the y-axis. How should the points be arranged in the ideal case? Also plot what this ideal relationship should be.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -419,7 +430,7 @@
 <p>A much better method to analyse the result of the learning algorithm is to track the <strong>mean squared error</strong> (mse) after each epoch, i.e. the loss function which we actually want to minimize. The MSE is defined as:</p>
 <div class="math notranslate nohighlight">
 \[\text{mse} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2\]</div>
-<p><strong>Q:</strong> Modify your LMS algorithm (either directly or copy it in the next cell) to track the mse after each epoch. After each epoch, append the mse on the training set to a list and plot it at the end. How does the mse evolve? Which value does it get in the end? Why? How many epochs do you actually need?</p>
+<p><strong>Q:</strong> Modify your LMS algorithm (either directly or copy it in the next cell) to track the mse after each epoch. After each epoch, append the mse on the training set to a list (initially empty) and plot it at the end. How does the mse evolve? Which value does it get in the end? Why? How many epochs do you actually need?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
@@ -432,16 +443,26 @@
     <span class="n">dw</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">db</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">mse</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
-        <span class="n">dw</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># Prediction</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># LMS</span>
+        <span class="n">dw</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">db</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="c1"># mse</span>
         <span class="n">mse</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="c1"># Parameter updates</span>
     <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">dw</span><span class="o">/</span><span class="n">N</span>
     <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">db</span><span class="o">/</span><span class="n">N</span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
@@ -450,10 +471,69 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3-LinearRegression-solution_16_0.png" src="../_images/3-LinearRegression-solution_16_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mse: [205.75347966]
+</pre></div>
+</div>
+<img alt="../_images/3-LinearRegression-solution_16_1.png" src="../_images/3-LinearRegression-solution_16_1.png" />
 </div>
 </div>
-<p><strong>Answer:</strong> the mse decreases exponentially with the epochs. It never reaches 0 because of the noise in the data (try setting the <code class="docutils literal notranslate"><span class="pre">noise</span></code> argument in the data generator to 0 and check that the mse reaches 0). 30 or 40 epochs seem sufficient to solve the problem, nothing happens afterwards.</p>
+<p><strong>A:</strong> the mse decreases exponentially with the epochs. It never reaches 0 because of the noise in the data (try setting the <code class="docutils literal notranslate"><span class="pre">noise</span></code> argument in the data generator to 0 and check that the mse reaches 0). 30 or 40 epochs seem sufficient to solve the problem, nothing happens afterwards.</p>
+<p>Let’s now study the influence of the learning rate <code class="docutils literal notranslate"><span class="pre">eta=0.1</span></code> seemed to work, but is it the best value?</p>
+<p><strong>Q:</strong> Iterate over multiple values of <code class="docutils literal notranslate"><span class="pre">eta</span></code> using a logarithmic scale and plot the final mse after 100 epochs as a function of the learning rate. Conclude.</p>
+<p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math notranslate nohighlight">\(10^{-5}\)</span>, <span class="math notranslate nohighlight">\(10^{-4}\)</span>, <span class="math notranslate nohighlight">\(10^{-3}\)</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>. For the plot, use <code class="docutils literal notranslate"><span class="pre">np.log10(eta)</span></code> to only display the exponent on the X-axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">etas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">eta</span> <span class="ow">in</span> <span class="n">etas</span><span class="p">:</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">dw</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="c1"># Prediction</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+            
+            <span class="c1"># LMS</span>
+            <span class="n">dw</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">db</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+            
+            <span class="c1"># mse</span>
+            <span class="n">mse</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="c1"># Parameter updates</span>
+        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">dw</span><span class="o">/</span><span class="n">N</span>
+        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span><span class="o">*</span><span class="n">db</span><span class="o">/</span><span class="n">N</span>
+    
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">etas</span><span class="p">),</span> <span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;log(eta)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([8461.50542914]), array([8448.11250949]), array([8315.36918067]), array([7099.73267265]), array([1558.81380678]), array([205.75347966]), array([205.75341538])]
+</pre></div>
+</div>
+<img alt="../_images/3-LinearRegression-solution_19_1.png" src="../_images/3-LinearRegression-solution_19_1.png" />
+</div>
+</div>
+<p><strong>A:</strong> with small values of the learning rate, LMS does not have time to converge within 100 epochs. A learning rate of 1 is actually possible in this simple problem. Try setting <code class="docutils literal notranslate"><span class="pre">eta</span></code> to 2.0 and observe what happens.</p>
+</div>
+<div class="section" id="scikit-learn">
+<h2>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">¶</a></h2>
 <p>The code that you have written is functional, but extremely slow, as you use for loops in Python. For so little data samples, it does not make a difference, but if you had millions of samples, this would start to be a problem.</p>
 <p>The solution is to use optimized implementations of the algorithms, running in C++ or FORTRAN under the hood. We will use here the LMS algorithm provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> as you have already installed it and it is very simple to use. Note that one could use tensorflow too, but that would be killing a fly with a sledgehammer.</p>
 <p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object that implements LMS. The documentation is at: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html</a>.</p>
@@ -466,7 +546,7 @@
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">reg</span></code> is now an object with different methods (<code class="docutils literal notranslate"><span class="pre">fit()</span></code>, <code class="docutils literal notranslate"><span class="pre">predict()</span></code>) that accept any kind of data and performs linear regression.</p>
-<p>To train the model on the data <span class="math notranslate nohighlight">\(X, t\)</span>, simply use:</p>
+<p>To train the model on the data <span class="math notranslate nohighlight">\((X, t)\)</span>, simply use:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -475,19 +555,25 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Q:</strong> Apply linear regression on the data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Check the model parameters after learning and compare them to what you obtained previously. Make a plot comparing the predictions with the data.</p>
+<p><strong>Q:</strong> Apply linear regression on the data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Check the model parameters after learning and compare them to what you obtained previously. Print the mse and make a plot comparing the predictions with the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 
+<span class="c1"># Linear regression</span>
 <span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
 
+<span class="c1"># Prediction</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># mse</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">x_axis</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
@@ -498,318 +584,186 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[71.83579731] -0.4249001654178497
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[95.28734628] -1.426580793575432
+mse: 205.75341537754272
 </pre></div>
 </div>
-<img alt="../_images/3-LinearRegression-solution_19_1.png" src="../_images/3-LinearRegression-solution_19_1.png" />
+<img alt="../_images/3-LinearRegression-solution_22_1.png" src="../_images/3-LinearRegression-solution_22_1.png" />
 </div>
 </div>
-<p><strong>A:</strong> for such a simple problem, it does not make a difference with your previous implementation, but it is very simple to use and optimized.</p>
+<p><strong>A:</strong> No need to select the right learning rate, fast and error-free.</p>
 </div>
-<div class="section" id="multiple-linear-regression">
-<h2>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h2>
-<p>Let’s now try multiple linear regression (MLR), where the output depends on more than one input variable:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{cases}
-y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
-\\
-y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
-\end{cases}
-\end{split}\]</div>
-<p>The Boston Housing Dataset consists of price of houses in various places in Boston. Alongside with price, the dataset also provide information such as the crime rate (CRIM), the proportion of non-retail business acres per town (INDUS), the proportion of owner-occupied units built prior to 1940 (AGE) and several other attributes. It is available here : <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/housing">https://archive.ics.uci.edu/ml/machine-learning-databases/housing</a>.</p>
-<p>The Boston dataset can be directly downloaded from scikit-learn:</p>
+<div class="section" id="delta-learning-rule">
+<h2>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now implement the online version of LMS, the <strong>delta learning rule</strong>. The only difference is that the parameter updates are applied immediately after each example is evaluated, not at the end of training.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
+<li><p><strong>for</strong> M epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((x_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i = w \, x_i + b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta w = \eta \, (t_i - y_i ) \, x_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Q:</strong> Implement the delta learning rule for the regression problem with <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code>. Plot the evolution of the mse and compare it to LMS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    
+    <span class="n">mse</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Prediction</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># Delta learning rule</span>
+        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="c1"># mse</span>
+        <span class="n">mse</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(506, 13)
-(506,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mse: [241.05201205]
 </pre></div>
 </div>
+<img alt="../_images/3-LinearRegression-solution_25_1.png" src="../_images/3-LinearRegression-solution_25_1.png" />
 </div>
 </div>
-<p>There are 506 samples with 13 inputs and one output (the price). The following cell decribes what the features are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">DESCR</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _boston_dataset:
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span>
 
-Boston house prices dataset
----------------------------
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-**Data Set Characteristics:**  
-
-    :Number of Instances: 506 
-
-    :Number of Attributes: 13 numeric/categorical predictive. Median Value (attribute 14) is usually the target.
-
-    :Attribute Information (in order):
-        - CRIM     per capita crime rate by town
-        - ZN       proportion of residential land zoned for lots over 25,000 sq.ft.
-        - INDUS    proportion of non-retail business acres per town
-        - CHAS     Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
-        - NOX      nitric oxides concentration (parts per 10 million)
-        - RM       average number of rooms per dwelling
-        - AGE      proportion of owner-occupied units built prior to 1940
-        - DIS      weighted distances to five Boston employment centres
-        - RAD      index of accessibility to radial highways
-        - TAX      full-value property-tax rate per $10,000
-        - PTRATIO  pupil-teacher ratio by town
-        - B        1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town
-        - LSTAT    % lower status of the population
-        - MEDV     Median value of owner-occupied homes in $1000&#39;s
-
-    :Missing Attribute Values: None
-
-    :Creator: Harrison, D. and Rubinfeld, D.L.
-
-This is a copy of UCI ML housing dataset.
-https://archive.ics.uci.edu/ml/machine-learning-databases/housing/
-
-
-This dataset was taken from the StatLib library which is maintained at Carnegie Mellon University.
-
-The Boston house-price data of Harrison, D. and Rubinfeld, D.L. &#39;Hedonic
-prices and the demand for clean air&#39;, J. Environ. Economics &amp; Management,
-vol.5, 81-102, 1978.   Used in Belsley, Kuh &amp; Welsch, &#39;Regression diagnostics
-...&#39;, Wiley, 1980.   N.B. Various transformations are used in the table on
-pages 244-261 of the latter.
-
-The Boston house-price data has been used in many machine learning papers that address regression
-problems.   
-     
-.. topic:: References
-
-   - Belsley, Kuh &amp; Welsch, &#39;Regression diagnostics: Identifying Influential Data and Sources of Collinearity&#39;, Wiley, 1980. 244-261.
-   - Quinlan,R. (1993). Combining Instance-Based and Model-Based Learning. In Proceedings on the Tenth International Conference of Machine Learning, 236-243, University of Massachusetts, Amherst. Morgan Kaufmann.
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell allows to visualize how each variable influences the price individually:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/3-LinearRegression-solution_29_0.png" src="../_images/3-LinearRegression-solution_29_0.png" />
-</div>
-</div>
-<p><strong>Q:</strong> Apply MLR on the Boston data. Print the mse and visualize the prediction <span class="math notranslate nohighlight">\(y\)</span> against the true value <span class="math notranslate nohighlight">\(t\)</span> for each sample as before. Does it work?</p>
-<p>You will also plot the weights of the model (<code class="docutils literal notranslate"><span class="pre">reg.coef_</span></code>) and conclude on the relative importance of the different features.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
-
-<span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+
+<span class="n">x_axis</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 21.894831181729202
+<img alt="../_images/3-LinearRegression-solution_26_0.png" src="../_images/3-LinearRegression-solution_26_0.png" />
+</div>
+</div>
+<p><strong>A:</strong> The delta learning rule converges faster, but the final mse is higher. This is due to the learning rate as shown in the next question.</p>
+<p><strong>Q:</strong> Vary the learning rate logarithmically as for LMS and conclude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">etas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">eta</span> <span class="ow">in</span> <span class="n">etas</span><span class="p">:</span>
+    
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    
+        <span class="n">mse</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="c1"># Prediction</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+        
+            <span class="c1"># Delta learning rule</span>
+            <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+        
+            <span class="c1"># mse</span>
+            <span class="n">mse</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">etas</span><span class="p">),</span> <span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;eta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([8314.66609921]), array([7094.25080431]), array([1557.7207601]), array([206.18470859]), array([209.94231293]), array([241.05201205])]
+</pre></div>
+</div>
+<img alt="../_images/3-LinearRegression-solution_29_1.png" src="../_images/3-LinearRegression-solution_29_1.png" />
+</div>
+</div>
+<p><strong>A:</strong> The optimal value of <code class="docutils literal notranslate"><span class="pre">eta</span></code> is now 0.001, higher learning rates lead to worse mse. One explanation is that the <em>true</em> learning rate of LMS is <code class="docutils literal notranslate"><span class="pre">eta/N</span> <span class="pre">=</span> <span class="pre">0.001</span></code>, not <code class="docutils literal notranslate"><span class="pre">eta=0.1</span></code>. When using 0.001 for the learning, the delta learning rule behaves exactly like LMS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.001</span>
+
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    
+    <span class="n">mse</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Prediction</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+        
+        <span class="c1"># Delta learning rule</span>
+        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="c1"># mse</span>
+        <span class="n">mse</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mse</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mse: [206.18470859]
 </pre></div>
 </div>
 <img alt="../_images/3-LinearRegression-solution_31_1.png" src="../_images/3-LinearRegression-solution_31_1.png" />
-<img alt="../_images/3-LinearRegression-solution_31_2.png" src="../_images/3-LinearRegression-solution_31_2.png" />
 </div>
 </div>
-<p>Feature 4 (NOX) got a very strong weight, although it is not a good predictor of the price. The main reason is that the features are not <strong>normalized</strong>: NOX varies between 0.0 an 1.0, while B varies between 0 and 400. The weight on B (Feature 11) does not need to be very high to influence the price prediction.</p>
-<p>A good practice in machine learning is to <strong>normalize</strong> the inputs, i.e. to make sure that the samples have a mean of 0 and a standard deviation of 1. <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides a method named <code class="docutils literal notranslate"><span class="pre">scale</span></code> that does it automatically:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">scale</span>
-<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Q:</strong> Apply MLR again on <code class="docutils literal notranslate"><span class="pre">X_scaled</span></code>, print the mse and visualize the weights. What has changed?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
-
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mse:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mse: 21.894831181729202
-</pre></div>
-</div>
-<img alt="../_images/3-LinearRegression-solution_35_1.png" src="../_images/3-LinearRegression-solution_35_1.png" />
-<img alt="../_images/3-LinearRegression-solution_35_2.png" src="../_images/3-LinearRegression-solution_35_2.png" />
-</div>
-</div>
-<p><strong>Answer:</strong> the mse does not change (it may in more complex problems), but the weights are more interpretable. Now strong weights in absolute value mean that the features are very predictive of the price.</p>
-<p>Now is time to investigate <strong>regularization</strong>:</p>
-<ol class="simple">
-<li><p>MLR with L2 regularization is called <strong>Ridge regression</strong></p></li>
-<li><p>MLR with L1 regularization is called <strong>Lasso regression</strong></p></li>
-</ol>
-<p>Fortunately, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides these methods with a similar interface to <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>. The <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> and <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> objects take an additional argument <code class="docutils literal notranslate"><span class="pre">alpha</span></code> which represents the regularization parameter:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Q:</strong> Apply Ridge and Lasso regression on the scaled data, vary the regularization parameter to understand its function and comment on the results. In particular, increase the regularization parameter for LASSO and identify the features which are the most predictive of the price. Does it make sense?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
-
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.967591187738435
-[-0.85905074  0.95497477 -0.04132656  0.70777968 -1.81261091  2.74234394
- -0.03238278 -2.85675627  2.0978234  -1.56539453 -1.98775121  0.84470905
- -3.62394181]
-</pre></div>
-</div>
-<img alt="../_images/3-LinearRegression-solution_40_1.png" src="../_images/3-LinearRegression-solution_40_1.png" />
-<img alt="../_images/3-LinearRegression-solution_40_2.png" src="../_images/3-LinearRegression-solution_40_2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.464652626660328
-[-0.          0.         -0.          0.         -0.          2.7133553
- -0.         -0.         -0.         -0.         -1.3435488   0.18095664
- -3.54338107]
-</pre></div>
-</div>
-<img alt="../_images/3-LinearRegression-solution_41_1.png" src="../_images/3-LinearRegression-solution_41_1.png" />
-<img alt="../_images/3-LinearRegression-solution_41_2.png" src="../_images/3-LinearRegression-solution_41_2.png" />
-</div>
-</div>
-<p><strong>A:</strong> Ridge regression does not have a big effect for this data. By increasing the regularization parameter in Lasso regression, the MSE worsens slightly, but the number of non-zero weights becomes very small. With <code class="docutils literal notranslate"><span class="pre">alpha=1.0</span></code>, there are only 4 non-zero parameters: the corresponding features are the most predictive of the prices. You can identify them with:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;RM&#39; &#39;PTRATIO&#39; &#39;B&#39; &#39;LSTAT&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>RM       average number of rooms per dwelling</p></li>
-<li><p>PTRATIO  pupil-teacher ratio by town</p></li>
-<li><p>B        1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town</p></li>
-<li><p>LSTAT    % lower status of the population</p></li>
-</ul>
-<p>You are now a data scientist!</p>
 </div>
 </div>
 
