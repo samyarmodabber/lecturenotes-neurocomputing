@@ -49,7 +49,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-LinearClassification-solution.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Linear classification" />
-<meta property="og:description" content="Linear classification  Perceptron algorithm for linear classification  The goal of this exercise is to implement the perceptron algorithm (batch and online) for" />
+<meta property="og:description" content="Linear classification  import numpy as np import matplotlib.pyplot as plt  Linear perceptron algorithm  Linearly separable data  We start by generating a classi" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -243,13 +243,13 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#perceptron-algorithm-for-linear-classification">
-   Perceptron algorithm for linear classification
+  <a class="reference internal nav-link" href="#linear-perceptron-algorithm">
+   Linear perceptron algorithm
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#online-version">
-     Online version
+    <a class="reference internal nav-link" href="#linearly-separable-data">
+     Linearly separable data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -257,12 +257,12 @@
      Non-linearly separable data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#batch-version">
-     Batch version
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic regression
+  </a>
  </li>
 </ul>
 
@@ -276,9 +276,6 @@
                 
   <div class="section" id="linear-classification">
 <h1>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="perceptron-algorithm-for-linear-classification">
-<h2>Perceptron algorithm for linear classification<a class="headerlink" href="#perceptron-algorithm-for-linear-classification" title="Permalink to this headline">¶</a></h2>
-<p>The goal of this exercise is to implement the perceptron algorithm (batch and online) for binary linear classification on a simple artificial dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -287,8 +284,10 @@
 </div>
 </div>
 </div>
-<div class="section" id="online-version">
-<h3>Online version<a class="headerlink" href="#online-version" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="linear-perceptron-algorithm">
+<h2>Linear perceptron algorithm<a class="headerlink" href="#linear-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="linearly-separable-data">
+<h3>Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h3>
 <p>We start by generating a classification dataset with 100 examples. You do not need to read the code generating the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -306,7 +305,7 @@
 <p>Let’s visualize the training set now in the following cell. Samples of the positive class (t=1) will be represented by blue points, examples of the negative class (t=-1) by orange ones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -344,7 +343,7 @@
 <p><span class="math notranslate nohighlight">\(\qquad \qquad y_i =  \text{sign}( \langle \mathbf{w} . \mathbf{x}_i \rangle + b)\)</span></p>
 <p><span class="math notranslate nohighlight">\(\qquad \qquad \mathbf{w} \gets \mathbf{w} + \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p>
 <p><span class="math notranslate nohighlight">\(\qquad \qquad b \gets b + \eta \, (t_i - y_i)\)</span></p>
-<p><strong>Q:</strong> Implement the algorithm based on the linear regression algorithm of last exercise. The only differences are that updates are <strong>online</strong> and that the weight vector is now a vector… You will need to use <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>. Use 20 epochs and a learning rate of 0.01 at first, but you can vary it later. Initialize the weight vector and the bias to 0. Make a plot of the mse during training.</p>
+<p><strong>Q:</strong> Implement the algorithm based on the linear regression algorithm of exercise 3. The only difference is that the weight vector is now a vector… You will need to use <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>. Use 20 epochs and a learning rate of 0.01 at first, but you can vary it later. Initialize the weight vector and the bias to 0. Make a plot of the mse during training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
@@ -364,7 +363,7 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
         <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
@@ -376,7 +375,7 @@
     <span class="c1"># Append </span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -412,7 +411,7 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
         <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
@@ -424,13 +423,13 @@
     <span class="c1"># Append </span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -468,7 +467,7 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
         <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
@@ -483,14 +482,16 @@
     <span class="c1"># Append </span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -499,8 +500,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_12_0.png" src="../_images/6-LinearClassification-solution_12_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: 0.0
+</pre></div>
+</div>
 <img alt="../_images/6-LinearClassification-solution_12_1.png" src="../_images/6-LinearClassification-solution_12_1.png" />
+<img alt="../_images/6-LinearClassification-solution_12_2.png" src="../_images/6-LinearClassification-solution_12_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> The training error and the loss vary together, by definition. The scale of the loss is somewhat arbitrary, while the error corresponds to what we want. If you have to choose, visualize the error.</p>
@@ -531,7 +535,7 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
         <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
@@ -546,14 +550,16 @@
     <span class="c1"># Append </span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -562,13 +568,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_15_0.png" src="../_images/6-LinearClassification-solution_15_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: 0.0
+</pre></div>
+</div>
 <img alt="../_images/6-LinearClassification-solution_15_1.png" src="../_images/6-LinearClassification-solution_15_1.png" />
+<img alt="../_images/6-LinearClassification-solution_15_2.png" src="../_images/6-LinearClassification-solution_15_2.png" />
 </div>
 </div>
-<p><strong>A:</strong></p>
-<p>The learning rate does not change much… We will see why in the next question.</p>
-<p>After a minimum of epochs, the result is stable, because there are no errors anymore: <code class="docutils literal notranslate"><span class="pre">T[i]</span> <span class="pre">-</span> <span class="pre">y_i</span></code> is always 0, so the weight vector and the bias are not changed anymore.</p>
+<p><strong>A:</strong> The learning rate does not change much… We will see why in the next question.</p>
+<p>After a minimum of epochs, the result is stable, because there are no errors anymore: <code class="docutils literal notranslate"><span class="pre">t[i]</span> <span class="pre">-</span> <span class="pre">y_i</span></code> is always 0, so the weight vector and the bias are not changed anymore.</p>
 <p><strong>Q:</strong> Change the initial value of the weight vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> to something different from 0 (e.g. [1, -1], [-5, 5], etc). What does it change? Vary the learning rate again and conclude on the importance of weight initialization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -590,7 +598,7 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
         <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
@@ -605,14 +613,16 @@
     <span class="c1"># Append </span>
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -621,8 +631,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_18_0.png" src="../_images/6-LinearClassification-solution_18_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: 0.38
+</pre></div>
+</div>
 <img alt="../_images/6-LinearClassification-solution_18_1.png" src="../_images/6-LinearClassification-solution_18_1.png" />
+<img alt="../_images/6-LinearClassification-solution_18_2.png" src="../_images/6-LinearClassification-solution_18_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> contrary to the case where the weight vector is initially 0, the learning rate had a big influence on the learning speed when the initial weight vector is non-zero. It is even worse with big weights ([-10, 10]).</p>
@@ -636,15 +649,16 @@
 </div>
 <div class="section" id="non-linearly-separable-data">
 <h3>Non-linearly separable data<a class="headerlink" href="#non-linearly-separable-data" title="Permalink to this headline">¶</a></h3>
-<p>The generated dataset was obviously linearly separable, because you found a linear hyperplane able to classify it… Let’s now see what happens when you apply your algorithm on a non-linearly separable dataset. It is basically the same method as before, except that two data points have their class changed (from +1 to -1 and vice versa).</p>
+<p>The generated dataset was obviously linearly separable, because you found a linear hyperplane able to classify it… Let’s now see what happens when you apply your algorithm on a non-linearly separable dataset. It is basically the same method as before, except that we add one outlier at the end.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)])</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="n">n_samples</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="c1"># Outlier</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">t</span>
 
 <span class="n">X</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">create_dataset</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -654,7 +668,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -665,12 +679,12 @@
 <img alt="../_images/6-LinearClassification-solution_22_0.png" src="../_images/6-LinearClassification-solution_22_0.png" />
 </div>
 </div>
-<p><strong>Q:</strong> Apply your online Perceptron algorithm (with default values: <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code>, <code class="docutils literal notranslate"><span class="pre">nb_epochs</span> <span class="pre">=</span> <span class="pre">100</span></code>,<span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(b\)</span> initialized to 0) to the non-linear data. What do you observe? Is it a satisfying result? Does it get better when you change the learning rate or weight initialization?</p>
+<p><strong>Q:</strong> Apply your online Perceptron algorithm (with default values: <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code>, <code class="docutils literal notranslate"><span class="pre">nb_epochs</span> <span class="pre">=</span> <span class="pre">20</span></code>,<span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(b\)</span> initialized to 0) to the non-linear data. At the end of learning, compute the final error on the training set. What do you observe? Is it a satisfying result? Does it get better when you change the learning rate or weight initialization?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
 <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
 <span class="c1"># Initialize the weight vector and bias</span>
@@ -686,10 +700,10 @@
     
     <span class="c1"># Iterate over all training examples</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction of the hypothesis</span>
+        <span class="c1"># Prediction</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
         <span class="c1"># Update the weight</span>
-        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> 
         <span class="c1"># Update the bias</span>
         <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> 
         <span class="c1"># Loss mse</span>
@@ -702,13 +716,20 @@
     <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
     <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+<span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_i</span> <span class="p">:</span>
+        <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>    
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
     
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -717,93 +738,108 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_24_0.png" src="../_images/6-LinearClassification-solution_24_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final error: 0.2
+</pre></div>
+</div>
 <img alt="../_images/6-LinearClassification-solution_24_1.png" src="../_images/6-LinearClassification-solution_24_1.png" />
+<img alt="../_images/6-LinearClassification-solution_24_2.png" src="../_images/6-LinearClassification-solution_24_2.png" />
 </div>
 </div>
+<p><strong>A:</strong> the outlier heavily attracts the hyperplane. That’s bad.</p>
 </div>
-<div class="section" id="batch-version">
-<h3>Batch version<a class="headerlink" href="#batch-version" title="Permalink to this headline">¶</a></h3>
-<p>Let’s now implement the batch version of the Perceptron algorithm for comparison. The algorithm is theoretically:</p>
-<p><span class="math notranslate nohighlight">\(\text{Initialize the weight vector } \mathbf{w} \text{ and the bias } b.\)</span></p>
-<p><span class="math notranslate nohighlight">\(\textbf{for } M \text{epochs:}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \text{Initialize weight and bias changes } \Delta \mathbf{w} = 0\, , \, \Delta b = 0\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \textbf{forall } \text{examples } (\mathbf{x}_i, t_i) :\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \qquad y_i =  \text{sign}( \langle \mathbf{w} . \mathbf{x}_i \rangle + b)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \qquad \Delta \mathbf{w} \gets \Delta \mathbf{w} + (t_i - y_i) \, \mathbf{x}_i\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \qquad \Delta b \gets \Delta b + (t_i - y_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad \mathbf{w} \gets \mathbf{w} + \eta \, \Delta \mathbf{w}/N\)</span></p>
-<p><span class="math notranslate nohighlight">\(\qquad b \gets b + \eta \, \Delta b/N\)</span></p>
-<p>Here we will use the numerical abilities of numpy to avoid the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over the training examples. As <code class="docutils literal notranslate"><span class="pre">X</span></code> s a <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">d)</span></code> matrix, you can obtain a vector of predictions using directly matrix-matrix multiplications:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+</div>
+<div class="section" id="logistic-regression">
+<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now see whether <strong>logistic regression</strong> helps us with outliers. The following cell implements the logistic function:</p>
+<div class="math notranslate nohighlight">
+\[\sigma(x) = \dfrac{1}{1 + e^{-x}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logistic</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">y</span></code> is now a vector of predictions using the current hyperplane, you can apply the <strong>batch</strong> delta learning rule in just two lines:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span>  <span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
-<span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+</div>
+</div>
+<p>In logistic regression, the prediction <span class="math notranslate nohighlight">\(y = \sigma(w \, x + b)\)</span> represents the probability of belonging to the positive class. If <span class="math notranslate nohighlight">\(y&gt;0.5\)</span>, we can say that the example belongs to the positive class.</p>
+<p>As seen in the course, there is absolutely no difference in the learning algorithm apart from using the logistic function instead of the sign. One thing to take care of, though, is that the targets <span class="math notranslate nohighlight">\(t_i\)</span> should be 0 and 1 in the logistic regression algorithm, while they are -1 and 1 in the current vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>. The following cell transforms the array <code class="docutils literal notranslate"><span class="pre">t</span></code> to match the output of the logistic function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">np.mean()</span></code> allows to compute directly the average of the delta terms over the whole data.</p>
-<p>The error and the loss are also easy to compute:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
 </div>
-<p><strong>Q</strong> Implement the batch version of the Perceptron algorithm. Train it on the non-linear dataset using different parameters (vary the learning rate and weight initialization). Compare its performance to the online version.</p>
+</div>
+<p><strong>Q:</strong> Implement the logistic regression algorithm on the non-linear data. When computing the error, you will need to predict the class based on the probability <span class="math notranslate nohighlight">\(y\)</span>. What do you observe? Conclude.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
 <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-<span class="c1"># Weight vector and bias</span>
+<span class="c1"># Initialize the weight vector and bias</span>
 <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mf">0.</span>
 
-<span class="c1"># Batch Perceptron algorithm</span>
+<span class="c1"># Perceptron algorithm</span>
 <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
     
-    <span class="c1"># Compute the prediction for the whole training set</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="c1"># Iterate over all training examples</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Probability</span>
+        <span class="n">y_i</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+        <span class="c1"># Predicted class</span>
+        <span class="n">c_i</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">y_i</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="c1"># Update the weight</span>
+        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> 
+        <span class="c1"># Update the bias</span>
+        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> 
+        <span class="c1"># Loss mse</span>
+        <span class="n">loss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="c1"># Count misclassifications</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c_i</span> <span class="p">:</span>
+            <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="c1"># Append </span>
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">y_i</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">c_i</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">y_i</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c_i</span> <span class="p">:</span>
+        <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>    
     
-    <span class="c1"># Update the weight vector</span>
-    <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span>  <span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
-    
-    <span class="c1"># Update the bias</span>
-    <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
-    
-    <span class="c1"># Compute the error and loss</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    
-    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_27_0.png" src="../_images/6-LinearClassification-solution_27_0.png" />
-<img alt="../_images/6-LinearClassification-solution_27_1.png" src="../_images/6-LinearClassification-solution_27_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final error: 0.02
+</pre></div>
+</div>
+<img alt="../_images/6-LinearClassification-solution_32_1.png" src="../_images/6-LinearClassification-solution_32_1.png" />
+<img alt="../_images/6-LinearClassification-solution_32_2.png" src="../_images/6-LinearClassification-solution_32_2.png" />
 </div>
 </div>
-<p><strong>A:</strong> the batch version is indeed slower than the online version, but it finds a much better solution when the data is not strictly linearly separable.</p>
-<p><em>Note:</em> this statement might depend on the data… Regenerate the dataset if you observe the contrary ;)</p>
-</div>
+<p><strong>A:</strong> As logistic regression does not use “hard” boundaries like the perceptron, but soft ones, it is much more robust to outliers. As we have in addition the confidence score, the conclusion is that one should never use the perceptron algorithm but logistic regression for binary classification.</p>
 </div>
 </div>
 
