@@ -773,7 +773,7 @@ You ask 50 people whether they like cats or dogs:
 We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities...). Among the 23 who love cats, which proportion also loves dogs?
 
 ```{dropdown} Answer
-We have $P(\text{dog}) = \displaystyle\frac{18+21}{50}= \displaystyle\frac{139}{50}$ and $P(\text{cat}) = \displaystyle\frac{18+5}{50} = \frac{23}{50}$.
+We have $P(\text{dog}) = \displaystyle\frac{18+21}{50}= \displaystyle\frac{39}{50}$ and $P(\text{cat}) = \displaystyle\frac{18+5}{50} = \frac{23}{50}$.
 
 The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \displaystyle\frac{18}{50}$.
 
