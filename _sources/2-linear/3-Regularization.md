@@ -4,6 +4,8 @@ Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectur
 
 ## A bit of learning theory
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/QbvCJNfeXbE' frameborder='0' allowfullscreen></iframe></div>
+
 Before going further, let's think about what we have been doing so far. We had a bunch of data samples $\mathcal{D} = (\mathbf{x}_i, t_i)_{i=1..N}$ (the **training set**). We decided to apply a (linear) model on it:
 
 $$y_i = \langle \mathbf{w} . \mathbf{x}_i \rangle + b$$
@@ -239,6 +241,8 @@ The optimal complexity of an algorithm is a trade-off between bias and variance.
 ```
 
 ## Regularized regression
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/6R46KLgfw5s' frameborder='0' allowfullscreen></iframe></div>
 
 Linear regression can either underfit or overfit depending on the data.
 

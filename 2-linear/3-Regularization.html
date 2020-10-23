@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regularization &#8212; Neurocomputing</title>
+    <title>3. Regularization &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/3-Regularization.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="prev" title="2. Linear Regression" href="2-LinearRegression.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -49,7 +51,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/3-Regularization.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Regularization" />
-<meta property="og:description" content="Regularization  Slides: pdf  A bit of learning theory  Before going further, let’s think about what we have been doing so far. We had a bunch of data samples \m" />
+<meta property="og:description" content="Regularization  Slides: pdf  A bit of learning theory  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/QbvCJNfeXbE&#39; frameborder=&#39;0&#39; allo" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -115,10 +117,20 @@
   1 - Linear models
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-Optimization.html">
    1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Regularization
   </a>
  </li>
 </ul>
@@ -136,6 +148,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
    2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
   </a>
  </li>
 </ul>
@@ -222,44 +239,44 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-bit-of-learning-theory">
-   A bit of learning theory
+   3.1. A bit of learning theory
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sensibility-to-outliers">
-     Sensibility to outliers
+     3.1.1. Sensibility to outliers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cross-validation">
-     Cross-validation
+     3.1.2. Cross-validation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#underfitting-overfitting">
-     Underfitting - overfitting
+     3.1.3. Underfitting - overfitting
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#regularized-regression">
-   Regularized regression
+   3.2. Regularized regression
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#l2-regularization-ridge-regression">
-     L2 regularization - Ridge regression
+     3.2.1. L2 regularization - Ridge regression
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#l1-regularization-lasso-regression">
-     L1 regularization - LASSO regression
+     3.2.2. L1 regularization - LASSO regression
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#l1-l2-regularization-elasticnet">
-     L1+L2 regularization - ElasticNet
+     3.2.3. L1+L2 regularization - ElasticNet
     </a>
    </li>
   </ul>
@@ -275,10 +292,11 @@
               <div>
                 
   <div class="section" id="regularization">
-<h1>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3. </span>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h1>
 <p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.3-Regularization.pdf">pdf</a></p>
 <div class="section" id="a-bit-of-learning-theory">
-<h2>A bit of learning theory<a class="headerlink" href="#a-bit-of-learning-theory" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>A bit of learning theory<a class="headerlink" href="#a-bit-of-learning-theory" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/QbvCJNfeXbE' frameborder='0' allowfullscreen></iframe></div>
 <p>Before going further, let’s think about what we have been doing so far. We had a bunch of data samples <span class="math notranslate nohighlight">\(\mathcal{D} = (\mathbf{x}_i, t_i)_{i=1..N}\)</span> (the <strong>training set</strong>). We decided to apply a (linear) model on it:</p>
 <div class="math notranslate nohighlight">
 \[y_i = \langle \mathbf{w} . \mathbf{x}_i \rangle + b\]</div>
@@ -296,7 +314,7 @@
 <p>The <strong>mean square error</strong> mse is not very informative, as its value depends on how the outputs are scaled: multiply the targets and prediction by 10 and the mse is 100 times higher.</p>
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/regression-animation-mse-dual.png"><img alt="../_images/regression-animation-mse-dual.png" src="../_images/regression-animation-mse-dual.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.21 </span><span class="caption-text">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>The <strong>coefficient of determination</strong> <span class="math notranslate nohighlight">\(R^2\)</span> is a rescaled variant of the mse comparing the variance of the residuals to the variance of the data around its mean <span class="math notranslate nohighlight">\(\hat{t}\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -306,38 +324,38 @@
 <p><span class="math notranslate nohighlight">\(R^2\)</span> should be as close from 1 as possible. For example, if <span class="math notranslate nohighlight">\(R^2 = 0.8\)</span>, we can say that the <strong>model explains 80% of the variance of the data</strong>.</p>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/r2.png"><img alt="../_images/r2.png" src="../_images/r2.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a class="reference external" href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.22 </span><span class="caption-text">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a class="reference external" href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <div class="section" id="sensibility-to-outliers">
-<h3>Sensibility to outliers<a class="headerlink" href="#sensibility-to-outliers" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.1.1. </span>Sensibility to outliers<a class="headerlink" href="#sensibility-to-outliers" title="Permalink to this headline">¶</a></h3>
 <p>Suppose we have a training set with one <strong>outlier</strong> (bad measurement, bad luck, etc).</p>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/regression-outlier.png"><img alt="../_images/regression-outlier.png" src="../_images/regression-outlier.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Linear data with one outlier.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Linear data with one outlier.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>LMS would find the minimum of the mse, but it is clearly a bad fit for most points.</p>
 <div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/regression-outlier-fit.png"><img alt="../_images/regression-outlier-fit.png" src="../_images/regression-outlier-fit.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">LMS is attracted by the outlier, leading to a bad prediction for all points.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.24 </span><span class="caption-text">LMS is attracted by the outlier, leading to a bad prediction for all points.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <p>This model feels much better, but its residual mse is actually higher…</p>
 <div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/regression-outlier-fit-corrected.png"><img alt="../_images/regression-outlier-fit-corrected.png" src="../_images/regression-outlier-fit-corrected.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">By ignoring the outlier, the prediction would be correct for most points.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.25 </span><span class="caption-text">By ignoring the outlier, the prediction would be correct for most points.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s visualize polynomial regression with various orders of the polynomial on a small dataset.</p>
 <div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/polynomialregression-animation.gif"><img alt="../_images/polynomialregression-animation.gif" src="../_images/polynomialregression-animation.gif" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Polynomial regression with various orders.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.26 </span><span class="caption-text">Polynomial regression with various orders.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 <p>When only looking at the residual mse on the training data, one could think that the higher the order of the polynomial, the better. But it is obvious that the interpolation quickly becomes very bad when the order is too high. A <strong>complex</strong> model (with a lot of parameters) is useless for predicting new values. We actually do <strong>not</strong> care about the error on the training set, but about <strong>generalization</strong>.</p>
 <div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/polynomialregression-mse.png"><img alt="../_images/polynomialregression-mse.png" src="../_images/polynomialregression-mse.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Residual mse of polynomial regression depending on the order of the polynomial.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.27 </span><span class="caption-text">Residual mse of polynomial regression depending on the order of the polynomial.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="cross-validation">
-<h3>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.1.2. </span>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h3>
 <p>Let’s suppose we dispose of <span class="math notranslate nohighlight">\(m\)</span> models <span class="math notranslate nohighlight">\(\mathcal{M} = \{ M_1, ..., M_m\}\)</span> that could be used to fit (or classify) some data <span class="math notranslate nohighlight">\(\mathcal{D} = \{\mathbf{x}_i, t_i\}_{i=1}^N\)</span>. Such a class could be the ensemble of polynomes with different orders, different algorithms (NN, SVM) or the same algorithm with different values for the hyperparameters (learning rate, regularization parameters…).</p>
 <p>The naive and <strong>wrong</strong> method to find the best hypothesis would be:</p>
 <div class="admonition-do-not-do-this admonition">
@@ -364,7 +382,7 @@
 </ol>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/polynomialregression-traintest.png"><img alt="../_images/polynomialregression-traintest.png" src="../_images/polynomialregression-traintest.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Polynomial data split in a training set and a test set.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.28 </span><span class="caption-text">Polynomial data split in a training set and a test set.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 <p>The test performance will better measure how well the model generalizes to new examples.</p>
 <div class="admonition-simple-hold-out-cross-validation admonition">
@@ -386,7 +404,7 @@
 <p><strong>k-fold cross-validation</strong> allows a more efficient use os the available data and a better measure of the generalization error. The idea is to build several different training/test sets with the same data, train and test each model repeatedly on each partition and choose the hypothesis that works best on average.</p>
 <div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/kfold.jpg"><img alt="../_images/kfold.jpg" src="../_images/kfold.jpg" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">k-fold cross-validation. Source <a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.29 </span><span class="caption-text">k-fold cross-validation. Source <a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition-k-fold-cross-validation admonition">
 <p class="admonition-title">k-fold cross-validation</p>
@@ -414,16 +432,16 @@
 <p>In general, you can take <span class="math notranslate nohighlight">\(k=10\)</span> partitions. The extreme case is to take <span class="math notranslate nohighlight">\(k=N\)</span> partition, i.e. the test set has only one sample each time: <strong>leave-one-out cross-validation</strong>. k-fold cross-validation works well, but needs a lot of repeated learning.</p>
 </div>
 <div class="section" id="underfitting-overfitting">
-<h3>Underfitting - overfitting<a class="headerlink" href="#underfitting-overfitting" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.1.3. </span>Underfitting - overfitting<a class="headerlink" href="#underfitting-overfitting" title="Permalink to this headline">¶</a></h3>
 <p>While the training mse always decrease with more complex models, the test mse increases after a while. This is called <strong>overfitting</strong>: learning by heart the data without caring about generalization. The two curves suggest that we should chose a polynomial order between 2 and 9.</p>
 <div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/polynomialregression-mse-traintest.png"><img alt="../_images/polynomialregression-mse-traintest.png" src="../_images/polynomialregression-mse-traintest.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-text">Training and test mse of polynomial regression.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.30 </span><span class="caption-text">Training and test mse of polynomial regression.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 <p>A model not complex enough for the data will <strong>underfit</strong>: its training error is high. A model too complex for the data will <strong>overfit</strong>: its test error is high. In between, there is the right complexity for the model: it learns the data correctly but does not overfit.</p>
 <div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/underfitting-overfitting.png"><img alt="../_images/underfitting-overfitting.png" src="../_images/underfitting-overfitting.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Underfitting and overfitting.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.31 </span><span class="caption-text">Underfitting and overfitting.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <p>What does complexity mean? In polynomial regression, the complexity is related to the order of the polynomial, i.e. the number of coefficients to estimate:</p>
 <div class="math notranslate nohighlight">
@@ -437,7 +455,7 @@
 <p>Under-/Over-fitting relates to the statistical concept of <strong>bias-variance trade-off</strong>. The <strong>bias</strong> is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model): a model with high bias is underfitting. The <strong>variance</strong> is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples): a model with high variance is overfitting.</p>
 <div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/biasvariance31.png"><img alt="../_images/biasvariance31.png" src="../_images/biasvariance31.png" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-text">Bias and variance of an estimator. Source: <a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.32 </span><span class="caption-text">Bias and variance of an estimator. Source: <a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <p>The bias decreases when the model becomes complex; the variance increases when the model becomes complex. The <strong>generalization error</strong> is a combination of the bias and variance:</p>
 <div class="math notranslate nohighlight">
@@ -447,20 +465,21 @@
 <p>We search for the model with the <strong>optimum complexity</strong> realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).</p>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/biasvariance2.png"><img alt="../_images/biasvariance2.png" src="../_images/biasvariance2.png" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-text">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.33 </span><span class="caption-text">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="regularized-regression">
-<h2>Regularized regression<a class="headerlink" href="#regularized-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Regularized regression<a class="headerlink" href="#regularized-regression" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/6R46KLgfw5s' frameborder='0' allowfullscreen></iframe></div>
 <p>Linear regression can either underfit or overfit depending on the data.</p>
 <div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/underfitting-overfitting-linear.png"><img alt="../_images/underfitting-overfitting-linear.png" src="../_images/underfitting-overfitting-linear.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">Linear regression underfits non-linear data.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.34 </span><span class="caption-text">Linear regression underfits non-linear data.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/regression-outlier-fit.png"><img alt="../_images/regression-outlier-fit.png" src="../_images/regression-outlier-fit.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">Linear regression overfits outliers.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.35 </span><span class="caption-text">Linear regression overfits outliers.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>When linear regression <strong>underfits</strong> (both training and test errors are high), the data is not linear: we need to use a <strong>neural network</strong>. When linear regression <strong>overfits</strong> (the test error is higher than the training error), we would like to <strong>decrease its complexity</strong>.</p>
 <p>The problem is that the number of free parameters in linear regression only depends on the number of inputs (dimensions of the input space).</p>
@@ -471,7 +490,7 @@
 <p>For <span class="math notranslate nohighlight">\(d\)</span> inputs, there are <span class="math notranslate nohighlight">\(d+1\)</span> free parameters: the <span class="math notranslate nohighlight">\(d\)</span> weights and the bias.</p>
 <p>We must find a way to reduce the complexity of the linear regression without changing the number of parameters, which is impossible. The solution is to <strong>constrain</strong> the values that the parameters can take: <strong>regularization</strong>. Regularization reduces the variance at the cost of increasing the bias.</p>
 <div class="section" id="l2-regularization-ridge-regression">
-<h3>L2 regularization - Ridge regression<a class="headerlink" href="#l2-regularization-ridge-regression" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.2.1. </span>L2 regularization - Ridge regression<a class="headerlink" href="#l2-regularization-ridge-regression" title="Permalink to this headline">¶</a></h3>
 <p>Using <strong>L2 regularization</strong> for linear regression leads to the <strong>Ridge regression</strong> algorithm. The individual loss function is defined as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -490,11 +509,11 @@
 <p>Ridge regression is also called <strong>weight decay</strong>: even if there is no error, all weights will decay to 0.</p>
 <div class="figure align-default" id="id16">
 <a class="reference internal image-reference" href="../_images/ridge-effect.png"><img alt="../_images/ridge-effect.png" src="../_images/ridge-effect.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a class="reference external" href="https://www.mlalgorithms.org/articles/l1-l2-regression/">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.36 </span><span class="caption-text">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a class="reference external" href="https://www.mlalgorithms.org/articles/l1-l2-regression/">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="l1-regularization-lasso-regression">
-<h3>L1 regularization - LASSO regression<a class="headerlink" href="#l1-regularization-lasso-regression" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.2.2. </span>L1 regularization - LASSO regression<a class="headerlink" href="#l1-regularization-lasso-regression" title="Permalink to this headline">¶</a></h3>
 <p>Using <strong>L1 regularization</strong> for linear regression leads to the <strong>LASSO regression</strong> algorithm (least absolute shrinkage and selection operator). The individual loss function is defined as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -513,21 +532,21 @@
 <p><strong>Weight decay</strong> does not depend on the value of the weight, only its sign. Weights can decay very fast to 0.</p>
 <div class="figure align-default" id="id17">
 <a class="reference internal image-reference" href="../_images/lasso-effect.png"><img alt="../_images/lasso-effect.png" src="../_images/lasso-effect.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a class="reference external" href="https://www.mlalgorithms.org/articles/l1-l2-regression/">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.37 </span><span class="caption-text">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a class="reference external" href="https://www.mlalgorithms.org/articles/l1-l2-regression/">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>Both methods depend on the <strong>regularization parameter</strong> <span class="math notranslate nohighlight">\(\lambda\)</span>. Its value determines how important the regularization term should. Regularization introduce a <strong>bias</strong>, as the solution found is <strong>not</strong> the minimum of the mse, but reduces the variance of the estimation, as small weights are less sensible to noise.</p>
 <p>LASSO allows <strong>feature selection</strong>: features with a zero weight can be removed from the training set.</p>
 <div class="figure align-default" id="id18">
 <a class="reference internal image-reference" href="../_images/linearregression-withoutregularization.png"><img alt="../_images/linearregression-withoutregularization.png" src="../_images/linearregression-withoutregularization.png" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-text">Linear regression tends to assign values to all weights. Source: <a class="reference external" href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.38 </span><span class="caption-text">Linear regression tends to assign values to all weights. Source: <a class="reference external" href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id19">
 <a class="reference internal image-reference" href="../_images/linearregression-withregularization.png"><img alt="../_images/linearregression-withregularization.png" src="../_images/linearregression-withregularization.png" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-text">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a class="reference external" href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.39 </span><span class="caption-text">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a class="reference external" href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="l1-l2-regularization-elasticnet">
-<h3>L1+L2 regularization - ElasticNet<a class="headerlink" href="#l1-l2-regularization-elasticnet" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.2.3. </span>L1+L2 regularization - ElasticNet<a class="headerlink" href="#l1-l2-regularization-elasticnet" title="Permalink to this headline">¶</a></h3>
 <p>An <strong>ElasticNet</strong> is a linear regression using both L1 and L2 regression:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -566,6 +585,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="2-LinearRegression.html" title="previous page"><span class="section-number">2. </span>Linear Regression</a>
+    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
