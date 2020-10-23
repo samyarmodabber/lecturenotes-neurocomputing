@@ -11,8 +11,8 @@
 - part: 1 - Linear models
   chapters:
     - file: 2-linear/1-Optimization
-    # - file: 2-linear/2-LinearRegression
-    # - file: 2-linear/3-Regularization
+    - file: 2-linear/2-LinearRegression
+    - file: 2-linear/3-Regularization
 #     - file: 2-linear/4-LinearClassification
 #     - file: 2-linear/5-MaximumLikelihoodEstimation
 #     - file: 2-linear/6-MultiClassification
@@ -32,7 +32,7 @@
 
 # - part: 3 - Neurocomputing
 #   chapters:
-#     - file: 4-neurocomputing/1-Limitsfigsize=(10, 5)
+#     - file: 4-neurocomputing/1-Limits
 #     - file: 4-neurocomputing/2-Hopfield
 #     - file: 4-neurocomputing/3-NeuralFields
 #     - file: 4-neurocomputing/4-Reservoir
@@ -47,6 +47,7 @@
           title: Notebook
         - file: 5-exercises/1-Python-solution
           title: Solution
+          
     - file: 5-exercises/ex2-Numpy
       sections:
         - file: 5-exercises/2-Numpy
@@ -54,12 +55,12 @@
         - file: 5-exercises/2-Numpy-solution
           title: Solution
 
-    # - file: 5-exercises/ex3-LinearRegression
-    #   sections:
-    #     - file: 5-exercises/3-LinearRegression
-    #       title: Notebook
-    #     - file: 5-exercises/3-LinearRegression-solution
-    #       title: Solution
+    - file: 5-exercises/ex3-LinearRegression
+      sections:
+        - file: 5-exercises/3-LinearRegression
+          title: Notebook
+        - file: 5-exercises/3-LinearRegression-solution
+          title: Solution
 
 
 - part: References

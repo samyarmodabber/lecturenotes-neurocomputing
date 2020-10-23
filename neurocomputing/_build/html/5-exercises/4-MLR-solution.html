@@ -121,6 +121,16 @@
    1. Optimization
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -136,6 +146,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="ex2-Numpy.html">
    2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex3-LinearRegression.html">
+   3. Linear regression
   </a>
  </li>
 </ul>
@@ -241,7 +256,19 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   Linear regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regularized-regression">
+   Regularized regression
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -349,7 +376,7 @@ problems.
 </div>
 </div>
 </div>
-<p>The following cell allows to visualize how each variable influences the price individually:</p>
+<p>The following cell allows to visualize how each feature influences the price individually:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
@@ -366,8 +393,10 @@ problems.
 <img alt="../_images/4-MLR-solution_8_0.png" src="../_images/4-MLR-solution_8_0.png" />
 </div>
 </div>
-<p><strong>Q:</strong> Apply MLR on the Boston data. Print the mse and visualize the prediction <span class="math notranslate nohighlight">\(y\)</span> against the true value <span class="math notranslate nohighlight">\(t\)</span> for each sample as before. Does it work?</p>
-<p>You will also plot the weights of the model (<code class="docutils literal notranslate"><span class="pre">reg.coef_</span></code>) and conclude on the relative importance of the different features.</p>
+<div class="section" id="linear-regression">
+<h2>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
+<p><strong>Q:</strong> Apply MLR on the Boston data using the same <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> method of <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> as last time. Print the mse and visualize the prediction <span class="math notranslate nohighlight">\(y\)</span> against the true value <span class="math notranslate nohighlight">\(t\)</span> for each sample as before. Does it work?</p>
+<p>You will also plot the weights of the model (<code class="docutils literal notranslate"><span class="pre">reg.coef_</span></code>) and conclude on the relative importance of the different features: which feature has the stronger weight and why?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
@@ -405,11 +434,12 @@ problems.
 <img alt="../_images/4-MLR-solution_10_2.png" src="../_images/4-MLR-solution_10_2.png" />
 </div>
 </div>
-<p>Feature 4 (NOX) got a very strong weight, although it is not a good predictor of the price. The main reason is that the features are not <strong>normalized</strong>: NOX varies between 0.0 an 1.0, while B varies between 0 and 400. The weight on B (Feature 11) does not need to be very high to influence the price prediction.</p>
+<p><strong>A:</strong> Feature 4 (NOX) got a very strong weight, although it is not a good predictor of the price. The main reason is that the features are not <strong>normalized</strong>: NOX varies between 0.0 an 1.0, while B varies between 0 and 400. The weight on B (Feature 11) does not need to be very high to influence the price prediction.</p>
 <p>A good practice in machine learning is to <strong>normalize</strong> the inputs, i.e. to make sure that the samples have a mean of 0 and a standard deviation of 1. <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides a method named <code class="docutils literal notranslate"><span class="pre">scale</span></code> that does it automatically:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">scale</span>
+
 <span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -418,12 +448,14 @@ problems.
 <p><strong>Q:</strong> Apply MLR again on <code class="docutils literal notranslate"><span class="pre">X_scaled</span></code>, print the mse and visualize the weights. What has changed?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linear regression</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
+<span class="c1"># Prediction</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
 
+<span class="c1"># mse</span>
 <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mse:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
 
@@ -445,11 +477,14 @@ problems.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mse: 21.894831181729202
 </pre></div>
 </div>
-<img alt="../_images/4-MLR-solution_14_1.png" src="../_images/4-MLR-solution_14_1.png" />
-<img alt="../_images/4-MLR-solution_14_2.png" src="../_images/4-MLR-solution_14_2.png" />
+<img alt="../_images/4-MLR-solution_15_1.png" src="../_images/4-MLR-solution_15_1.png" />
+<img alt="../_images/4-MLR-solution_15_2.png" src="../_images/4-MLR-solution_15_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> the mse does not change (it may in more complex problems), but the weights are more interpretable. Now strong weights in absolute value mean that the features are very predictive of the price.</p>
+</div>
+<div class="section" id="regularized-regression">
+<h2>Regularized regression<a class="headerlink" href="#regularized-regression" title="Permalink to this headline">¶</a></h2>
 <p>Now is time to investigate <strong>regularization</strong>:</p>
 <ol class="simple">
 <li><p>MLR with L2 regularization is called <strong>Ridge regression</strong></p></li>
@@ -500,8 +535,8 @@ problems.
  -3.62394181]
 </pre></div>
 </div>
-<img alt="../_images/4-MLR-solution_19_1.png" src="../_images/4-MLR-solution_19_1.png" />
-<img alt="../_images/4-MLR-solution_19_2.png" src="../_images/4-MLR-solution_19_2.png" />
+<img alt="../_images/4-MLR-solution_20_1.png" src="../_images/4-MLR-solution_20_1.png" />
+<img alt="../_images/4-MLR-solution_20_2.png" src="../_images/4-MLR-solution_20_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -516,7 +551,7 @@ problems.
 <span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
@@ -536,8 +571,8 @@ problems.
  -3.54338107]
 </pre></div>
 </div>
-<img alt="../_images/4-MLR-solution_20_1.png" src="../_images/4-MLR-solution_20_1.png" />
-<img alt="../_images/4-MLR-solution_20_2.png" src="../_images/4-MLR-solution_20_2.png" />
+<img alt="../_images/4-MLR-solution_21_1.png" src="../_images/4-MLR-solution_21_1.png" />
+<img alt="../_images/4-MLR-solution_21_2.png" src="../_images/4-MLR-solution_21_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> Ridge regression does not have a big effect for this data. By increasing the regularization parameter in Lasso regression, the MSE worsens slightly, but the number of non-zero weights becomes very small. With <code class="docutils literal notranslate"><span class="pre">alpha=1.0</span></code>, there are only 4 non-zero parameters: the corresponding features are the most predictive of the prices. You can identify them with:</p>
@@ -560,6 +595,7 @@ problems.
 <li><p>LSTAT    % lower status of the population</p></li>
 </ul>
 <p>You are now a data scientist!</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

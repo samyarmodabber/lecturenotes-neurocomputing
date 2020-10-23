@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linear Regression &#8212; Neurocomputing</title>
+    <title>2. Linear Regression &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/2-LinearRegression.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Regularization" href="3-Regularization.html" />
+    <link rel="prev" title="1. Optimization" href="1-Optimization.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -49,7 +51,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/2-LinearRegression.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Linear Regression" />
-<meta property="og:description" content="Linear Regression  Slides: pdf  Linear regression    Simple linear regression. x is the input, y the output. The data is represented by blue dots, the model by " />
+<meta property="og:description" content="Linear Regression  Slides: pdf  Linear regression  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/lEILkDvT0gI&#39; frameborder=&#39;0&#39; allowful" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -115,10 +117,20 @@
   1 - Linear models
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-Optimization.html">
    1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-Regularization.html">
+   3. Regularization
   </a>
  </li>
 </ul>
@@ -136,6 +148,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
    2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
   </a>
  </li>
 </ul>
@@ -222,46 +239,34 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   Linear regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gradient-descent-for-linear-regression">
-   Gradient descent for linear regression
+   2.1. Linear regression
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#least-mean-squares">
-     Least Mean Squares
+     2.1.1. Least Mean Squares
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#delta-learning-rule">
-     Delta learning rule
+     2.1.2. Delta learning rule
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-linear-regression">
-   Multiple linear regression
+   2.2. Multiple linear regression
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mlr-example-fuel-consumption-and-co2-emissions">
-     MLR example: fuel consumption and CO2 emissions
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#logistic-regression">
-   Logistic regression
+   2.3. Logistic regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polynomial-regression">
-   Polynomial regression
+   2.4. Polynomial regression
   </a>
  </li>
 </ul>
@@ -275,13 +280,14 @@
               <div>
                 
   <div class="section" id="linear-regression">
-<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
 <p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.2-LinearRegression.pdf">pdf</a></p>
 <div class="section" id="id1">
-<h2>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Linear regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/lEILkDvT0gI' frameborder='0' allowfullscreen></iframe></div>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/regression-animation2.png"><img alt="../_images/regression-animation2.png" src="../_images/regression-animation2.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.23 </span><span class="caption-text">Simple linear regression. <span class="math notranslate nohighlight">\(x\)</span> is the input, <span class="math notranslate nohighlight">\(y\)</span> the output. The data is represented by blue dots, the model by the black line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s consider a training set of N examples <span class="math notranslate nohighlight">\(\mathcal{D} = (x_i, t_i)_{i=1..N}\)</span>. In <strong>linear regression</strong>, we want to learn a linear model (hypothesis) <span class="math notranslate nohighlight">\(y\)</span> that is linearly dependent on the input <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -291,7 +297,7 @@
 <p>The <strong>free parameters</strong> of the model are the slope <span class="math notranslate nohighlight">\(w\)</span> and the intercept <span class="math notranslate nohighlight">\(b\)</span>. This model corresponds to a single <strong>artificial neuron</strong> with output <span class="math notranslate nohighlight">\(y\)</span>, having one input <span class="math notranslate nohighlight">\(x\)</span>, one weight <span class="math notranslate nohighlight">\(w\)</span>, one bias <span class="math notranslate nohighlight">\(b\)</span> and a <strong>linear</strong> activation function <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.24 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:</p>
 <div class="math notranslate nohighlight">
@@ -306,13 +312,10 @@
 <p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math notranslate nohighlight">\(y_i = f_{w, b}(x_i)\)</span> is equal to the <strong>true value</strong> <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples. In other words, we want to minimize the <strong>residual error</strong> of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.</p>
 <div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/regression-animation-mse-dual.png"><img alt="../_images/regression-animation-mse-dual.png" src="../_images/regression-animation-mse-dual.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.25 </span><span class="caption-text">A good fit to the data is when the prediction <span class="math notranslate nohighlight">\(y_i\)</span> (on the line) is close to the data <span class="math notranslate nohighlight">\(t_i\)</span> for all training examples.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
-</div>
-<div class="section" id="gradient-descent-for-linear-regression">
-<h2>Gradient descent for linear regression<a class="headerlink" href="#gradient-descent-for-linear-regression" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="least-mean-squares">
-<h3>Least Mean Squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.1.1. </span>Least Mean Squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h3>
 <p>We search for <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(b\)</span> which minimize the mean square error:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -431,16 +434,16 @@
 </div>
 <div class="figure align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/regression-animation.gif"><img alt="../_images/regression-animation.gif" src="../_images/regression-animation.gif" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Visualization of least mean squares applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta=0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.26 </span><span class="caption-text">Visualization of least mean squares applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta=0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
 <div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/regression-animation-loss.png"><img alt="../_images/regression-animation-loss.png" src="../_images/regression-animation-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.27 </span><span class="caption-text">Evolution of the loss function during training.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="delta-learning-rule">
-<h3>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.1.2. </span>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h3>
 <p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>, which is the <strong>online</strong> version of LMS:</p>
 <div class="math notranslate nohighlight">
 \[\Delta w = \eta \, (t_i - y_i) \, x_i\]</div>
@@ -466,16 +469,17 @@
 <p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is slightly higher at the end of learning (see Exercise 3 for a deeper discussion).</p>
 <div class="figure align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/regression-animation-online.gif"><img alt="../_images/regression-animation-online.gif" src="../_images/regression-animation-online.gif" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta = 0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.28 </span><span class="caption-text">Visualization of the delta learning rule applied to a simple regression problem with <span class="math notranslate nohighlight">\(\eta = 0.1\)</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/regression-animation-online-loss.png"><img alt="../_images/regression-animation-online-loss.png" src="../_images/regression-animation-online-loss.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.29 </span><span class="caption-text">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="multiple-linear-regression">
-<h2>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/BOJFFy0nA6I' frameborder='0' allowfullscreen></iframe></div>
 <p>The key idea of linear regression (one input <span class="math notranslate nohighlight">\(x\)</span>, one output <span class="math notranslate nohighlight">\(y\)</span>) can be generalized to multiple inputs and outputs.</p>
 <p><strong>Multiple Linear Regression</strong> (MLR) predicts several output variables based on several explanatory variables:</p>
 <div class="math notranslate nohighlight">
@@ -486,124 +490,8 @@ y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
 y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \end{cases}
 \end{split}\]</div>
-<p>The system of equations can be put in a matrix-vector form:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
-\end{split}\]</div>
-<p>We simply create the corresponding vectors and matrices:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} \qquad \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} \qquad \mathbf{t} = \begin{bmatrix} t_1 \\ t_2 \\\end{bmatrix} \qquad \mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix} \qquad W = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix}
-\end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is the input vector, <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is the output vector, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is the target vector. <span class="math notranslate nohighlight">\(W\)</span> is called the <strong>weight matrix</strong> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> the <strong>bias vector</strong>. The model is now defined by:</p>
-<div class="math notranslate nohighlight">
-\[
-    \mathbf{y} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
-\]</div>
-<p>The problem is exactly the same as before, except that we use vectors and matrices instead of scalars. <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> can have any number of dimensions, the same procedure will apply. This corresponds to a <strong>linear neural network</strong> (also called <strong>linear perceptron</strong>), with one output neuron per predicted value <span class="math notranslate nohighlight">\(y_i\)</span> using the linear activation function.</p>
-<div class="figure align-default" id="id9">
-<a class="reference internal image-reference" href="../_images/linearperceptron.svg"><img alt="../_images/linearperceptron.svg" src="../_images/linearperceptron.svg" width="60%" /></a>
-<p class="caption"><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
-</div>
-<p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the prediction error <strong>vector</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ]
-\]</div>
-<p>On our problem with two outputs <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span>, it is simply:</p>
-<div class="math notranslate nohighlight">
-\[
-    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ((t_1 - y_1)^2 + (t_2 - y_2)^2) ]
-\]</div>
-<p>In order to apply gradient descent, one needs to calculate partial derivatives w.r.t the weight matrix <span class="math notranslate nohighlight">\(W\)</span> and the bias vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, i.e. <strong>gradients</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{cases}
-    \nabla_W \, \mathcal{L}(W, \mathbf{b}) = \displaystyle\frac{\partial \mathcal{L}(W, \mathbf{b})}{\partial W} \\
-    \\
-    \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) = \displaystyle\frac{\partial \mathcal{L}(W, \mathbf{b})}{\partial \mathbf{b}} \\
-    \end{cases}
-\end{split}\]</div>
-<p>Basic linear algebra becomes important to know how to compute these gradients, but it is actually quite simple.</p>
-<p>Let’s start by sampling the mse loss on the training set:</p>
-<div class="math notranslate nohighlight">
-\[
-    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \frac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \frac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
-\]</div>
-<p>The individual loss function <span class="math notranslate nohighlight">\(\mathcal{l}_i(W, \mathbf{b})\)</span> is the squared norm of the error vector, which is a multiplication of its transpose with itself::</p>
-<div class="math notranslate nohighlight">
-\[
-    \mathcal{l}_i(W, \mathbf{b}) = ||\mathbf{t}_i - \mathbf{y}_i||^2 = (\mathbf{t}_i - \mathbf{y}_i)^T \times (\mathbf{t}_i - \mathbf{y}_i)
-\]</div>
-<p>As this is a quadratic function of <span class="math notranslate nohighlight">\(\mathbf{t}_i - \mathbf{y}_i\)</span>, its gradient w.r.t the output vector <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span> is linear:</p>
-<div class="math notranslate nohighlight">
-\[
-    \nabla_{\mathbf{y}_i} \, \mathcal{l}_i(W, \mathbf{b}) = - 2 \, (\mathbf{t}_i - \mathbf{y}_i)
-\]</div>
-<p>For the model <span class="math notranslate nohighlight">\(\mathbf{y}_i = W \times \mathbf{x}_i + \mathbf{b}\)</span>, the gradient w.r.t <span class="math notranslate nohighlight">\(W\)</span> is the transpose of <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, while its gradient w.r.t <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is a vector of ones:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{cases}
-    \nabla_W \, \mathbf{y}_i = \mathbf{x}_i^T\\
-    \\
-    \nabla_\mathbf{b} \, \mathbf{y}_i = \mathbf{1}\\
-    \end{cases}
-\end{split}\]</div>
-<p>We can then use the chain rule to obtain the gradients:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{cases}
-    \nabla_W \, \mathcal{l}_i(W, \mathbf{b}) = - 2 \, (\mathbf{t}_i - \mathbf{y}_i) \times \mathbf{x}_i^T\\
-    \\
-    \nabla_\mathbf{b} \, \mathcal{l}_i(W, \mathbf{b}) = - 2 \, (\mathbf{t}_i - \mathbf{y}_i) \\
-    \end{cases}
-\end{split}\]</div>
-<p>This allows us apply gradient descent on the mean square error.</p>
-<p><strong>Batch version</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}
-    \Delta W = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, \displaystyle\frac{1}{N} \, \sum_{i=1}^N  (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}\end{split}\]</div>
-<p><strong>Online version</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}
-    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}\end{split}\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This vector notation his is completely equivalent to one learning rule per parameter in the original problem:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{cases}
-y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
-\\
-y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
-\end{cases}
-\end{split}\]</div>
-<p>Each parameter can be adapted online using:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{cases}
-    \Delta w_1 = \eta \, (t_1 - y_1) \, x_1 \\
-    \Delta w_2 = \eta \, (t_1 - y_1) \, x_2 \\
-    \Delta w_3 = \eta \, (t_2 - y_2) \, x_1 \\
-    \Delta w_4 = \eta \, (t_2 - y_2) \, x_2 \\
-    \Delta b_1 = \eta \, (t_1 - y_1) \\
-    \Delta b_2 = \eta \, (t_2 - y_2) \\
-\end{cases}
-\end{split}\]</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The delta learning rule is always of the form: <span class="math notranslate nohighlight">\(\Delta w\)</span> = eta * error * input. Biases have an input of 1.</p>
-</div>
-<div class="section" id="mlr-example-fuel-consumption-and-co2-emissions">
-<h3>MLR example: fuel consumption and CO2 emissions<a class="headerlink" href="#mlr-example-fuel-consumption-and-co2-emissions" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-example-fuel-consumption-and-co2-emissions admonition">
+<p class="admonition-title">Example: fuel consumption and CO2 emissions</p>
 <p>Let’s suppose you have 13971 measurements in some Excel file, linking engine size, number of cylinders, fuel consumption and CO2 emissions of various cars. You want to predict fuel consumption and CO2 emissions when you know the engine size and the number of cylinders.</p>
 <table class="table" id="example-table">
 <colgroup>
@@ -647,16 +535,15 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 </tr>
 </tbody>
 </table>
-<div class="figure align-default" id="id10">
+<div class="figure align-default" id="id9">
 <a class="reference internal image-reference" href="../_images/MLR-example-data.png"><img alt="../_images/MLR-example-data.png" src="../_images/MLR-example-data.png" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.30 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-default" id="id11">
+<div class="figure align-default" id="id10">
 <a class="reference internal image-reference" href="../_images/MLR-example-data-3d.png"><img alt="../_images/MLR-example-data-3d.png" src="../_images/MLR-example-data-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.31 </span><span class="caption-text">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
-<p>We can notice that the output variables seem to linearly depend on the inputs.</p>
-<p>Noting the input variables <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> and the output ones <span class="math notranslate nohighlight">\(y_1\)</span>, <span class="math notranslate nohighlight">\(y_2\)</span>, we can define our problem as a mulitple linear regression:</p>
+<p>We can notice that the output variables seem to linearly depend on the inputs. Noting the input variables <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> and the output ones <span class="math notranslate nohighlight">\(y_1\)</span>, <span class="math notranslate nohighlight">\(y_2\)</span>, we can define our problem as a multiple linear regression:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{cases}
@@ -665,18 +552,10 @@ y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
 y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \end{cases}
 \end{split}\]</div>
-<p>or:</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{y} = W \times \mathbf{x} + \mathbf{b}\]</div>
-<p>and solve it using the least mean squares method. We obtain at the end of training:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    W = \begin{bmatrix} 27.33240954 &amp; 9.90867957 \\ 1.71933891 &amp; 0.24163635 \\\end{bmatrix} \qquad \mathbf{b} = \begin{bmatrix} 107.17575394 \\ 4.41854197 \\\end{bmatrix}
-\end{split}\]</div>
-<p>We can check that the model correctly explains the data by visualizing it:</p>
-<div class="figure align-default" id="id12">
+<p>and solve it using the least mean squares method by minimizing the mse between the model and the data.</p>
+<div class="figure align-default" id="id11">
 <a class="reference internal image-reference" href="../_images/MLR-example-fit-3d.png"><img alt="../_images/MLR-example-fit-3d.png" src="../_images/MLR-example-fit-3d.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.32 </span><span class="caption-text">The result of MLR is a plane in the input space.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -687,9 +566,200 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 </div>
 </div>
 </div>
+<p>The system of equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
+\\
+y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
+\end{cases}
+\end{split}\]</div>
+<p>can be put in a matrix-vector form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
+\end{split}\]</div>
+<p>We simply create the corresponding vectors and matrices:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} \qquad \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} \qquad \mathbf{t} = \begin{bmatrix} t_1 \\ t_2 \\\end{bmatrix} \qquad \mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix} \qquad W = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is the input vector, <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is the output vector, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is the target vector. <span class="math notranslate nohighlight">\(W\)</span> is called the <strong>weight matrix</strong> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> the <strong>bias vector</strong>.</p>
+<p>The model is now defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<p>The problem is exactly the same as before, except that we use vectors and matrices instead of scalars: <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> can have any number of dimensions, the same procedure will apply. This corresponds to a <strong>linear neural network</strong> (or linear perceptron), with one <strong>output neuron</strong> per predicted value <span class="math notranslate nohighlight">\(y_i\)</span> using the linear activation function.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/linearperceptron.svg"><img alt="../_images/linearperceptron.svg" src="../_images/linearperceptron.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 2.33 </span><span class="caption-text">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is compared to the ground truth vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> using the mse loss.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the error <strong>vector</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] = \mathbb{E}_\mathcal{D} [ ((t_1 - y_1)^2 + (t_2 - y_2)^2) ]
+\]</div>
+<p>In order to apply gradient descent, one needs to calculate partial derivatives w.r.t the weight matrix <span class="math notranslate nohighlight">\(W\)</span> and the bias vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, i.e. <strong>gradients</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{cases}
+    \Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b}) \\
+    \\
+    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) \\
+    \end{cases}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some more advanced linear algebra becomes important to know how to compute these gradients:</p>
+<p><a class="reference external" href="https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf">https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf</a></p>
+</div>
+<p>We search the minimum of the mse loss function:</p>
+<div class="math notranslate nohighlight">
+\[
+    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \frac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \frac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
+\]</div>
+<p>The individual loss function <span class="math notranslate nohighlight">\(\mathcal{l}_i(W, \mathbf{b})\)</span> is the squared <span class="math notranslate nohighlight">\(\mathcal{L}^2\)</span>-norm of the error vector, what can be expressed as a dot product or a vector multiplication:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}_i(W, \mathbf{b}) = ||\mathbf{t}_i - \mathbf{y}_i||^2 = \langle \mathbf{t}_i - \mathbf{y}_i \cdot \mathbf{t}_i - \mathbf{y}_i \rangle = (\mathbf{t}_i - \mathbf{y}_i)^T \times (\mathbf{t}_i - \mathbf{y}_i)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{x}^T \times \mathbf{x} = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_n \end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = x_1 \, x_1 + x_2 \, x_2 + \ldots + x_n \, x_n = \langle \mathbf{x} \cdot \mathbf{x} \rangle = ||\mathbf{x}||^2_2\end{split}\]</div>
+</div>
+<p>The chain rule tells us in principle that:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{W} \, \mathcal{l}_i(W, \mathbf{b}) = \nabla_{\mathbf{y}_i} \, \mathcal{l}_i(W, \mathbf{b}) \times \nabla_{W} \, \mathbf{y}_i\]</div>
+<p>The gradient w.r.t the output vector <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span> is quite easy to obtain, as it a quadratic function of <span class="math notranslate nohighlight">\(\mathbf{t}_i - \mathbf{y}_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{y}_i} \, \mathcal{l}_i(W, \mathbf{b}) = \nabla_{\mathbf{y}_i} \, (\mathbf{t}_i - \mathbf{y}_i)^T \times (\mathbf{t}_i - \mathbf{y}_i)\]</div>
+<p>The proof relies on product differentiation <span class="math notranslate nohighlight">\((f\times g)' = f' \, g + f \, g'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+    \nabla_{\mathbf{y}_i} \, (\mathbf{t}_i - \mathbf{y}_i)^T \times (\mathbf{t}_i - \mathbf{y}_i) &amp; = ( \nabla_{\mathbf{y}_i} \, (\mathbf{t}_i - \mathbf{y}_i) ) \times (\mathbf{t}_i - \mathbf{y}_i) + (\mathbf{t}_i - \mathbf{y}_i) \times \nabla_{\mathbf{y}_i} \, (\mathbf{t}_i - \mathbf{y}_i)  \\
+    &amp;\\
+    &amp;= - (\mathbf{t}_i - \mathbf{y}_i) - (\mathbf{t}_i - \mathbf{y}_i) \\
+    &amp;\\
+    &amp;= - 2 \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{aligned}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use the properties <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\,  \mathbf{x}^T \times \mathbf{z} = \mathbf{z}\)</span> and <span class="math notranslate nohighlight">\(\nabla_{\mathbf{z}} \, \mathbf{x}^T \times \mathbf{z} = \mathbf{x}\)</span> to get rid of the transpose.</p>
+</div>
+<p>The “problem” is when computing <span class="math notranslate nohighlight">\(\nabla_{W} \, \mathbf{y}_i = \nabla_{W} \, (W \times \mathbf{x}_i + \mathbf{b})\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span> is a vector and <span class="math notranslate nohighlight">\(W\)</span> a matrix.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla_{W} \, \mathbf{y}_i\)</span> is then a Jacobian (matrix), not a gradient (vector).</p></li>
+</ul>
+<p>Intuitively, differentiating <span class="math notranslate nohighlight">\(W \times \mathbf{x}_i + \mathbf{b}\)</span> w.r.t <span class="math notranslate nohighlight">\(W\)</span> should return <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, but it is a vector, not a matrix…</p>
+<p>Actually, only the gradient (or Jacobian) of <span class="math notranslate nohighlight">\(\mathcal{l}_i(W, \mathbf{b})\)</span> w.r.t <span class="math notranslate nohighlight">\(W\)</span> should be a matrix of the same size as <span class="math notranslate nohighlight">\(W\)</span> so that we can apply gradient descent:</p>
+<div class="math notranslate nohighlight">
+\[\Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b})\]</div>
+<p>We already know that:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{W} \, \mathcal{l}_i(W, \mathbf{b}) = - 2\, (\mathbf{t}_i - \mathbf{y}_i) \times \nabla_{W} \, \mathbf{y}_i\]</div>
+<p>If <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> has <span class="math notranslate nohighlight">\(n\)</span> elements and <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span> <span class="math notranslate nohighlight">\(m\)</span> elements, <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember the outer product between two vectors:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{u} \times \mathbf{v}^\textsf{T} =
+  \begin{bmatrix}u_1 \\ u_2 \\ u_3 \\ u_4\end{bmatrix}
+    \begin{bmatrix}v_1 &amp; v_2 &amp; v_3\end{bmatrix} =
+  \begin{bmatrix}
+    u_1v_1 &amp; u_1v_2 &amp; u_1v_3 \\
+    u_2v_1 &amp; u_2v_2 &amp; u_2v_3 \\
+    u_3v_1 &amp; u_3v_2 &amp; u_3v_3 \\
+    u_4v_1 &amp; u_4v_2 &amp; u_4v_3
+  \end{bmatrix}.
+\end{split}\]</div>
+</div>
+<p>It is easy to see that the outer product between <span class="math notranslate nohighlight">\((\mathbf{t}_i - \mathbf{y}_i)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> gives a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \nabla_W \, \mathcal{l}_i(W, \mathbf{b}) = - 2 \, (\mathbf{t}_i - \mathbf{y}_i) \times \mathbf{x}_i^T\\
+\end{split}\]</div>
+<p>Let’s prove it element per element on a small matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathcal{l}(W, \mathbf{b}) = (\mathbf{t} - \mathbf{y})^T \times (\mathbf{t} - \mathbf{y}) = \begin{bmatrix} t_1 - y_1 &amp; t_2 - y_2 \\\end{bmatrix} \times \begin{bmatrix} t_1 - y_1 \\ t_2 - y_2 \\\end{bmatrix} = (t_1 - y_1)^2 + (t_2 - y_2)^2
+\end{split}\]</div>
+<p>The Jacobian w.r.t <span class="math notranslate nohighlight">\(W\)</span> can be explicitly formed using partial derivatives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla_W \, \mathcal{l}(W, \mathbf{b}) = \begin{bmatrix} 
+\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
+\end{bmatrix}
+= \begin{bmatrix} 
+-2 \, (t_1 - y_1) \, x_1 &amp; -2 \, (t_1 - y_1) \, x_2 \\ -2 \, (t_2 - y_2) \, x_1 &amp; -2 \, (t_2 - y_2) \, x_2 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>We can rearrange this matrix as an outer product:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\nabla_W \, \mathcal{l}(W, \mathbf{b}) = -2 \, \begin{bmatrix} 
+t_1 - y_1  \\  t_2 - y_2 \\
+\end{bmatrix} \times \begin{bmatrix} 
+x_1 &amp; x_2 \\
+\end{bmatrix}
+= - 2 \, (\mathbf{t} - \mathbf{y}) \times \mathbf{x}^T
+\end{split}\]</div>
+<p><strong>Multiple linear regression</strong></p>
+<ul class="simple">
+<li><p>Batch version:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}\end{split}\]</div>
+<ul class="simple">
+<li><p>Online version (<strong>delta learning rule</strong>):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}\end{split}\]</div>
+<p>The matrix-vector notation is completely equivalent to having one learning rule per parameter:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta w_1 = \eta \, (t_1 - y_1) \, x_1 \\
+    \Delta w_2 = \eta \, (t_1 - y_1) \, x_2 \\
+    \Delta w_3 = \eta \, (t_2 - y_2) \, x_1 \\
+    \Delta w_4 = \eta \, (t_2 - y_2) \, x_2 \\
+\end{cases}
+\qquad
+\begin{cases}
+    \Delta b_1 = \eta \, (t_1 - y_1) \\
+    \Delta b_2 = \eta \, (t_2 - y_2) \\
+\end{cases}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The delta learning rule is always of the form: <span class="math notranslate nohighlight">\(\Delta w\)</span> = eta * error * input. Biases have an input of 1.</p>
+</div>
 </div>
 <div class="section" id="logistic-regression">
-<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/fRuzoyV036Y' frameborder='0' allowfullscreen></iframe></div>
 <p>Let’s suppose we want to perform a regression, but where the outputs <span class="math notranslate nohighlight">\(t_i\)</span> are bounded between 0 and 1. We could use a logistic (or sigmoid) function instead of a linear function in order to transform the input into an output:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -697,7 +767,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \]</div>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/sigmoid.png"><img alt="../_images/sigmoid.png" src="../_images/sigmoid.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.34 </span><span class="caption-text">Logistic or sigmoid function <span class="math notranslate nohighlight">\(\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p>By definition of the logistic function, the prediction <span class="math notranslate nohighlight">\(y\)</span> will be bounded between 0 and 1, what matches the targets <span class="math notranslate nohighlight">\(t\)</span>. Let’s now apply gradient descent on the <strong>mse</strong> loss using this new model. The individual loss will be:</p>
 <div class="math notranslate nohighlight">
@@ -751,7 +821,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p><strong>Generalized form of the delta learning rule</strong></p>
 <div class="figure align-default" id="id14">
 <a class="reference internal image-reference" href="../_images/artificialneuron1.svg"><img alt="../_images/artificialneuron1.svg" src="../_images/artificialneuron1.svg" width="60%" /></a>
-<p class="caption"><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.35 </span><span class="caption-text">Artificial neuron with multiple inputs.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 <p>For a linear perceptron with parameters <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and any activation function <span class="math notranslate nohighlight">\(f\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -775,10 +845,11 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <p>In the linear case, <span class="math notranslate nohighlight">\(f'(x) = 1\)</span>. One can use any non-linear function, e.g hyperbolic tangent tanh(), ReLU, etc. Transfer functions are chosen for neural networks so that we can compute their derivative easily.</p>
 </div>
 <div class="section" id="polynomial-regression">
-<h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/a6sQgJovhzU' frameborder='0' allowfullscreen></iframe></div>
 <div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/polynomialregression.png"><img alt="../_images/polynomialregression.png" src="../_images/polynomialregression.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 2.36 </span><span class="caption-text">Polynomial regression.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:</p>
 <div class="math notranslate nohighlight">
@@ -841,6 +912,8 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="1-Optimization.html" title="previous page"><span class="section-number">1. </span>Optimization</a>
+    <a class='right-next' id="next-link" href="3-Regularization.html" title="next page"><span class="section-number">3. </span>Regularization</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
