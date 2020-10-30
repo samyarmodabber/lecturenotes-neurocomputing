@@ -1,2 +1,0 @@
-# Hebbian learning
-

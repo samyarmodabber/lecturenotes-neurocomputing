@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Softmax Multi-class classification &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/5-Multiclassification.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/5-Multiclassification.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Softmax Multi-class classification" />
+<meta property="og:description" content="Softmax Multi-class classification  Slides: pdf  Multi-class classification  Can we perform multi-class classification using the previous methods when t \in \{A" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/2-linear/5-Multiclassification.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-class-classification">
+   Multi-class classification
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#softmax-linear-classifier">
+   Softmax linear classifier
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-hot-encoding">
+     One-hot encoding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#softmax-activation">
+     Softmax activation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cross-entropy-loss-function">
+     Cross-entropy loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparison-of-linear-classification-and-regression">
+     Comparison of linear classification and regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-label-classification">
+   Multi-label classification
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="softmax-multi-class-classification">
+<h1>Softmax Multi-class classification<a class="headerlink" href="#softmax-multi-class-classification" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.5-Multiclassification.pdf">pdf</a></p>
+<div class="section" id="multi-class-classification">
+<h2>Multi-class classification<a class="headerlink" href="#multi-class-classification" title="Permalink to this headline">¶</a></h2>
+<p>Can we perform multi-class classification using the previous methods when <span class="math notranslate nohighlight">\(t \in \{A, B, C\}\)</span> instead of <span class="math notranslate nohighlight">\(t = +1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>? There are two main solutions:</p>
+<ul class="simple">
+<li><p><strong>One-vs-All</strong> (or One-vs-the-rest): one trains simultaneously a binary (linear) classifier for each class. The examples belonging to this class form the positive class, all others are the negative class:</p>
+<ul>
+<li><p>A vs. B and C</p></li>
+<li><p>B vs. A and C</p></li>
+<li><p>C vs. A and B</p></li>
+</ul>
+</li>
+</ul>
+<p>If multiple classes are predicted for a single example, ones needs a confidence level for each classifier saying how sure it is of its prediction.</p>
+<ul class="simple">
+<li><p><strong>One-vs-One</strong>: one trains a classifier for each pair of class:</p>
+<ul>
+<li><p>A vs. B</p></li>
+<li><p>B vs. C</p></li>
+<li><p>C vs. A</p></li>
+</ul>
+</li>
+</ul>
+<p>A majority vote is then performed to find the correct class.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/pixelspace.jpg"><img alt="../_images/pixelspace.jpg" src="../_images/pixelspace.jpg" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">Example of <strong>One-vs-All</strong> classification: one binary classifier per class. Source <a class="reference external" href="http://cs231n.github.io/linear-classify">http://cs231n.github.io/linear-classify</a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="softmax-linear-classifier">
+<h2>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have <span class="math notranslate nohighlight">\(C\)</span> classes (dog vs. cat vs. ship vs…). The One-vs-All scheme involves <span class="math notranslate nohighlight">\(C\)</span> binary classifiers <span class="math notranslate nohighlight">\((\mathbf{w}_i, b_i)\)</span>, each with a weight vector and a bias, working on the same input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[y_i = f(\langle \mathbf{w}_i \cdot \mathbf{x} \rangle + b_i)\]</div>
+<p>Putting all neurons together, we obtain a <strong>linear perceptron</strong> similar to multiple linear regression:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(C\)</span> weight vectors form a <span class="math notranslate nohighlight">\(d\times C\)</span> <strong>weight matrix</strong> <span class="math notranslate nohighlight">\(W\)</span>, the biases form a vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/imagemap.jpg"><img alt="../_images/imagemap.jpg" src="../_images/imagemap.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Linear perceptron for images. The output is the logit score. Source <a class="reference external" href="http://cs231n.github.io/linear-classify">http://cs231n.github.io/linear-classify</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The net activations form a vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{z} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<p>Each element <span class="math notranslate nohighlight">\(z_j\)</span> of the vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is called the <strong>logit score</strong> of the class:  the higher the score, the more likely the input belongs to this class. The logit scores are not probabilities, as they can be negative and do not sum to 1.</p>
+<div class="section" id="one-hot-encoding">
+<h3>One-hot encoding<a class="headerlink" href="#one-hot-encoding" title="Permalink to this headline">¶</a></h3>
+<p>How do we represent the ground truth <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> for each neuron? The target vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is represented using <strong>one-hot encoding</strong>. The binary vector has one element per class: only one element is 1, the others are 0. Example:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [0, 1, 0, 0, 0]
+\]</div>
+<p>The labels can be seen as a <strong>probability distribution</strong> over the training set, in this case a <strong>multinomial</strong> distribution (a dice with <span class="math notranslate nohighlight">\(C\)</span> sides). For a given image <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (e.g. a picture of a dog), the conditional pmf is defined by the one-hot encoded vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{t} | \mathbf{x}) = [P(\text{cat}| \mathbf{x}), P(\text{dog}| \mathbf{x}), P(\text{ship}| \mathbf{x}), P(\text{house}| \mathbf{x}), P(\text{car}| \mathbf{x})] = [0, 1, 0, 0, 0]\]</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/softmax-transformation.png"><img alt="../_images/softmax-transformation.png" src="../_images/softmax-transformation.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">The logit scores <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> cannot be compared to the targets <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>: we need to transform them into a probability distribution <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>We need to transform the logit score <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> into a <strong>probability distribution</strong> <span class="math notranslate nohighlight">\(P(\mathbf{y} | \mathbf{x})\)</span> that should be as close as possible from <span class="math notranslate nohighlight">\(P(\mathbf{t} | \mathbf{x})\)</span>.</p>
+</div>
+<div class="section" id="softmax-activation">
+<h3>Softmax activation<a class="headerlink" href="#softmax-activation" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>softmax</strong> operator makes sure that the sum of the outputs <span class="math notranslate nohighlight">\(\mathbf{y} = \{y_i\}\)</span> over all classes is 1.</p>
+<div class="math notranslate nohighlight">
+\[
+    y_j = P(\text{class = j} | \mathbf{x}) = \mathcal{S}(z_j) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</div>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/softmax-comp.png"><img alt="../_images/softmax-comp.png" src="../_images/softmax-comp.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Softmax activation transforms the logit score into a probability distribution. Source <a class="reference external" href="http://cs231n.github.io/linear-classify">http://cs231n.github.io/linear-classify</a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>The higher <span class="math notranslate nohighlight">\(z_j\)</span>, the higher the probability that the example belongs to class <span class="math notranslate nohighlight">\(j\)</span>. This is very similar to logistic regression for soft classification, except that we have multiple classes.</p>
+</div>
+<div class="section" id="cross-entropy-loss-function">
+<h3>Cross-entropy loss function<a class="headerlink" href="#cross-entropy-loss-function" title="Permalink to this headline">¶</a></h3>
+<p>We cannot use the mse as a loss function, as the softmax function would be hard to differentiate:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{mse}(W, \mathbf{b}) = \sum_j (t_{j} - \frac{\exp(z_j)}{\sum_k \exp(z_k)})^2
+\]</div>
+<p>We actually want to minimize the statistical distance netween two distributions:</p>
+<ul class="simple">
+<li><p>The model outputs a multinomial probability distribution <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> for an input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>: <span class="math notranslate nohighlight">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span>.</p></li>
+<li><p>The one-hot encoded classes also come from a multinomial probability distribution <span class="math notranslate nohighlight">\(P(\mathbf{t} | \mathbf{x})\)</span>.</p></li>
+</ul>
+<p>We search which parameters <span class="math notranslate nohighlight">\((W, \mathbf{b})\)</span> make the two distributions <span class="math notranslate nohighlight">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span> and <span class="math notranslate nohighlight">\(P(\mathbf{t} | \mathbf{x})\)</span> close. The training data <span class="math notranslate nohighlight">\(\{\mathbf{x}_i, \mathbf{t}_i\}\)</span> represents samples from <span class="math notranslate nohighlight">\(P(\mathbf{t} | \mathbf{x})\)</span>. <span class="math notranslate nohighlight">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span> is a good model of the data when the two distributions are close, i.e. when the <strong>negative log-likelihood</strong> of each sample under the model is small.</p>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/crossentropy1.svg"><img alt="../_images/crossentropy1.svg" src="../_images/crossentropy1.svg" width="100%" /></a>
+<p class="caption"><span class="caption-text">Cross-entropy between two distributions <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>: are samples of <span class="math notranslate nohighlight">\(X\)</span> likely under <span class="math notranslate nohighlight">\(Y\)</span>?</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>For an input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we minimize the <strong>cross-entropy</strong> between the target distribution and the predicted outputs:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+\]</div>
+<p>The cross-entropy samples from <span class="math notranslate nohighlight">\(\mathbf{t} | \mathbf{x}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+\]</div>
+<p>For a given input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is non-zero only for the correct class <span class="math notranslate nohighlight">\(t^*\)</span>, as <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is a one-hot encoded vector <span class="math notranslate nohighlight">\([0, 1, 0, 0, 0]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log P(\mathbf{y} = t^* | \mathbf{x})
+\]</div>
+<p>If we note <span class="math notranslate nohighlight">\(j^*\)</span> the index of the correct class <span class="math notranslate nohighlight">\(t^*\)</span>, the cross entropy is simply:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log y_{j^*}
+\]</div>
+<p>As only one element of <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is non-zero, the cross-entropy is the same as the <strong>negative log-likelihood</strong> of the prediction for the true label:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log y_{j^*}
+\]</div>
+<p>The minimum of <span class="math notranslate nohighlight">\(- \log y\)</span> is obtained when <span class="math notranslate nohighlight">\(y =1\)</span>: We want to classifier to output a probability 1 for the true label. Because of the softmax activation function, the probability for the other classes should become closer from 0.</p>
+<div class="math notranslate nohighlight">
+\[
+    y_j = P(\text{class = j}) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</div>
+<p>Minimizing the cross-entropy / negative log-likelihood pushes the output distribution <span class="math notranslate nohighlight">\(\mathbf{y} | \mathbf{x}\)</span> to be as close as possible to the target distribution <span class="math notranslate nohighlight">\(\mathbf{t} | \mathbf{x}\)</span>.</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/crossentropy-animation.gif"><img alt="../_images/crossentropy-animation.gif" src="../_images/crossentropy-animation.gif" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Minimizing the cross-entropy between <span class="math notranslate nohighlight">\(\mathbf{t} | \mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y} | \mathbf{x}\)</span> makes them similar.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>As <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is a binary vector <span class="math notranslate nohighlight">\([0, 1, 0, 0, 0]\)</span>, the cross-entropy / negative log-likelihood can also be noted as the dot product between <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> and <span class="math notranslate nohighlight">\(\log \mathbf{y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{l}(W, \mathbf{b}) = - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle = - \sum_{j=1}^C t_j \, \log y_j =  - \log y_{j^*}
+\]</div>
+<p>The <strong>cross-entropy loss function</strong> is then the expectation over the training set of the individual cross-entropies:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [- \langle \mathbf{t} \cdot \log \mathbf{y} \rangle ] \approx \frac{1}{N} \sum_{i=1}^N - \langle \mathbf{t}_i \cdot \log \mathbf{y}_i \rangle
+\]</div>
+<p>The nice thing with the <strong>cross-entropy</strong> loss function, when used on a softmax activation function, is that the partial derivative w.r.t the logit score <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is simple:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+    \frac{\partial {l}(W, \mathbf{b})}{\partial z_i} &amp; = - \sum_j \frac{\partial}{\partial z_i}  t_j \log(y_j)=
+- \sum_j t_j \frac{\partial \log(y_j)}{\partial z_i} = - \sum_j t_j \frac{1}{y_j} \frac{\partial y_j}{\partial z_i} \\
+&amp; = - \frac{t_i}{y_i} \frac{\partial y_i}{\partial z_i} - \sum_{j \neq i}^C \frac{t_j}{y_j} \frac{\partial y_j}{\partial z_i}
+= - \frac{t_i}{y_i} y_i (1-y_i) - \sum_{j \neq i}^C \frac{t_j}{y_i} (-y_j \, y_i) \\
+&amp; = - t_i + t_i \, y_i + \sum_{j \neq i}^C t_j \, y_i = - y_i + \sum_{j = 1}^C t_j y_i
+= -t_i + y_i \sum_{j = 1}^C t_j \\
+&amp; = - (t_i - y_i)
+\end{split}
+\end{split}\]</div>
+<p>i.e. the same as with the mse in linear regression! refer <a class="reference external" href="https://peterroelants.github.io/posts/cross-entropy-softmax/">https://peterroelants.github.io/posts/cross-entropy-softmax/</a> for more explanations on the proof. Vector notation:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} =  -  (\mathbf{t} - \mathbf{y} ) 
+\]</div>
+<p>As:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<p>we can obtain the partial derivatives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial W} = \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} \times \dfrac{\partial \mathbf{z}}{\partial W} = - (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{b}} = \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} \times \dfrac{\partial \mathbf{z}}{\partial \mathbf{b}} = - (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\end{split}\]</div>
+<p>So gradient descent leads to the <strong>delta learning rule</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\end{split}\]</div>
+<div class="admonition-softmax-linear-classifier admonition">
+<p class="admonition-title">Softmax linear classifier</p>
+<p><img alt="" src="../_images/softmaxclassifier.svg" /></p>
+<ul class="simple">
+<li><p>We first compute the <strong>logit scores</strong> <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> using a linear layer:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
+\]</div>
+<ul class="simple">
+<li><p>We turn them into probabilities <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> using the <strong>softmax activation function</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    y_j = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</div>
+<ul class="simple">
+<li><p>We minimize the <strong>cross-entropy</strong> / <strong>negative log-likelihood</strong> on the training set:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]
+\]</div>
+<p>which simplifies into the <strong>delta learning rule</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="comparison-of-linear-classification-and-regression">
+<h3>Comparison of linear classification and regression<a class="headerlink" href="#comparison-of-linear-classification-and-regression" title="Permalink to this headline">¶</a></h3>
+<p>Classification and regression differ in the nature of their outputs: in classification they are discrete, in regression they are continuous values. However, when trying to minimize the mismatch between a model <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and the real data <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>, we have found the same <strong>delta learning rule</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\end{split}\]</div>
+<p>Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the activation function of the output and the <strong>loss function</strong>:</p>
+<ul>
+<li><p>For regression, we use regular activation functions and the <strong>mean square error</strong> (mse):</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
+    \]</div>
+</li>
+<li><p>For classification, we use the softmax activation function and the <strong>cross-entropy</strong> (negative log-likelihood) loss function:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]\]</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="multi-label-classification">
+<h2>Multi-label classification<a class="headerlink" href="#multi-label-classification" title="Permalink to this headline">¶</a></h2>
+<p>What if there is more than one label on the image? The target vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> does not represent a probability distribution anymore:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [1, 1, 0, 0, 0]
+\]</div>
+<p>Normalizing the vector does not help: it is not a dog <strong>or</strong> a cat, it is a dog <strong>and</strong> a cat.</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [0.5, 0.5, 0, 0, 0]
+\]</div>
+<p>For multi-label classification, we can simply use the <strong>logistic</strong> activation function for the output neurons:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = \sigma(W \times \mathbf{x} + \mathbf{b})
+\]</div>
+<p>The outputs are between 0 and 1, but they do not sum to one. Each output neuron performs <strong>linear regression for soft classification</strong> on their class:</p>
+<div class="math notranslate nohighlight">
+\[y_j = P(\text{class} = j | \mathbf{x})\]</div>
+<p>Each output neuron <span class="math notranslate nohighlight">\(y_j\)</span> has a binary target <span class="math notranslate nohighlight">\(t_j\)</span> (one-vs-the-rest) and has to minimize the negative log-likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{l}_j(W, \mathbf{b}) =  - t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)
+\]</div>
+<p>The <strong>binary cross-entropy</strong> loss for the whole network is the sum of the negative log-likelihood for each class:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(W, \mathbf{b}) =  \mathbb{E}_{\mathcal{D}} [- \sum_{j=1}^C t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)]
+\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./2-linear"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

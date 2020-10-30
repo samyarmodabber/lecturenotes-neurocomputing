@@ -1,2 +1,0 @@
-# Neural Fields (optional)
-
