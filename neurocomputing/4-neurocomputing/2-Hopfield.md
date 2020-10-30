@@ -1,2 +1,0 @@
-# Hopfield networks
-

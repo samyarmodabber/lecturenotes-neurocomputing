@@ -1,2 +1,0 @@
-# Restricted Boltzmann machines (optional)
-
