@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning theory &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/6-LearningTheory.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/2-linear/6-LearningTheory.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Learning theory" />
+<meta property="og:description" content="Learning theory  Error measurements  The training error is the error made on the training set. It is easy to measure for classification as the number of misclas" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/2-linear/6-LearningTheory.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-measurements">
+   Error measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vapnik-chervonenkis-dimension">
+   Vapnik-Chervonenkis dimension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structural-risk-minimization">
+   Structural risk minimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-space">
+   Feature space
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomial-features">
+     Polynomial features
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#radial-basis-function-networks">
+     Radial-basis function networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kernel-perceptron">
+     Kernel perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-vector-machines">
+     Support vector machines
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="learning-theory">
+<h1>Learning theory<a class="headerlink" href="#learning-theory" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="error-measurements">
+<h2>Error measurements<a class="headerlink" href="#error-measurements" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>training error</strong> is the error made on the training set. It is easy to measure for classification as the number of misclassified examples divided by the total number of examples.</p>
+<div class="math notranslate nohighlight">
+\[
+    \epsilon_\mathcal{D} = \frac{\text{# misclassifications}}{\text{# examples}}
+\]</div>
+<p>The training error is totally irrelevant on usage: reading the training set has a training error of 0%.
+What matters is the <strong>generalization error</strong>, which is the error that will be made on new examples (not used during learning). It is much harder to measure (potentially infinite number of new examples, what is the correct answer?). The generalization error is often approximated by the <strong>empirical error</strong>: one keeps a number of training examples out of the learning phase and one tests the performance on them.</p>
+<p>Classification errors can also depend on the class:</p>
+<ul class="simple">
+<li><p><strong>False Positive</strong> errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.</p></li>
+<li><p><strong>False Negative</strong> errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.</p></li>
+<li><p><strong>True Positive</strong> (TP) and <strong>True Negative</strong> (TN) are correctly classified examples.</p></li>
+</ul>
+<p>Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?</p>
+<p>Some other metrics:</p>
+<ul class="simple">
+<li><p>Accuracy (1 - error)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+\]</div>
+<ul class="simple">
+<li><p>Recall (hit rate, sensitivity)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+\]</div>
+<ul class="simple">
+<li><p>Precision (specificity)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+\]</div>
+<ul class="simple">
+<li><p>F1 score = harmonic mean of precision and recall</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \text{F1} = \frac{2\, P \, R}{P + R}
+\]</div>
+<p>For multiclass classification problems, the <strong>confusion matrix</strong> tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/confusionmatrix.png"><img alt="../_images/confusionmatrix.png" src="../_images/confusionmatrix.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">Confusion matrix.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cross-validation">
+<h2>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/underfitting-overfitting.png"><img alt="../_images/underfitting-overfitting.png" src="../_images/underfitting-overfitting.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Overfitting in regression.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/underfitting-overfitting-classification.png"><img alt="../_images/underfitting-overfitting-classification.png" src="../_images/underfitting-overfitting-classification.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Overfitting in classification.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>In classification too, <strong>cross-validation</strong> has to be used to prevent overfitting. The classifier is trained on the <strong>training set</strong> and tested on the <strong>test set</strong>. Optionally, a third <strong>validation set</strong> can be used to track overfitting during training.</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/validationset.svg"><img alt="../_images/validationset.svg" src="../_images/validationset.svg" width="80%" /></a>
+<p class="caption"><span class="caption-text">Training, validation and test sets. Source: <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/validation/another-partition">https://developers.google.com/machine-learning/crash-course/validation/another-partition</a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.</p>
+</div>
+</div>
+<div class="section" id="vapnik-chervonenkis-dimension">
+<h2>Vapnik-Chervonenkis dimension<a class="headerlink" href="#vapnik-chervonenkis-dimension" title="Permalink to this headline">¶</a></h2>
+<p>How many data examples can be correctly classified by a linear model in <span class="math notranslate nohighlight">\(\Re^d\)</span>?
+In <span class="math notranslate nohighlight">\(\Re^2\)</span>, all dichotomies of three non-aligned examples can be correctly classified by a linear model (<span class="math notranslate nohighlight">\(y = w_1 \, x_1 + w_2 \, x_2 + b\)</span>).</p>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/vc4.png"><img alt="../_images/vc4.png" src="../_images/vc4.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-text">A linear classifier in 2D can classify any configuration of three points.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, there exists sets of four examples in <span class="math notranslate nohighlight">\(\Re^2\)</span> which can NOT be correctly classified by a linear model, i.e. they are not linearly separable.</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/vc6.png"><img alt="../_images/vc6.png" src="../_images/vc6.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-text">There exists configurations of four points in 2D that cannot be linearly classified.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>The XOR function in <span class="math notranslate nohighlight">\(\Re^2\)</span> is for example not linearly separable, i.e. the Perceptron algorithm can not converge.</p>
+<p>The probability that a set of 3 (non-aligned) points in <span class="math notranslate nohighlight">\(\Re^2\)</span> is linearly separable is 1, but the probability that a set of four points is linearly separable is smaller than 1 (but not zero). When a class of hypotheses <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> can correctly classify all points of a training set <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, we say that <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> <strong>shatters</strong> <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>.</p>
+<p>The <strong>Vapnik-Chervonenkis dimension</strong> <span class="math notranslate nohighlight">\(\text{VC}_\text{dim} (\mathcal{H})\)</span> of an hypothesis class <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is defined as the maximal number of training examples that <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> can shatter. We saw that in <span class="math notranslate nohighlight">\(\Re^2\)</span>, this dimension is 3:</p>
+<div class="math notranslate nohighlight">
+\[\text{VC}_\text{dim} (\text{Linear}(\Re^2) ) = 3\]</div>
+<p>This can be generalized to linear classifiers in <span class="math notranslate nohighlight">\(\Re^d\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</div>
+<p>This corresponds to the number of <strong>free parameters</strong> of the linear classifier: <span class="math notranslate nohighlight">\(d\)</span> parameters for the weight vector, 1 for the bias. Given any set of <span class="math notranslate nohighlight">\((d+1)\)</span> examples in <span class="math notranslate nohighlight">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For other types of (non-linear) hypotheses, the VC dimension is generally proportional to the <strong>number of free parameters</strong>, but <strong>regularization</strong> reduces the VC dimension of the classifier.</p>
+<div class="admonition-vapnik-chervonenkis-theorem admonition">
+<p class="admonition-title">Vapnik-Chervonenkis theorem</p>
+<p>The generalization error <span class="math notranslate nohighlight">\(\epsilon(h)\)</span> of an hypothesis <span class="math notranslate nohighlight">\(h\)</span> taken from a class <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> of finite VC dimension and trained on <span class="math notranslate nohighlight">\(N\)</span> samples of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is bounded by the sum of the training error <span class="math notranslate nohighlight">\(\hat{\epsilon}_{\mathcal{S}}(h)\)</span> and the VC complexity term:</p>
+<div class="math notranslate nohighlight">
+\[
+    \epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}}(h) + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}
+\]</div>
+<p>with probability <span class="math notranslate nohighlight">\(1-\delta\)</span>, if <span class="math notranslate nohighlight">\(\text{VC}_\text{dim} (\mathcal{H}) &lt;&lt; N\)</span>.</p>
+<p>Vapnik, Vladimir (2000). The nature of statistical learning theory. Springer.</p>
+</div>
+</div>
+<div class="section" id="structural-risk-minimization">
+<h2>Structural risk minimization<a class="headerlink" href="#structural-risk-minimization" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id7">
+<a class="reference internal image-reference" href="../_images/srm.png"><img alt="../_images/srm.png" src="../_images/srm.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-text">Structural risk minimization.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>The generalization error increases with the VC dimension, while the training error decreases. Structural risk minimization is an alternative method to cross-validation. The VC dimensions of various classes of hypothesis are already known (~ number of free parameters). The VC bounds tells how many training samples are needed by a given hypothesis class in order to obtain a satisfying generalization error.</p>
+<div class="math notranslate nohighlight">
+\[\epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}(h)} + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}\]</div>
+<p><strong>The more complex the model, the more training data you will need to get a good generalization error!</strong></p>
+<p>Rule of thumb:</p>
+<div class="math notranslate nohighlight">
+\[
+        \epsilon(h) \approx \frac{\text{VC}_\text{dim} (\mathcal{H})}{N}
+\]</div>
+<p>A learning algorithm should only try to minimize the training error, as the VC complexity term only depends on the model. This term is only an upper bound: most of the time, the real bound is usually 100 times smaller.</p>
+<p>The VC dimension of linear classifiers in <span class="math notranslate nohighlight">\(\Re^d\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</div>
+<p>Given any set of <span class="math notranslate nohighlight">\((d+1)\)</span> examples in <span class="math notranslate nohighlight">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For <span class="math notranslate nohighlight">\(N &gt;&gt; d\)</span> the probability of having training errors becomes huge (the data is generally not linearly separable).</p>
+<blockquote>
+<div><p><strong>If we project the input data onto a space with sufficiently high dimensions, it becomes then possible to find a linear classifier on this projection space that is able to classify the data!</strong></p>
+</div></blockquote>
+<p>However, if the space has too many dimensions, the VC dimension will increase and the generalization error will increase. This is the basic principle of all non-linear ML methods: multi-layer perceptron, radial-basis-function networks, support-vector machines…</p>
+</div>
+<div class="section" id="feature-space">
+<h2>Feature space<a class="headerlink" href="#feature-space" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-cover-s-theorem-on-the-separability-of-patterns-1965 admonition">
+<p class="admonition-title">Cover’s theorem on the separability of patterns (1965)</p>
+<p>A complex pattern-classification problem, cast in a high dimensional space non-linearly, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.*</p>
+</div>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="../_images/featurespace.png"><img alt="../_images/featurespace.png" src="../_images/featurespace.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-text">Projection to a feature space.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>The highly dimensional space where the input data is projected is called the <strong>feature space</strong> When the number of dimensions of the feature space increases, the training error decreases (the pattern is more likely linearly separable) but the generalization error increases (the VC dimension increases).</p>
+<div class="section" id="polynomial-features">
+<h3>Polynomial features<a class="headerlink" href="#polynomial-features" title="Permalink to this headline">¶</a></h3>
+<p>For the polynomial regression of order <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b\]</div>
+<p>the vector <span class="math notranslate nohighlight">\(\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix}\)</span> defines a feature space for  the input <span class="math notranslate nohighlight">\(x\)</span>. The elements of the feature space are called <strong>polynomial features</strong>. We can define polynomial features of more than one variable, e.g. <span class="math notranslate nohighlight">\(x^2 \, y\)</span>, <span class="math notranslate nohighlight">\(x^3 \, y^4\)</span>, etc. We then apply multiple <strong>linear</strong> regression (MLR) on the polynomial feature space to find the parameters:</p>
+<div class="math notranslate nohighlight">
+\[\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}\]</div>
+</div>
+<div class="section" id="radial-basis-function-networks">
+<h3>Radial-basis function networks<a class="headerlink" href="#radial-basis-function-networks" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id9">
+<a class="reference internal image-reference" href="../_images/rbf.png"><img alt="../_images/rbf.png" src="../_images/rbf.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">Radial basis function network. Source: <a class="reference external" href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>Radial-basis function (<strong>RBF</strong>) networks samples a subset of <span class="math notranslate nohighlight">\(K\)</span> training examples and form the feature space using a <strong>gaussian kernel</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi(\mathbf{x}) = \begin{bmatrix} \varphi(\mathbf{x} - \mathbf{x}_1) \\ \varphi(\mathbf{x} - \mathbf{x}_2) \\ \ldots \\ \varphi(\mathbf{x} - \mathbf{x}_K) \end{bmatrix}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\varphi(\mathbf{x}  - \mathbf{x}_i) = \exp - \beta \, ||\mathbf{x}  - \mathbf{x}_i||^2\)</span> decreasing with the distance between the vectors.</p>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/rbf2.png"><img alt="../_images/rbf2.png" src="../_images/rbf2.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">Selection of protypes among the training data. Source: <a class="reference external" href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/rbf4.png"><img alt="../_images/rbf4.png" src="../_images/rbf4.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">Gaussian kernel. Source: <a class="reference external" href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>By applying a linear classification algorithm on the RBF feature space:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = f(W \times \phi(\mathbf{x}) + \mathbf{b})\]</div>
+<p>we obtain a smooth <strong>non-linear</strong> partition of the input space. The width of the gaussian kernel allows distance-based <strong>generalization</strong>.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/rbf3.png"><img alt="../_images/rbf3.png" src="../_images/rbf3.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">RBF networks learn linearly smooth transitions between the training examples. Source: <a class="reference external" href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="kernel-perceptron">
+<h3>Kernel perceptron<a class="headerlink" href="#kernel-perceptron" title="Permalink to this headline">¶</a></h3>
+<p>What happens during online Perceptron learning?</p>
+<div class="admonition-primal-form-of-the-online-perceptron-algorithm admonition">
+<p class="admonition-title">Primal form of the online Perceptron algorithm</p>
+<ul class="simple">
+<li><p><strong>for</strong> <span class="math notranslate nohighlight">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i =  \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>If an example <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> is correctly classified (<span class="math notranslate nohighlight">\(y_i = t_i\)</span>), the weight vector does not change.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} \leftarrow \mathbf{w}\]</div>
+<p>If an example <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> is miscorrectly classified (<span class="math notranslate nohighlight">\(y_i \neq t_i\)</span>), the weight vector is increased from <span class="math notranslate nohighlight">\(t_i \, \mathbf{x}_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i\]</div>
+<p>If you initialize the weight vector to 0, its final value will therefore be a <strong>linear combination</strong> of the input samples:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\]</div>
+<p>The coefficients <span class="math notranslate nohighlight">\(\alpha_i\)</span> represent the <strong>embedding strength</strong> of each example, i.e. how often they were misclassified.</p>
+<p>With <span class="math notranslate nohighlight">\(\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\)</span>, the prediction for an input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> only depends on the training samples and their <span class="math notranslate nohighlight">\(\alpha_i\)</span> value:</p>
+<div class="math notranslate nohighlight">
+\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)\]</div>
+<p>To make a prediction <span class="math notranslate nohighlight">\(y\)</span>, we need the dot product between the input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and all training examples <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>. We ignore the bias here, but it can be added back.</p>
+<div class="admonition-dual-form-of-the-online-perceptron-algorithm admonition">
+<p class="admonition-title">Dual form of the online Perceptron algorithm</p>
+<ul class="simple">
+<li><p><strong>for</strong> <span class="math notranslate nohighlight">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i =  \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)\)</span></p></li>
+<li><p><strong>if</strong> <span class="math notranslate nohighlight">\(y_i \neq t_i\)</span> :</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i \leftarrow \alpha_i + 1\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This <strong>dual form</strong> of the Perceptron algorithm is strictly equivalent to its primal form. It needs one parameter <span class="math notranslate nohighlight">\(\alpha_i\)</span> per training example instead of a weight vector (<span class="math notranslate nohighlight">\(N &gt;&gt; d\)</span>), but relies on dot products between vectors.</p>
+<p>Why is it interesting to have an algorithm relying on dot products? You can project the inputs <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to a <strong>feature space</strong> <span class="math notranslate nohighlight">\(\phi(\mathbf{x})\)</span> and apply the same algorithm:</p>
+<div class="math notranslate nohighlight">
+\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)\]</div>
+<p>But you do not need to compute the dot product in the feature space, all you need to know is its result.</p>
+<div class="math notranslate nohighlight">
+\[K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle\]</div>
+<blockquote>
+<div><p><strong>Kernel trick:</strong> A kernel <span class="math notranslate nohighlight">\(K(\mathbf{x}, \mathbf{z})\)</span> allows to compute the dot product between the feature space representation of two vectors without ever computing these representations!</p>
+</div></blockquote>
+<p>Let’s consider the quadratic kernel in <span class="math notranslate nohighlight">\(\Re^3\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{eqnarray*}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 &amp;&amp; \\
+&amp;&amp; \\
+  K(\mathbf{x}, \mathbf{z}) &amp;=&amp; ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
+                                            &amp;=&amp;  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
+                                            &amp;=&amp;  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
+                                            &amp;=&amp;  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
+\end{eqnarray*}\]</div>
+<p>with:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \phi(\mathbf{x}) = \begin{bmatrix}
+                            x_1 \cdot x_1 \\
+                            x_1 \cdot x_2 \\
+                            x_1 \cdot x_3 \\
+                            x_2 \cdot x_1 \\
+                            x_2 \cdot x_2 \\
+                            x_2 \cdot x_3 \\
+                            x_3 \cdot x_1 \\
+                            x_3 \cdot x_2 \\
+                            x_3 \cdot x_3 \end{bmatrix}
+\end{split}\]</div>
+<p>The quadratic kernel implicitely transforms an input space with three dimensions into a feature space of 9 dimensions.</p>
+<p>More generally, the polynomial kernel in <span class="math notranslate nohighlight">\(\Re^d\)</span> of degree <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^d \times \Re^d \qquad  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^p \\
+                                            &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
+\end{align*}
+\end{split}\]</div>
+<p>transforms the input from a space with <span class="math notranslate nohighlight">\(d\)</span> dimensions into a feature space of <span class="math notranslate nohighlight">\(d^p\)</span> dimensions.</p>
+<p>While the inner product in the feature space would require <span class="math notranslate nohighlight">\(O(d^p)\)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math notranslate nohighlight">\(O(d)\)</span> operations. This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p>
+<p>The <strong>kernel perceptron</strong> is the dual form of the Perceptron algorithm using a kernel:</p>
+<div class="admonition-kernel-perceptron admonition">
+<p class="admonition-title">Kernel perceptron</p>
+<ul class="simple">
+<li><p><strong>for</strong> <span class="math notranslate nohighlight">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math notranslate nohighlight">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_i =  \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))\)</span></p></li>
+<li><p><strong>if</strong> <span class="math notranslate nohighlight">\(y_i \neq t_i\)</span> :</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i \leftarrow \alpha_i + 1\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Depending on the kernel, the implicit dimensionality of the feature space can even be infinite! Some kernels:</p>
+<ul class="simple">
+<li><p><strong>Linear kernel</strong>: dimension of the feature space = <span class="math notranslate nohighlight">\(d\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+K(\mathbf{x},\mathbf{z}) = \langle \mathbf{x} \cdot \mathbf{z} \rangle
+\]</div>
+<ul class="simple">
+<li><p><strong>Polynomial kernel</strong>: dimension of the feature space = <span class="math notranslate nohighlight">\(d^p\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+K(\mathbf{x},\mathbf{z}) = (\langle \mathbf{x} \cdot \mathbf{z} \rangle)^p
+\]</div>
+<ul class="simple">
+<li><p><strong>Gaussian kernel</strong> (or RBF kernel): dimension of the feature space= <span class="math notranslate nohighlight">\(\infty\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+K(\mathbf{x},\mathbf{z}) = \exp(-\frac{\| \mathbf{x} - \mathbf{z} \|^2}{2\sigma^2})
+\]</div>
+<ul class="simple">
+<li><p><strong>Hyperbolic tangent kernel</strong>: dimension of the feature space = <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangle +c)
+\]</div>
+<p>In practice, the choice of the kernel family depends more on the nature of data (text, image…) and its distribution than on the complexity of the learning problem. RBF kernels tend to “group” positive examples together. Polynomial kernels are more like “distorted” hyperplanes. Kernels have parameters (<span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>…) which have to found using cross-validation.</p>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/kernels.png"><img alt="../_images/kernels.png" src="../_images/kernels.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Different kernels lead to different decision functions. Source: <a class="reference external" href="http://beta.cambridgespark.com/courses/jpm/05-module.html">http://beta.cambridgespark.com/courses/jpm/05-module.html</a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="support-vector-machines">
+<h3>Support vector machines<a class="headerlink" href="#support-vector-machines" title="Permalink to this headline">¶</a></h3>
+<p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero <span class="math notranslate nohighlight">\(\alpha_i\)</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{y} = \text{sign}(\sum_{i=1}^{N_{SV}} \alpha_i \, t_i \, K(\mathbf{x}_i, \mathbf{x}) + b)
+\]</div>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/supportvectors.svg"><img alt="../_images/supportvectors.svg" src="../_images/supportvectors.svg" width="60%" /></a>
+<p class="caption"><span class="caption-text">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math notranslate nohighlight">\(\alpha\)</span> coefficient.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<p>Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting. SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./2-linear"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

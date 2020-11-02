@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-layer perceptron &#8212; Neurocomputing</title>
+    <title>Linear classification &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,7 +37,7 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex8-MLP.html" />
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex6-LinearClassification.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 
@@ -46,10 +46,10 @@
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex8-MLP.html" />
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex6-LinearClassification.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Multi-layer perceptron" />
-<meta property="og:description" content="Multi-layer perceptron" />
+<meta property="og:title"       content="Linear classification" />
+<meta property="og:description" content="Linear classification  The goal of this exercise is to investigate hard and soft binary classification.  Presentation  &lt;div class=&#34;embed-container&#34;&gt;   &lt;iframe s" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -136,16 +136,6 @@
    4. Linear classification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
-   5. Multi-class classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
-   6. Learning theory
-  </a>
- </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -176,11 +166,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="ex5-Crossvalidation.html">
    5. Cross-validation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ex6-LinearClassification.html">
-   6. Linear classification
   </a>
  </li>
 </ul>
@@ -237,7 +222,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/5-exercises/ex8-MLP.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/5-exercises/ex6-LinearClassification.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -264,7 +249,19 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#presentation">
+   Presentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commented-solution">
+   Commented solution
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -273,8 +270,20 @@
         
               <div>
                 
-  <div class="section" id="multi-layer-perceptron">
-<h1>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="linear-classification">
+<h1>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to investigate hard and soft binary classification.</p>
+<div class="section" id="presentation">
+<h2>Presentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h2>
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="section" id="commented-solution">
+<h2>Commented solution<a class="headerlink" href="#commented-solution" title="Permalink to this headline">¶</a></h2>
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+</div></div>
 </div>
 
     <script type="text/x-thebe-config">

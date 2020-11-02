@@ -49,7 +49,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-LinearClassification-solution.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Linear classification" />
-<meta property="og:description" content="Linear classification  import numpy as np import matplotlib.pyplot as plt  Linear perceptron algorithm  Linearly separable data  We start by generating a classi" />
+<meta property="og:description" content="Linear classification  The goal of this exercise is to study hard and soft binary linear classification.  import numpy as np import matplotlib.pyplot as plt  Ha" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -273,8 +273,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-perceptron-algorithm">
-   Linear perceptron algorithm
+  <a class="reference internal nav-link" href="#hard-linear-classification-perceptron-algorithm">
+   Hard linear classification: perceptron algorithm
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -290,8 +290,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#logistic-regression">
-   Logistic regression
+  <a class="reference internal nav-link" href="#soft-linear-classification-logistic-regression">
+   Soft linear classification: logistic regression
   </a>
  </li>
 </ul>
@@ -306,6 +306,7 @@
                 
   <div class="section" id="linear-classification">
 <h1>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to study hard and soft binary linear classification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -314,11 +315,11 @@
 </div>
 </div>
 </div>
-<div class="section" id="linear-perceptron-algorithm">
-<h2>Linear perceptron algorithm<a class="headerlink" href="#linear-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hard-linear-classification-perceptron-algorithm">
+<h2>Hard linear classification: perceptron algorithm<a class="headerlink" href="#hard-linear-classification-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="linearly-separable-data">
 <h3>Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h3>
-<p>We start by generating a classification dataset with 100 examples. You do not need to read the code generating the data.</p>
+<p>We start by generating a binary linear classification dataset with 100 examples (50 in each class). You do not need to read the code generating the data, we just randomly select 100 point in <span class="math notranslate nohighlight">\([0, 1]^2\)</span> and assign a label depending on their position.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
@@ -359,12 +360,12 @@
 <p>Our goal is to minimize the <strong>mean square error</strong> (mse) of the hyperplane on the training set:</p>
 <div class="math notranslate nohighlight">
 \[
-    L(\mathbf{w}, b) = \frac{1}{2N} \, \sum_{i=1}^N (t_i - y_i)^2
+    L(\mathbf{w}, b) = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2
 \]</div>
 <p>By applying gradient descent on this loss function, we obtain the <strong>delta learning rule</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-    \Delta \mathbf{w} = \eta \, \sum_{i=1}^N (t_i - y_i)
+    \Delta \mathbf{w} = \eta \, \sum_{i=1}^N (t_i - y_i) \, \mathbf{x}_i
 \]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -428,52 +429,22 @@
 <p>You just need to draw a line between the two extremities of the hyperplane, for example between 0 and 1 or between <code class="docutils literal notranslate"><span class="pre">X[:,</span> <span class="pre">0].min()</span></code> and <code class="docutils literal notranslate"><span class="pre">X[:,</span> <span class="pre">0].max()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
-<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
 
-<span class="c1"># Initialize the weight vector and bias</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mf">0.</span>
-
-<span class="c1"># Perceptron algorithm</span>
-<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
-    
-    <span class="c1"># Iterate over all training examples</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Prediction</span>
-        <span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-        
-        <span class="c1"># Update the weight</span>
-        <span class="n">w</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
-        
-        <span class="c1"># Update the bias</span>
-        <span class="n">b</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span> 
-        
-        <span class="c1"># Loss mse</span>
-        <span class="n">loss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_i</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-        
-    <span class="c1"># Append </span>
-    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
+<span class="c1"># Data</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Model</span>
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">x_min</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">x_max</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6-LinearClassification-solution_10_0.png" src="../_images/6-LinearClassification-solution_10_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fedd4d185e0&gt;]
+</pre></div>
+</div>
 <img alt="../_images/6-LinearClassification-solution_10_1.png" src="../_images/6-LinearClassification-solution_10_1.png" />
 </div>
 </div>
@@ -617,7 +588,7 @@
 </div>
 </div>
 <p><strong>A:</strong> The learning rate does not change much… We will see why in the next question.</p>
-<p>After a minimum of epochs, the result is stable, because there are no errors anymore: <code class="docutils literal notranslate"><span class="pre">t[i]</span> <span class="pre">-</span> <span class="pre">y_i</span></code> is always 0, so the weight vector and the bias are not changed anymore.</p>
+<p>After a minimum of epochs, the result is stable, because there are no errors anymore: <span class="math notranslate nohighlight">\(t_i - y_i\)</span> is always 0, so the weight vector and the bias are not changed anymore.</p>
 <p><strong>Q:</strong> Change the initial value of the weight vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> to something different from 0 (e.g. [1, -1], [-5, 5], etc). What does it change? Vary the learning rate again and conclude on the importance of weight initialization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,7 +643,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: 0.36
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: 0.28
 </pre></div>
 </div>
 <img alt="../_images/6-LinearClassification-solution_18_1.png" src="../_images/6-LinearClassification-solution_18_1.png" />
@@ -727,7 +698,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
 <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">nb_epochs</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
 <span class="c1"># Initialize the weight vector and bias</span>
@@ -785,18 +756,18 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final error: 0.24
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final error: 0.31
 </pre></div>
 </div>
 <img alt="../_images/6-LinearClassification-solution_24_1.png" src="../_images/6-LinearClassification-solution_24_1.png" />
 <img alt="../_images/6-LinearClassification-solution_24_2.png" src="../_images/6-LinearClassification-solution_24_2.png" />
 </div>
 </div>
-<p><strong>A:</strong> the outlier heavily attracts the hyperplane. That’s bad.</p>
+<p><strong>A:</strong> the outlier heavily attracts the hyperplane and changing the hyperparameters does not improve the situation. That’s bad.</p>
 </div>
 </div>
-<div class="section" id="logistic-regression">
-<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="soft-linear-classification-logistic-regression">
+<h2>Soft linear classification: logistic regression<a class="headerlink" href="#soft-linear-classification-logistic-regression" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now see whether <strong>logistic regression</strong> helps us with outliers. The following cell implements the logistic function:</p>
 <div class="math notranslate nohighlight">
 \[\sigma(x) = \dfrac{1}{1 + e^{-x}}\]</div>

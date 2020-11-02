@@ -8,25 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Multi-layer Perceptron &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
+    <link href="../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
@@ -36,17 +36,17 @@
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/8-MLP-solution.html" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/staging/8-MLP-solution.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/8-MLP-solution.html" />
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/staging/8-MLP-solution.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Multi-layer Perceptron" />
 <meta property="og:description" content="Multi-layer Perceptron  The goal of this exercise is to implement a shallow multi-layer perceptron to perform non-linear classification. Let’s start with usual " />
@@ -65,9 +65,9 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
+<a class="navbar-brand text-wrap" href="../../index.html">
   
-  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  <img src="../../_static/tuc.svg" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Neurocomputing</h1>
@@ -75,7 +75,7 @@
 </a>
 </div>
 
-<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
@@ -83,7 +83,7 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
+  <a class="reference internal" href="../../intro.html">
    Neurocomputing
   </a>
  </li>
@@ -95,17 +95,17 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../1-intro/1-Introduction.html">
+  <a class="reference internal" href="../../1-intro/1-Introduction.html">
    1. Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../1-intro/2-Math.html">
+  <a class="reference internal" href="../../1-intro/2-Math.html">
    2. Math basics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../1-intro/3-Neurons.html">
+  <a class="reference internal" href="../../1-intro/3-Neurons.html">
    3. Neurons
   </a>
  </li>
@@ -117,32 +117,32 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/1-Optimization.html">
+  <a class="reference internal" href="../../2-linear/1-Optimization.html">
    1. Optimization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+  <a class="reference internal" href="../../2-linear/2-LinearRegression.html">
    2. Linear Regression
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/3-Regularization.html">
+  <a class="reference internal" href="../../2-linear/3-Regularization.html">
    3. Regularization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+  <a class="reference internal" href="../../2-linear/4-LinearClassification.html">
    4. Linear classification
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+  <a class="reference internal" href="../../2-linear/5-Multiclassification.html">
    5. Multi-class classification
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+  <a class="reference internal" href="../../2-linear/6-LearningTheory.html">
    6. Learning theory
   </a>
  </li>
@@ -154,32 +154,32 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="ex1-Python.html">
+  <a class="reference internal" href="../ex1-Python.html">
    1. Introduction to Python
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ex2-Numpy.html">
+  <a class="reference internal" href="../ex2-Numpy.html">
    2. Numpy and Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ex3-LinearRegression.html">
+  <a class="reference internal" href="../ex3-LinearRegression.html">
    3. Linear regression
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ex4-MLR.html">
+  <a class="reference internal" href="../ex4-MLR.html">
    4. Multiple Linear Regression
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ex5-Crossvalidation.html">
+  <a class="reference internal" href="../ex5-Crossvalidation.html">
    5. Cross-validation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ex6-LinearClassification.html">
+  <a class="reference internal" href="../ex6-LinearClassification.html">
    6. Linear classification
   </a>
  </li>
@@ -191,7 +191,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../zreferences.html">
+  <a class="reference internal" href="../../zreferences.html">
    1. Bibliography
   </a>
  </li>
@@ -237,7 +237,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/5-exercises/8-MLP-solution.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/5-exercises/staging/8-MLP-solution.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -261,17 +261,17 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/8-MLP-solution.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/staging/8-MLP-solution.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
+                    src="../../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/8-MLP-solution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/staging/8-MLP-solution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
+                    src="../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
         
@@ -388,7 +388,7 @@
 <div class="section" id="structure-of-the-mlp">
 <h2>Structure of the MLP<a class="headerlink" href="#structure-of-the-mlp" title="Permalink to this headline">¶</a></h2>
 <p>In this exercise, we will consider a MLP for non-linear binary classification composed of 2 input neurons <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, one output neuron <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(K\)</span> hidden neurons in a single hidden layer (<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>).</p>
-<a class="reference internal image-reference" href="../_images/mlp-example.svg"><img alt="../_images/mlp-example.svg" src="../_images/mlp-example.svg" width="600" /></a>
+<a class="reference internal image-reference" href="5-exercises/staging/../img/mlp-example.svg"><img alt="5-exercises/staging/../img/mlp-example.svg" src="5-exercises/staging/../img/mlp-example.svg" width="600" /></a>
 <p>The output neuron is a vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> with one element that sums its inputs with <span class="math notranslate nohighlight">\(K\)</span> weights <span class="math notranslate nohighlight">\(W^2\)</span> and a bias <span class="math notranslate nohighlight">\(\mathbf{b}^2\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{y} = \sigma( W^2 \times \mathbf{h} + \mathbf{b}^2)\]</div>
@@ -448,7 +448,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_7_0.png" src="../_images/8-MLP-solution_7_0.png" />
+<img alt="../../_images/8-MLP-solution_7_0.png" src="../../_images/8-MLP-solution_7_0.png" />
 </div>
 </div>
 <p><strong>Q:</strong> Split the data into a training and test set (70/30). Make sure to call them <code class="docutils literal notranslate"><span class="pre">X_train,</span> <span class="pre">X_test,</span> <span class="pre">t_train,</span> <span class="pre">t_test</span></code>.</p>
@@ -739,7 +739,7 @@ positive class
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_18_0.png" src="../_images/8-MLP-solution_18_0.png" />
+<img alt="../../_images/8-MLP-solution_18_0.png" src="../../_images/8-MLP-solution_18_0.png" />
 </div>
 </div>
 <p><strong>A:</strong> The output neurons answers the same class for the whole input space. Let’s learn!</p>
@@ -862,12 +862,12 @@ positive class
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_23_0.png" src="../_images/8-MLP-solution_23_0.png" />
+<img alt="../../_images/8-MLP-solution_23_0.png" src="../../_images/8-MLP-solution_23_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 314
 Training accuracy: 1.0
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_23_2.png" src="../_images/8-MLP-solution_23_2.png" />
+<img alt="../../_images/8-MLP-solution_23_2.png" src="../../_images/8-MLP-solution_23_2.png" />
 </div>
 </div>
 <p><strong>Q:</strong> Use the <code class="docutils literal notranslate"><span class="pre">test()</span></code> method to compute the error on the test set. What is the test accuracy of your network after training? Compare it to the training accuracy.</p>
@@ -919,13 +919,13 @@ Training accuracy: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_27_0.png" src="../_images/8-MLP-solution_27_0.png" />
+<img alt="../../_images/8-MLP-solution_27_0.png" src="../../_images/8-MLP-solution_27_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 1000
 Training accuracy: 0.9
 Test accuracy: 0.9
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_27_2.png" src="../_images/8-MLP-solution_27_2.png" />
+<img alt="../../_images/8-MLP-solution_27_2.png" src="../../_images/8-MLP-solution_27_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> Surprisingly, 3 hidden neurons are enough for the non-linear dataset… This problem is really easy. The more hidden neurons, the faster it converges (in terms of epochs, not computation time…), as the model is more flexible.</p>
@@ -961,13 +961,13 @@ Test accuracy: 0.9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_30_0.png" src="../_images/8-MLP-solution_30_0.png" />
+<img alt="../../_images/8-MLP-solution_30_0.png" src="../../_images/8-MLP-solution_30_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 411
 Training accuracy: 1.0
 Test accuracy: 0.9333333333333333
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_30_2.png" src="../_images/8-MLP-solution_30_2.png" />
+<img alt="../../_images/8-MLP-solution_30_2.png" src="../../_images/8-MLP-solution_30_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> for such small networks and easy problems, a high learning rate of 0.2 works well (ca 600 epochs to converge). This won’t be true for deeper networks. Learning rates smaller than 0.01 take forever.</p>
@@ -1003,13 +1003,13 @@ Test accuracy: 0.9333333333333333
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_33_0.png" src="../_images/8-MLP-solution_33_0.png" />
+<img alt="../../_images/8-MLP-solution_33_0.png" src="../../_images/8-MLP-solution_33_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 1000
 Training accuracy: 0.5714285714285714
 Test accuracy: 0.3666666666666667
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_33_2.png" src="../_images/8-MLP-solution_33_2.png" />
+<img alt="../../_images/8-MLP-solution_33_2.png" src="../../_images/8-MLP-solution_33_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> this is a simple example of <strong>vanishing gradient</strong>. The backpropagated error gets multiplied by <code class="docutils literal notranslate"><span class="pre">W2</span></code>, which is initially zero. There is therefore no backpropagated error, the first layer cannot learn anything for a quite long time. The global function stays linear.</p>
@@ -1038,7 +1038,7 @@ Test accuracy: 0.3666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_36_0.png" src="../_images/8-MLP-solution_36_0.png" />
+<img alt="../../_images/8-MLP-solution_36_0.png" src="../../_images/8-MLP-solution_36_0.png" />
 </div>
 </div>
 <p><strong>A:</strong> Because of the random initialization of the weights, some networks converge faster than others, as their weights are initially closer to the solution and gradient descent is an iterative method.</p>
@@ -1163,13 +1163,13 @@ Test accuracy: 0.3666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_43_0.png" src="../_images/8-MLP-solution_43_0.png" />
+<img alt="../../_images/8-MLP-solution_43_0.png" src="../../_images/8-MLP-solution_43_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 1000
 Training accuracy: 0.5428571428571429
 Test accuracy: 0.33333333333333337
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_43_2.png" src="../_images/8-MLP-solution_43_2.png" />
+<img alt="../../_images/8-MLP-solution_43_2.png" src="../../_images/8-MLP-solution_43_2.png" />
 </div>
 </div>
 <p><strong>Q:</strong> Use this time the hyperbolic tangent function as a transfer function for the hidden neurons. Does it improve learning?</p>
@@ -1202,13 +1202,13 @@ Test accuracy: 0.33333333333333337
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_45_0.png" src="../_images/8-MLP-solution_45_0.png" />
+<img alt="../../_images/8-MLP-solution_45_0.png" src="../../_images/8-MLP-solution_45_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 258
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_45_2.png" src="../_images/8-MLP-solution_45_2.png" />
+<img alt="../../_images/8-MLP-solution_45_2.png" src="../../_images/8-MLP-solution_45_2.png" />
 </div>
 </div>
 <p><strong>Q:</strong> Use the Rectified Linear Unit (ReLU) transfer function. What does it change? Conclude on the importance of the transfer function for the hidden neurons. Select the best one from now on.</p>
@@ -1241,13 +1241,13 @@ Test accuracy: 0.9666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_47_0.png" src="../_images/8-MLP-solution_47_0.png" />
+<img alt="../../_images/8-MLP-solution_47_0.png" src="../../_images/8-MLP-solution_47_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 84
 Training accuracy: 1.0
 Test accuracy: 0.8666666666666667
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_47_2.png" src="../_images/8-MLP-solution_47_2.png" />
+<img alt="../../_images/8-MLP-solution_47_2.png" src="../../_images/8-MLP-solution_47_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> Using the linear function does not work at all, as the equivalent input/output model would be linear, and the data is non-linear. logistic and tanh work approximately in the same way. ReLU is the best.</p>
@@ -1273,7 +1273,7 @@ Test accuracy: 0.8666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_50_0.png" src="../_images/8-MLP-solution_50_0.png" />
+<img alt="../../_images/8-MLP-solution_50_0.png" src="../../_images/8-MLP-solution_50_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1305,13 +1305,13 @@ Test accuracy: 0.8666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_51_0.png" src="../_images/8-MLP-solution_51_0.png" />
+<img alt="../../_images/8-MLP-solution_51_0.png" src="../../_images/8-MLP-solution_51_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 1000
 Training accuracy: 0.7
 Test accuracy: 0.5
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_51_2.png" src="../_images/8-MLP-solution_51_2.png" />
+<img alt="../../_images/8-MLP-solution_51_2.png" src="../../_images/8-MLP-solution_51_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> It does not work anymore…</p>
@@ -1333,7 +1333,7 @@ Test accuracy: 0.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_54_0.png" src="../_images/8-MLP-solution_54_0.png" />
+<img alt="../../_images/8-MLP-solution_54_0.png" src="../../_images/8-MLP-solution_54_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1365,13 +1365,13 @@ Test accuracy: 0.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_55_0.png" src="../_images/8-MLP-solution_55_0.png" />
+<img alt="../../_images/8-MLP-solution_55_0.png" src="../../_images/8-MLP-solution_55_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 63
 Training accuracy: 1.0
 Test accuracy: 0.8666666666666667
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_55_2.png" src="../_images/8-MLP-solution_55_2.png" />
+<img alt="../../_images/8-MLP-solution_55_2.png" src="../../_images/8-MLP-solution_55_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> Now it works again. Conclusion: <strong>always</strong> normalize the data before training so that each input dimension has a mean of 0 and variance of 1. Refer batch normalization later.</p>
@@ -1456,13 +1456,13 @@ Test accuracy: 0.8666666666666667
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_59_0.png" src="../_images/8-MLP-solution_59_0.png" />
+<img alt="../../_images/8-MLP-solution_59_0.png" src="../../_images/8-MLP-solution_59_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 52
 Training accuracy: 1.0
 Test accuracy: 0.8333333333333334
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_59_2.png" src="../_images/8-MLP-solution_59_2.png" />
+<img alt="../../_images/8-MLP-solution_59_2.png" src="../../_images/8-MLP-solution_59_2.png" />
 </div>
 </div>
 </div>
@@ -1525,13 +1525,13 @@ Test accuracy: 0.8333333333333334
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_62_0.png" src="../_images/8-MLP-solution_62_0.png" />
+<img alt="../../_images/8-MLP-solution_62_0.png" src="../../_images/8-MLP-solution_62_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 50
 Training accuracy: 1.0
 Test accuracy: 0.9
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_62_2.png" src="../_images/8-MLP-solution_62_2.png" />
+<img alt="../../_images/8-MLP-solution_62_2.png" src="../../_images/8-MLP-solution_62_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> the decision function seems already quite centered at the beginning (closer to the solution), so it converges faster.</p>
@@ -1567,13 +1567,13 @@ Test accuracy: 0.9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8-MLP-solution_65_0.png" src="../_images/8-MLP-solution_65_0.png" />
+<img alt="../../_images/8-MLP-solution_65_0.png" src="../../_images/8-MLP-solution_65_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of epochs needed: 47
 Training accuracy: 1.0
 Test accuracy: 0.8666666666666667
 </pre></div>
 </div>
-<img alt="../_images/8-MLP-solution_65_2.png" src="../_images/8-MLP-solution_65_2.png" />
+<img alt="../../_images/8-MLP-solution_65_2.png" src="../../_images/8-MLP-solution_65_2.png" />
 </div>
 </div>
 <p><strong>A:</strong> Quite small changes can drastically change the performance of the network, both in terms of accuracy and training time. Data normalization, Glorot initialization and the use of ReLU are the most determinant here.</p>
@@ -1594,7 +1594,7 @@ Test accuracy: 0.8666666666666667
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./5-exercises"
+            path: "./5-exercises/staging"
         },
         predefinedOutput: true
     }
@@ -1630,7 +1630,7 @@ Test accuracy: 0.8666666666666667
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    <script src="../../_static/js/index.js"></script>
     
   </body>
 </html>

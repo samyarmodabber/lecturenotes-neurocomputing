@@ -1,4 +1,4 @@
-# Softmax Multi-class classification
+# Multi-class classification
 
 
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.5-Multiclassification.pdf)
