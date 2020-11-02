@@ -15,7 +15,7 @@
     - file: 2-linear/3-Regularization
     - file: 2-linear/4-LinearClassification
     # - file: 2-linear/5-Multiclassification
-#     - file: 2-linear/6-LearningTheory
+    # - file: 2-linear/6-LearningTheory
 
 # - part: Deep learning
 #   chapters:
@@ -74,6 +74,13 @@
           title: Notebook
         - file: 5-exercises/5-Crossvalidation-solution
           title: Solution
+
+    # - file: 5-exercises/ex6-LinearClassification
+    #   sections:
+    #     - file: 5-exercises/6-LinearClassification
+    #       title: Notebook
+    #     - file: 5-exercises/6-LinearClassification-solution
+    #       title: Solution
 
 
 - part: References

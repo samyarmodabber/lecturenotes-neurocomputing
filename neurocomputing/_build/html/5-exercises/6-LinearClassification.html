@@ -49,7 +49,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-LinearClassification.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Linear classification" />
-<meta property="og:description" content="Linear classification  import numpy as np import matplotlib.pyplot as plt  Linear perceptron algorithm  Linearly separable data  We start by generating a classi" />
+<meta property="og:description" content="Linear classification  The goal of this exercise is to study hard and soft binary linear classification.  import numpy as np import matplotlib.pyplot as plt  Ha" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -273,8 +273,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-perceptron-algorithm">
-   Linear perceptron algorithm
+  <a class="reference internal nav-link" href="#hard-linear-classification-perceptron-algorithm">
+   Hard linear classification: perceptron algorithm
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -290,8 +290,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#logistic-regression">
-   Logistic regression
+  <a class="reference internal nav-link" href="#soft-linear-classification-logistic-regression">
+   Soft linear classification: logistic regression
   </a>
  </li>
 </ul>
@@ -306,6 +306,7 @@
                 
   <div class="section" id="linear-classification">
 <h1>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to study hard and soft binary linear classification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -314,11 +315,11 @@
 </div>
 </div>
 </div>
-<div class="section" id="linear-perceptron-algorithm">
-<h2>Linear perceptron algorithm<a class="headerlink" href="#linear-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hard-linear-classification-perceptron-algorithm">
+<h2>Hard linear classification: perceptron algorithm<a class="headerlink" href="#hard-linear-classification-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="linearly-separable-data">
 <h3>Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h3>
-<p>We start by generating a classification dataset with 100 examples. You do not need to read the code generating the data.</p>
+<p>We start by generating a binary linear classification dataset with 100 examples (50 in each class). You do not need to read the code generating the data, we just randomly select 100 point in <span class="math notranslate nohighlight">\([0, 1]^2\)</span> and assign a label depending on their position.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
@@ -359,12 +360,12 @@
 <p>Our goal is to minimize the <strong>mean square error</strong> (mse) of the hyperplane on the training set:</p>
 <div class="math notranslate nohighlight">
 \[
-    L(\mathbf{w}, b) = \frac{1}{2N} \, \sum_{i=1}^N (t_i - y_i)^2
+    L(\mathbf{w}, b) = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2
 \]</div>
 <p>By applying gradient descent on this loss function, we obtain the <strong>delta learning rule</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-    \Delta \mathbf{w} = \eta \, \sum_{i=1}^N (t_i - y_i)
+    \Delta \mathbf{w} = \eta \, \sum_{i=1}^N (t_i - y_i) \, \mathbf{x}_i
 \]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -437,8 +438,8 @@
 <p><strong>Q:</strong> Apply your online Perceptron algorithm (with default values: <code class="docutils literal notranslate"><span class="pre">eta</span> <span class="pre">=</span> <span class="pre">0.1</span></code>, <code class="docutils literal notranslate"><span class="pre">nb_epochs</span> <span class="pre">=</span> <span class="pre">20</span></code>,<span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(b\)</span> initialized to 0) to the non-linear data. At the end of learning, compute the final error on the training set. What do you observe? Is it a satisfying result? Does it get better when you change the learning rate or weight initialization?</p>
 </div>
 </div>
-<div class="section" id="logistic-regression">
-<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="soft-linear-classification-logistic-regression">
+<h2>Soft linear classification: logistic regression<a class="headerlink" href="#soft-linear-classification-logistic-regression" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now see whether <strong>logistic regression</strong> helps us with outliers. The following cell implements the logistic function:</p>
 <div class="math notranslate nohighlight">
 \[\sigma(x) = \dfrac{1}{1 + e^{-x}}\]</div>

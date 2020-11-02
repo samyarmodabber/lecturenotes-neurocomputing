@@ -2,6 +2,7 @@
 title: Neurocomputing
 author: Julien Vitay - julien.vitay@informatik.tu-chemnitz.de
 logo: img/tuc.svg
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", "5-exercises/staging/*"]
 
 latex:
   latex_engine              : pdflatex
