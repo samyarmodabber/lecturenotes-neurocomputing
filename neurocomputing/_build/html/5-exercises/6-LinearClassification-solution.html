@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linear classification &#8212; Neurocomputing</title>
+    <title>6.2.2. Linear classification &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/6-LinearClassification-solution.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Bibliography" href="../zreferences.html" />
+    <link rel="prev" title="6.2.1. Linear classification" href="6-LinearClassification.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -136,13 +138,23 @@
    4. Linear classification
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ex1-Python.html">
    1. Introduction to Python
@@ -167,6 +179,23 @@
   <a class="reference internal" href="ex5-Crossvalidation.html">
    5. Cross-validation
   </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="6-LinearClassification.html">
+     6.2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.2.2. Solution
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -274,24 +303,24 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hard-linear-classification-perceptron-algorithm">
-   Hard linear classification: perceptron algorithm
+   6.2.2.1. Hard linear classification: perceptron algorithm
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#linearly-separable-data">
-     Linearly separable data
+     6.2.2.1.1. Linearly separable data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#non-linearly-separable-data">
-     Non-linearly separable data
+     6.2.2.1.2. Non-linearly separable data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#soft-linear-classification-logistic-regression">
-   Soft linear classification: logistic regression
+   6.2.2.2. Soft linear classification: logistic regression
   </a>
  </li>
 </ul>
@@ -305,7 +334,7 @@
               <div>
                 
   <div class="section" id="linear-classification">
-<h1>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.2.2. </span>Linear classification<a class="headerlink" href="#linear-classification" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this exercise is to study hard and soft binary linear classification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -316,9 +345,9 @@
 </div>
 </div>
 <div class="section" id="hard-linear-classification-perceptron-algorithm">
-<h2>Hard linear classification: perceptron algorithm<a class="headerlink" href="#hard-linear-classification-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.2.2.1. </span>Hard linear classification: perceptron algorithm<a class="headerlink" href="#hard-linear-classification-perceptron-algorithm" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="linearly-separable-data">
-<h3>Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.2.1.1. </span>Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h3>
 <p>We start by generating a binary linear classification dataset with 100 examples (50 in each class). You do not need to read the code generating the data, we just randomly select 100 point in <span class="math notranslate nohighlight">\([0, 1]^2\)</span> and assign a label depending on their position.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -660,7 +689,7 @@
 <p>If <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is initially big, you will need a lot of iterations to bring it in the right direction, as you only add small errors at each time step. The learning rate will then influence a lot the speed of convergence.</p>
 </div>
 <div class="section" id="non-linearly-separable-data">
-<h3>Non-linearly separable data<a class="headerlink" href="#non-linearly-separable-data" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.2.1.2. </span>Non-linearly separable data<a class="headerlink" href="#non-linearly-separable-data" title="Permalink to this headline">¶</a></h3>
 <p>The generated dataset was obviously linearly separable, because you found a linear hyperplane able to classify it… Let’s now see what happens when you apply your algorithm on a non-linearly separable dataset. It is basically the same method as before, except that we add one outlier at the end.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -767,7 +796,7 @@
 </div>
 </div>
 <div class="section" id="soft-linear-classification-logistic-regression">
-<h2>Soft linear classification: logistic regression<a class="headerlink" href="#soft-linear-classification-logistic-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.2.2.2. </span>Soft linear classification: logistic regression<a class="headerlink" href="#soft-linear-classification-logistic-regression" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now see whether <strong>logistic regression</strong> helps us with outliers. The following cell implements the logistic function:</p>
 <div class="math notranslate nohighlight">
 \[\sigma(x) = \dfrac{1}{1 + e^{-x}}\]</div>
@@ -894,6 +923,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="6-LinearClassification.html" title="previous page"><span class="section-number">6.2.1. </span>Linear classification</a>
+    <a class='right-next' id="next-link" href="../zreferences.html" title="next page"><span class="section-number">1. </span>Bibliography</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

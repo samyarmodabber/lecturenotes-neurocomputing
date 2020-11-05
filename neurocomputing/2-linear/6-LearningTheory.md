@@ -2,6 +2,8 @@
 
 ## Error measurements
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/WNGmapP2JL8' frameborder='0' allowfullscreen></iframe></div>
+
 The **training error** is the error made on the training set. It is easy to measure for classification as the number of misclassified examples divided by the total number of examples.
 
 $$
@@ -98,6 +100,8 @@ Beware: the test data must come from the same distribution as the training data,
 
 ## Vapnik-Chervonenkis dimension
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/w3drWJ-tFH8' frameborder='0' allowfullscreen></iframe></div>
+
 How many data examples can be correctly classified by a linear model in $\Re^d$?
 In $\Re^2$, all dichotomies of three non-aligned examples can be correctly classified by a linear model ($y = w_1 \, x_1 + w_2 \, x_2 + b$).
 
@@ -185,6 +189,8 @@ However, if the space has too many dimensions, the VC dimension will increase an
 
 
 ## Feature space
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/KXCcZBFuk08' frameborder='0' allowfullscreen></iframe></div>
 
 ```{admonition} Cover's theorem on the separability of patterns (1965)
 A complex pattern-classification problem, cast in a high dimensional space non-linearly, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.*

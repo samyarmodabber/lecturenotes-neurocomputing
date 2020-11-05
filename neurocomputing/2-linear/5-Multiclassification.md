@@ -3,6 +3,8 @@
 
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.5-Multiclassification.pdf)
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/24GpIHcaTxA' frameborder='0' allowfullscreen></iframe></div>
+
 ## Multi-class classification
 
 Can we perform multi-class classification using the previous methods when $t \in \{A, B, C\}$ instead of $t = +1$ or $-1$? There are two main solutions:
@@ -306,7 +308,7 @@ $$
     \mathbf{y} = \sigma(W \times \mathbf{x} + \mathbf{b})
 $$
 
-The outputs are between 0 and 1, but they do not sum to one. Each output neuron performs **linear regression for soft classification** on their class:
+The outputs are between 0 and 1, but they do not sum to one. Each output neuron performs a **logistic regression for soft classification** on their class:
 
 $$y_j = P(\text{class} = j | \mathbf{x})$$
 
