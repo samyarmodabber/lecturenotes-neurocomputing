@@ -17,9 +17,9 @@
     - file: 2-linear/5-Multiclassification
     - file: 2-linear/6-LearningTheory
 
-- part: Deep learning
-  chapters:
-    # - file: 3-deeplearning/1-NN
+#- part: Deep learning
+#  chapters:
+#     - file: 3-deeplearning/1-NN
 #     - file: 3-deeplearning/2-DNN
 #     - file: 3-deeplearning/3-CNN
 #     - file: 3-deeplearning/4-ObjectDetection
