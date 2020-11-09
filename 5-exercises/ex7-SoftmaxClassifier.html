@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Numpy and Matplotlib &#8212; Neurocomputing</title>
+    <title>7. Softmax classifier &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,21 +37,21 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex2-Numpy.html" />
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex7-SoftmaxClassifier.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2.1. Introduction to Numpy and Matplotlib" href="2-Numpy.html" />
-    <link rel="prev" title="1.2.2. Introduction To Python" href="1-Python-solution.html" />
+    <link rel="next" title="7.2.1. Softmax classification" href="7-SoftmaxClassifier.html" />
+    <link rel="prev" title="6.2.2. Linear classification" href="6-LinearClassification-solution.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex2-Numpy.html" />
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex7-SoftmaxClassifier.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Numpy and Matplotlib" />
-<meta property="og:description" content="Numpy and Matplotlib  The goal of this exercise is to present the basics of the numerical library numpy as well as the visualization library matplotlib.  Presen" />
+<meta property="og:title"       content="Softmax classifier" />
+<meta property="og:description" content="Softmax classifier  The goal of this exercise is to investigate the linear sofmtax classifier on single digits.  Presentation  &lt;div class=&#34;embed-container&#34;&gt;   &lt;" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -157,7 +157,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../3-deeplearning/1-NN.html">
-   1. Artificial neural networks
+   1. Backpropagation
   </a>
  </li>
 </ul>
@@ -172,22 +172,10 @@
    1. Introduction to Python
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
    2. Numpy and Matplotlib
   </a>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2-Numpy.html">
-     2.2.1. Notebook
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2-Numpy-solution.html">
-     2.2.2. Solution
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ex3-LinearRegression.html">
@@ -209,10 +197,22 @@
    6. Linear classification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ex7-SoftmaxClassifier.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    7. Softmax classifier
   </a>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="7-SoftmaxClassifier.html">
+     7.2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="7-SoftmaxClassifier-solution.html">
+     7.2.2. Solution
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -268,7 +268,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/5-exercises/ex2-Numpy.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/5-exercises/ex7-SoftmaxClassifier.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -298,12 +298,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#presentation">
-   2.1. Presentation
+   7.1. Presentation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commented-solution">
-   2.2. Commented solution
+   7.2. Commented solution
   </a>
  </li>
 </ul>
@@ -316,19 +316,19 @@
         
               <div>
                 
-  <div class="section" id="numpy-and-matplotlib">
-<h1><span class="section-number">2. </span>Numpy and Matplotlib<a class="headerlink" href="#numpy-and-matplotlib" title="Permalink to this headline">¶</a></h1>
-<p>The goal of this exercise is to present the basics of the numerical library <code class="docutils literal notranslate"><span class="pre">numpy</span></code> as well as the visualization library <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+  <div class="section" id="softmax-classifier">
+<h1><span class="section-number">7. </span>Softmax classifier<a class="headerlink" href="#softmax-classifier" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to investigate the linear sofmtax classifier on single digits.</p>
 <div class="section" id="presentation">
-<h2><span class="section-number">2.1. </span>Presentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>Presentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h2>
 <div class="embed-container">
-  <iframe src="https://www.youtube.com/embed/0FBuLT04r-M" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
 </div>
 </div>
 <div class="section" id="commented-solution">
-<h2><span class="section-number">2.2. </span>Commented solution<a class="headerlink" href="#commented-solution" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>Commented solution<a class="headerlink" href="#commented-solution" title="Permalink to this headline">¶</a></h2>
 <div class="embed-container">
-  <iframe src="https://www.youtube.com/embed/kngLlgI3eKU" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -363,8 +363,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="1-Python-solution.html" title="previous page"><span class="section-number">1.2.2. </span>Introduction To Python</a>
-    <a class='right-next' id="next-link" href="2-Numpy.html" title="next page"><span class="section-number">2.2.1. </span>Introduction to Numpy and  Matplotlib</a>
+    <a class='left-prev' id="prev-link" href="6-LinearClassification-solution.html" title="previous page"><span class="section-number">6.2.2. </span>Linear classification</a>
+    <a class='right-next' id="next-link" href="7-SoftmaxClassifier.html" title="next page"><span class="section-number">7.2.1. </span>Softmax classification</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
