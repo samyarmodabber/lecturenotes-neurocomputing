@@ -199,7 +199,7 @@ $$
 i.e. the same as with the mse in linear regression! Refer <https://peterroelants.github.io/posts/cross-entropy-softmax/> for more explanations on the proof. 
 
 ```{note}
-When differentiating a softmax probability $y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}$ w.r.t a logit score $z_i$, i.e. $\dfrac{\partial \log(y_j)}{\partial z_i}$, we need to consider two cases:
+When differentiating a softmax probability $y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}$ w.r.t a logit score $z_i$, i.e. $\dfrac{\partial y_j}{\partial z_i}$, we need to consider two cases:
 
 * If $i=j$, $\exp(z_i)$ appears both at the numerator and denominator of $\frac{\exp(z_i)}{\sum_k \exp(z_k)}$. The product rule $(f\times g)' = f'\, g + f \, g'$ gives us:
 
