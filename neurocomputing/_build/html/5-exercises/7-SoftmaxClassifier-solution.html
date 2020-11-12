@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Softmax classification &#8212; Neurocomputing</title>
+    <title>7.2.2. Softmax classification &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/7-SoftmaxClassifier-solution.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Bibliography" href="../zreferences.html" />
+    <link rel="prev" title="7.2.1. Softmax classification" href="7-SoftmaxClassifier.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -149,10 +151,22 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Exercises
+  Deep learning
  </span>
 </p>
 <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Backpropagation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ex1-Python.html">
    1. Introduction to Python
@@ -182,6 +196,23 @@
   <a class="reference internal" href="ex6-LinearClassification.html">
    6. Linear classification
   </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="7-SoftmaxClassifier.html">
+     7.2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7.2.2. Solution
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -289,17 +320,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loading-the-data">
-   Loading the data
+   7.2.2.1. Loading the data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#softmax-linear-classifier">
-   Softmax linear classifier
+   7.2.2.2. Softmax linear classifier
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementation">
-   Implementation
+   7.2.2.3. Implementation
   </a>
  </li>
 </ul>
@@ -313,7 +344,7 @@
               <div>
                 
   <div class="section" id="softmax-classification">
-<h1>Softmax classification<a class="headerlink" href="#softmax-classification" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7.2.2. </span>Softmax classification<a class="headerlink" href="#softmax-classification" title="Permalink to this headline">¶</a></h1>
 <p>In this exercise, you will implement a softmax classifier for multi-class classification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -324,7 +355,7 @@
 </div>
 </div>
 <div class="section" id="loading-the-data">
-<h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.2.1. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now import the <code class="docutils literal notranslate"><span class="pre">digits</span></code> dataset provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html</a></p>
 <p>It contains 1797 small (8x8) black and white images of digits between 0 and 9.</p>
@@ -439,13 +470,13 @@
 </div>
 </div>
 <div class="section" id="softmax-linear-classifier">
-<h2>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.2.2. </span>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h2>
 <p>Let’s remember the structure of the softmax linear classifier: the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is transformed into a <strong>logit score</strong> vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> using a weight matrix <span class="math notranslate nohighlight">\(W\)</span> and a bias vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
 \]</div>
-<p>This logit score has one element per class, so the weight matrix must have a size <span class="math notranslate nohighlight">\((c, d)\)</span>, where <span class="math notranslate nohighlight">\(c\)</span> is the number of classes (3) and <span class="math notranslate nohighlight">\(d\)</span> is the number of dimensions of the input space (2). The bias vector has 3 elements (one per class).</p>
+<p>This logit score has one element per class, so the weight matrix must have a size <span class="math notranslate nohighlight">\((c, d)\)</span>, where <span class="math notranslate nohighlight">\(c\)</span> is the number of classes (10) and <span class="math notranslate nohighlight">\(d\)</span> is the number of dimensions of the input space (64). The bias vector has 10 elements (one per class).</p>
 <p>The logit score is turned into probabilities using the <strong>softmax</strong> operator:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -494,7 +525,7 @@
 <p>Note that because <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\((c, d)\)</span> matrix, <span class="math notranslate nohighlight">\(\Delta W\)</span> too. <span class="math notranslate nohighlight">\((\mathbf{t} - \mathbf{y}) \, \mathbf{x}^T\)</span> is therefore the <strong>outer product</strong> between the error vector <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}\)</span> (<span class="math notranslate nohighlight">\(c\)</span> elements) and the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (<span class="math notranslate nohighlight">\(d\)</span> elements).</p>
 </div>
 <div class="section" id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.2.3. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>You will now modify your implementation of the online Perceptron algorithm from last week.</p>
 <p>Some things to keep in mind:</p>
 <ul class="simple">
@@ -504,7 +535,7 @@
 <li><p>For <span class="math notranslate nohighlight">\(\Delta W\)</span>, you will need the <strong>outer</strong> product between the vectors <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}_\text{train}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_\text{train}\)</span>. Check the doc for <code class="docutils literal notranslate"><span class="pre">np.outer()</span></code>.</p></li>
 <li><p>The one-hot encoding of the class of the example <span class="math notranslate nohighlight">\(i\)</span> is now a vector with 10 elements <code class="docutils literal notranslate"><span class="pre">t_train[i,</span> <span class="pre">:]</span></code>. You can get the index of the corresponding class by looking at the position of its maximum with <code class="docutils literal notranslate"><span class="pre">t_train[i,</span> <span class="pre">:].argmax()</span></code>.</p></li>
 <li><p>Similarly, the predicted class by the model can be identified by the class with the maximum probability: <code class="docutils literal notranslate"><span class="pre">y.argmax()</span></code>.</p></li>
-<li><p>Do not forget to record and plot the evolution of the training error and loss. Compute the test error and loss at the end of learning.</p></li>
+<li><p>Do not forget to record and plot the evolution of the training error and loss. Compute the test error and loss at the end of each epoch, and plot them together with the training error/loss.</p></li>
 <li><p>Pick the right learning rate and number of epochs.</p></li>
 </ul>
 <p><strong>Q:</strong> Let’s go.</p>
@@ -521,6 +552,8 @@
 <span class="c1"># Perceptron algorithm</span>
 <span class="n">training_errors</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">training_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_losses</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
     <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
@@ -551,38 +584,45 @@
     <span class="n">training_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N_train</span><span class="p">)</span>
     <span class="n">training_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N_train</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final training error:&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">/</span><span class="n">N_train</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final training loss:&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">/</span><span class="n">N_train</span><span class="p">)</span>
+    <span class="c1"># Test error</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
 
-<span class="c1"># Test error</span>
-<span class="n">test_error</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">test_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Iterate over all test examples</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_test</span><span class="p">):</span>
 
-<span class="c1"># Iterate over all test examples</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_test</span><span class="p">):</span>
+        <span class="c1"># Prediction</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span>
 
-    <span class="c1"># Prediction</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="c1"># Probability</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
-    <span class="c1"># Probability</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="c1"># Increment the error if the maximum probability is different from the class</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">():</span>
+            <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1"># Increment the error if the maximum probability is different from the class</span>
-    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">():</span>
-        <span class="n">test_error</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Accumulate the loss</span>
+        <span class="n">loss</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()])</span>
 
-    <span class="c1"># Accumulate the loss</span>
-    <span class="n">test_loss</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">t_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()])</span>
+    <span class="n">test_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="o">/</span><span class="n">N_test</span><span class="p">)</span>
+    <span class="n">test_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">/</span><span class="n">N_test</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test error:&quot;</span><span class="p">,</span> <span class="n">test_error</span><span class="o">/</span><span class="n">N_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test loss:&quot;</span><span class="p">,</span> <span class="n">test_loss</span><span class="o">/</span><span class="n">N_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final training error:&quot;</span><span class="p">,</span> <span class="n">training_errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final training loss:&quot;</span><span class="p">,</span> <span class="n">training_losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final test error:&quot;</span><span class="p">,</span> <span class="n">test_errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final test loss:&quot;</span><span class="p">,</span> <span class="n">test_errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">training_errors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">training_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">training_losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">training_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cross-entropy loss&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -590,19 +630,21 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final training error: 0.0
-Final training loss: 0.005902052488010588
-Test error: 0.046296296296296294
-Test loss: 0.20035874867574222
+Final training loss: 0.005654702534318429
+Final test error: 0.02962962962962963
+Final test loss: 0.02962962962962963
 </pre></div>
 </div>
 <img alt="../_images/7-SoftmaxClassifier-solution_22_1.png" src="../_images/7-SoftmaxClassifier-solution_22_1.png" />
 </div>
 </div>
-<p><strong>Q:</strong> With a small learning rate (0.001), what is the final training error and loss of the model? Is it what you expected? Why do they evolve like this? What about the test error/loss?</p>
+<p><strong>Q:</strong> What is the final training error and loss of the model? After how many epochs do you get a perfect classification? Why do they evolve like this?</p>
 <p><em>Hint:</em> you may need to avoid plotting the error/loss during the first 20 epochs or so to observe the effect.</p>
 <p><strong>A:</strong> The training error reaches quickly 0, but the loss still decreases for a number of epochs. This is because the probability vector <code class="docutils literal notranslate"><span class="pre">y</span></code> is a correct prediction for the class (the maximum probability corresponds to the correct class) but not with a probability of 1 yet. The loss continues to evolve even when there is no error, as it wants to bring the probability vector as close as possible to a binary vector.</p>
 <p>This is the main difference with the mean square error (mse) loss function: as soon as there are no errors, the mse loss becomes 0 and learning stops. In classification problems, one should therefore track the loss function, not the training error.</p>
+<p><strong>Q:</strong> Compare the evolution of the training and test errors during training. What happens?</p>
 <p>The test error is higher than the final training error. as the examples were not use for training. This is a classical sign of <strong>overfitting</strong>, although the model is linear. Regularization may help.</p>
+<p>If you let the network learn for more epochs, the validation error may even start to go up: you need <strong>early stopping</strong>.</p>
 <p><strong>Q:</strong> The following cell samples 12 misclassified images from the test and shows the predicted class together with the ground truth. What do you think?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -628,7 +670,7 @@ Test loss: 0.20035874867574222
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7-SoftmaxClassifier-solution_26_0.png" src="../_images/7-SoftmaxClassifier-solution_26_0.png" />
+<img alt="../_images/7-SoftmaxClassifier-solution_28_0.png" src="../_images/7-SoftmaxClassifier-solution_28_0.png" />
 </div>
 </div>
 <p><strong>A:</strong> for some misclassified images, the mistakes are quite understandable, so the classifier did a quite good job. Real-world data are never clean, there always are some bad annotations. It is therefore important to use methods that are robust to outliers, such as soft classifiers.</p>
@@ -663,6 +705,8 @@ Test loss: 0.20035874867574222
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="7-SoftmaxClassifier.html" title="previous page"><span class="section-number">7.2.1. </span>Softmax classification</a>
+    <a class='right-next' id="next-link" href="../zreferences.html" title="next page"><span class="section-number">1. </span>Bibliography</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

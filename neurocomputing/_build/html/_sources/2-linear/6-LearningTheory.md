@@ -1,5 +1,7 @@
 # Learning theory
 
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.6-LearningTheory.pdf)
+
 ## Error measurements
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/WNGmapP2JL8' frameborder='0' allowfullscreen></iframe></div>

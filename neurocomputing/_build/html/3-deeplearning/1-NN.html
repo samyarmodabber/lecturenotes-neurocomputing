@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backpropagation &#8212; Neurocomputing</title>
+    <title>1. Artificial neural networks &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/1-NN.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="prev" title="6. Learning theory" href="../2-linear/6-LearningTheory.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -48,8 +50,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/1-NN.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Backpropagation" />
-<meta property="og:description" content="Backpropagation" />
+<meta property="og:title"       content="Artificial neural networks" />
+<meta property="og:description" content="Artificial neural networks  Slides: pdf  Multi-layer perceptron  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/M5GwvFpzrjE&#39; frameborde" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -149,6 +151,18 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Artificial neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Exercises
  </span>
 </p>
@@ -181,6 +195,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
    6. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
   </a>
  </li>
 </ul>
@@ -264,7 +283,68 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-layer-perceptron">
+   1.1. Multi-layer perceptron
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fully-connected-layer">
+     1.1.1. Fully-connected layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#activation-functions">
+     1.1.2. Activation functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-function">
+     1.1.3. Loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimizer">
+     1.1.4. Optimizer
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation">
+   1.2. Backpropagation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backpropagation-on-a-shallow-network">
+     1.2.1. Backpropagation on a shallow network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backpropagation-at-the-neuron-level">
+     1.2.2. Backpropagation at the neuron level
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#universal-approximation-theorem">
+     1.2.3. Universal approximation theorem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backpropagation-on-a-deep-neural-network">
+     1.2.4. Backpropagation on a deep neural network
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-a-shallow-network">
+   1.3. Example of a shallow network
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -273,8 +353,593 @@
         
               <div>
                 
-  <div class="section" id="backpropagation">
-<h1>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="artificial-neural-networks">
+<h1><span class="section-number">1. </span>Artificial neural networks<a class="headerlink" href="#artificial-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.1-NeuralNetworks.pdf">pdf</a></p>
+<div class="section" id="multi-layer-perceptron">
+<h2><span class="section-number">1.1. </span>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/M5GwvFpzrjE' frameborder='0' allowfullscreen></iframe></div>
+<p>A <strong>Multi-Layer Perceptron</strong> (MLP) or <strong>feedforward neural network</strong> is composed of:</p>
+<ul class="simple">
+<li><p>an input layer for the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></p></li>
+<li><p>one or several hidden layers allowing to project non-linearly the input into a space of higher dimensions <span class="math notranslate nohighlight">\(\mathbf{h}_1, \mathbf{h}_2, \mathbf{h}_3, \ldots\)</span>.</p></li>
+<li><p>an output layer for the output <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>.</p></li>
+</ul>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/mlp.svg"><img alt="../_images/mlp.svg" src="../_images/mlp.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.29 </span><span class="caption-text">Multi-layer perceptron with one hidden layer.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>If there is a single hidden layer <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> (shallow network), it corresponds to the feature space. Each layer takes inputs from the previous layer. If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>.</p>
+<div class="section" id="fully-connected-layer">
+<h3><span class="section-number">1.1.1. </span>Fully-connected layer<a class="headerlink" href="#fully-connected-layer" title="Permalink to this headline">¶</a></h3>
+<p>The operation performed by each layer can be written in the form of a <strong>matrix-vector</strong> multiplication:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
+\]</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/matrixvector.png"><img alt="../_images/matrixvector.png" src="../_images/matrixvector.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.30 </span><span class="caption-text">Fully-connected layer.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Fully-connected layers</strong> (FC) transform an input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> into a new vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> by multiplying it by a <strong>weight matrix</strong> <span class="math notranslate nohighlight">\(W\)</span> and adding a <strong>bias vector</strong> <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. A non-linear <strong>activation function</strong> transforms each element of the net activation.</p>
+</div>
+<div class="section" id="activation-functions">
+<h3><span class="section-number">1.1.2. </span>Activation functions<a class="headerlink" href="#activation-functions" title="Permalink to this headline">¶</a></h3>
+<p>Here are some of the most useful activation functions in a MLP.</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/ratecoded-transferfunctions1.png"><img alt="../_images/ratecoded-transferfunctions1.png" src="../_images/ratecoded-transferfunctions1.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.31 </span><span class="caption-text">Some classical activation functions in MLPs.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Threshold function (output is binary)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    f(x) = \begin{cases} 1 \; \text{if} \; x \geq 0 \\ 0 \; \text{otherwise.} \end{cases}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Logistic / sigmoid function (output is continuous and bounded between 0 and 1)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    f(x) = \dfrac{1}{1 + \exp -x}
+\]</div>
+<ul class="simple">
+<li><p>Hyperbolic function (output is continuous and bounded between -1 and 1)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    f(x) = \text{tanh}(x)
+\]</div>
+<ul class="simple">
+<li><p>Rectified linear function - ReLU (output is continuous and positive).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.} \end{cases}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Parametric Rectifier Linear Unit - PReLU (output is continuous and unbounded).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    f(x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ \alpha \, x  \quad \text{otherwise.}\end{cases}
+\end{split}\]</div>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/prelu.ppm"><img alt="../_images/prelu.ppm" src="../_images/prelu.ppm" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.32 </span><span class="caption-text">ReLU vs. PReLU activation functions.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math notranslate nohighlight">\(\mathbf{y} = \{y_j\}\)</span> over all output neurons is one.</p>
+<div class="math notranslate nohighlight">
+\[
+    y_j = P(\text{class = j}) = \frac{\exp(\text{net}_j)}{\sum_k \exp(\text{net}_k)}
+\]</div>
+<p>The higher the net activation <span class="math notranslate nohighlight">\(\text{net}_j\)</span>, the higher the probability that the example belongs to class <span class="math notranslate nohighlight">\(j\)</span>. Softmax is not <em>per se</em> a transfer function (not local to each neuron), but the idea is similar.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why not use the linear function <span class="math notranslate nohighlight">\(f(x) = x\)</span> in the hidden layer?</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{h} = W^1 \, \mathbf{x} + \mathbf{b}^1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2
+\]</div>
+<p>We would have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+    \mathbf{y} &amp;= W^2 \, (W^1 \, \mathbf{x} + \mathbf{b}^1) + \mathbf{b}^2 \\
+               &amp;= (W^2 \, W^1) \, \mathbf{x} + (W^2 \, \mathbf{b}^1 + \mathbf{b}^2) \\
+               &amp;= W \, \mathbf{x} + \mathbf{b} \\
+\end{align*}
+\end{split}\]</div>
+<p>so the equivalent function would be linear…</p>
+<p>Remember Cover’s theorem:</p>
+<blockquote>
+<div><p>A complex pattern-classification problem, cast in a high dimensional space <strong>non-linearly</strong>, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.</p>
+</div></blockquote>
+<p>In practice it does not matter how non-linear the function is (e.g PReLU is almost linear), but there must be at least one non-linearity.</p>
+</div>
+</div>
+<div class="section" id="loss-function">
+<h3><span class="section-number">1.1.3. </span>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h3>
+<p>We have a training set \mathcal{D} composed of N input/output pairs <span class="math notranslate nohighlight">\((\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}\)</span>. What are the free parameters <span class="math notranslate nohighlight">\(\theta\)</span> (weights <span class="math notranslate nohighlight">\(W^1, W^2\)</span> and biases <span class="math notranslate nohighlight">\(\textbf{b}^1, \textbf{b}^2\)</span>) making the prediction <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> as close as possible from the desired output <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>?</p>
+<p>We define a <strong>loss function</strong> <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span> of the free parameters which should be minimized:</p>
+<ul class="simple">
+<li><p>For <strong>regression</strong> problems, we take the <strong>mean square error</strong> (mse):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{L}_\text{reg}(\theta) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
+\]</div>
+<ul class="simple">
+<li><p>For <strong>classification</strong> problems, we take the <strong>cross-entropy</strong> or <strong>negative log-likelihood</strong> on a softmax output layer:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_\text{class}(\theta) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]\]</div>
+</div>
+<div class="section" id="optimizer">
+<h3><span class="section-number">1.1.4. </span>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">¶</a></h3>
+<p>To minimize the chosen loss function, we are going to use <strong>stochastic gradient descent</strong> iteratively until the network converges:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    \Delta W^1 = - \eta \, \nabla_{W^1} \, \mathcal{L}(\theta) \\
+    \\
+    \Delta \mathbf{b}^1 = - \eta \, \nabla_{\mathbf{b}^1} \, \mathcal{L}(\theta) \\
+    \\
+    \Delta W^2 = - \eta \, \nabla_{W^2} \, \mathcal{L}(\theta) \\
+    \\
+    \Delta \mathbf{b}^2 = - \eta \, \nabla_{\mathbf{b}^2} \, \mathcal{L}(\theta)\\
+\end{cases}
+\end{split}\]</div>
+<p>We will see later that other optimizers than SGD can be used. The question is now how to compute efficiently these <strong>gradients</strong> w.r.t all the weights and biases. The algorithm to achieve this is called <strong>backpropagation</strong> <a class="bibtex reference internal" href="../zreferences.html#rumelhart1986a" id="id1">[RHW86]</a>, which is simply a smart implementation of the chain rule.</p>
+</div>
+</div>
+<div class="section" id="backpropagation">
+<h2><span class="section-number">1.2. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/eq3uVwtzWmA' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="backpropagation-on-a-shallow-network">
+<h3><span class="section-number">1.2.1. </span>Backpropagation on a shallow network<a class="headerlink" href="#backpropagation-on-a-shallow-network" title="Permalink to this headline">¶</a></h3>
+<p>A shallow MLP computes:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
+\]</div>
+<p>The chain rule gives us for the parameters of the output layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial W^2} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}^2} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2}
+\]</div>
+<p>and for the hidden layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial W^1} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}^1} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1}
+\]</div>
+<p>If we can compute all these partial derivatives / gradients individually, the problem is solved.</p>
+<p>We have already seen for the linear algorithms that the derivative of the loss function w.r.t the net activation of the output <span class="math notranslate nohighlight">\(\textbf{net}_\mathbf{y}\)</span> is proportional to the <strong>prediction error</strong> <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}\)</span>:</p>
+<ul class="simple">
+<li><p>mse for regression:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_y} = - \frac{\partial \mathcal{l}_\text{reg}(\theta)}{\partial \textbf{net}_\mathbf{y}} = - \frac{\partial \mathcal{l}_\text{reg}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} = 2 \, (\mathbf{t} - \mathbf{y}) \, f'(\textbf{net}_\mathbf{y})
+\]</div>
+<ul class="simple">
+<li><p>cross-entropy using a softmax output layer:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_y} = - \frac{\partial \mathcal{l}_\text{class}(\theta)}{\partial \textbf{net}_\mathbf{y}} = (\mathbf{t} - \mathbf{y})
+\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{\delta_y} = - \dfrac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}\)</span> is called the output error. The output error is going to appear in all partial derivatives, i.e. in all learning rules. The backpropagation algorithm is sometimes called <strong>backpropagation of the error</strong>.</p>
+<p>We now have everything we need to train the output layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2} = - \mathbf{\delta_y}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2} = - \mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2}
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2\)</span>, we get for the cross-entropy loss:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = - \mathbf{\delta_y} \times \mathbf{h}^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = - \mathbf{\delta_y}
+\]</div>
+<p>i.e. exactly the same delta learning rule as a softmax linear classifier or multiple linear regression using the vector <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> as an input.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W^2 = \eta \, \mathbf{\delta_y} \times \mathbf{h}^T = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{h}^T \\
+    \\
+    \Delta \mathbf{b}^2 = \eta \,  \mathbf{\delta_y} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\end{split}\]</div>
+<p>Let’s now note <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span> the <strong>hidden error</strong>, i.e. the gradient of the loss function w.r.t the net activation of the hidden layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_h} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}  = - \mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}
+\]</div>
+<p>Using this hidden error, we can compute the gradients w.r.t <span class="math notranslate nohighlight">\(W^1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}^1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial W^1} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1} = - \mathbf{\delta_h} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^1} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1} = - \mathbf{\delta_h} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1}
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(\textbf{net}_\mathbf{h} = W^1 \, \mathbf{x} + \mathbf{b}^1\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial W^1} =  - \mathbf{\delta_h} \times \mathbf{x}^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^1} =  - \mathbf{\delta_h}
+\]</div>
+<p>If we know the <strong>hidden error</strong> <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span>, the update rules for the input weights <span class="math notranslate nohighlight">\(W^1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}^1\)</span> also take the form of the delta learning rule:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W^1 = \eta \,   \mathbf{\delta_h} \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b}^1 = \eta \,  \mathbf{\delta_h} \\
+\end{cases}
+\end{split}\]</div>
+<p>This is the classical form eta * error * input. All we need to know is the <strong>backpropagated error</strong> <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span> and we can apply the delta learning rule!</p>
+<p>The backpropagated error <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span> is a vector assigning an error to each of the hidden neurons:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_h} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}}  = -\mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}
+\]</div>
+<p>As :</p>
+<div class="math notranslate nohighlight">
+\[\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{h} = f(\textbf{net}_\mathbf{h})\]</div>
+<p>we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_h} = -  f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span> have <span class="math notranslate nohighlight">\(K\)</span> elements and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\delta_y}\)</span> have <span class="math notranslate nohighlight">\(C\)</span> elements, the matrix <span class="math notranslate nohighlight">\(W^2\)</span> is <span class="math notranslate nohighlight">\(C \times K\)</span> as <span class="math notranslate nohighlight">\(W^2 \times \mathbf{h}\)</span> must be a vector with <span class="math notranslate nohighlight">\(C\)</span> elements. <span class="math notranslate nohighlight">\((W^2)^T \times \mathbf{\delta_y}\)</span> is therefore a vector with <span class="math notranslate nohighlight">\(K\)</span> elements, which is then multiplied element-wise with the derivative of the transfer function to obtain <span class="math notranslate nohighlight">\(\mathbf{\delta_h}\)</span>.</p>
+<div class="admonition-backpropagation-for-a-shallow-mlp admonition">
+<p class="admonition-title">Backpropagation for a shallow MLP</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/mlp.svg"><img alt="../_images/mlp.svg" src="../_images/mlp.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.33 </span><span class="caption-text">Shallow MLP.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>For a shallow MLP with one hidden layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
+\]</div>
+<p>the output error:</p>
+<div class="math notranslate nohighlight">
+\[
+        \mathbf{\delta_y} = - \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}} = (\mathbf{t} - \mathbf{y})
+    \]</div>
+<p>is <strong>backpropagated</strong> to the hidden layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\delta_h} = -  f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
+\]</div>
+<p>what allows to apply the delta learning rule to all parameters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    \Delta W^2 = \eta \, \mathbf{\delta_y} \times \mathbf{h}^T \\
+    \Delta \mathbf{b}^2 = \eta \,  \mathbf{\delta_y} \\
+    \Delta W^1 = \eta \, \mathbf{\delta_h}  \times  \mathbf{x}^T \\
+    \Delta \mathbf{b}^1 = \eta \, \mathbf{\delta_h}  \\
+\end{cases}
+\end{split}\]</div>
+</div>
+<p>The usual transfer functions are easy to derive (that is why they are chosen…).</p>
+<ul class="simple">
+<li><p>Threshold and sign functions are not differentiable, we simply consider the derivative is 1.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases} 1 \quad \text{if} \quad x \geq 0 \\ 0 \text{ or } 1 \quad \text{otherwise.} \end{cases} \qquad \rightarrow \qquad f'(x) = 1
+\end{split}\]</div>
+<ul class="simple">
+<li><p>The logistic or sigmoid function has the nice property that its derivative can be expressed as a function of itself:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{1+\exp(-x)} \qquad \rightarrow \qquad f'(x) = f(x) \, (1 - f(x))
+\]</div>
+<ul class="simple">
+<li><p>The hyperbolic tangent function too:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \tanh(x) \qquad \rightarrow \qquad f'(x) = 1 - f(x)^2
+\]</div>
+<ul class="simple">
+<li><p>ReLU is even simpler:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.} \end{cases} \qquad \rightarrow \qquad f'(x) = \begin{cases} 1 \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.}\end{cases}
+\end{split}\]</div>
+</div>
+<div class="section" id="backpropagation-at-the-neuron-level">
+<h3><span class="section-number">1.2.2. </span>Backpropagation at the neuron level<a class="headerlink" href="#backpropagation-at-the-neuron-level" title="Permalink to this headline">¶</a></h3>
+<p>Let’s have a closer look at what is backpropagated using single neurons and weights.  The output neuron <span class="math notranslate nohighlight">\(y_k\)</span> computes:</p>
+<div class="math notranslate nohighlight">
+\[y_k = f(\sum_{j=1}^K W^2_{jk} \, h_j + b^2_k)\]</div>
+<p>All output weights <span class="math notranslate nohighlight">\(W^2_{jk}\)</span> are updated proportionally to the output error of the neuron <span class="math notranslate nohighlight">\(y_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta W^2_{jk} = \eta \, \delta_{{y}_k} \, h_j = \eta \, (t_k - y_k) \, h_j\]</div>
+<p>This is possible because we know the output error directly from the data <span class="math notranslate nohighlight">\(t_k\)</span>.</p>
+<p>The hidden neuron <span class="math notranslate nohighlight">\(h_j\)</span> computes:</p>
+<div class="math notranslate nohighlight">
+\[h_j = f(\sum_{i=1}^d W^1_{ij} \, x_i + b^1_j)\]</div>
+<p>We want to learn the hidden weights <span class="math notranslate nohighlight">\(W^1_{ij}\)</span> using the delta learning rule:</p>
+<div class="math notranslate nohighlight">
+\[\Delta W^1_{ij} = \eta \, \delta_{{h}_j} \, x_i\]</div>
+<p>but we do not know the ground truth of the hidden neuron in the data:</p>
+<div class="math notranslate nohighlight">
+\[\delta_{{h}_j} = (? - h_j)\]</div>
+<p>We need to <strong>estimate</strong> the backpropagated error using the output error. If we omit the derivative of the transfer function, the backpropagated error for the hidden neuron <span class="math notranslate nohighlight">\(h_j\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\delta_{{h}_j} = - \sum_{k=1}^C W^2_{jk} \, \delta_{{y}_k}\]</div>
+<p>The backpropagated error is an <strong>average</strong> of the output errors <span class="math notranslate nohighlight">\(\delta_{{y}_k}\)</span>, weighted by the output weights between the hidden neuron <span class="math notranslate nohighlight">\(h_j\)</span> and the output neurons <span class="math notranslate nohighlight">\(y_k\)</span>.</p>
+<p>The backpropagated error is the <strong>contribution</strong> of each hidden neuron <span class="math notranslate nohighlight">\(h_j\)</span> to the output error:</p>
+<ul class="simple">
+<li><p>If there is no output error, there is no hidden error.</p></li>
+<li><p>If a hidden neuron sends <strong>strong weights</strong> <span class="math notranslate nohighlight">\(|W^2_{jk}|\)</span> to an output neuron <span class="math notranslate nohighlight">\(y_k\)</span> with a strong prediction error <span class="math notranslate nohighlight">\(\delta_{{y}_k}\)</span>, this means that it participates strongly to the output error and should learn from it.</p></li>
+<li><p>If the weight <span class="math notranslate nohighlight">\(|W^2_{jk}|\)</span> is small, it means that the hidden neuron does not take part in the output error.</p></li>
+</ul>
+</div>
+<div class="section" id="universal-approximation-theorem">
+<h3><span class="section-number">1.2.3. </span>Universal approximation theorem<a class="headerlink" href="#universal-approximation-theorem" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-universal-approximation-theorem admonition">
+<p class="admonition-title">Universal approximation theorem</p>
+<p><strong>Cybenko, 1989</strong></p>
+<p><em>Let <span class="math notranslate nohighlight">\(\varphi()\)</span> be a nonconstant, bounded, and monotonically-increasing continuous function. Let <span class="math notranslate nohighlight">\(I_{m_0}\)</span> denote the <span class="math notranslate nohighlight">\(m_0\)</span>-dimensional unit hypercube <span class="math notranslate nohighlight">\([0,1]^{m_0}\)</span>. The space of continuous functions on <span class="math notranslate nohighlight">\(I_{m_0}\)</span> is denoted by <span class="math notranslate nohighlight">\(C(I_{m_0})\)</span>. Then, given any function <span class="math notranslate nohighlight">\(f \in C(I_{m_0})\)</span> and <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math notranslate nohighlight">\(m_1\)</span> and sets of real constants <span class="math notranslate nohighlight">\(\alpha_i, b_i\)</span> and <span class="math notranslate nohighlight">\(w_{ij} \in \Re\)</span>, where <span class="math notranslate nohighlight">\(i = 1, ..., m_1\)</span> and <span class="math notranslate nohighlight">\(j = 1, ..., m_0\)</span> such that we may define:</em></p>
+<div class="math notranslate nohighlight">
+\[
+    F(\mathbf{x}) = \sum_{i=1}^{m_1} \alpha_i \cdot \varphi \left( \sum_{j=1}^{m_0} w_{ij} \cdot x_j + b_i \right)
+\]</div>
+<p><em>as an approximate realization of the function f; that is,</em></p>
+<div class="math notranslate nohighlight">
+\[ | F(\mathbf{x}) - f(\mathbf{x})| &lt; \epsilon\]</div>
+<p><em>for all <span class="math notranslate nohighlight">\(x \in I_m\)</span>.</em></p>
+</div>
+<p>This theorem shows that for <strong>any</strong> input/output mapping function <span class="math notranslate nohighlight">\(f\)</span> in supervised learning, there exists a MLP with <span class="math notranslate nohighlight">\(m_1\)</span> neurons in the hidden layer which is able to approximate it with a desired precision!</p>
+<p>The universal approximation theorem only proves the existence of a shallow MLP with <span class="math notranslate nohighlight">\(m_1\)</span> neurons in the hidden layer that can approximate any function, but it does not tell how to find this number. A rule of thumb to find this number is that the generalization error is empirically close to:</p>
+<div class="math notranslate nohighlight">
+\[ \epsilon = \frac{\text{VC}_{\text{dim}}(\text{MLP})}{N}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{VC}_{\text{dim}}(\text{MLP})\)</span> is the total number of weights and biases in the model, and <span class="math notranslate nohighlight">\(N\)</span> the number of training samples.</p>
+<p>The more neurons in the hidden layer, the better the training error, but the worse the generalization error (overfitting). The optimal number should be found with cross-validation methods. For most functions, the optimal number <span class="math notranslate nohighlight">\(m_1\)</span> is high and becomes quickly computationally untractable. We need to go deep!</p>
+</div>
+<div class="section" id="backpropagation-on-a-deep-neural-network">
+<h3><span class="section-number">1.2.4. </span>Backpropagation on a deep neural network<a class="headerlink" href="#backpropagation-on-a-deep-neural-network" title="Permalink to this headline">¶</a></h3>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/2Ew8Sz0Giw0' frameborder='0' allowfullscreen></iframe></div>
+<p>A MLP with more than one hidden layer is a <strong>deep neural network</strong>.</p>
+<div class="figure align-default" id="id7">
+<a class="reference internal image-reference" href="../_images/deeplearning.png"><img alt="../_images/deeplearning.png" src="../_images/deeplearning.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.34 </span><span class="caption-text">Deep network extract progressively more complex features.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>Backpropagation still works if we have many hidden layers <span class="math notranslate nohighlight">\(\mathbf{h}_1, \ldots, \mathbf{h}_n\)</span>:</p>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="../_images/deepforward.png"><img alt="../_images/deepforward.png" src="../_images/deepforward.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.35 </span><span class="caption-text">Forward pass. Source: David Silver <a class="reference external" href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>If each layer is differentiable, i.e. one can compute its gradient <span class="math notranslate nohighlight">\(\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}\)</span>, we can chain <strong>backwards</strong> each partial derivatives to know how to update each layer.</p>
+<div class="figure align-default" id="id9">
+<a class="reference internal image-reference" href="../_images/deepbackward.png"><img alt="../_images/deepbackward.png" src="../_images/deepbackward.png" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.36 </span><span class="caption-text">Backpropagation pass. Source: David Silver <a class="reference external" href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Backpropagation</strong> is simply an efficient implementation of the chain rule: the partial derivatives are iteratively reused in the backwards phase.</p>
+<p>A fully connected layer transforms an input vector <span class="math notranslate nohighlight">\(\mathbf{h}_{k-1}\)</span> into an output vector <span class="math notranslate nohighlight">\(\mathbf{h}_{k}\)</span> using a weight matrix <span class="math notranslate nohighlight">\(W^k\)</span>, a bias vector <span class="math notranslate nohighlight">\(\mathbf{b}^k\)</span> and a non-linear activation function <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{h}_{k} = f(\textbf{net}_{\mathbf{h}^k}) = f(W^k \, \mathbf{h}_{k-1} + \mathbf{b}^k)
+\]</div>
+<p>The gradient of its output w.r.t the input <span class="math notranslate nohighlight">\(\mathbf{h}_{k-1}\)</span> is (using the chain rule):</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}} = f'(\textbf{net}_{\mathbf{h}^k}) \, W^k
+\]</div>
+<p>The gradients of its output w.r.t the free parameters <span class="math notranslate nohighlight">\(W^k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}_{k}\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \mathbf{h}_{k}}{\partial W^{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \mathbf{h}_{k-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{b}_{k}} =  f'(\textbf{net}_{\mathbf{h}^k})
+\]</div>
+<p>A fully connected layer <span class="math notranslate nohighlight">\(\mathbf{h}_{k} =  f(W^k \, \mathbf{h}_{k-1} + \mathbf{b}^k)\)</span> receives the gradient of the loss function w.r.t. its output <span class="math notranslate nohighlight">\(\mathbf{h}_{k}\)</span> from the layer above:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} 
+\]</div>
+<p>It adds to this gradient its own contribution and transmits it to the previous layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}} = f'(\textbf{net}_{\mathbf{h}^k}) \, (W^k)^T \times \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}
+\]</div>
+<p>It then updates its parameters <span class="math notranslate nohighlight">\(W^k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}_{k}\)</span> with:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+\dfrac{\partial \mathcal{L}(\theta)}{\partial W^{k}} = \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \dfrac{\partial \mathbf{h}_{k}}{\partial W^{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \mathbf{h}_{k-1}^T \\
+\\
+\dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}_{k}}  = \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \dfrac{\partial \mathbf{h}_{k}}{\partial \mathbf{b}_{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \\
+\end{cases} 
+\end{split}\]</div>
+<div class="admonition-training-a-deep-neural-network-with-backpropagation admonition">
+<p class="admonition-title">Training a deep neural network with backpropagation</p>
+<p>A <strong>feedforward</strong> neural network is an acyclic graph of differentiable and parameterized layers.</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{x} \rightarrow \mathbf{h}_1 \rightarrow \mathbf{h}_2 \rightarrow \ldots \rightarrow  \mathbf{h}_n \rightarrow \mathbf{y}
+\]</div>
+<p>The <strong>backpropagation</strong> algorithm is used to assign the gradient of the loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span> to each layer using backward chaining:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}
+\]</div>
+<p><strong>Stochastic gradient descent</strong> is then used to update the parameters of each layer:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta W^k = - \eta \, \frac{\partial \mathcal{L}(\theta)}{\partial W^{k}} = - \eta \, \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial W^{k}}
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-of-a-shallow-network">
+<h2><span class="section-number">1.3. </span>Example of a shallow network<a class="headerlink" href="#example-of-a-shallow-network" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/8B7RcBC11Lo' frameborder='0' allowfullscreen></iframe></div>
+<p>Let’s try to solve this <strong>non-linear</strong> binary classification problem:</p>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/mlp-data.png"><img alt="../_images/mlp-data.png" src="../_images/mlp-data.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.37 </span><span class="caption-text">Non-linearly separable dataset.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can create a shallow MLP with:</p>
+<ul class="simple">
+<li><p>Two input neurons <span class="math notranslate nohighlight">\(x_1, x_2\)</span> for the two input variables.</p></li>
+<li><p>Enough hidden neurons (e.g. 20), with a sigmoid or ReLU activation function.</p></li>
+<li><p>One output neuron with the logistic activation function.</p></li>
+<li><p>The cross-entropy (negative log-likelihood) loss function.</p></li>
+</ul>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/mlp-example.svg"><img alt="../_images/mlp-example.svg" src="../_images/mlp-example.svg" width="60%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.38 </span><span class="caption-text">Simple MLP for the non-linearly separable dataset.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>We train it on the input data using the backpropagation algorithm and the SGD optimizer.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/mlp-animation.gif"><img alt="../_images/mlp-animation.gif" src="../_images/mlp-animation.gif" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.39 </span><span class="caption-text">Prediction after each epoch of training.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>Experiment with this network live on <a class="reference external" href="https://playground.tensorflow.org/">https://playground.tensorflow.org/</a>! You will implement this MLP with numpy during exercise 8.</p>
+<div class="admonition-automatic-differentiation-deep-learning-frameworks admonition">
+<p class="admonition-title">Automatic differentiation Deep Learning frameworks</p>
+<p><strong>Current:</strong></p>
+<ul class="simple">
+<li><p><strong>Tensorflow</strong> <a class="reference external" href="https://www.tensorflow.org/">https://www.tensorflow.org/</a> released by Google in 2015 is one of the two standard DL frameworks.</p></li>
+<li><p><strong>Keras</strong> <a class="reference external" href="https://keras.io/">https://keras.io/</a> is a high-level Python API over tensorflow (but also theano, CNTK and MxNet) written by Francois Chollet.</p></li>
+<li><p><strong>PyTorch</strong> <a class="reference external" href="http://pytorch.org">http://pytorch.org</a> by Facebook is the other standard framework.</p></li>
+</ul>
+<p><strong>Historical:</strong></p>
+<ul class="simple">
+<li><p><strong>Theano</strong> <a class="reference external" href="http://deeplearning.net/software/theano/">http://deeplearning.net/software/theano/</a> released by U Toronto in 2010 is the predecessor of tensorflow. Now abandoned.</p></li>
+<li><p><strong>Caffe</strong> <a class="reference external" href="http://caffe.berkeleyvision.org/">http://caffe.berkeleyvision.org/</a> by U Berkeley was long the standard library for convolutional networks.</p></li>
+<li><p><strong>CNTK</strong> <a class="reference external" href="https://github.com/Microsoft/CNTK">https://github.com/Microsoft/CNTK</a> (Microsoft Cognitive Toolkit) is a <strong>free</strong> library by Microsoft!</p></li>
+<li><p><strong>MxNet</strong> <a class="reference external" href="https://github.com/apache/incubator-mxnet">https://github.com/apache/incubator-mxnet</a> from Apache became the DL framework at Amazon.</p></li>
+</ul>
+</div>
+<p>Let’s implement the previous MLP using keras. We first need to generate the data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn.datasets</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We then import <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+<p>The neural network is called a <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> model in keras:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Creating a NN is simply <strong>stacking</strong> layers in the model. The input layer is just a placeholder for the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">))</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The hidden layer has 20 neurons, the ReLU activation and takes input from the previous layer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+        <span class="mi">20</span><span class="p">,</span> <span class="c1"># Number of hidden neurons</span>
+        <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span> <span class="c1"># Activation function</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The output layer has 1 neuron with the logistic/sigmoid activation function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="c1"># Number of output neurons</span>
+        <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span> <span class="c1"># Soft classification</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We now choose an optimizer (SGD) with a learning rate <span class="math notranslate nohighlight">\(\eta = 0.001\)</span>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We choose a loss function (binary cross-entropy, aka negative log-likelihood):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">binary_crossentropy</span>
+</pre></div>
+</div>
+<p>We compile the model (important!) and tell it to track the accuracy of the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span> 
+    <span class="n">metrics</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">categorical_accuracy</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Et voilà! The network has been created.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="s2">&quot;sequential_1&quot;</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="nb">type</span><span class="p">)</span>                 <span class="n">Output</span> <span class="n">Shape</span>              <span class="n">Param</span> <span class="c1">#   </span>
+<span class="o">=================================================================</span>
+<span class="n">dense</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>                <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>                <span class="mi">60</span>        
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense_1</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>              <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                 <span class="mi">21</span>        
+<span class="o">=================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">81</span>
+<span class="n">Trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">81</span>
+<span class="n">Non</span><span class="o">-</span><span class="n">trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+<p>We now train the model on the data for 100 epochs using a batch size of 10 and wait for it to finish:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With keras (and the other automatic differentiation frameworks), you only need to define the structure of the network. The rest (backpropagation, SGD) is done automatically. To make predictions on new data, just do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -305,6 +970,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../2-linear/6-LearningTheory.html" title="previous page"><span class="section-number">6. </span>Learning theory</a>
+    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
