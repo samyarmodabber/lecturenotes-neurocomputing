@@ -199,12 +199,29 @@ $$
 i.e. the same as with the mse in linear regression! Refer <https://peterroelants.github.io/posts/cross-entropy-softmax/> for more explanations on the proof. 
 
 ```{note}
-When differentiating a probability $y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}$ w.r.t a logit score $z_i$, i.e. $\dfrac{\partial \log(y_j)}{\partial z_i}$, we need to consider two cases:
+When differentiating a softmax probability $y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}$ w.r.t a logit score $z_i$, i.e. $\dfrac{\partial \log(y_j)}{\partial z_i}$, we need to consider two cases:
 
-* If $i=j$, $\exp(z_i)$ appears both at the numerator and denominator of $\frac{\exp(z_i)}{\sum_k \exp(z_k)}$. The chain rule gives us:
+* If $i=j$, $\exp(z_i)$ appears both at the numerator and denominator of $\frac{\exp(z_i)}{\sum_k \exp(z_k)}$. The product rule $(f\times g)' = f'\, g + f \, g'$ gives us:
 
-$$\dfrac{\partial \log(y_i)}{\partial z_i} = - \dfrac{\exp(z_i) \, \exp(z_i) }{(\sum_k \exp(z_k))^2}
+$$\begin{aligned}
+\dfrac{\partial \log(y_i)}{\partial z_i} &= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} + \exp(z_i) \, \dfrac{- \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
+&= \exp(z_i) \dfrac{\sum_k \exp(z_k) - \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
+&= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} \, (1- \dfrac{\exp(z_i)}{\sum_k \exp(z_k)})\\
+&= y_i \, (1 - y_i)\\
+\end{aligned}
 $$
+
+This is similar to the derivative of the logistic function.
+
+* If $i \neq j$, $z_i$ only appears at the denominator.
+
+$$\begin{aligned}
+\dfrac{\partial \log(y_j)}{\partial z_i} &= - \exp(z_j) \, \dfrac{\exp(z_i)}{(\sum_k \exp(z_k))^2} \\
+&= - \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} \, \dfrac{\exp(z_j)}{\sum_k \exp(z_k)} \\
+&= - y_i \, y_j \\
+\end{aligned}
+$$
+
 ```
 
 
