@@ -498,14 +498,14 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \dfrac{\partial \log(y_i)}{\partial z_i} &amp;= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} + \exp(z_i) \, \dfrac{- \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
-&amp;= \exp(z_i) \dfrac{\sum_k \exp(z_k) - \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
+&amp;= \dfrac{\exp(z_i)  \, \sum_k \exp(z_k) - \exp(z_i)^2}{(\sum_k \exp(z_k))^2} \\
 &amp;= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} \, (1- \dfrac{\exp(z_i)}{\sum_k \exp(z_k)})\\
 &amp;= y_i \, (1 - y_i)\\
 \end{aligned}
 \end{split}\]</div>
 <p>This is similar to the derivative of the logistic function.</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(i \neq j\)</span>, <span class="math notranslate nohighlight">\(z_i\)</span> only appears at the denominator.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(i \neq j\)</span>, <span class="math notranslate nohighlight">\(z_i\)</span> only appears at the denominator, so we only need the chain rule:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}

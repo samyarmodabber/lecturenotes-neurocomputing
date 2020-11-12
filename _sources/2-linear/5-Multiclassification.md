@@ -205,7 +205,7 @@ When differentiating a softmax probability $y_j = \dfrac{\exp(z_j)}{\sum_k \exp(
 
 $$\begin{aligned}
 \dfrac{\partial \log(y_i)}{\partial z_i} &= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} + \exp(z_i) \, \dfrac{- \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
-&= \exp(z_i) \dfrac{\sum_k \exp(z_k) - \exp(z_i)}{(\sum_k \exp(z_k))^2} \\
+&= \dfrac{\exp(z_i)  \, \sum_k \exp(z_k) - \exp(z_i)^2}{(\sum_k \exp(z_k))^2} \\
 &= \dfrac{\exp(z_i)}{\sum_k \exp(z_k)} \, (1- \dfrac{\exp(z_i)}{\sum_k \exp(z_k)})\\
 &= y_i \, (1 - y_i)\\
 \end{aligned}
@@ -213,7 +213,7 @@ $$
 
 This is similar to the derivative of the logistic function.
 
-* If $i \neq j$, $z_i$ only appears at the denominator.
+* If $i \neq j$, $z_i$ only appears at the denominator, so we only need the chain rule:
 
 $$\begin{aligned}
 \dfrac{\partial \log(y_j)}{\partial z_i} &= - \exp(z_j) \, \dfrac{\exp(z_i)}{(\sum_k \exp(z_k))^2} \\
