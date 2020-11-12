@@ -190,7 +190,7 @@ $$
 - \sum_j t_j \frac{\partial \log(y_j)}{\partial z_i} = - \sum_j t_j \frac{1}{y_j} \frac{\partial y_j}{\partial z_i} \\
 & = - \frac{t_i}{y_i} \frac{\partial y_i}{\partial z_i} - \sum_{j \neq i}^C \frac{t_j}{y_j} \frac{\partial y_j}{\partial z_i}
 = - \frac{t_i}{y_i} y_i (1-y_i) - \sum_{j \neq i}^C \frac{t_j}{y_i} (-y_j \, y_i) \\
-& = - t_i + t_i \, y_i + \sum_{j \neq i}^C t_j \, y_i = - y_i + \sum_{j = 1}^C t_j y_i
+& = - t_i + t_i \, y_i + \sum_{j \neq i}^C t_j \, y_i = - t_i + \sum_{j = 1}^C t_j y_i
 = -t_i + y_i \sum_{j = 1}^C t_j \\
 & = - (t_i - y_i)
 \end{split}
