@@ -491,7 +491,7 @@
 <p>i.e. the same as with the mse in linear regression! Refer <a class="reference external" href="https://peterroelants.github.io/posts/cross-entropy-softmax/">https://peterroelants.github.io/posts/cross-entropy-softmax/</a> for more explanations on the proof.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When differentiating a softmax probability <span class="math notranslate nohighlight">\(y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}\)</span> w.r.t a logit score <span class="math notranslate nohighlight">\(z_i\)</span>, i.e. <span class="math notranslate nohighlight">\(\dfrac{\partial \log(y_j)}{\partial z_i}\)</span>, we need to consider two cases:</p>
+<p>When differentiating a softmax probability <span class="math notranslate nohighlight">\(y_j = \dfrac{\exp(z_j)}{\sum_k \exp(z_k)}\)</span> w.r.t a logit score <span class="math notranslate nohighlight">\(z_i\)</span>, i.e. <span class="math notranslate nohighlight">\(\dfrac{\partial y_j}{\partial z_i}\)</span>, we need to consider two cases:</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(i=j\)</span>, <span class="math notranslate nohighlight">\(\exp(z_i)\)</span> appears both at the numerator and denominator of <span class="math notranslate nohighlight">\(\frac{\exp(z_i)}{\sum_k \exp(z_k)}\)</span>. The product rule <span class="math notranslate nohighlight">\((f\times g)' = f'\, g + f \, g'\)</span> gives us:</p></li>
 </ul>
