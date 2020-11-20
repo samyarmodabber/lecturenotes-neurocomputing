@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.2.1. Multi-layer Perceptron &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/8-MLP.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.2.2. Multi-layer Perceptron" href="8-MLP-solution.html" />
+    <link rel="prev" title="8. Multi-layer perceptron" href="ex8-MLP.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/8-MLP.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Multi-layer Perceptron" />
+<meta property="og:description" content="Multi-layer Perceptron  The goal of this exercise is to implement a shallow multi-layer perceptron to perform non-linear classification. Let’s start with usual " />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="8-MLP-solution.html">
+     8.2.2. Solution
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/5-exercises/8-MLP.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/8-MLP.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/8-MLP.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure-of-the-mlp">
+   8.2.1.1. Structure of the MLP
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   8.2.1.2. Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-definition">
+   8.2.1.3. Class definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation">
+   8.2.1.4. Backpropagation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experiments">
+   8.2.1.5. Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-the-number-of-hidden-neurons">
+     8.2.1.5.1. Influence of the number of hidden neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-the-learning-rate">
+     8.2.1.5.2. Influence of the learning rate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-weight-initialization">
+     8.2.1.5.3. Influence of weight initialization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-the-transfer-function">
+     8.2.1.5.4. Influence of the transfer function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-data-normalization">
+     8.2.1.5.5. Influence of data normalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-randomization">
+     8.2.1.5.6. Influence of randomization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#influence-of-weight-initialization-part-2">
+     8.2.1.5.7. Influence of weight initialization - part 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     8.2.1.5.8. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multi-layer-perceptron">
+<h1><span class="section-number">8.2.1. </span>Multi-layer Perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to implement a shallow multi-layer perceptron to perform non-linear classification. Let’s start with usual imports, including the logistic function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">logistic</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="structure-of-the-mlp">
+<h2><span class="section-number">8.2.1.1. </span>Structure of the MLP<a class="headerlink" href="#structure-of-the-mlp" title="Permalink to this headline">¶</a></h2>
+<p>In this exercise, we will consider a MLP for non-linear binary classification composed of 2 input neurons <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, one output neuron <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(K\)</span> hidden neurons in a single hidden layer (<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>).</p>
+<a class="reference internal image-reference" href="../_images/mlp-example1.svg"><img alt="../_images/mlp-example1.svg" src="../_images/mlp-example1.svg" width="600" /></a>
+<p>The output neuron is a vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> with one element that sums its inputs with <span class="math notranslate nohighlight">\(K\)</span> weights <span class="math notranslate nohighlight">\(W^2\)</span> and a bias <span class="math notranslate nohighlight">\(\mathbf{b}^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = \sigma( W^2 \times \mathbf{h} + \mathbf{b}^2)\]</div>
+<p>It uses the logistic transfer function:</p>
+<div class="math notranslate nohighlight">
+\[\sigma(x) = \dfrac{1}{1 + \exp -x}\]</div>
+<p>As in logistic regression for linear classification, we will interpret <span class="math notranslate nohighlight">\(y\)</span> as the probability that the input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> belongs to the positive class.</p>
+<p><span class="math notranslate nohighlight">\(W^2\)</span> is a <span class="math notranslate nohighlight">\(1 \times K\)</span> matrix (we could interpret it as a vector, but this will make the computations easier) and <span class="math notranslate nohighlight">\(\mathbf{b}^2\)</span> is a vector with one element.</p>
+<p>Each of the <span class="math notranslate nohighlight">\(K\)</span> hidden neurons receives 2 weights from the input layer, what gives a <span class="math notranslate nohighlight">\(K \times 2\)</span> weight matrix <span class="math notranslate nohighlight">\(W^1\)</span>, and <span class="math notranslate nohighlight">\(K\)</span> biases in the vector <span class="math notranslate nohighlight">\(\mathbf{b}^1\)</span>. They will also use the logistic activation function at first:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h} = \sigma(W^1 \times \mathbf{x} + \mathbf{b}^1)\]</div>
+<p>The goal is to implement the backpropagation algorithm by comparing the desired output <span class="math notranslate nohighlight">\(t\)</span> with the prediction <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<ul class="simple">
+<li><p>The output error is a vector with one element:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\delta =  (\mathbf{t} - \mathbf{y})\]</div>
+<ul class="simple">
+<li><p>The backpropagated error is a vector with <span class="math notranslate nohighlight">\(K\)</span> elements:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\delta_\text{hidden} = \sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1) \, W_2^T \times \delta\]</div>
+<p>(<span class="math notranslate nohighlight">\(W^2\)</span> is a <span class="math notranslate nohighlight">\(1 \times K\)</span> matrix, so <span class="math notranslate nohighlight">\(W_2^T \times \delta\)</span> is a <span class="math notranslate nohighlight">\(K \times 1\)</span> vector. The vector <span class="math notranslate nohighlight">\(\sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1)\)</span> is multiplied element-wise.)</p>
+<ul class="simple">
+<li><p>Parameter updates follow the delta learning rule:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta W^1 = \eta \, \mathbf{x} \times \delta_\text{hidden}^T\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta \mathbf{b}^1 = \eta \, \delta_\text{hidden} \]</div>
+<div class="math notranslate nohighlight">
+\[\Delta W^2 = \eta \, \delta \, \mathbf{h}^T\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta \mathbf{b}^2 = \eta \, \delta\]</div>
+<p>Notice the transpose operators to obtain the correct shapes. You will remember that the derivative of the logistic function is given by:</p>
+<div class="math notranslate nohighlight">
+\[\sigma'(x)= \sigma(x) \, (1- \sigma(x))\]</div>
+<p><strong>Q:</strong> Why do not we use the derivative of the transfer function of the output neuron when computing the output error <span class="math notranslate nohighlight">\(\delta\)</span>?</p>
+</div>
+<div class="section" id="data">
+<h2><span class="section-number">8.2.1.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>The MLP will be trained on a non-linear dataset with samples of each class forming a circle. Each sample has two input dimensions. In the cell below, blue points represent the positive class (t=1), orange ones the negative class (t=0).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_circles</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8-MLP_6_0.png" src="../_images/8-MLP_6_0.png" />
+</div>
+</div>
+<p><strong>Q:</strong> Split the data into a training and test set (80/20). Make sure to call them <code class="docutils literal notranslate"><span class="pre">X_train,</span> <span class="pre">X_test,</span> <span class="pre">t_train,</span> <span class="pre">t_test</span></code>.</p>
+</div>
+<div class="section" id="class-definition">
+<h2><span class="section-number">8.2.1.3. </span>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this headline">¶</a></h2>
+<p>The neural network is entirely defined by its parameters, i.e. the weight matrices and bias vectors, as well the transfer function of the hidden neurons. In order to make your code more reusable, the MLP will be implemented as a Python class. The following cell defines the class, but we will explain it step by step afterwards.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MLP</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">activation_function</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">=</span> <span class="n">activation_function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span> <span class="o">=</span> <span class="n">eta</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        
+    <span class="k">def</span> <span class="nf">feedforward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    
+        <span class="c1"># Make sure x has 2 rows</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># Hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1</span><span class="p">)</span>
+
+        <span class="c1"># Output layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span><span class="p">)</span> 
+        
+    
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">nb_epochs</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
+            
+            <span class="n">nb_errors</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Epoch</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+                <span class="c1"># Feedforward pass: sets self.h and self.y</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">feedforward</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+        
+                <span class="c1"># Backpropagation</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">backprop</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">t_train</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        
+                <span class="c1"># Predict the class:         </span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="c1"># Count the number of misclassifications</span>
+                <span class="k">if</span> <span class="n">t_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">:</span> 
+                    <span class="n">nb_errors</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="c1"># Compute the error rate</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nb_errors</span><span class="o">/</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                
+            <span class="c1"># Plot the decision function every 10 epochs</span>
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">visualize</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">plot_classification</span><span class="p">()</span> 
+
+            <span class="c1"># Stop when the error rate is 0</span>
+            <span class="k">if</span> <span class="n">nb_errors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">visualize</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">plot_classification</span><span class="p">()</span> 
+                <span class="k">break</span>
+                
+        <span class="k">return</span> <span class="n">errors</span><span class="p">,</span> <span class="n">epoch</span><span class="o">+</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    
+        <span class="c1"># Make sure x has 2 rows</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># TODO: implement backpropagation</span>
+    
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">):</span>
+    
+        <span class="n">nb_errors</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+            <span class="c1"># Feedforward pass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feedforward</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> 
+
+            <span class="c1"># Predict the class:         </span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Count the number of misclassifications</span>
+            <span class="k">if</span> <span class="n">t_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">:</span> 
+                <span class="n">nb_errors</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">nb_errors</span><span class="o">/</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+    <span class="k">def</span> <span class="nf">plot_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># Allow redrawing </span>
+        <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="o">.</span><span class="mi">02</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="o">.</span><span class="mi">02</span><span class="p">))</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>    
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedforward</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">Z</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">Z</span><span class="o">&lt;=</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+        <span class="n">cm_bright</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;#FF0000&#39;</span><span class="p">,</span> <span class="s1">&#39;#0000FF&#39;</span><span class="p">])</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm_bright</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">t_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm_bright</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">t_test</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm_bright</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<p>The constructor <code class="docutils literal notranslate"><span class="pre">__init__</span></code> of the class accepts several arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code> is the number inputs, here 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is the number of hidden neurons.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">activation_function</span></code> is the function to use for the hidden neurons, for example the <code class="docutils literal notranslate"><span class="pre">logistic</span></code> function defined at the beginning of the notebook. Note that the name of the method can be stored as a variable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_val</span></code> is the maximum value used to initialize the weight matrices.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eta</span></code> is the learning rate.</p></li>
+</ul>
+<p>The constructor starts by saving these arguments as attributes, so that they can be used in other method as <code class="docutils literal notranslate"><span class="pre">self.K</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">activation_function</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">=</span> <span class="n">activation_function</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">eta</span> <span class="o">=</span> <span class="n">eta</span>
+</pre></div>
+</div>
+<p>The constructor then initializes randomly the weight matrices and bias vectors, uniformly between <code class="docutils literal notranslate"><span class="pre">-max_val</span></code> and <code class="docutils literal notranslate"><span class="pre">max_val</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> 
+<span class="bp">self</span><span class="o">.</span><span class="n">b1</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span> 
+<span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can then already create the <code class="docutils literal notranslate"><span class="pre">MLP</span></code> object and observe how the parameters are initialized:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">activation_function</span><span class="o">=</span><span class="n">logistic</span><span class="p">,</span> <span class="n">max_val</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong> Create the object and print the weight matrices and bias vectors.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">feedforward</span></code> method takes a vector <code class="docutils literal notranslate"><span class="pre">x</span></code> as input, reshapes it to make sure it has two rows, and computes the hidden activation <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> and the prediction <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">feedforward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="c1"># Make sure x has 2 rows</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Hidden layer</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1</span><span class="p">)</span>
+
+    <span class="c1"># Output layer</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Notice the use of <code class="docutils literal notranslate"><span class="pre">self.</span></code> to access attributes, as well as the use of <code class="docutils literal notranslate"><span class="pre">np.dot()</span></code> to mulitply vectors and matrices.</p>
+<p><strong>Q:</strong> Using the randomly initialized weights, apply the <code class="docutils literal notranslate"><span class="pre">feedforward()</span></code> method to an input vector (for example <span class="math notranslate nohighlight">\([0.5, 0.5]\)</span>) and print <code class="docutils literal notranslate"><span class="pre">h</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. What is the predicted class of the example?</p>
+<p>The class also provides a visualization method. It is not import to understand the code for the exercise, so you can safely skip it. It displays the training data as plain points, the test data as semi-transparent points and displays the decision function as a background color (all points in the blue region will be classified as negative examples).</p>
+<p><strong>Q:</strong> Plot the initial classification on the dataset with random weights. Is there a need for learning? Reinitialize the weights and biases multiple times. What do you observe?</p>
+</div>
+<div class="section" id="backpropagation">
+<h2><span class="section-number">8.2.1.4. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">train()</span></code> method implements the training loop you have already implemented several times: several epochs over the training set, making a prediction for each input and modifying the parameters according to the prediction error:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">nb_epochs</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_epochs</span><span class="p">):</span>
+
+        <span class="n">nb_errors</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Epoch</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+            <span class="c1"># Feedforward pass: sets self.h and self.y</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feedforward</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+
+            <span class="c1"># Backpropagation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backprop</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">t_train</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="c1"># Predict the class:         </span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Count the number of misclassifications</span>
+            <span class="k">if</span> <span class="n">t_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">:</span> 
+                <span class="n">nb_errors</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Compute the error rate</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nb_errors</span><span class="o">/</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Plot the decision function every 10 epochs</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">visualize</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_classification</span><span class="p">()</span> 
+
+        <span class="c1"># Stop when the error rate is 0</span>
+        <span class="k">if</span> <span class="n">nb_errors</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">visualize</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">plot_classification</span><span class="p">()</span> 
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">errors</span><span class="p">,</span> <span class="n">epoch</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>The training methods stops after <code class="docutils literal notranslate"><span class="pre">nb_epochs</span></code> epochs or when no error is made during the last epoch. The decision function is visualized every 10 epochs to better understand what is happening. The method returns a list containing the error rate after each epoch, as well as the number of epochs needed to reach an error rate of 0.</p>
+<p>The only thing missing is the <code class="docutils literal notranslate"><span class="pre">backprop(x,</span> <span class="pre">t)</span></code> method, which currently does nothing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+
+    <span class="c1"># Make sure x has 2 rows</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># TODO: implement backpropagation</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong>  Implement the <em>online</em> backpropagation algorithm.</p>
+<p>All you have to do is to backpropagate the output error and adapt the parameters using the delta learning rule:</p>
+<ol class="simple">
+<li><p>compute the output error <code class="docutils literal notranslate"><span class="pre">delta</span></code>.</p></li>
+<li><p>compute the backpropagated error <code class="docutils literal notranslate"><span class="pre">delta_hidden</span></code>.</p></li>
+<li><p>increment the parameters <code class="docutils literal notranslate"><span class="pre">self.W1,</span> <span class="pre">self.b1,</span> <span class="pre">self.W2,</span> <span class="pre">self.b2</span></code> accordingly.</p></li>
+</ol>
+<p>The only difficulty is to take care of the shape of each matrix (before multiplying two matrices or vectors, test what their shape is).</p>
+<p><em>Note:</em> you can either edit directly the cell containing the definition of the class, or create a new class <code class="docutils literal notranslate"><span class="pre">TrainableMLP</span></code> inheriting from the class <code class="docutils literal notranslate"><span class="pre">MLP</span></code> and simply redefine the <code class="docutils literal notranslate"><span class="pre">backprop()</span></code> method. The solution will use the second option to be more readable, but it does not matter.</p>
+<p><strong>Q:</strong> Train the MLP for 1000 epochs on the data using a learning rate of 0.05, 15 hidden neurons and weights initialized between -1 and 1. Plot the evolution of the training error.</p>
+<p><strong>Q:</strong> Use the <code class="docutils literal notranslate"><span class="pre">test()</span></code> method to compute the error on the test set. What is the test accuracy of your network after training? Compare it to the training accuracy.</p>
+</div>
+<div class="section" id="experiments">
+<h2><span class="section-number">8.2.1.5. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="influence-of-the-number-of-hidden-neurons">
+<h3><span class="section-number">8.2.1.5.1. </span>Influence of the number of hidden neurons<a class="headerlink" href="#influence-of-the-number-of-hidden-neurons" title="Permalink to this headline">¶</a></h3>
+<p><strong>Q:</strong> Try different values for the number of hidden neurons <span class="math notranslate nohighlight">\(K\)</span> (e.g. 2, 5, 10, 15, 20, 25, 50…) and observe how the accuracy and speed of convergence evolve.</p>
+</div>
+<div class="section" id="influence-of-the-learning-rate">
+<h3><span class="section-number">8.2.1.5.2. </span>Influence of the learning rate<a class="headerlink" href="#influence-of-the-learning-rate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Q:</strong> Vary the learning rate between extreme values. How does the performance evolve?</p>
+</div>
+<div class="section" id="influence-of-weight-initialization">
+<h3><span class="section-number">8.2.1.5.3. </span>Influence of weight initialization<a class="headerlink" href="#influence-of-weight-initialization" title="Permalink to this headline">¶</a></h3>
+<p><strong>Q:</strong> The weights are initialized randomly between -1 and 1. Try to initialize them to 0. Does it work? Why?</p>
+<p><strong>Q:</strong> For a fixed number of hidden neurons (e.g. <span class="math notranslate nohighlight">\(K=15\)</span>) and a correct value of <code class="docutils literal notranslate"><span class="pre">eta</span></code>, train 10 times the network with different initial weights and superimpose on the same plot the evolution of the training error. Conclude.</p>
+</div>
+<div class="section" id="influence-of-the-transfer-function">
+<h3><span class="section-number">8.2.1.5.4. </span>Influence of the transfer function<a class="headerlink" href="#influence-of-the-transfer-function" title="Permalink to this headline">¶</a></h3>
+<p><strong>Q:</strong> Modify the <code class="docutils literal notranslate"><span class="pre">backprop()</span></code> method so that it applies backpropagation correctly for any of the four activation functions:</p>
+<ul class="simple">
+<li><p>linear</p></li>
+<li><p>logistic</p></li>
+<li><p>tanh</p></li>
+<li><p>relu</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linear transfer function</span>
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># tanh transfer function </span>
+<span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># ReLU transfer function</span>
+<span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that the derivatives of these activations functions are easy to compute:</p>
+<ul class="simple">
+<li><p>linear: <span class="math notranslate nohighlight">\(f'(x) = 1\)</span></p></li>
+<li><p>logistic: <span class="math notranslate nohighlight">\(f'(x) = f(x) \, (1 - f(x))\)</span></p></li>
+<li><p>tanh: <span class="math notranslate nohighlight">\(f'(x) = 1 - f^2(x)\)</span></p></li>
+<li><p>relu: <span class="math notranslate nohighlight">\(f'(x) = \begin{cases}1 \; \text{if} \; x&gt;0\\ 0 \; \text{if} \; x \leq 0\\ \end{cases}\)</span></p></li>
+</ul>
+<p><em>Hint:</em> <code class="docutils literal notranslate"><span class="pre">activation_function</span></code> is a variable like others, although it is the name of a method. You can apply comparisons on it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">==</span> <span class="n">linear</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">something</span>
+<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">==</span> <span class="n">logistic</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">something</span>
+<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">==</span> <span class="n">tanh</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">something</span>
+<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">==</span> <span class="n">relu</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">something</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong> Use a linear transfer function for the hidden neurons. How does performance evolve? Is the non-linearity of the transfer function important for learning?</p>
+<p><strong>Q:</strong> Use this time the hyperbolic tangent function as a transfer function for the hidden neurons. Does it improve learning?</p>
+<p><strong>Q:</strong> Use the Rectified Linear Unit (ReLU) transfer function. What does it change? Conclude on the importance of the transfer function for the hidden neurons. Select the best one from now on.</p>
+</div>
+<div class="section" id="influence-of-data-normalization">
+<h3><span class="section-number">8.2.1.5.5. </span>Influence of data normalization<a class="headerlink" href="#influence-of-data-normalization" title="Permalink to this headline">¶</a></h3>
+<p>The input data returned by <code class="docutils literal notranslate"><span class="pre">make_circles</span></code> is nicely center around 0, with values between -1 and 1. What happens if this is not the case with your data?</p>
+<p><strong>Q:</strong> Shift the input data <code class="docutils literal notranslate"><span class="pre">X</span></code> using the formula:</p>
+<div class="math notranslate nohighlight">
+\[X_\text{shifted} = 8 \, X + 2\]</div>
+<p>regenerate the training and test sets and train the MLP on them. What do you observe?</p>
+<p><strong>Q:</strong> Normalize the shifted data so that it has a mean of 0 and a variance of 1 in each dimension, using the formula:</p>
+<div class="math notranslate nohighlight">
+\[X_\text{normalized} = \dfrac{X_\text{shifted} - \text{mean}(X_\text{shifted})}{\text{std}(X_\text{shifted})}\]</div>
+<p>and retrain the network. Conclude.</p>
+</div>
+<div class="section" id="influence-of-randomization">
+<h3><span class="section-number">8.2.1.5.6. </span>Influence of randomization<a class="headerlink" href="#influence-of-randomization" title="Permalink to this headline">¶</a></h3>
+<p>The training loop we used until now iterated over the training samples in the exact same order at every epoch. The samples are therefore not i.i.d (independent and identically distributed) as they follow the same sequence.</p>
+<p><strong>Q:</strong> Modify the <code class="docutils literal notranslate"><span class="pre">train()</span></code> method so that the indices of the training samples are randomized between two epochs. Check the doc of <code class="docutils literal notranslate"><span class="pre">rng.permutation()</span></code> for help.</p>
+</div>
+<div class="section" id="influence-of-weight-initialization-part-2">
+<h3><span class="section-number">8.2.1.5.7. </span>Influence of weight initialization - part 2<a class="headerlink" href="#influence-of-weight-initialization-part-2" title="Permalink to this headline">¶</a></h3>
+<p>According to the empirical analysis by Glorot and Bengio in “Understanding the difficulty of training deep feedforward neural networks”, the optimal initial values for the weights between two layers of a MLP are uniformly taken in the range:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{U}( - \sqrt{\frac{6}{N_{\text{in}}+N_{\text{out}}}} , \sqrt{\frac{6}{N_{\text{in}}+N_{\text{out}}}} )
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_{\text{in}}\)</span> is the number of neurons in the first layer and <span class="math notranslate nohighlight">\(N_{\text{out}}\)</span> the number of neurons in the second layer.</p>
+<p><strong>Q:</strong> Modify the constructor of your class to initialize both hidden and output weights with this new range. The biases should be initialized to 0. What is the effect?</p>
+</div>
+<div class="section" id="summary">
+<h3><span class="section-number">8.2.1.5.8. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p><strong>Q:</strong> Now that we optimized the MLP, it is time to cross-validate again the number of hidden neurons and the learning rate. As the networks always get a training error rate of 0 and the test set is not very relevant, the maincriteria will be the number of epochs needed on average to converge. Find the best MLP for the dataset (there is not a single solution), for example by iterating over multiple values of <code class="docutils literal notranslate"><span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">eta</span></code>. What do you think of the change in performance between the first naive implementation and the final one? What were the most critical changes?</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./5-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ex8-MLP.html" title="previous page"><span class="section-number">8. </span>Multi-layer perceptron</a>
+    <a class='right-next' id="next-link" href="8-MLP-solution.html" title="next page"><span class="section-number">8.2.2. </span>Multi-layer Perceptron</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
