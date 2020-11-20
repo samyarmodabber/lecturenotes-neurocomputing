@@ -51,7 +51,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/2-DNN.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Deep neural networks" />
-<meta property="og:description" content="Deep neural networks  Slides: pdf  Why deep neural networks?  The universal approximation theorem (Cybenko, 1989) states that a shallow network can approximate " />
+<meta property="og:description" content="Deep neural networks  Slides: pdf  Why deep neural networks?  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/TWGcYiykAn4&#39; frameborder=&#39;" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -439,6 +439,7 @@
 <p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.2-DeepNN.pdf">pdf</a></p>
 <div class="section" id="why-deep-neural-networks">
 <h2><span class="section-number">2.1. </span>Why deep neural networks?<a class="headerlink" href="#why-deep-neural-networks" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/TWGcYiykAn4' frameborder='0' allowfullscreen></iframe></div>
 <p>The <strong>universal approximation theorem</strong> (Cybenko, 1989) states that a <strong>shallow</strong> network can approximate any mapping function between inputs and outputs. However, if the mapping function is too complex, a shallow network may need too many hidden neurons.</p>
 <p>The hidden neurons extract <strong>features</strong> in the input space: typical characteristics of the input which, when combined by the output neurons, allow to solve the classification task. Problem: the features are not hierarchically organized and cannot become complex enough.</p>
 <p>Shallow networks can not work directly with raw images: noise, translation, rotation, scaling… One needs first to extract complex and useful features from the input images in order to classify them correctly.</p>
@@ -470,6 +471,7 @@
 </div>
 <div class="section" id="bad-convergence">
 <h2><span class="section-number">2.2. </span>Bad convergence<a class="headerlink" href="#bad-convergence" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/UdcmfiDZrVU' frameborder='0' allowfullscreen></iframe></div>
 <p>The loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span> of a deep neural network has usually not a single global minimum, but many local minima: irregular <strong>loss landscape</strong>.</p>
 <div class="figure align-default" id="id8">
 <a class="reference internal image-reference" href="../_images/losslandscape.png"><img alt="../_images/losslandscape.png" src="../_images/losslandscape.png" style="width: 60%;" /></a>
@@ -705,6 +707,7 @@
 </div>
 <div class="section" id="long-training-times">
 <h2><span class="section-number">2.3. </span>Long training times<a class="headerlink" href="#long-training-times" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/nnf253n2HCY' frameborder='0' allowfullscreen></iframe></div>
 <div class="section" id="importance-of-normalization">
 <h3><span class="section-number">2.3.1. </span>Importance of normalization<a class="headerlink" href="#importance-of-normalization" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="../_images/meanremoval.gif" /></p>
@@ -776,6 +779,7 @@
 </div>
 <div class="section" id="overfitting">
 <h2><span class="section-number">2.4. </span>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/AflXkfzAzoo' frameborder='0' allowfullscreen></iframe></div>
 <p>The main problem with deep NN is <strong>overfitting</strong>. With increasing depth, the network has too many weights = free parameters, so its VC dimension is high.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -859,6 +863,7 @@
 </div>
 <div class="section" id="vanishing-gradient">
 <h2><span class="section-number">2.5. </span>Vanishing gradient<a class="headerlink" href="#vanishing-gradient" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/NPUqQb9U-ww' frameborder='0' allowfullscreen></iframe></div>
 <div class="section" id="principle">
 <h3><span class="section-number">2.5.1. </span>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h3>
 <p>Contrary to what we could think, adding more layers to a DNN does not necessarily lead to a better performance, both on the training and test set. Here is the performance of neural networks with 20 or 56 layers on <strong>CIFAR-10</strong>:</p>

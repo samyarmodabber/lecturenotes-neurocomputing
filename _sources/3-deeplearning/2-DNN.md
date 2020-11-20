@@ -5,6 +5,8 @@ Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectur
 
 ## Why deep neural networks?
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/TWGcYiykAn4' frameborder='0' allowfullscreen></iframe></div>
+
 The **universal approximation theorem** (Cybenko, 1989) states that a **shallow** network can approximate any mapping function between inputs and outputs. However, if the mapping function is too complex, a shallow network may need too many hidden neurons.
 
 The hidden neurons extract **features** in the input space: typical characteristics of the input which, when combined by the output neurons, allow to solve the classification task. Problem: the features are not hierarchically organized and cannot become complex enough.
@@ -37,6 +39,8 @@ In practice, training a deep network is not as easy as the theory would suggest.
 
 ## Bad convergence
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/UdcmfiDZrVU' frameborder='0' allowfullscreen></iframe></div>
+
 The loss function $\mathcal{L}(\theta)$ of a deep neural network has usually not a single global minimum, but many local minima: irregular **loss landscape**.
 
 ```{figure} ../img/losslandscape.png
@@ -49,7 +53,6 @@ Visualizing the loss landscape of neural nets {cite}`Li2018`.
 Gradient descent gets stuck in local minima by design. One could perform different weight initializations, in order to find per chance an initial position close enough from the global minimum, but this is **inefficient**.
 
 ### Optimizers
-
 
 #### Stochastic gradient descent
 
@@ -334,6 +337,8 @@ print best
 
 ## Long training times
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/nnf253n2HCY' frameborder='0' allowfullscreen></iframe></div>
+
 ### Importance of normalization
 
 ![](../img/meanremoval.gif)
@@ -419,6 +424,9 @@ $$
 
 
 ## Overfitting
+
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/AflXkfzAzoo' frameborder='0' allowfullscreen></iframe></div>
 
 The main problem with deep NN is **overfitting**. With increasing depth, the network has too many weights = free parameters, so its VC dimension is high.
 
@@ -523,6 +531,8 @@ Early-stopping by checking the validation loss during training.
 ```
 
 ## Vanishing gradient
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/NPUqQb9U-ww' frameborder='0' allowfullscreen></iframe></div>
 
 ### Principle 
 
