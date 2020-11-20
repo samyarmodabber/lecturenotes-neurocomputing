@@ -20,7 +20,7 @@
 - part: Deep learning
   chapters:
     - file: 3-deeplearning/1-NN
-#     - file: 3-deeplearning/2-DNN
+    - file: 3-deeplearning/2-DNN
 #     - file: 3-deeplearning/3-CNN
 #     - file: 3-deeplearning/4-ObjectDetection
 #     - file: 3-deeplearning/5-Autoencoders
@@ -88,6 +88,13 @@
         - file: 5-exercises/7-SoftmaxClassifier
           title: Notebook
         - file: 5-exercises/7-SoftmaxClassifier-solution
+          title: Solution
+
+    - file: 5-exercises/ex8-MLP
+      sections:
+        - file: 5-exercises/8-MLP
+          title: Notebook
+        - file: 5-exercises/8-MLP-solution
           title: Solution
 
 

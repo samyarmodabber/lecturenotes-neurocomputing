@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-layer perceptron &#8212; Neurocomputing</title>
+    <title>8. Multi-layer perceptron &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,6 +40,8 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex8-MLP.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.2.1. Multi-layer Perceptron" href="8-MLP.html" />
+    <link rel="prev" title="7.2.2. Softmax classification" href="7-SoftmaxClassifier-solution.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -49,7 +51,7 @@
 <meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/ex8-MLP.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Multi-layer perceptron" />
-<meta property="og:description" content="Multi-layer perceptron" />
+<meta property="og:description" content="Multi-layer perceptron  The goal of this exercise is to implement a shallow MLP and the backpropagation algorithm, as well as to investigate several improvement" />
 <meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
 
 <meta name="twitter:card" content="summary" />
@@ -149,10 +151,27 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Exercises
+  Deep learning
  </span>
 </p>
 <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ex1-Python.html">
    1. Introduction to Python
@@ -182,6 +201,28 @@
   <a class="reference internal" href="ex6-LinearClassification.html">
    6. Linear classification
   </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. Multi-layer perceptron
+  </a>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="8-MLP.html">
+     8.2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="8-MLP-solution.html">
+     8.2.2. Solution
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -264,7 +305,19 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#presentation">
+   8.1. Presentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commented-solution">
+   8.2. Commented solution
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -274,7 +327,22 @@
               <div>
                 
   <div class="section" id="multi-layer-perceptron">
-<h1>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Multi-layer perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
+<p>The goal of this exercise is to implement a shallow MLP and the backpropagation algorithm, as well as to investigate several improvements to improve convergence.</p>
+<div class="section" id="presentation">
+<h2><span class="section-number">8.1. </span>Presentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h2>
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="section" id="commented-solution">
+<h2><span class="section-number">8.2. </span>Commented solution<a class="headerlink" href="#commented-solution" title="Permalink to this headline">¶</a></h2>
+<div class="embed-container">
+  <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -305,6 +373,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="7-SoftmaxClassifier-solution.html" title="previous page"><span class="section-number">7.2.2. </span>Softmax classification</a>
+    <a class='right-next' id="next-link" href="8-MLP.html" title="next page"><span class="section-number">8.2.1. </span>Multi-layer Perceptron</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

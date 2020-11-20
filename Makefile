@@ -1,9 +1,10 @@
 all: build
 
 build:
+	touch neurocomputing/zreferences.md
 	jupyter-book build neurocomputing
 
-export:
+export: build
 	git add neurocomputing/_build/html
 	git commit -a -m "Rebuilding site `date`"
 	git push origin master
