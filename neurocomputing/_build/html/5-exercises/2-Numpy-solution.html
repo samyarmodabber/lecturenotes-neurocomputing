@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.2.2. Introduction to Numpy and Matplotlib &#8212; Neurocomputing</title>
+    <title>2.2. Introduction to Numpy and Matplotlib &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -41,7 +41,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Linear regression" href="ex3-LinearRegression.html" />
-    <link rel="prev" title="2.2.1. Introduction to Numpy and Matplotlib" href="2-Numpy.html" />
+    <link rel="prev" title="2.1. Introduction to Numpy and Matplotlib" href="2-Numpy.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -184,12 +184,12 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="2-Numpy.html">
-     2.2.1. Notebook
+     2.1. Notebook
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.2.2. Solution
+     2.2. Solution
     </a>
    </li>
   </ul>
@@ -330,81 +330,81 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#numpy-numerical-library">
-   2.2.2.1. Numpy numerical library
+   2.2.1. Numpy numerical library
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#importing-libraries">
-     2.2.2.1.1. Importing libraries
+     2.2.1.1. Importing libraries
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#vectors-and-matrices">
-     2.2.2.1.2. Vectors and matrices
+     2.2.1.2. Vectors and matrices
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#initialization-of-an-array">
-     2.2.2.1.3. Initialization of an array
+     2.2.1.3. Initialization of an array
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#random-distributions">
-     2.2.2.1.4. Random distributions
+     2.2.1.4. Random distributions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#manipulation-of-matrices-indices-slices">
-     2.2.2.1.5. Manipulation of matrices: indices, slices
+     2.2.1.5. Manipulation of matrices: indices, slices
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#basic-linear-algebra">
-     2.2.2.1.6. Basic linear algebra
+     2.2.1.6. Basic linear algebra
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#transpose-a-matrix">
-       2.2.2.1.6.1. Transpose a matrix
+       2.2.1.6.1. Transpose a matrix
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#multiply-two-matrices">
-       2.2.2.1.6.2. Multiply two matrices
+       2.2.1.6.2. Multiply two matrices
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#multiplying-a-matrix-with-a-vector">
-       2.2.2.1.6.3. Multiplying a matrix with a vector
+       2.2.1.6.3. Multiplying a matrix with a vector
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#inverting-a-matrix">
-       2.2.2.1.6.4. Inverting a matrix
+       2.2.1.6.4. Inverting a matrix
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#summing-elements">
-     2.2.2.1.7. Summing elements
+     2.2.1.7. Summing elements
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mathematical-operations">
-     2.2.2.1.8. Mathematical operations
+     2.2.1.8. Mathematical operations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matplotlib">
-   2.2.2.2. Matplotlib
+   2.2.2. Matplotlib
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plt-plot">
-     2.2.2.2.1.
+     2.2.2.1.
      <code class="docutils literal notranslate">
       <span class="pre">
        plt.plot()
@@ -414,12 +414,12 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#side-by-side-plots">
-     2.2.2.2.2. Side-by-side plots
+     2.2.2.2. Side-by-side plots
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plt-imshow">
-     2.2.2.2.3.
+     2.2.2.3.
      <code class="docutils literal notranslate">
       <span class="pre">
        plt.imshow
@@ -429,7 +429,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plt-scatter">
-     2.2.2.2.4.
+     2.2.2.4.
      <code class="docutils literal notranslate">
       <span class="pre">
        plt.scatter
@@ -439,7 +439,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plt-hist">
-     2.2.2.2.5.
+     2.2.2.5.
      <code class="docutils literal notranslate">
       <span class="pre">
        plt.hist()
@@ -460,9 +460,9 @@
               <div>
                 
   <div class="section" id="introduction-to-numpy-and-matplotlib">
-<h1><span class="section-number">2.2.2. </span>Introduction to Numpy and  Matplotlib<a class="headerlink" href="#introduction-to-numpy-and-matplotlib" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.2. </span>Introduction to Numpy and  Matplotlib<a class="headerlink" href="#introduction-to-numpy-and-matplotlib" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="numpy-numerical-library">
-<h2><span class="section-number">2.2.2.1. </span>Numpy numerical library<a class="headerlink" href="#numpy-numerical-library" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.1. </span>Numpy numerical library<a class="headerlink" href="#numpy-numerical-library" title="Permalink to this headline">¶</a></h2>
 <p>NumPy is a linear algebra library in Python, with computationally expensive methods written in FORTRAN for speed.</p>
 <ul class="simple">
 <li><p>The reference manual is at <a class="reference external" href="https://numpy.org/doc/stable/">https://numpy.org/doc/stable/</a>.</p></li>
@@ -471,7 +471,7 @@
 <li><p>If you already know Matlab, a comparison is at <a class="reference external" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html">https://numpy.org/doc/stable/user/numpy-for-matlab-users.html</a></p></li>
 </ul>
 <div class="section" id="importing-libraries">
-<h3><span class="section-number">2.2.2.1.1. </span>Importing libraries<a class="headerlink" href="#importing-libraries" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.1. </span>Importing libraries<a class="headerlink" href="#importing-libraries" title="Permalink to this headline">¶</a></h3>
 <p>To import a library in Python, you only need to use the keyword <code class="docutils literal notranslate"><span class="pre">import</span></code> at the beginning of your script / notebook (or more exactly, before you use it).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 </pre></div>
@@ -510,7 +510,7 @@
 </div>
 </div>
 <div class="section" id="vectors-and-matrices">
-<h3><span class="section-number">2.2.2.1.2. </span>Vectors and matrices<a class="headerlink" href="#vectors-and-matrices" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.2. </span>Vectors and matrices<a class="headerlink" href="#vectors-and-matrices" title="Permalink to this headline">¶</a></h3>
 <p>The basic object in NumPy is an <strong>array</strong> with d-dimensions (1D = vector, 2D = matrix, 3D or more = tensor). They can store either integers or floats, using various precisions.</p>
 <p>In order to create a vector of three floats, you simply have to build an <code class="docutils literal notranslate"><span class="pre">array()</span></code> object by providing a list of floats as input:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]</span> <span class="p">)</span>
@@ -605,7 +605,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="initialization-of-an-array">
-<h3><span class="section-number">2.2.2.1.3. </span>Initialization of an array<a class="headerlink" href="#initialization-of-an-array" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.3. </span>Initialization of an array<a class="headerlink" href="#initialization-of-an-array" title="Permalink to this headline">¶</a></h3>
 <p>Providing a list of values to <code class="docutils literal notranslate"><span class="pre">array()</span></code> would be tedious for large arrays. Numpy offers constructors that allow to construct simply most vectors or matrices.</p>
 <p><code class="docutils literal notranslate"><span class="pre">np.zeros(shape)</span></code> creates an array of shape <code class="docutils literal notranslate"><span class="pre">shape</span></code> filled with zeros. Note: if you give a single integer for the shape, it will be interpreted as a vector of shape <code class="docutils literal notranslate"><span class="pre">(d,)</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">np.ones(shape)</span></code> creates an array of shape <code class="docutils literal notranslate"><span class="pre">shape</span></code> filled with ones.</p>
@@ -632,7 +632,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="random-distributions">
-<h3><span class="section-number">2.2.2.1.4. </span>Random distributions<a class="headerlink" href="#random-distributions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.4. </span>Random distributions<a class="headerlink" href="#random-distributions" title="Permalink to this headline">¶</a></h3>
 <p>In many cases, it is useful to initialize a vector or matrix with random values. <strong>Random number generators</strong> (rng) allows to draw numbers from any probability distribution (uniform, normal, etc.) using pseudo-random methods.</p>
 <p>In numpy versions before 1.16, the <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> module had direct methods allowing to initialize arrays:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># a 10x10 matrix with values uniformly taken between -1 and 1</span>
@@ -664,7 +664,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="manipulation-of-matrices-indices-slices">
-<h3><span class="section-number">2.2.2.1.5. </span>Manipulation of matrices: indices, slices<a class="headerlink" href="#manipulation-of-matrices-indices-slices" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.5. </span>Manipulation of matrices: indices, slices<a class="headerlink" href="#manipulation-of-matrices-indices-slices" title="Permalink to this headline">¶</a></h3>
 <p>To access a particular element of a matrix, you can use the usual Python list style (the first element has a rank of 0), once per dimension:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
     <span class="p">[</span> 
@@ -767,7 +767,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="basic-linear-algebra">
-<h3><span class="section-number">2.2.2.1.6. </span>Basic linear algebra<a class="headerlink" href="#basic-linear-algebra" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.6. </span>Basic linear algebra<a class="headerlink" href="#basic-linear-algebra" title="Permalink to this headline">¶</a></h3>
 <p>Let’s first define some matrices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -788,7 +788,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="transpose-a-matrix">
-<h4><span class="section-number">2.2.2.1.6.1. </span>Transpose a matrix<a class="headerlink" href="#transpose-a-matrix" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.2.1.6.1. </span>Transpose a matrix<a class="headerlink" href="#transpose-a-matrix" title="Permalink to this headline">¶</a></h4>
 <p>A matrix can be transposed with the <code class="docutils literal notranslate"><span class="pre">transpose()</span></code> method or the <code class="docutils literal notranslate"><span class="pre">.T</span></code> shortcut:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> 
 <span class="n">E</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="c1"># equivalent</span>
@@ -819,7 +819,7 @@ Type of elements in B is : uint8
 <p><code class="docutils literal notranslate"><span class="pre">transpose()</span></code> does not change <code class="docutils literal notranslate"><span class="pre">A</span></code>, it only returns a transposed copy. To transpose <code class="docutils literal notranslate"><span class="pre">A</span></code> definitely, you have to use the assigment <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">A.T</span></code></p>
 </div>
 <div class="section" id="multiply-two-matrices">
-<h4><span class="section-number">2.2.2.1.6.2. </span>Multiply two matrices<a class="headerlink" href="#multiply-two-matrices" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.2.1.6.2. </span>Multiply two matrices<a class="headerlink" href="#multiply-two-matrices" title="Permalink to this headline">¶</a></h4>
 <p>There are two manners to multiply matrices:</p>
 <ul class="simple">
 <li><p>element-wise: Two arrays of <strong>exactly</strong> the same shape can be multiplied <em>element-wise</em> by using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator:</p></li>
@@ -869,7 +869,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="multiplying-a-matrix-with-a-vector">
-<h4><span class="section-number">2.2.2.1.6.3. </span>Multiplying a matrix with a vector<a class="headerlink" href="#multiplying-a-matrix-with-a-vector" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.2.1.6.3. </span>Multiplying a matrix with a vector<a class="headerlink" href="#multiplying-a-matrix-with-a-vector" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> also apply on matrix-vector multiplications <span class="math notranslate nohighlight">\(\mathbf{y} = A \times \mathbf{x}\)</span> or vector-vector multiplications.</p>
 <p><strong>Q:</strong> Define a vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with four elements and multiply it with the matrix <span class="math notranslate nohighlight">\(A\)</span> using <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>. What do you obtain? Try the same by multiplying the vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and itself.</p>
 <div class="cell docutils container">
@@ -902,7 +902,7 @@ Type of elements in B is : uint8
 <p><strong>A:</strong> the element-wise multiplies each column of the matrix by the corresponding element of the vector. <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> works as expected. The same happens for vector-vector multiplications: element-wise for <code class="docutils literal notranslate"><span class="pre">*</span></code>, dot-product for <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> (hence the name of the method).</p>
 </div>
 <div class="section" id="inverting-a-matrix">
-<h4><span class="section-number">2.2.2.1.6.4. </span>Inverting a matrix<a class="headerlink" href="#inverting-a-matrix" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.2.1.6.4. </span>Inverting a matrix<a class="headerlink" href="#inverting-a-matrix" title="Permalink to this headline">¶</a></h4>
 <p>Inverting a Matrix (when possible) can be done using the <code class="docutils literal notranslate"><span class="pre">inv()</span></code> method whitch is defined in the <code class="docutils literal notranslate"><span class="pre">linalg</span></code> submodule of NumPy.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inv_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </pre></div>
@@ -938,7 +938,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="summing-elements">
-<h3><span class="section-number">2.2.2.1.7. </span>Summing elements<a class="headerlink" href="#summing-elements" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.7. </span>Summing elements<a class="headerlink" href="#summing-elements" title="Permalink to this headline">¶</a></h3>
 <p>One can sum the elements of a matrix globally, row-wise or column-wise:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Globally</span>
 <span class="n">S1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -1013,7 +1013,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="mathematical-operations">
-<h3><span class="section-number">2.2.2.1.8. </span>Mathematical operations<a class="headerlink" href="#mathematical-operations" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.1.8. </span>Mathematical operations<a class="headerlink" href="#mathematical-operations" title="Permalink to this headline">¶</a></h3>
 <p>You can apply any usual mathematical operations (cos, sin, exp, etc…) on each element of a matrix (element-wise):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -1052,7 +1052,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="matplotlib">
-<h2><span class="section-number">2.2.2.2. </span>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.2. </span>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h2>
 <p>Matplotlib is a python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms.</p>
 <ul class="simple">
 <li><p>Reference: <a class="reference external" href="http://matplotlib.org">http://matplotlib.org</a></p></li>
@@ -1075,7 +1075,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="plt-plot">
-<h3><span class="section-number">2.2.2.2.1. </span><code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code><a class="headerlink" href="#plt-plot" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.2.1. </span><code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code><a class="headerlink" href="#plt-plot" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> command allows to make simple line drawings:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.</span>
@@ -1230,7 +1230,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="side-by-side-plots">
-<h3><span class="section-number">2.2.2.2.2. </span>Side-by-side plots<a class="headerlink" href="#side-by-side-plots" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.2.2. </span>Side-by-side plots<a class="headerlink" href="#side-by-side-plots" title="Permalink to this headline">¶</a></h3>
 <p>To make separate plots in the same figure, you can use <code class="docutils literal notranslate"><span class="pre">plt.subplot(abc)</span></code>.</p>
 <p>The function takes three digits a, b, c as input (e.g. 221 or 122) where:</p>
 <ul class="simple">
@@ -1289,7 +1289,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="plt-imshow">
-<h3><span class="section-number">2.2.2.2.3. </span><code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code><a class="headerlink" href="#plt-imshow" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.2.3. </span><code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code><a class="headerlink" href="#plt-imshow" title="Permalink to this headline">¶</a></h3>
 <p>Matrices can be displayed using <code class="docutils literal notranslate"><span class="pre">plt.imshow()</span></code>. You can choose the color code with the <code class="docutils literal notranslate"><span class="pre">cmap</span></code> argument (e.g. <code class="docutils literal notranslate"><span class="pre">gray</span></code> or <code class="docutils literal notranslate"><span class="pre">hot</span></code>).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
@@ -1316,7 +1316,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="plt-scatter">
-<h3><span class="section-number">2.2.2.2.4. </span><code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code><a class="headerlink" href="#plt-scatter" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.2.4. </span><code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code><a class="headerlink" href="#plt-scatter" title="Permalink to this headline">¶</a></h3>
 <p>If you want to display dots instead of of lines or pixels, <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> takes two vectors of same size and plots them against each other:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
@@ -1339,7 +1339,7 @@ Type of elements in B is : uint8
 </div>
 </div>
 <div class="section" id="plt-hist">
-<h3><span class="section-number">2.2.2.2.5. </span><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code><a class="headerlink" href="#plt-hist" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.2.2.5. </span><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code><a class="headerlink" href="#plt-hist" title="Permalink to this headline">¶</a></h3>
 <p>Histograms can be useful to visualize the distribution of some data. If <code class="docutils literal notranslate"><span class="pre">z</span></code> is a vector of values, the histogram is simply:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
@@ -1392,7 +1392,7 @@ Type of elements in B is : uint8
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="2-Numpy.html" title="previous page"><span class="section-number">2.2.1. </span>Introduction to Numpy and  Matplotlib</a>
+    <a class='left-prev' id="prev-link" href="2-Numpy.html" title="previous page"><span class="section-number">2.1. </span>Introduction to Numpy and  Matplotlib</a>
     <a class='right-next' id="next-link" href="ex3-LinearRegression.html" title="next page"><span class="section-number">3. </span>Linear regression</a>
 
     </div>

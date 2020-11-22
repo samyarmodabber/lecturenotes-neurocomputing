@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7.2.2. Softmax classification &#8212; Neurocomputing</title>
+    <title>7.2. Softmax classification &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -41,7 +41,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="8. Multi-layer perceptron" href="ex8-MLP.html" />
-    <link rel="prev" title="7.2.1. Softmax classification" href="7-SoftmaxClassifier.html" />
+    <link rel="prev" title="7.1. Softmax classification" href="7-SoftmaxClassifier.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -209,12 +209,12 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="7-SoftmaxClassifier.html">
-     7.2.1. Notebook
+     7.1. Notebook
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     7.2.2. Solution
+     7.2. Solution
     </a>
    </li>
   </ul>
@@ -330,17 +330,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loading-the-data">
-   7.2.2.1. Loading the data
+   7.2.1. Loading the data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#softmax-linear-classifier">
-   7.2.2.2. Softmax linear classifier
+   7.2.2. Softmax linear classifier
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementation">
-   7.2.2.3. Implementation
+   7.2.3. Implementation
   </a>
  </li>
 </ul>
@@ -354,7 +354,7 @@
               <div>
                 
   <div class="section" id="softmax-classification">
-<h1><span class="section-number">7.2.2. </span>Softmax classification<a class="headerlink" href="#softmax-classification" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7.2. </span>Softmax classification<a class="headerlink" href="#softmax-classification" title="Permalink to this headline">¶</a></h1>
 <p>In this exercise, you will implement a softmax classifier for multi-class classification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -365,7 +365,7 @@
 </div>
 </div>
 <div class="section" id="loading-the-data">
-<h2><span class="section-number">7.2.2.1. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.1. </span>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now import the <code class="docutils literal notranslate"><span class="pre">digits</span></code> dataset provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html</a></p>
 <p>It contains 1797 small (8x8) black and white images of digits between 0 and 9.</p>
@@ -480,7 +480,7 @@
 </div>
 </div>
 <div class="section" id="softmax-linear-classifier">
-<h2><span class="section-number">7.2.2.2. </span>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.2. </span>Softmax linear classifier<a class="headerlink" href="#softmax-linear-classifier" title="Permalink to this headline">¶</a></h2>
 <p>Let’s remember the structure of the softmax linear classifier: the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is transformed into a <strong>logit score</strong> vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> using a weight matrix <span class="math notranslate nohighlight">\(W\)</span> and a bias vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -535,7 +535,7 @@
 <p>Note that because <span class="math notranslate nohighlight">\(W\)</span> is a <span class="math notranslate nohighlight">\((c, d)\)</span> matrix, <span class="math notranslate nohighlight">\(\Delta W\)</span> too. <span class="math notranslate nohighlight">\((\mathbf{t} - \mathbf{y}) \, \mathbf{x}^T\)</span> is therefore the <strong>outer product</strong> between the error vector <span class="math notranslate nohighlight">\(\mathbf{t} - \mathbf{y}\)</span> (<span class="math notranslate nohighlight">\(c\)</span> elements) and the input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (<span class="math notranslate nohighlight">\(d\)</span> elements).</p>
 </div>
 <div class="section" id="implementation">
-<h2><span class="section-number">7.2.2.3. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2.3. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>You will now modify your implementation of the online Perceptron algorithm from last week.</p>
 <p>Some things to keep in mind:</p>
 <ul class="simple">
@@ -715,7 +715,7 @@ Final test loss: 0.02962962962962963
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="7-SoftmaxClassifier.html" title="previous page"><span class="section-number">7.2.1. </span>Softmax classification</a>
+    <a class='left-prev' id="prev-link" href="7-SoftmaxClassifier.html" title="previous page"><span class="section-number">7.1. </span>Softmax classification</a>
     <a class='right-next' id="next-link" href="ex8-MLP.html" title="next page"><span class="section-number">8. </span>Multi-layer perceptron</a>
 
     </div>
