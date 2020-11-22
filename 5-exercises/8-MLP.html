@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8.2.1. Multi-layer Perceptron &#8212; Neurocomputing</title>
+    <title>8.1. Multi-layer Perceptron &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,7 +40,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/8-MLP.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8.2.2. Multi-layer Perceptron" href="8-MLP-solution.html" />
+    <link rel="next" title="8.2. Multi-layer Perceptron" href="8-MLP-solution.html" />
     <link rel="prev" title="8. Multi-layer perceptron" href="ex8-MLP.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -214,12 +214,12 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     8.2.1. Notebook
+     8.1. Notebook
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="8-MLP-solution.html">
-     8.2.2. Solution
+     8.2. Solution
     </a>
    </li>
   </ul>
@@ -330,67 +330,67 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#structure-of-the-mlp">
-   8.2.1.1. Structure of the MLP
+   8.1.1. Structure of the MLP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   8.2.1.2. Data
+   8.1.2. Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#class-definition">
-   8.2.1.3. Class definition
+   8.1.3. Class definition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#backpropagation">
-   8.2.1.4. Backpropagation
+   8.1.4. Backpropagation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#experiments">
-   8.2.1.5. Experiments
+   8.1.5. Experiments
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-the-number-of-hidden-neurons">
-     8.2.1.5.1. Influence of the number of hidden neurons
+     8.1.5.1. Influence of the number of hidden neurons
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-the-learning-rate">
-     8.2.1.5.2. Influence of the learning rate
+     8.1.5.2. Influence of the learning rate
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-weight-initialization">
-     8.2.1.5.3. Influence of weight initialization
+     8.1.5.3. Influence of weight initialization
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-the-transfer-function">
-     8.2.1.5.4. Influence of the transfer function
+     8.1.5.4. Influence of the transfer function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-data-normalization">
-     8.2.1.5.5. Influence of data normalization
+     8.1.5.5. Influence of data normalization
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-randomization">
-     8.2.1.5.6. Influence of randomization
+     8.1.5.6. Influence of randomization
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#influence-of-weight-initialization-part-2">
-     8.2.1.5.7. Influence of weight initialization - part 2
+     8.1.5.7. Influence of weight initialization - part 2
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#summary">
-     8.2.1.5.8. Summary
+     8.1.5.8. Summary
     </a>
    </li>
   </ul>
@@ -406,7 +406,7 @@
               <div>
                 
   <div class="section" id="multi-layer-perceptron">
-<h1><span class="section-number">8.2.1. </span>Multi-layer Perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8.1. </span>Multi-layer Perceptron<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this exercise is to implement a shallow multi-layer perceptron to perform non-linear classification. Let’s start with usual imports, including the logistic function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -427,7 +427,7 @@
 </div>
 </div>
 <div class="section" id="structure-of-the-mlp">
-<h2><span class="section-number">8.2.1.1. </span>Structure of the MLP<a class="headerlink" href="#structure-of-the-mlp" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.1. </span>Structure of the MLP<a class="headerlink" href="#structure-of-the-mlp" title="Permalink to this headline">¶</a></h2>
 <p>In this exercise, we will consider a MLP for non-linear binary classification composed of 2 input neurons <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, one output neuron <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(K\)</span> hidden neurons in a single hidden layer (<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>).</p>
 <a class="reference internal image-reference" href="../_images/mlp-example1.svg"><img alt="../_images/mlp-example1.svg" src="../_images/mlp-example1.svg" width="600" /></a>
 <p>The output neuron is a vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> with one element that sums its inputs with <span class="math notranslate nohighlight">\(K\)</span> weights <span class="math notranslate nohighlight">\(W^2\)</span> and a bias <span class="math notranslate nohighlight">\(\mathbf{b}^2\)</span>.</p>
@@ -470,7 +470,7 @@
 <p><strong>Q:</strong> Why do not we use the derivative of the transfer function of the output neuron when computing the output error <span class="math notranslate nohighlight">\(\delta\)</span>?</p>
 </div>
 <div class="section" id="data">
-<h2><span class="section-number">8.2.1.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <p>The MLP will be trained on a non-linear dataset with samples of each class forming a circle. Each sample has two input dimensions. In the cell below, blue points represent the positive class (t=1), orange ones the negative class (t=0).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -494,7 +494,7 @@
 <p><strong>Q:</strong> Split the data into a training and test set (80/20). Make sure to call them <code class="docutils literal notranslate"><span class="pre">X_train,</span> <span class="pre">X_test,</span> <span class="pre">t_train,</span> <span class="pre">t_test</span></code>.</p>
 </div>
 <div class="section" id="class-definition">
-<h2><span class="section-number">8.2.1.3. </span>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.3. </span>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this headline">¶</a></h2>
 <p>The neural network is entirely defined by its parameters, i.e. the weight matrices and bias vectors, as well the transfer function of the hidden neurons. In order to make your code more reusable, the MLP will be implemented as a Python class. The following cell defines the class, but we will explain it step by step afterwards.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -674,7 +674,7 @@
 <p><strong>Q:</strong> Plot the initial classification on the dataset with random weights. Is there a need for learning? Reinitialize the weights and biases multiple times. What do you observe?</p>
 </div>
 <div class="section" id="backpropagation">
-<h2><span class="section-number">8.2.1.4. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.4. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">train()</span></code> method implements the training loop you have already implemented several times: several epochs over the training set, making a prediction for each input and modifying the parameters according to the prediction error:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">nb_epochs</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
@@ -741,22 +741,22 @@
 <p><strong>Q:</strong> Use the <code class="docutils literal notranslate"><span class="pre">test()</span></code> method to compute the error on the test set. What is the test accuracy of your network after training? Compare it to the training accuracy.</p>
 </div>
 <div class="section" id="experiments">
-<h2><span class="section-number">8.2.1.5. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.5. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="influence-of-the-number-of-hidden-neurons">
-<h3><span class="section-number">8.2.1.5.1. </span>Influence of the number of hidden neurons<a class="headerlink" href="#influence-of-the-number-of-hidden-neurons" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.1. </span>Influence of the number of hidden neurons<a class="headerlink" href="#influence-of-the-number-of-hidden-neurons" title="Permalink to this headline">¶</a></h3>
 <p><strong>Q:</strong> Try different values for the number of hidden neurons <span class="math notranslate nohighlight">\(K\)</span> (e.g. 2, 5, 10, 15, 20, 25, 50…) and observe how the accuracy and speed of convergence evolve.</p>
 </div>
 <div class="section" id="influence-of-the-learning-rate">
-<h3><span class="section-number">8.2.1.5.2. </span>Influence of the learning rate<a class="headerlink" href="#influence-of-the-learning-rate" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.2. </span>Influence of the learning rate<a class="headerlink" href="#influence-of-the-learning-rate" title="Permalink to this headline">¶</a></h3>
 <p><strong>Q:</strong> Vary the learning rate between extreme values. How does the performance evolve?</p>
 </div>
 <div class="section" id="influence-of-weight-initialization">
-<h3><span class="section-number">8.2.1.5.3. </span>Influence of weight initialization<a class="headerlink" href="#influence-of-weight-initialization" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.3. </span>Influence of weight initialization<a class="headerlink" href="#influence-of-weight-initialization" title="Permalink to this headline">¶</a></h3>
 <p><strong>Q:</strong> The weights are initialized randomly between -1 and 1. Try to initialize them to 0. Does it work? Why?</p>
 <p><strong>Q:</strong> For a fixed number of hidden neurons (e.g. <span class="math notranslate nohighlight">\(K=15\)</span>) and a correct value of <code class="docutils literal notranslate"><span class="pre">eta</span></code>, train 10 times the network with different initial weights and superimpose on the same plot the evolution of the training error. Conclude.</p>
 </div>
 <div class="section" id="influence-of-the-transfer-function">
-<h3><span class="section-number">8.2.1.5.4. </span>Influence of the transfer function<a class="headerlink" href="#influence-of-the-transfer-function" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.4. </span>Influence of the transfer function<a class="headerlink" href="#influence-of-the-transfer-function" title="Permalink to this headline">¶</a></h3>
 <p><strong>Q:</strong> Modify the <code class="docutils literal notranslate"><span class="pre">backprop()</span></code> method so that it applies backpropagation correctly for any of the four activation functions:</p>
 <ul class="simple">
 <li><p>linear</p></li>
@@ -806,7 +806,7 @@
 <p><strong>Q:</strong> Use the Rectified Linear Unit (ReLU) transfer function. What does it change? Conclude on the importance of the transfer function for the hidden neurons. Select the best one from now on.</p>
 </div>
 <div class="section" id="influence-of-data-normalization">
-<h3><span class="section-number">8.2.1.5.5. </span>Influence of data normalization<a class="headerlink" href="#influence-of-data-normalization" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.5. </span>Influence of data normalization<a class="headerlink" href="#influence-of-data-normalization" title="Permalink to this headline">¶</a></h3>
 <p>The input data returned by <code class="docutils literal notranslate"><span class="pre">make_circles</span></code> is nicely center around 0, with values between -1 and 1. What happens if this is not the case with your data?</p>
 <p><strong>Q:</strong> Shift the input data <code class="docutils literal notranslate"><span class="pre">X</span></code> using the formula:</p>
 <div class="math notranslate nohighlight">
@@ -818,12 +818,12 @@
 <p>and retrain the network. Conclude.</p>
 </div>
 <div class="section" id="influence-of-randomization">
-<h3><span class="section-number">8.2.1.5.6. </span>Influence of randomization<a class="headerlink" href="#influence-of-randomization" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.6. </span>Influence of randomization<a class="headerlink" href="#influence-of-randomization" title="Permalink to this headline">¶</a></h3>
 <p>The training loop we used until now iterated over the training samples in the exact same order at every epoch. The samples are therefore not i.i.d (independent and identically distributed) as they follow the same sequence.</p>
 <p><strong>Q:</strong> Modify the <code class="docutils literal notranslate"><span class="pre">train()</span></code> method so that the indices of the training samples are randomized between two epochs. Check the doc of <code class="docutils literal notranslate"><span class="pre">rng.permutation()</span></code> for help.</p>
 </div>
 <div class="section" id="influence-of-weight-initialization-part-2">
-<h3><span class="section-number">8.2.1.5.7. </span>Influence of weight initialization - part 2<a class="headerlink" href="#influence-of-weight-initialization-part-2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.7. </span>Influence of weight initialization - part 2<a class="headerlink" href="#influence-of-weight-initialization-part-2" title="Permalink to this headline">¶</a></h3>
 <p>According to the empirical analysis by Glorot and Bengio in “Understanding the difficulty of training deep feedforward neural networks”, the optimal initial values for the weights between two layers of a MLP are uniformly taken in the range:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -833,7 +833,7 @@
 <p><strong>Q:</strong> Modify the constructor of your class to initialize both hidden and output weights with this new range. The biases should be initialized to 0. What is the effect?</p>
 </div>
 <div class="section" id="summary">
-<h3><span class="section-number">8.2.1.5.8. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.1.5.8. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
 <p><strong>Q:</strong> Now that we optimized the MLP, it is time to cross-validate again the number of hidden neurons and the learning rate. As the networks always get a training error rate of 0 and the test set is not very relevant, the maincriteria will be the number of epochs needed on average to converge. Find the best MLP for the dataset (there is not a single solution), for example by iterating over multiple values of <code class="docutils literal notranslate"><span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">eta</span></code>. What do you think of the change in performance between the first naive implementation and the final one? What were the most critical changes?</p>
 </div>
 </div>
@@ -868,7 +868,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ex8-MLP.html" title="previous page"><span class="section-number">8. </span>Multi-layer perceptron</a>
-    <a class='right-next' id="next-link" href="8-MLP-solution.html" title="next page"><span class="section-number">8.2.2. </span>Multi-layer Perceptron</a>
+    <a class='right-next' id="next-link" href="8-MLP-solution.html" title="next page"><span class="section-number">8.2. </span>Multi-layer Perceptron</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

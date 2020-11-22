@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.2.1. Linear regression &#8212; Neurocomputing</title>
+    <title>3.1. Linear regression &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -40,7 +40,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/3-LinearRegression.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.2.2. Linear regression" href="3-LinearRegression-solution.html" />
+    <link rel="next" title="3.2. Linear regression" href="3-LinearRegression-solution.html" />
     <link rel="prev" title="3. Linear regression" href="ex3-LinearRegression.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -189,12 +189,12 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.2.1. Notebook
+     3.1. Notebook
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="3-LinearRegression-solution.html">
-     3.2.2. Solution
+     3.2. Solution
     </a>
    </li>
   </ul>
@@ -330,17 +330,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#least-mean-squares">
-   3.2.1.1. Least mean squares
+   3.1.1. Least mean squares
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scikit-learn">
-   3.2.1.2. Scikit-learn
+   3.1.2. Scikit-learn
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#delta-learning-rule">
-   3.2.1.3. Delta learning rule
+   3.1.3. Delta learning rule
   </a>
  </li>
 </ul>
@@ -354,7 +354,7 @@
               <div>
                 
   <div class="section" id="linear-regression">
-<h1><span class="section-number">3.2.1. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3.1. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this exercise is to implement the least mean squares algorithm (LMS) for linear regression seen in the course.</p>
 <p>We start by importing numpy and matplotlib.</p>
 <div class="cell docutils container">
@@ -366,7 +366,7 @@
 </div>
 </div>
 <div class="section" id="least-mean-squares">
-<h2><span class="section-number">3.2.1.1. </span>Least mean squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1.1. </span>Least mean squares<a class="headerlink" href="#least-mean-squares" title="Permalink to this headline">¶</a></h2>
 <p>To generate the data for the exercise, we will use the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library <a class="reference external" href="https://scikit-learn.org">https://scikit-learn.org</a>. It provides a huge selection of already implemented machine learning algorithms for classification, regression or clustering.</p>
 <p>If you use Anaconda or Colab, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> should already be installed. Otherwise, install it with <code class="docutils literal notranslate"><span class="pre">pip</span></code> (you may need to restart this notebook afterwards):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
@@ -427,7 +427,7 @@
 <p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math notranslate nohighlight">\(10^{-5}\)</span>, <span class="math notranslate nohighlight">\(10^{-4}\)</span>, <span class="math notranslate nohighlight">\(10^{-3}\)</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>. For the plot, use <code class="docutils literal notranslate"><span class="pre">np.log10(eta)</span></code> to only display the exponent on the X-axis.</p>
 </div>
 <div class="section" id="scikit-learn">
-<h2><span class="section-number">3.2.1.2. </span>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1.2. </span>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">¶</a></h2>
 <p>The code that you have written is functional, but extremely slow, as you use for loops in Python. For so little data samples, it does not make a difference, but if you had millions of samples, this would start to be a problem.</p>
 <p>The solution is to use optimized implementations of the algorithms, running in C++ or FORTRAN under the hood. We will use here the LMS algorithm provided by <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> as you have already installed it and it is very simple to use. Note that one could use tensorflow too, but that would be killing a fly with a sledgehammer.</p>
 <p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object that implements LMS. The documentation is at: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html</a>.</p>
@@ -452,7 +452,7 @@
 <p><strong>Q:</strong> Apply linear regression on the data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Check the model parameters after learning and compare them to what you obtained previously. Print the mse and make a plot comparing the predictions with the data.</p>
 </div>
 <div class="section" id="delta-learning-rule">
-<h2><span class="section-number">3.2.1.3. </span>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1.3. </span>Delta learning rule<a class="headerlink" href="#delta-learning-rule" title="Permalink to this headline">¶</a></h2>
 <p>Let’s now implement the online version of LMS, the <strong>delta learning rule</strong>. The only difference is that the parameter updates are applied immediately after each example is evaluated, not at the end of training.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(w=0 \quad;\quad b=0\)</span></p></li>
@@ -502,7 +502,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ex3-LinearRegression.html" title="previous page"><span class="section-number">3. </span>Linear regression</a>
-    <a class='right-next' id="next-link" href="3-LinearRegression-solution.html" title="next page"><span class="section-number">3.2.2. </span>Linear regression</a>
+    <a class='right-next' id="next-link" href="3-LinearRegression-solution.html" title="next page"><span class="section-number">3.2. </span>Linear regression</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

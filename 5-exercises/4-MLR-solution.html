@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4.2.2. Multiple linear regression &#8212; Neurocomputing</title>
+    <title>4.2. Multiple linear regression &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -41,7 +41,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Cross-validation" href="ex5-Crossvalidation.html" />
-    <link rel="prev" title="4.2.1. Multiple linear regression" href="4-MLR.html" />
+    <link rel="prev" title="4.1. Multiple linear regression" href="4-MLR.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -194,12 +194,12 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="4-MLR.html">
-     4.2.1. Notebook
+     4.1. Notebook
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4.2.2. Solution
+     4.2. Solution
     </a>
    </li>
   </ul>
@@ -330,12 +330,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-regression">
-   4.2.2.1. Linear regression
+   4.2.1. Linear regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#regularized-regression">
-   4.2.2.2. Regularized regression
+   4.2.2. Regularized regression
   </a>
  </li>
 </ul>
@@ -349,7 +349,7 @@
               <div>
                 
   <div class="section" id="multiple-linear-regression">
-<h1><span class="section-number">4.2.2. </span>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4.2. </span>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this headline">¶</a></h1>
 <p>Let’s now investigate <strong>multiple linear regression</strong> (MLR), where several output depends on more than one input variable:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -465,7 +465,7 @@ problems.
 </div>
 </div>
 <div class="section" id="linear-regression">
-<h2><span class="section-number">4.2.2.1. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2.1. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
 <p><strong>Q:</strong> Apply MLR on the Boston data using the same <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> method of <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> as last time. Print the mse and visualize the prediction <span class="math notranslate nohighlight">\(y\)</span> against the true value <span class="math notranslate nohighlight">\(t\)</span> for each sample as before. Does it work?</p>
 <p>You will also plot the weights of the model (<code class="docutils literal notranslate"><span class="pre">reg.coef_</span></code>) and conclude on the relative importance of the different features: which feature has the stronger weight and why?</p>
 <div class="cell docutils container">
@@ -555,7 +555,7 @@ problems.
 <p><strong>A:</strong> the mse does not change (it may in more complex problems), but the weights are more interpretable. Now strong weights in absolute value mean that the features are very predictive of the price.</p>
 </div>
 <div class="section" id="regularized-regression">
-<h2><span class="section-number">4.2.2.2. </span>Regularized regression<a class="headerlink" href="#regularized-regression" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2.2. </span>Regularized regression<a class="headerlink" href="#regularized-regression" title="Permalink to this headline">¶</a></h2>
 <p>Now is time to investigate <strong>regularization</strong>:</p>
 <ol class="simple">
 <li><p>MLR with L2 regularization is called <strong>Ridge regression</strong></p></li>
@@ -697,7 +697,7 @@ problems.
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="4-MLR.html" title="previous page"><span class="section-number">4.2.1. </span>Multiple linear regression</a>
+    <a class='left-prev' id="prev-link" href="4-MLR.html" title="previous page"><span class="section-number">4.1. </span>Multiple linear regression</a>
     <a class='right-next' id="next-link" href="ex5-Crossvalidation.html" title="next page"><span class="section-number">5. </span>Cross-validation</a>
 
     </div>
