@@ -9,8 +9,8 @@
     <title>1. Bibliography &#8212; Neurocomputing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -164,6 +164,11 @@
    2. Deep neural networks
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -313,8 +318,14 @@
 <dt class="bibtex label" id="brette2005"><span class="brackets">BG05</span></dt>
 <dd><p>Romain Brette and Wulfram Gerstner. Adaptive Exponential Integrate-and-Fire Model as an Effective Description of Neuronal Activity. <em>Journal of Neurophysiology</em>, 94(5):3637–3642, November 2005. URL: <a class="reference external" href="https://journals.physiology.org/doi/full/10.1152/jn.00686.2005">https://journals.physiology.org/doi/full/10.1152/jn.00686.2005</a>, <a class="reference external" href="https://doi.org/10.1152/jn.00686.2005">doi:10.1152/jn.00686.2005</a>.</p>
 </dd>
-<dt class="bibtex label" id="chollet2017a"><span class="brackets">Cho17</span></dt>
+<dt class="bibtex label" id="chollet2017a"><span class="brackets">Cho17a</span></dt>
 <dd><p>François Chollet. <em>Deep Learning with Python</em>. Manning publications, 2017. URL: <a class="reference external" href="https://www.manning.com/books/deep-learning-with-python">https://www.manning.com/books/deep-learning-with-python</a>.</p>
+</dd>
+<dt class="bibtex label" id="chollet2017b"><span class="brackets">Cho17b</span></dt>
+<dd><p>François Chollet. Xception: Deep Learning with Depthwise Separable Convolutions. <em>arXiv:1610.02357 [cs]</em>, April 2017. URL: <a class="reference external" href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>, <a class="reference external" href="https://arxiv.org/abs/1610.02357">arXiv:1610.02357</a>.</p>
+</dd>
+<dt class="bibtex label" id="fukushima1980"><span class="brackets">Fuk80</span></dt>
+<dd><p>Kunihiko Fukushima. Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. <em>Biological Cybernetics</em>, 36(4):193–202, April 1980. URL: <a class="reference external" href="https://doi.org/10.1007/BF00344251">https://doi.org/10.1007/BF00344251</a>, <a class="reference external" href="https://doi.org/10.1007/BF00344251">doi:10.1007/BF00344251</a>.</p>
 </dd>
 <dt class="bibtex label" id="gerstner2014a"><span class="brackets">GKNP14</span></dt>
 <dd><p>Wulfram Gerstner, Werner Kistler, Richard Naud, and Liam Paninski. <em>Neuronal Dynamics - a Neuroscience Textbook</em>. Cambridge University Press., 2014. URL: <a class="reference external" href="https://neuronaldynamics.epfl.ch/index.html">https://neuronaldynamics.epfl.ch/index.html</a>.</p>
@@ -328,23 +339,38 @@
 <dt class="bibtex label" id="goodfellow2014"><span class="brackets">GPougetAbadieM+14</span></dt>
 <dd><p>Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative Adversarial Networks. <em>arXiv:1406.2661 [cs]</em>, June 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1406.2661">http://arxiv.org/abs/1406.2661</a>, <a class="reference external" href="https://arxiv.org/abs/1406.2661">arXiv:1406.2661</a>.</p>
 </dd>
+<dt class="bibtex label" id="hannun2014"><span class="brackets">HCC+14</span></dt>
+<dd><p>Awni Hannun, Carl Case, Jared Casper, Bryan Catanzaro, Greg Diamos, Erich Elsen, Ryan Prenger, Sanjeev Satheesh, Shubho Sengupta, Adam Coates, and Andrew Y. Ng. Deep Speech: Scaling up end-to-end speech recognition. <em>arXiv:1412.5567 [cs]</em>, December 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.5567">http://arxiv.org/abs/1412.5567</a>, <a class="reference external" href="https://arxiv.org/abs/1412.5567">arXiv:1412.5567</a>.</p>
+</dd>
 <dt class="bibtex label" id="haykin2009"><span class="brackets">Hay09</span></dt>
 <dd><p>Simon S. Haykin. <em>Neural Networks and Learning Machines, 3rd Edition</em>. Pearson, 2009. URL: <a class="reference external" href="http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf">http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf</a>.</p>
 </dd>
 <dt class="bibtex label" id="he2018"><span class="brackets">HGDollarG18</span></dt>
 <dd><p>Kaiming He, Georgia Gkioxari, Piotr Dollár, and Ross Girshick. Mask R-CNN. <em>arXiv:1703.06870 [cs]</em>, January 2018. URL: <a class="reference external" href="http://arxiv.org/abs/1703.06870">http://arxiv.org/abs/1703.06870</a>, <a class="reference external" href="https://arxiv.org/abs/1703.06870">arXiv:1703.06870</a>.</p>
 </dd>
-<dt class="bibtex label" id="he2015a"><span class="brackets">HZRS15</span></dt>
+<dt class="bibtex label" id="he2015"><span class="brackets">HZRS15a</span></dt>
+<dd><p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep Residual Learning for Image Recognition. <em>arXiv:1512.03385 [cs]</em>, December 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>, <a class="reference external" href="https://arxiv.org/abs/1512.03385">arXiv:1512.03385</a>.</p>
+</dd>
+<dt class="bibtex label" id="he2015a"><span class="brackets">HZRS15b</span></dt>
 <dd><p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification. <em>arXiv:1502.01852 [cs]</em>, February 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1502.01852">http://arxiv.org/abs/1502.01852</a>, <a class="reference external" href="https://arxiv.org/abs/1502.01852">arXiv:1502.01852</a>.</p>
 </dd>
 <dt class="bibtex label" id="hochreiter1997"><span class="brackets">HS97</span></dt>
 <dd><p>S Hochreiter and J Schmidhuber. Long short-term memory. <em>Neural computation</em>, 9(8):1735–80, November 1997. URL: <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9377276">http://www.ncbi.nlm.nih.gov/pubmed/9377276</a>.</p>
+</dd>
+<dt class="bibtex label" id="huang2018"><span class="brackets">HLvandMaatenW18</span></dt>
+<dd><p>Gao Huang, Zhuang Liu, Laurens van der Maaten, and Kilian Q. Weinberger. Densely Connected Convolutional Networks. <em>arXiv:1608.06993 [cs]</em>, January 2018. URL: <a class="reference external" href="http://arxiv.org/abs/1608.06993">http://arxiv.org/abs/1608.06993</a>, <a class="reference external" href="https://arxiv.org/abs/1608.06993">arXiv:1608.06993</a>.</p>
 </dd>
 <dt class="bibtex label" id="ioffe2015"><span class="brackets">IS15</span></dt>
 <dd><p>Sergey Ioffe and Christian Szegedy. Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. <em>arXiv:1502.03167 [cs.LG]</em>, February 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1502.03167">http://arxiv.org/abs/1502.03167</a>, <a class="reference external" href="https://arxiv.org/abs/1502.03167">arXiv:1502.03167</a>.</p>
 </dd>
 <dt class="bibtex label" id="izhikevich2003"><span class="brackets">Izh03</span></dt>
 <dd><p>E M Izhikevich. Simple model of spiking neurons. <em>IEEE transactions on neural networks / a publication of the IEEE Neural Networks Council</em>, 14(6):1569–72, January 2003. URL: <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/18244602">http://www.ncbi.nlm.nih.gov/pubmed/18244602</a>, <a class="reference external" href="https://doi.org/10.1109/TNN.2003.820440">doi:10.1109/TNN.2003.820440</a>.</p>
+</dd>
+<dt class="bibtex label" id="kendall2016"><span class="brackets">KGC16</span></dt>
+<dd><p>Alex Kendall, Matthew Grimes, and Roberto Cipolla. PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization. <em>arXiv:1505.07427 [cs]</em>, February 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1505.07427">http://arxiv.org/abs/1505.07427</a>, <a class="reference external" href="https://arxiv.org/abs/1505.07427">arXiv:1505.07427</a>.</p>
+</dd>
+<dt class="bibtex label" id="kim2014"><span class="brackets">Kim14</span></dt>
+<dd><p>Yoon Kim. Convolutional Neural Networks for Sentence Classification. <em>arXiv:1408.5882 [cs]</em>, September 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1408.5882">http://arxiv.org/abs/1408.5882</a>, <a class="reference external" href="https://arxiv.org/abs/1408.5882">arXiv:1408.5882</a>.</p>
 </dd>
 <dt class="bibtex label" id="kingma2014"><span class="brackets">KB14</span></dt>
 <dd><p>Diederik Kingma and Jimmy Ba. Adam: A Method for Stochastic Optimization. In <em>Proc. ICLR</em>, 1–13. 2014. URL: <a class="reference external" href="http://arxiv.org/abs/1412.6980">http://arxiv.org/abs/1412.6980</a>, <a class="reference external" href="https://doi.org/10.1145/1830483.1830503">doi:10.1145/1830483.1830503</a>.</p>
@@ -373,8 +399,26 @@
 <dt class="bibtex label" id="rumelhart1986a"><span class="brackets">RHW86</span></dt>
 <dd><p>David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams. Learning representations by back-propagating errors. <em>Nature</em>, 323(6088):533–536, October 1986. URL: <a class="reference external" href="https://www.nature.com/articles/323533a0">https://www.nature.com/articles/323533a0</a>, <a class="reference external" href="https://doi.org/10.1038/323533a0">doi:10.1038/323533a0</a>.</p>
 </dd>
+<dt class="bibtex label" id="simonyan2015"><span class="brackets">SZ15</span></dt>
+<dd><p>Karen Simonyan and Andrew Zisserman. Very Deep Convolutional Networks for Large-Scale Image Recognition. <em>International Conference on Learning Representations (ICRL)</em>, pages 1–14, 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1409.1556">http://arxiv.org/abs/1409.1556</a>, <a class="reference external" href="https://doi.org/10.1016/j.infsof.2008.09.005">doi:10.1016/j.infsof.2008.09.005</a>.</p>
+</dd>
+<dt class="bibtex label" id="springenberg2015"><span class="brackets">SDBR15</span></dt>
+<dd><p>Jost Tobias Springenberg, Alexey Dosovitskiy, Thomas Brox, and Martin Riedmiller. Striving for Simplicity: The All Convolutional Net. <em>arXiv:1412.6806 [cs]</em>, April 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1412.6806">http://arxiv.org/abs/1412.6806</a>, <a class="reference external" href="https://arxiv.org/abs/1412.6806">arXiv:1412.6806</a>.</p>
+</dd>
 <dt class="bibtex label" id="srivastava2014"><span class="brackets">SHK+14</span></dt>
 <dd><p>Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: A Simple Way to Prevent Neural Networks from Overfitting. <em>Journal of Machine Learning Research</em>, 15(56):1929–1958, 2014. URL: <a class="reference external" href="http://jmlr.org/papers/v15/srivastava14a.html">http://jmlr.org/papers/v15/srivastava14a.html</a>.</p>
+</dd>
+<dt class="bibtex label" id="srivastava2015"><span class="brackets">SGS15</span></dt>
+<dd><p>Rupesh Kumar Srivastava, Klaus Greff, and Jürgen Schmidhuber. Highway Networks. <em>arXiv:1505.00387 [cs]</em>, November 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1505.00387">http://arxiv.org/abs/1505.00387</a>, <a class="reference external" href="https://arxiv.org/abs/1505.00387">arXiv:1505.00387</a>.</p>
+</dd>
+<dt class="bibtex label" id="szegedy2015"><span class="brackets">SVI+15</span></dt>
+<dd><p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the Inception Architecture for Computer Vision. <em>arXiv:1512.00567 [cs]</em>, December 2015. URL: <a class="reference external" href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>, <a class="reference external" href="https://arxiv.org/abs/1512.00567">arXiv:1512.00567</a>.</p>
+</dd>
+<dt class="bibtex label" id="taigman2014"><span class="brackets">TYRW14</span></dt>
+<dd><p>Yaniv Taigman, Ming Yang, Marc’Aurelio Ranzato, and Lior Wolf. DeepFace: Closing the Gap to Human-Level Performance in Face Verification. In <em>2014 IEEE Conference on Computer Vision and Pattern Recognition</em>, 1701–1708. Columbus, OH, USA, June 2014. IEEE. URL: <a class="reference external" href="https://ieeexplore.ieee.org/document/6909616">https://ieeexplore.ieee.org/document/6909616</a>, <a class="reference external" href="https://doi.org/10.1109/CVPR.2014.220">doi:10.1109/CVPR.2014.220</a>.</p>
+</dd>
+<dt class="bibtex label" id="oord2016"><span class="brackets">vdODZ+16</span></dt>
+<dd><p>Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. WaveNet: A Generative Model for Raw Audio. <em>arXiv:1609.03499 [cs]</em>, September 2016. URL: <a class="reference external" href="http://arxiv.org/abs/1609.03499">http://arxiv.org/abs/1609.03499</a>, <a class="reference external" href="https://arxiv.org/abs/1609.03499">arXiv:1609.03499</a>.</p>
 </dd>
 </dl>
 </p>
