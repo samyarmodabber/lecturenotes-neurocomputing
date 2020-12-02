@@ -5,6 +5,9 @@ Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectur
 
 ## Object detection
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/arzmgsxmpRw' frameborder='0' allowfullscreen></iframe></div>
+
+
 Contrary to object classification/recognition which assigns a single label to an image, **object detection** requires to both classify object and report their position and size on the image (bounding box).
 
 ```{figure} ../img/dnn_classification_vs_detection.png
@@ -112,6 +115,8 @@ Faster R-CNN {cite}`Ren2016`.
 
 ## YOLO
 
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/EuAb0UdUnUM' frameborder='0' allowfullscreen></iframe></div>
 
 (Fast(er)) R-CNN perform classification for each region proposal sequentially: slow. YOLO (You Only Look Once) {cite}`Redmon2016` applies a single neural network to the full image to predict all possible boxes and the corresponding classes. YOLO divides the image into a SxS grid of cells.
 
@@ -292,9 +297,6 @@ Performance of YOLO compared to the state of the art. Source: {cite}`Redmon2016`
 Refer to the website of the authors for additional information: <https://pjreddie.com/darknet/yolo/> 
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
-
-
-
 
 
 ## SSD

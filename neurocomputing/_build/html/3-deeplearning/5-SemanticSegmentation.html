@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Semantic segmentation &#8212; Neurocomputing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/5-SemanticSegmentation.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="prev" title="4. Object detection" href="4-ObjectDetection.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/5-SemanticSegmentation.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Semantic segmentation" />
+<meta property="og:description" content="Semantic segmentation  Slides: pdf  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/JiQdlzqT4Qs&#39; frameborder=&#39;0&#39; allowfullscreen&gt;&lt;/ifram" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Semantic segmentation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
+   9. MNIST classification using keras
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/3-deeplearning/5-SemanticSegmentation.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   5.1. Semantic segmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output-encoding">
+     5.1.1. Output encoding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fully-convolutional-networks">
+     5.1.2. Fully convolutional networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segnet-segmentation-network">
+   5.2. SegNet: segmentation network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#u-net">
+   5.3. U-Net
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mask-r-cnn">
+   5.4. Mask R-CNN
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="semantic-segmentation">
+<h1><span class="section-number">5. </span>Semantic segmentation<a class="headerlink" href="#semantic-segmentation" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.5-SegNet.pdf">pdf</a></p>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/JiQdlzqT4Qs' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="id1">
+<h2><span class="section-number">5.1. </span>Semantic segmentation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Semantic segmentation</strong> is a class of segmentation methods where you use knowledge about the identity of objects to partition the image pixel-per-pixel.</p>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/semanticsegmentation-example.png"><img alt="../_images/semanticsegmentation-example.png" src="../_images/semanticsegmentation-example.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Semantic segmentation. Source : <a class="reference external" href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>Classical segmentation methods only rely on the similarity between neighboring pixels, they do not use class information. The output of a semantic segmentation is another image, where each pixel represents the class.</p>
+<p>The classes can be binary, for example foreground/background, person/not, etc. Semantic segmentation networks are used for example in Youtube stories to add <strong>virtual backgrounds</strong> (background matting).</p>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/segmentation-virtualbackground.gif"><img alt="../_images/segmentation-virtualbackground.gif" src="../_images/segmentation-virtualbackground.gif" style="width: 40%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Virtual backgrounds. Source: <a class="reference external" href="https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html">https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html</a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>Clothes can be segmented to allow for virtual try-ons.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/semanticsegmentation-clothes.png"><img alt="../_images/semanticsegmentation-clothes.png" src="../_images/semanticsegmentation-clothes.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Virtual try-ons. Source: <a class="bibtex reference internal" href="../zreferences.html#wang2018b" id="id2">[WZL+18]</a>.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>There are many datasets freely available, but annotating such data is very painful, expensive and error-prone.</p>
+<ul class="simple">
+<li><p>PASCAL VOC 2012 Segmentation Competition</p></li>
+<li><p>COCO 2018 Stuff Segmentation Task</p></li>
+<li><p>BDD100K: A Large-scale Diverse Driving Video Database</p></li>
+<li><p>Cambridge-driving Labeled Video Database (CamVid)</p></li>
+<li><p>Cityscapes Dataset</p></li>
+<li><p>Mapillary Vistas Dataset</p></li>
+<li><p>ApolloScape Scene Parsing</p></li>
+<li><p>KITTI pixel-level semantic segmentation</p></li>
+</ul>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/kitti-example.png"><img alt="../_images/kitti-example.png" src="../_images/kitti-example.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Semantic segmentation on the KITTI dataset. Source: <a class="reference external" href="http://www.cvlibs.net/datasets/kitti/">http://www.cvlibs.net/datasets/kitti/</a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="output-encoding">
+<h3><span class="section-number">5.1.1. </span>Output encoding<a class="headerlink" href="#output-encoding" title="Permalink to this headline">¶</a></h3>
+<p>Each pixel of the input image is associated to a label (as in classification).</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/segnet-encoding.png"><img alt="../_images/segnet-encoding.png" src="../_images/segnet-encoding.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Semantic labels. Source : <a class="reference external" href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<p>A <strong>one-hot encoding</strong> of the segmented image is therefore a tensor:</p>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/segnet-encoding2.png"><img alt="../_images/segnet-encoding2.png" src="../_images/segnet-encoding2.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.12 </span><span class="caption-text">One-hot encoding of semantic labels. Source : <a class="reference external" href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="fully-convolutional-networks">
+<h3><span class="section-number">5.1.2. </span>Fully convolutional networks<a class="headerlink" href="#fully-convolutional-networks" title="Permalink to this headline">¶</a></h3>
+<p>A <strong>fully convolutional network</strong> only has convolutional layers and learns to predict the output tensor. The last layer has a pixel-wise softmax activation. We minimize the <strong>pixel-wise cross-entropy loss</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]\]</div>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/fullyconvolutional.png"><img alt="../_images/fullyconvolutional.png" src="../_images/fullyconvolutional.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.13 </span><span class="caption-text">Fully convolutional network. Source : <a class="reference external" href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+<p>Downside: the image size is preserved throughout the network: computationally expensive. It is therefore difficult to increase the number of features in each convolutional layer.</p>
+</div>
+</div>
+<div class="section" id="segnet-segmentation-network">
+<h2><span class="section-number">5.2. </span>SegNet: segmentation network<a class="headerlink" href="#segnet-segmentation-network" title="Permalink to this headline">¶</a></h2>
+<p><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id3">[BKC16]</a> has an <strong>encoder-decoder</strong> architecture, with max-pooling to decrease the spatial resolution while increasing the number of features. But what is the inverse of max-pooling? <strong>Upsampling operation</strong>.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/segnet.png"><img alt="../_images/segnet.png" src="../_images/segnet.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.14 </span><span class="caption-text"><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id4">[BKC16]</a>.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+<p>Nearest neighbor and Bed of nails would just make random decisions for the upsampling. In SegNet, max-unpooling uses the information of the corresponding max-pooling layer in the encoder to place pixels adequately.</p>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/max-pooling-inverse.png"><img alt="../_images/max-pooling-inverse.png" src="../_images/max-pooling-inverse.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Upsampling methods. Source : <a class="reference external" href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+<p>Another popular option in the followers of SegNet is the <strong>transposed convolution</strong>. The original feature map is upsampled by putting zeros between the values and a learned filter performs a regular convolution to produce an upsampled feature map. This works well when convolutions with stride are used in the encoder, but it is quite expensive computationally.</p>
+<div class="figure align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/padding_strides_transposed.gif"><img alt="../_images/padding_strides_transposed.gif" src="../_images/padding_strides_transposed.gif" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.16 </span><span class="caption-text">Transposed convolution. Source : <a class="reference external" href="https://github.com/vdumoulin/conv_arithmetic">https://github.com/vdumoulin/conv_arithmetic</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id20">
+<a class="reference internal image-reference" href="../_images/transposedconvolution.png"><img alt="../_images/transposedconvolution.png" src="../_images/transposedconvolution.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.17 </span><span class="caption-text">Transposed convolution. Source : <a class="reference external" href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="u-net">
+<h2><span class="section-number">5.3. </span>U-Net<a class="headerlink" href="#u-net" title="Permalink to this headline">¶</a></h2>
+<p>The problem of SegNet is that small details (small scales) are lost because of the max-pooling. the segmentation is not precise. The solution proposed by <strong>U-Net</strong> <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id5">[RFB15]</a> is to add <strong>skip connections</strong> (as in ResNet) between different levels of the encoder-decoder. The final segmentation depends both on:</p>
+<ul class="simple">
+<li><p>large-scale information computed in the middle of the encoder-decoder.</p></li>
+<li><p>small-scale information processed in the early layers of the encoder.</p></li>
+</ul>
+<div class="figure align-default" id="id21">
+<a class="reference internal image-reference" href="../_images/unet.png"><img alt="../_images/unet.png" src="../_images/unet.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.18 </span><span class="caption-text">U-Net <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id6">[RFB15]</a>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="mask-r-cnn">
+<h2><span class="section-number">5.4. </span>Mask R-CNN<a class="headerlink" href="#mask-r-cnn" title="Permalink to this headline">¶</a></h2>
+<p>For many applications, segmenting the background is useless. A two-stage approach can save computations. <strong>Mask R-CNN</strong> <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id7">[HGDollarG18]</a> uses faster R-CNN to extract bounding boxes around interesting objects, followed by the prediction of a <strong>mask</strong> to segment the object.</p>
+<div class="figure align-default" id="id22">
+<a class="reference internal image-reference" href="../_images/mask-r-cnn.png"><img alt="../_images/mask-r-cnn.png" src="../_images/mask-r-cnn.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id8">[HGDollarG18]</a>.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id23">
+<a class="reference internal image-reference" href="../_images/mask-r-cnn-result.png"><img alt="../_images/mask-r-cnn-result.png" src="../_images/mask-r-cnn-result.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.20 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id9">[HGDollarG18]</a>.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./3-deeplearning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="4-ObjectDetection.html" title="previous page"><span class="section-number">4. </span>Object detection</a>
+    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

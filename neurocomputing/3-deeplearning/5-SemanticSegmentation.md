@@ -3,6 +3,8 @@
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.5-SegNet.pdf)
 
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/JiQdlzqT4Qs' frameborder='0' allowfullscreen></iframe></div>
+
 ## Semantic segmentation
 
 **Semantic segmentation** is a class of segmentation methods where you use knowledge about the identity of objects to partition the image pixel-per-pixel.
