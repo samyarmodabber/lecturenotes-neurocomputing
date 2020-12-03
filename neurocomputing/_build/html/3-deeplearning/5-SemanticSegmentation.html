@@ -376,7 +376,7 @@
 <p>Clothes can be segmented to allow for virtual try-ons.</p>
 <div class="figure align-default" id="id12">
 <a class="reference internal image-reference" href="../_images/semanticsegmentation-clothes.png"><img alt="../_images/semanticsegmentation-clothes.png" src="../_images/semanticsegmentation-clothes.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Virtual try-ons. Source: <a class="bibtex reference internal" href="../zreferences.html#wang2018b" id="id2">[WZL+18]</a>.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Virtual try-ons. Source: <a class="bibtex reference internal" href="../zreferences.html#wang2018b" id="id2">[Wang et al., 2018]</a>.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are many datasets freely available, but annotating such data is very painful, expensive and error-prone.</p>
 <ul class="simple">
@@ -420,10 +420,10 @@
 </div>
 <div class="section" id="segnet-segmentation-network">
 <h2><span class="section-number">5.2. </span>SegNet: segmentation network<a class="headerlink" href="#segnet-segmentation-network" title="Permalink to this headline">¶</a></h2>
-<p><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id3">[BKC16]</a> has an <strong>encoder-decoder</strong> architecture, with max-pooling to decrease the spatial resolution while increasing the number of features. But what is the inverse of max-pooling? <strong>Upsampling operation</strong>.</p>
+<p><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id3">[Badrinarayanan et al., 2016]</a> has an <strong>encoder-decoder</strong> architecture, with max-pooling to decrease the spatial resolution while increasing the number of features. But what is the inverse of max-pooling? <strong>Upsampling operation</strong>.</p>
 <div class="figure align-default" id="id17">
 <a class="reference internal image-reference" href="../_images/segnet.png"><img alt="../_images/segnet.png" src="../_images/segnet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.14 </span><span class="caption-text"><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id4">[BKC16]</a>.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5.14 </span><span class="caption-text"><strong>SegNet</strong> <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id4">[Badrinarayanan et al., 2016]</a>.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>Nearest neighbor and Bed of nails would just make random decisions for the upsampling. In SegNet, max-unpooling uses the information of the corresponding max-pooling layer in the encoder to place pixels adequately.</p>
 <div class="figure align-default" id="id18">
@@ -442,26 +442,26 @@
 </div>
 <div class="section" id="u-net">
 <h2><span class="section-number">5.3. </span>U-Net<a class="headerlink" href="#u-net" title="Permalink to this headline">¶</a></h2>
-<p>The problem of SegNet is that small details (small scales) are lost because of the max-pooling. the segmentation is not precise. The solution proposed by <strong>U-Net</strong> <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id5">[RFB15]</a> is to add <strong>skip connections</strong> (as in ResNet) between different levels of the encoder-decoder. The final segmentation depends both on:</p>
+<p>The problem of SegNet is that small details (small scales) are lost because of the max-pooling. the segmentation is not precise. The solution proposed by <strong>U-Net</strong> <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id5">[Ronneberger et al., 2015]</a> is to add <strong>skip connections</strong> (as in ResNet) between different levels of the encoder-decoder. The final segmentation depends both on:</p>
 <ul class="simple">
 <li><p>large-scale information computed in the middle of the encoder-decoder.</p></li>
 <li><p>small-scale information processed in the early layers of the encoder.</p></li>
 </ul>
 <div class="figure align-default" id="id21">
 <a class="reference internal image-reference" href="../_images/unet.png"><img alt="../_images/unet.png" src="../_images/unet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.18 </span><span class="caption-text">U-Net <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id6">[RFB15]</a>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5.18 </span><span class="caption-text">U-Net <a class="bibtex reference internal" href="../zreferences.html#ronneberger2015" id="id6">[Ronneberger et al., 2015]</a>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="mask-r-cnn">
 <h2><span class="section-number">5.4. </span>Mask R-CNN<a class="headerlink" href="#mask-r-cnn" title="Permalink to this headline">¶</a></h2>
-<p>For many applications, segmenting the background is useless. A two-stage approach can save computations. <strong>Mask R-CNN</strong> <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id7">[HGDollarG18]</a> uses faster R-CNN to extract bounding boxes around interesting objects, followed by the prediction of a <strong>mask</strong> to segment the object.</p>
+<p>For many applications, segmenting the background is useless. A two-stage approach can save computations. <strong>Mask R-CNN</strong> <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id7">[He et al., 2018]</a> uses faster R-CNN to extract bounding boxes around interesting objects, followed by the prediction of a <strong>mask</strong> to segment the object.</p>
 <div class="figure align-default" id="id22">
 <a class="reference internal image-reference" href="../_images/mask-r-cnn.png"><img alt="../_images/mask-r-cnn.png" src="../_images/mask-r-cnn.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id8">[HGDollarG18]</a>.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id8">[He et al., 2018]</a>.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id23">
 <a class="reference internal image-reference" href="../_images/mask-r-cnn-result.png"><img alt="../_images/mask-r-cnn-result.png" src="../_images/mask-r-cnn-result.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5.20 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id9">[HGDollarG18]</a>.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5.20 </span><span class="caption-text">Mask R-CNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id9">[He et al., 2018]</a>.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
 </div>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
 </div>

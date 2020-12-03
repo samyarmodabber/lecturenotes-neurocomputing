@@ -1,5 +1,5 @@
 # Bibliography
 
 ```{bibliography} DeepLearning.bib
-:style: alpha
+:style: apa
 ```
