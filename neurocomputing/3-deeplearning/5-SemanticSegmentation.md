@@ -1,6 +1,6 @@
 # Semantic segmentation
 
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.5-SegNet.pdf)
+Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.5-Segnet.pdf)
 
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/JiQdlzqT4Qs' frameborder='0' allowfullscreen></iframe></div>
