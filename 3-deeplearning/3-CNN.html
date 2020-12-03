@@ -229,7 +229,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
-   9. DNN on MNIST
+   9. MNIST classification using keras
   </a>
  </li>
 </ul>
@@ -546,7 +546,7 @@
 </div>
 <div class="section" id="convolution-with-strides">
 <h3><span class="section-number">3.1.4. </span>Convolution with strides<a class="headerlink" href="#convolution-with-strides" title="Permalink to this headline">¶</a></h3>
-<p>Convolution with strides <a class="bibtex reference internal" href="../zreferences.html#springenberg2015" id="id2">[SDBR15]</a> is an alternative to max-pooling layers. The convolution simply “jumps” one pixel when sliding over the image (stride 2). This results in a smaller feature map, using much less operations than a convolution with stride 1 followed by max-pooling, for the same performance.
+<p>Convolution with strides <a class="bibtex reference internal" href="../zreferences.html#springenberg2015" id="id2">[Springenberg et al., 2015]</a> is an alternative to max-pooling layers. The convolution simply “jumps” one pixel when sliding over the image (stride 2). This results in a smaller feature map, using much less operations than a convolution with stride 1 followed by max-pooling, for the same performance.
 They are particularly useful for generative models (VAE, GAN, etc).</p>
 <div class="figure align-default" id="id44">
 <a class="reference internal image-reference" href="../_images/padding_strides.gif"><img alt="../_images/padding_strides.gif" src="../_images/padding_strides.gif" style="width: 50%;" /></a>
@@ -598,7 +598,7 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>A <strong>convolutional neural network</strong> (CNN) is a cascade of convolution and pooling operations, extracting layer by layer increasingly  complex features. The spatial dimensions decrease after each pooling operation, but the number of extracted features increases after each convolution. One usually stops when the spatial dimensions are around 7x7. The last layers are fully connected (classical MLP). Training a CNN uses backpropagation all along: the convolution and pooling operations are differentiable.</p>
 <div class="figure align-default" id="id50">
 <a class="reference internal image-reference" href="../_images/lenet.png"><img alt="../_images/lenet.png" src="../_images/lenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.53 </span><span class="caption-text">Convolutional Neural Network. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id4">[LBBH98]</a>.</span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.53 </span><span class="caption-text">Convolutional Neural Network. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id4">[LeCun et al., 1998]</a>.</span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition-implementing-a-cnn-in-keras admonition">
 <p class="admonition-title">Implementing a CNN in keras</p>
@@ -647,76 +647,76 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/pw-sFY3UqG4' frameborder='0' allowfullscreen></iframe></div>
 <div class="section" id="neocognitron">
 <h3><span class="section-number">3.2.1. </span>Neocognitron<a class="headerlink" href="#neocognitron" title="Permalink to this headline">¶</a></h3>
-<p>The <strong>Neocognitron</strong> (Fukushima, 1980 <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id5">[Fuk80]</a>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
+<p>The <strong>Neocognitron</strong> (Fukushima, 1980 <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id5">[Fukushima, 1980]</a>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
 <div class="figure align-default" id="id51">
 <a class="reference internal image-reference" href="../_images/Neocognitron.jpg"><img alt="../_images/Neocognitron.jpg" src="../_images/Neocognitron.jpg" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.54 </span><span class="caption-text">Neocognitron. <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id6">[Fuk80]</a>. Source: <a class="reference external" href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.54 </span><span class="caption-text">Neocognitron. <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id6">[Fukushima, 1980]</a>. Source: <a class="reference external" href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="lenet">
 <h3><span class="section-number">3.2.2. </span>LeNet<a class="headerlink" href="#lenet" title="Permalink to this headline">¶</a></h3>
-<p><strong>LeNet</strong> (1998, Yann LeCun at AT&amp;T labs <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id7">[LBBH98]</a>) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two <strong>mean</strong>-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).</p>
+<p><strong>LeNet</strong> (1998, Yann LeCun at AT&amp;T labs <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id7">[LeCun et al., 1998]</a>) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two <strong>mean</strong>-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).</p>
 <div class="figure align-default" id="id52">
 <a class="reference internal image-reference" href="../_images/lenet.png"><img alt="../_images/lenet.png" src="../_images/lenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.55 </span><span class="caption-text">LeNet5. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id8">[LBBH98]</a>.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.55 </span><span class="caption-text">LeNet5. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id8">[LeCun et al., 1998]</a>.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="alexnet">
 <h3><span class="section-number">3.2.3. </span>AlexNet<a class="headerlink" href="#alexnet" title="Permalink to this headline">¶</a></h3>
-<p><strong>AlexNet</strong> (2012, Toronto University <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id9">[KSH12]</a>) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.</p>
+<p><strong>AlexNet</strong> (2012, Toronto University <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id9">[Krizhevsky et al., 2012]</a>) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.</p>
 <div class="figure align-default" id="id53">
 <a class="reference internal image-reference" href="../_images/alexnet.png"><img alt="../_images/alexnet.png" src="../_images/alexnet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.56 </span><span class="caption-text">Alexnet <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id10">[KSH12]</a>.</span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.56 </span><span class="caption-text">Alexnet <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id10">[Krizhevsky et al., 2012]</a>.</span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="vgg-16">
 <h3><span class="section-number">3.2.4. </span>VGG-16<a class="headerlink" href="#vgg-16" title="Permalink to this headline">¶</a></h3>
-<p><strong>VGG-16</strong> (2014, Visual Geometry Group, Oxford <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id11">[SZ15]</a>) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.</p>
+<p><strong>VGG-16</strong> (2014, Visual Geometry Group, Oxford <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id11">[Simonyan &amp; Zisserman, 2015]</a>) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.</p>
 <div class="figure align-default" id="id54">
 <a class="reference internal image-reference" href="../_images/vgg16.png"><img alt="../_images/vgg16.png" src="../_images/vgg16.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.57 </span><span class="caption-text">VGG-16 <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id12">[SZ15]</a>.</span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.57 </span><span class="caption-text">VGG-16 <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id12">[Simonyan &amp; Zisserman, 2015]</a>.</span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="googlenet-inception-v1">
 <h3><span class="section-number">3.2.5. </span>GoogLeNet - Inception v1<a class="headerlink" href="#googlenet-inception-v1" title="Permalink to this headline">¶</a></h3>
-<p><strong>GoogLeNet</strong> (2014, Google Brain <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id13">[SVI+15]</a>) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.</p>
+<p><strong>GoogLeNet</strong> (2014, Google Brain <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id13">[Szegedy et al., 2015]</a>) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.</p>
 <div class="figure align-default" id="id55">
 <a class="reference internal image-reference" href="../_images/googlenet-arch.jpg"><img alt="../_images/googlenet-arch.jpg" src="../_images/googlenet-arch.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.58 </span><span class="caption-text">GoogLeNet <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id14">[SVI+15]</a>.</span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.58 </span><span class="caption-text">GoogLeNet <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id14">[Szegedy et al., 2015]</a>.</span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
 </div>
 <p>Inside GoogleNet, each <strong>Inception</strong> module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math notranslate nohighlight">\((w, h, d_1)\)</span> tensor into <span class="math notranslate nohighlight">\((w, h, d_2)\)</span> pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.</p>
 <div class="figure align-default" id="id56">
 <a class="reference internal image-reference" href="../_images/inception.png"><img alt="../_images/inception.png" src="../_images/inception.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.59 </span><span class="caption-text">Inception module <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id15">[SVI+15]</a>.</span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.59 </span><span class="caption-text">Inception module <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id15">[Szegedy et al., 2015]</a>.</span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
 </div>
 <p>Three softmax layers predict the classes at different levels of the network. The combined loss is:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]\]</div>
 <p>Only the deeper softmax layer matters for the prediction. The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.</p>
-<p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception… Xception <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id16">[Cho17b]</a> has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in <code class="docutils literal notranslate"><span class="pre">keras</span></code>:</p>
+<p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception… Xception <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id16">[Chollet, 2017b]</a> has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in <code class="docutils literal notranslate"><span class="pre">keras</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">Xception</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s2">&quot;imagenet&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="id57">
 <a class="reference internal image-reference" href="../_images/inceptionv3.png"><img alt="../_images/inceptionv3.png" src="../_images/inceptionv3.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.60 </span><span class="caption-text">Inception v3 <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id17">[Cho17b]</a>. Source: <a class="reference external" href="https://cloud.google.com/tpu/docs/inception-v3-advanced">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.60 </span><span class="caption-text">Inception v3 <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id17">[Chollet, 2017b]</a>. Source: <a class="reference external" href="https://cloud.google.com/tpu/docs/inception-v3-advanced">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="resnet">
 <h3><span class="section-number">3.2.6. </span>ResNet<a class="headerlink" href="#resnet" title="Permalink to this headline">¶</a></h3>
-<p><strong>ResNet</strong> (2015, Microsoft <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id18">[HZRS15a]</a>) won ImageNet 2015. Instead of learning to transform an input directly with <span class="math notranslate nohighlight">\(\mathbf{h}_n = f_W(\mathbf{h}_{n-1})\)</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p>
+<p><strong>ResNet</strong> (2015, Microsoft <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id18">[He et al., 2015a]</a>) won ImageNet 2015. Instead of learning to transform an input directly with <span class="math notranslate nohighlight">\(\mathbf{h}_n = f_W(\mathbf{h}_{n-1})\)</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
 \]</div>
 <div class="figure align-default" id="id58">
 <a class="reference internal image-reference" href="../_images/resnetlayer.jpg"><img alt="../_images/resnetlayer.jpg" src="../_images/resnetlayer.jpg" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.61 </span><span class="caption-text">Residual layer with skip connections  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id19">[HZRS15a]</a>.</span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.61 </span><span class="caption-text">Residual layer with skip connections  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id19">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
 </div>
 <p>These <strong>skip connections</strong> allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.</p>
 <div class="figure align-default" id="id59">
 <a class="reference internal image-reference" href="../_images/resnet2.png"><img alt="../_images/resnet2.png" src="../_images/resnet2.png" style="width: 20%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.62 </span><span class="caption-text">ResNet  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id20">[HZRS15a]</a>.</span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.62 </span><span class="caption-text">ResNet  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id20">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
 </div>
 <p>Skip connections help overcome the <strong>vanishing gradients</strong> problem, as the contribution of bypassed layers to the backpropagated gradient is 1.</p>
 <div class="math notranslate nohighlight">
@@ -732,12 +732,12 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>It was the first network to make an heavy use of <strong>batch normalization</strong>.</p>
 <div class="figure align-default" id="id60">
 <a class="reference internal image-reference" href="../_images/resnet-block.png"><img alt="../_images/resnet-block.png" src="../_images/resnet-block.png" style="width: 40%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.63 </span><span class="caption-text">Residual block  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id21">[HZRS15a]</a>.</span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.63 </span><span class="caption-text">Residual block  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id21">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="highnets-highway-networks">
 <h3><span class="section-number">3.2.7. </span>HighNets: Highway networks<a class="headerlink" href="#highnets-highway-networks" title="Permalink to this headline">¶</a></h3>
-<p><strong>Highway networks</strong> (IDSIA <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id22">[SGS15]</a>) are residual networks which also learn to balance inputs with feature extraction:</p>
+<p><strong>Highway networks</strong> (IDSIA <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id22">[Srivastava et al., 2015]</a>) are residual networks which also learn to balance inputs with feature extraction:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
@@ -745,15 +745,15 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>The balance between the <strong>primary</strong> pathway and the <strong>skip</strong> pathway adapts to the task. It has been used up to 1000 layers and improved state-of-the-art accuracy on MNIST and CIFAR-10.</p>
 <div class="figure align-default" id="id61">
 <a class="reference internal image-reference" href="../_images/highway.png"><img alt="../_images/highway.png" src="../_images/highway.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.64 </span><span class="caption-text">Highway network  <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id23">[SGS15]</a>.</span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.64 </span><span class="caption-text">Highway network  <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id23">[Srivastava et al., 2015]</a>.</span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="densenets-dense-networks">
 <h3><span class="section-number">3.2.8. </span>DenseNets: Dense networks<a class="headerlink" href="#densenets-dense-networks" title="Permalink to this headline">¶</a></h3>
-<p><strong>Dense networks</strong> (Cornell University &amp; Facebook AI <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id24">[HLvandMaatenW18]</a>) are residual networks that can learn <strong>bypasses</strong> between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.</p>
+<p><strong>Dense networks</strong> (Cornell University &amp; Facebook AI <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id24">[Huang et al., 2018]</a>) are residual networks that can learn <strong>bypasses</strong> between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.</p>
 <div class="figure align-default" id="id62">
 <a class="reference internal image-reference" href="../_images/densenetworks.png"><img alt="../_images/densenetworks.png" src="../_images/densenetworks.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.65 </span><span class="caption-text">Dense network  <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id25">[HLvandMaatenW18]</a>.</span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.65 </span><span class="caption-text">Dense network  <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id25">[Huang et al., 2018]</a>.</span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="model-zoos">
@@ -799,31 +799,31 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p><strong>Object recognition</strong> has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like <strong>ImageNet</strong> (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.</p>
 <div class="figure align-default" id="id64">
 <a class="reference internal image-reference" href="../_images/objrecog.png"><img alt="../_images/objrecog.png" src="../_images/objrecog.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.67 </span><span class="caption-text">Object recognition on ImageNet. Source <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id26">[KSH12]</a>.</span><a class="headerlink" href="#id64" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.67 </span><span class="caption-text">Object recognition on ImageNet. Source <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id26">[Krizhevsky et al., 2012]</a>.</span><a class="headerlink" href="#id64" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="facial-recognition">
 <h3><span class="section-number">3.3.2. </span>Facial recognition<a class="headerlink" href="#facial-recognition" title="Permalink to this headline">¶</a></h3>
-<p>Facebook used 4.4 million annotated faces from 4030 users to train <strong>DeepFace</strong> <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id27">[TYRW14]</a>. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p>
+<p>Facebook used 4.4 million annotated faces from 4030 users to train <strong>DeepFace</strong> <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id27">[Taigman et al., 2014]</a>. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p>
 <div class="figure align-default" id="id65">
 <a class="reference internal image-reference" href="../_images/deepface.png"><img alt="../_images/deepface.png" src="../_images/deepface.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.68 </span><span class="caption-text">DeepFace. Source <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id28">[TYRW14]</a>.</span><a class="headerlink" href="#id65" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.68 </span><span class="caption-text">DeepFace. Source <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id28">[Taigman et al., 2014]</a>.</span><a class="headerlink" href="#id65" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="pose-estimation">
 <h3><span class="section-number">3.3.3. </span>Pose estimation<a class="headerlink" href="#pose-estimation" title="Permalink to this headline">¶</a></h3>
-<p><strong>PoseNet</strong> <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id29">[KGC16]</a> is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.</p>
+<p><strong>PoseNet</strong> <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id29">[Kendall et al., 2016]</a> is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.</p>
 <div class="figure align-default" id="id66">
 <a class="reference internal image-reference" href="../_images/posnet-face.gif"><img alt="../_images/posnet-face.gif" src="../_images/posnet-face.gif" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.69 </span><span class="caption-text">PoseNet <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id30">[KGC16]</a>. Source:  <a class="reference external" href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></span><a class="headerlink" href="#id66" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.69 </span><span class="caption-text">PoseNet <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id30">[Kendall et al., 2016]</a>. Source:  <a class="reference external" href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></span><a class="headerlink" href="#id66" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="speech-recognition">
 <h3><span class="section-number">3.3.4. </span>Speech recognition<a class="headerlink" href="#speech-recognition" title="Permalink to this headline">¶</a></h3>
-<p>To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. <strong>DeepSpeech</strong> <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id31">[HCC+14]</a> from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.</p>
+<p>To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. <strong>DeepSpeech</strong> <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id31">[Hannun et al., 2014]</a> from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.</p>
 <div class="figure align-default" id="id67">
 <a class="reference internal image-reference" href="../_images/deepspeech.png"><img alt="../_images/deepspeech.png" src="../_images/deepspeech.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.70 </span><span class="caption-text">DeepSpeech. Source <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id32">[HCC+14]</a>.</span><a class="headerlink" href="#id67" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.70 </span><span class="caption-text">DeepSpeech. Source <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id32">[Hannun et al., 2014]</a>.</span><a class="headerlink" href="#id67" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="sentiment-analysis">
@@ -831,19 +831,19 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>It is also possible to apply convolutions on text. <strong>Sentiment analysis</strong> assigns a positive or negative judgment to sentences. Each word is represented by a vector of values (word2vec). The convolutional layer can slide over all over words to find out the sentiment of the sentence.</p>
 <div class="figure align-default" id="id68">
 <a class="reference internal image-reference" href="../_images/sentimentanalysis.png"><img alt="../_images/sentimentanalysis.png" src="../_images/sentimentanalysis.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.71 </span><span class="caption-text">Sentiment analysis. Source <a class="bibtex reference internal" href="../zreferences.html#kim2014" id="id33">[Kim14]</a>.</span><a class="headerlink" href="#id68" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.71 </span><span class="caption-text">Sentiment analysis. Source <a class="bibtex reference internal" href="../zreferences.html#kim2014" id="id33">[Kim, 2014]</a>.</span><a class="headerlink" href="#id68" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="wavenet-text-to-speech-synthesis">
 <h3><span class="section-number">3.3.6. </span>Wavenet : text-to-speech synthesis<a class="headerlink" href="#wavenet-text-to-speech-synthesis" title="Permalink to this headline">¶</a></h3>
-<p><strong>Text-To-Speech</strong> (TTS) is also possible using CNNs. Google Home relies on <strong>Wavenet</strong> <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id34">[vdODZ+16]</a>, a complex CNN using <em>dilated convolutions</em> to grasp long-term dependencies.</p>
+<p><strong>Text-To-Speech</strong> (TTS) is also possible using CNNs. Google Home relies on <strong>Wavenet</strong> <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id34">[Oord et al., 2016]</a>, a complex CNN using <em>dilated convolutions</em> to grasp long-term dependencies.</p>
 <div class="figure align-default" id="id69">
 <a class="reference internal image-reference" href="../_images/wavenet.png"><img alt="../_images/wavenet.png" src="../_images/wavenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.72 </span><span class="caption-text">Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id35">[vdODZ+16]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id69" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.72 </span><span class="caption-text">Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id35">[Oord et al., 2016]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id69" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id70">
 <a class="reference internal image-reference" href="../_images/wavenet-dilated.gif"><img alt="../_images/wavenet-dilated.gif" src="../_images/wavenet-dilated.gif" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.73 </span><span class="caption-text">Dilated convolutions in Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id36">[vdODZ+16]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id70" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.73 </span><span class="caption-text">Dilated convolutions in Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id36">[Oord et al., 2016]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id70" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

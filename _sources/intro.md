@@ -17,15 +17,15 @@ Exercises are provided in the form of Jupyter notebooks, allowing to implement i
 
 <https://www.youtube.com/playlist?list=PLIEjdhhAF7ULpZTu2sKkchFkvcxN8EQNv>
 
-**Recommended readings**: {cite}`Goodfellow2016`, {cite}`Haykin2009`, {cite}`Chollet2017a`, {cite}`Gerstner2014a`
+**Recommended readings**:
 
-* Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. <http://www.deeplearningbook.org>.
+* {cite}`Goodfellow2016` Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. <http://www.deeplearningbook.org>.
 
-* Simon S. Haykin. Neural Networks and Learning Machines, 3rd Edition. Pearson, 2009. <http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf>.
+* {cite}`Haykin2009` Simon S. Haykin. Neural Networks and Learning Machines, 3rd Edition. Pearson, 2009. <http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf>.
 
-* François Chollet. Deep Learning with Python. Manning publications, 2017. <https://www.manning.com/books/deep-learning-with-python>.
+* {cite}`Chollet2017a` François Chollet. Deep Learning with Python. Manning publications, 2017. <https://www.manning.com/books/deep-learning-with-python>.
 
-* Wulfram Gerstner, Werner Kistler, Richard Naud, and Liam Paninski. Neuronal Dynamics - a Neuroscience Textbook. Cambridge University Press., 2014. <https://neuronaldynamics.epfl.ch/index.html>.
+* {cite}`Gerstner2014a` Wulfram Gerstner, Werner Kistler, Richard Naud, and Liam Paninski. Neuronal Dynamics - a Neuroscience Textbook. Cambridge University Press., 2014. <https://neuronaldynamics.epfl.ch/index.html>.
 
 ```{tableofcontents}
 ```
