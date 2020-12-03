@@ -219,8 +219,6 @@ We are going to combine three different loss functions:
 2. The **localization loss**: error between the predicted boundary box and the ground truth for each object.
 3. The **confidence loss**: do the predicted bounding boxes correspond to real objects?
 
-[citation Redmon et al. (2015).  You Only Look Once: Unified, Real-Time Object Detection. arxiv:1506.02640]
-
 **Classification loss**
 
 The classification loss is the **mse** between:
