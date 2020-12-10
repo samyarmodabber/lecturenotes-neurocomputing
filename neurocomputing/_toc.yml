@@ -24,9 +24,9 @@
     - file: 3-deeplearning/3-CNN
     - file: 3-deeplearning/4-ObjectDetection
     - file: 3-deeplearning/5-SemanticSegmentation
-#     - file: 3-deeplearning/6-Autoencoders
+    - file: 3-deeplearning/6-Autoencoders
 #     - file: 3-deeplearning/7-RBM
-#     - file: 3-deeplearning/8-GAN
+    - file: 3-deeplearning/8-GAN
 #     - file: 3-deeplearning/9-RNN
 
 # - part: Neurocomputing
@@ -102,6 +102,13 @@
         - file: 5-exercises/9-MNIST
           title: Notebook
         - file: 5-exercises/9-MNIST-solution
+          title: Solution
+
+    - file: 5-exercises/ex10-CNN
+      sections:
+        - file: 5-exercises/10-CNN
+          title: Notebook
+        - file: 5-exercises/10-CNN-solution
           title: Solution
 
 

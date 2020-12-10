@@ -180,6 +180,16 @@
    5. Semantic segmentation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-Autoencoders.html">
+   6. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   7. Generative adversarial networks
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -230,6 +240,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
    9. MNIST classification using keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../5-exercises/ex10-CNN.html">
+   10. Convolutional neural networks
   </a>
  </li>
 </ul>
@@ -487,7 +502,7 @@
 <p>However, Krizhevsky, Sutskever and Hinton <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id3">[Krizhevsky et al., 2012]</a> trained a CNN entirely on the images, without any form of preprocessing, and obtained an error rate of 15%, half of the other methods. This achievement marked the beginning of the deep learning era, attracted the attention of the major industrial players (Google, Facebook and soon the rest of the world) who have already invested hundreds of billions on AI research.</p>
 <p>The whole field of computer vision was taken by storm, and CNNs were able to outperform the state-of-the-art of many vision-related tasks, such as object detection with the YOLO (You Only Look Once) network <a class="bibtex reference internal" href="../zreferences.html#redmon2016" id="id4">[Redmon et al., 2016]</a>:</p>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
-<p>or semantic segmention with SegNet <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2015" id="id5">[Badrinarayanan et al., 2015]</a> or its variants such as Mask RCNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id6">[He et al., 2018]</a>:</p>
+<p>or semantic segmention with SegNet <a class="bibtex reference internal" href="../zreferences.html#badrinarayanan2016" id="id5">[Badrinarayanan et al., 2016]</a> or its variants such as Mask RCNN <a class="bibtex reference internal" href="../zreferences.html#he2018" id="id6">[He et al., 2018]</a>:</p>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
 <p>CNNs can even be used to control autonomous cars, by learning to reproduce human commands for a given input image <a class="bibtex reference internal" href="../zreferences.html#bojarski2016" id="id7">[Bojarski et al., 2016]</a>:</p>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/qhUvQiKec2U' frameborder='0' allowfullscreen></iframe></div>
@@ -570,7 +585,7 @@
 </div>
 <p>In deep RL, the policy <span class="math notranslate nohighlight">\(\pi\)</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
 <ul class="simple">
-<li><p>The first achievement of deep RL was the <strong>deep Q-network</strong> of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:</p></li>
+<li><p>The first achievement of deep RL was the <strong>deep Q-network (DQN)</strong> of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:</p></li>
 </ul>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
 <ul class="simple">

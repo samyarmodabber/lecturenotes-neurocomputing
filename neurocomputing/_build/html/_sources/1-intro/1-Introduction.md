@@ -155,7 +155,7 @@ The whole field of computer vision was taken by storm, and CNNs were able to out
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/MPU2HistivI' frameborder='0' allowfullscreen></iframe></div>
 
-or semantic segmention with SegNet {cite}`Badrinarayanan2015` or its variants such as Mask RCNN {cite}`He2018`:
+or semantic segmention with SegNet {cite}`Badrinarayanan2016` or its variants such as Mask RCNN {cite}`He2018`:
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/OOT3UIXZztE' frameborder='0' allowfullscreen></iframe></div>
 
@@ -294,7 +294,7 @@ Agent-environment interaction in RL. Source: <https://ieeexplore.ieee.org/docume
 
 In deep RL, the policy $\pi$ is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let's have a look at some applications:
 
-* The first achievement of deep RL was the **deep Q-network** of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:
+* The first achievement of deep RL was the **deep Q-network (DQN)** of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/rQIShnTz1kU' frameborder='0' allowfullscreen></iframe></div>
 
