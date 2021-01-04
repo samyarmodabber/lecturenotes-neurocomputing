@@ -1,4 +1,6 @@
-# Convolutional neural networks with keras
+# Transfer learning
+
+The goal of this exercise is to investigate data augmentation and transfer learning on a small dataset of cats and dogs.
 
 **Presentation**
 

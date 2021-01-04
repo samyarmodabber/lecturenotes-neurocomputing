@@ -27,7 +27,7 @@
     - file: 3-deeplearning/6-Autoencoders
 #     - file: 3-deeplearning/7-RBM
     - file: 3-deeplearning/8-GAN
-#     - file: 3-deeplearning/9-RNN
+    - file: 3-deeplearning/9-RNN
 
 # - part: Neurocomputing
 #   chapters:
@@ -109,6 +109,13 @@
         - file: 5-exercises/10-CNN
           title: Notebook
         - file: 5-exercises/10-CNN-solution
+          title: Solution
+
+    - file: 5-exercises/ex11-TransferLearning
+      sections:
+        - file: 5-exercises/11-TransferLearning
+          title: Notebook
+        - file: 5-exercises/11-TransferLearning-solution
           title: Solution
 
 
