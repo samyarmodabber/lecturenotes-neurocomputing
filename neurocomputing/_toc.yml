@@ -1,6 +1,5 @@
 - file: intro
   numbered: true
-  expand_sections: true
 
 - part: Introduction
   chapters:
@@ -25,7 +24,7 @@
     - file: 3-deeplearning/4-ObjectDetection
     - file: 3-deeplearning/5-SemanticSegmentation
     - file: 3-deeplearning/6-Autoencoders
-#     - file: 3-deeplearning/7-RBM
+    - file: 3-deeplearning/7-RBM
     - file: 3-deeplearning/8-GAN
     - file: 3-deeplearning/9-RNN
 

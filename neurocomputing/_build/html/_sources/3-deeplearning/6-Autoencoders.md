@@ -86,29 +86,6 @@ The output layer is trained using supervised learning on the last hidden layer. 
 
 This defines a **stacked autoencoder**, trained using **Greedy layer-wise** learning. Each layer progressively learns more and more complex features of the input data (edges - contour - forms - objects): **feature extraction**. This method allows to train a deep network on few labeled data: the network will not overfit, because the weights are already in the right region. It solves **gradient vanishing**, as the weights are already close to the optimal solution and will efficiently transmit the gradient backwards. One can keep the pre-trained weights fixed for the classification task or **fine-tune** all the weights as in a regular DNN.
 
-````{admonition} Application: Finding cats on the internet
-
-
-Andrew Ng and colleagues (Google, Stanford, {cite}`Le2013`) used a similar technique to train a deep belief network on color images (200x200) taken from 10 million random unlabeled Youtube videos. Each layer was trained greedily. They used a particular form of autoencoder called **restricted Boltzmann machines** (RBM) and a couple of other tricks (receptive fields, contrast normalization). Training was distributed over 1000 machines (16.000 cores) and lasted for three days. There was absolutely no task: the network just had to watch youtube videos. After learning, they visualized what the neurons had learned.
-
-```{figure} ../img/catnetwork.png
----
-width: 60%
----
-Deep Belief Network {cite}`Le2013`.
-```
-
-
-After training, some neurons had learned to respond uniquely to faces, or to cats, without ever having been instructed to. The network can then be fine-tuned for classification tasks, improving the pre-AlexNet state-of-the-art on ImageNet by 70%.
-
-
-```{figure} ../img/catfinder.png
----
-width: 80%
----
-Deep Belief Network {cite}`Le2013`.
-```
-````
 
 ## Deep autoencoders
 
