@@ -58,7 +58,7 @@
     <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/9-RNN.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="next" title="1. Limits of deep learning" href="../4-neurocomputing/1-Limits.html" />
     <link rel="prev" title="8. Generative adversarial networks" href="8-GAN.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -213,6 +213,18 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Neurocomputing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
+   1. Limits of deep learning
   </a>
  </li>
 </ul>
@@ -425,6 +437,25 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/11-TransferLearning-solution.html">
      11.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex12-VAE.html">
+   12. Variational autoencoder
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE.html">
+     12.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE-solution.html">
+     12.2. Solution
     </a>
    </li>
   </ul>
@@ -1008,8 +1039,8 @@ The gates also have a bias, which can be fixed (but hard to find). LSTM layers c
 <p class="caption"><span class="caption-number">Fig. 9.15 </span><span class="caption-text">Peephole connections. Source: <a class="reference external" href="http://colah.github.io/posts/2015-08-Understanding-LSTMs">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</span><a class="headerlink" href="#id35" title="Permalink to this image">¶</a></p>
 </div>
 <p>A popular variant of LSTM adds <strong>peephole connections</strong> <a class="bibtex reference internal" href="../zreferences.html#gers2000" id="id5">[Gers &amp; Schmidhuber, 2000]</a>, where the three gates have additionally access to the state <span class="math notranslate nohighlight">\(\mathbf{C}_{t-1}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6c045f64-3442-42e4-9d49-f3e6218805bd">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-6c045f64-3442-42e4-9d49-f3e6218805bd" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bbbefcce-dd11-494c-985a-2f5560a36096">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-bbbefcce-dd11-494c-985a-2f5560a36096" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \mathbf{f}_t &amp;= \sigma(W_f \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \\
     &amp;\\
     \mathbf{i}_t &amp;= \sigma(W_i \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i) \\
@@ -1026,8 +1057,8 @@ The gates also have a bias, which can be fixed (but hard to find). LSTM layers c
 </div>
 <p>Another variant is called the <strong>Gated Recurrent Unit</strong> (GRU) <a class="bibtex reference internal" href="../zreferences.html#chung2014" id="id6">[Chung et al., 2014]</a>.
 It uses directly the output <span class="math notranslate nohighlight">\(\mathbf{h}_t\)</span> as a state, and the forget and input gates are merged into a single gate <span class="math notranslate nohighlight">\(\mathbf{r}_t\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9e0d8332-9bec-4cbb-a9a1-1fe619001714">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-9e0d8332-9bec-4cbb-a9a1-1fe619001714" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a9a8e2f0-b2a6-4896-8144-780547579559">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-a9a8e2f0-b2a6-4896-8144-780547579559" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \mathbf{z}_t &amp;= \sigma(W_z \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\
     &amp;\\
     \mathbf{r}_t &amp;= \sigma(W_r \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\
@@ -1314,7 +1345,7 @@ Come, sir, I will make did behold your worship.
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="8-GAN.html" title="previous page"><span class="section-number">8. </span>Generative adversarial networks</a>
-    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
+    <a class='right-next' id="next-link" href="../4-neurocomputing/1-Limits.html" title="next page"><span class="section-number">1. </span>Limits of deep learning</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -1,0 +1,1176 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Limits of deep learning &#8212; Neurocomputing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/1-Limits.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="prev" title="9. Recurrent neural networks" href="../3-deeplearning/9-RNN.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/1-Limits.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Limits of deep learning" />
+<meta property="og:description" content="Limits of deep learning  Slides: pdf  The AI hype and general artificial intelligence  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/S" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-SemanticSegmentation.html">
+   5. Semantic segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-Autoencoders.html">
+   6. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-RBM.html">
+   7. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative adversarial networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Neurocomputing
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Limits of deep learning
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python.html">
+     1.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python-solution.html">
+     1.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy.html">
+     2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy-solution.html">
+     2.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
+     3.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression-solution.html">
+     3.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR.html">
+     4.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR-solution.html">
+     4.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
+     5.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation-solution.html">
+     5.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
+     6.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification-solution.html">
+     6.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
+     7.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier-solution.html">
+     7.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP.html">
+     8.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP-solution.html">
+     8.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
+   9. MNIST classification using keras
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST.html">
+     9.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST-solution.html">
+     9.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex10-CNN.html">
+   10. Convolutional neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN.html">
+     10.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN-solution.html">
+     10.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
+   11. Transfer learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
+     11.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning-solution.html">
+     11.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex12-VAE.html">
+   12. Variational autoencoder
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE.html">
+     12.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE-solution.html">
+     12.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/4-neurocomputing/1-Limits.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-ai-hype-and-general-artificial-intelligence">
+   1.1. The AI hype and general artificial intelligence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-limitations-of-deep-learning">
+   1.2. Current limitations of  deep learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-is-never-infinite">
+     1.2.1. Data is never infinite
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computational-power-and-energy">
+     1.2.2. Computational power and energy
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quantization">
+       1.2.2.1. Quantization
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pruning">
+       1.2.2.2. Pruning
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model-distillation">
+       1.2.2.3. Model distillation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-is-biased">
+     1.2.3. Data is biased
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adversarial-attacks">
+     1.2.4. Adversarial attacks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-is-mostly-offline">
+     1.2.5. Learning is mostly offline
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-task-at-a-time">
+     1.2.6. One task at a time
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explainable-interpretable-ai">
+     1.2.7. Explainable / interpretable AI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-deep-learning-might-never-be-able-to-do">
+   1.3. What deep learning might never be able to do
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#no-real-generalization">
+     1.3.1. No real generalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lack-of-abstraction">
+     1.3.2. Lack of abstraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lack-of-common-sense">
+     1.3.3. Lack of common sense
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#game-fallacy">
+     1.3.4. Game fallacy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embodiment">
+     1.3.5. Embodiment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conclusion-on-the-limits-of-deep-learning">
+     1.3.6. Conclusion on the limits of deep learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#towards-biological-deep-learning">
+   1.4. Towards biological deep learning?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-credit-assignment-problem">
+     1.4.1. The credit assignment problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feedback-alignment">
+     1.4.2. Feedback alignment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-learning-architectures-are-way-too-simple-and-unidirectional">
+     1.4.3. Deep learning architectures are way too simple and unidirectional
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#biological-neurons-have-dynamics">
+     1.4.4. Biological neurons have dynamics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recurrent-dynamics-and-emergence-of-functions">
+     1.4.5. Recurrent dynamics and emergence of functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#self-organization">
+     1.4.6. Self-organization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-differences-between-deep-networks-and-the-brain">
+     1.4.7. Key differences between deep networks and the brain
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="limits-of-deep-learning">
+<h1><span class="section-number">1. </span>Limits of deep learning<a class="headerlink" href="#limits-of-deep-learning" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/4.1-Limits.pdf">pdf</a></p>
+<div class="section" id="the-ai-hype-and-general-artificial-intelligence">
+<h2><span class="section-number">1.1. </span>The AI hype and general artificial intelligence<a class="headerlink" href="#the-ai-hype-and-general-artificial-intelligence" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/SG8E98kzoTs' frameborder='0' allowfullscreen></iframe></div>
+<blockquote>
+<div><p><em>“Intuition, insight, and learning are no longer exclusive possessions of human beings: any large high-speed computer can be programed to exhibit them also.”</em></p>
+<p><strong>Herbert Simon</strong>, MIT, Nobel Prize, Turing award, <strong>1958</strong>.</p>
+</div></blockquote>
+<p>It is not the first time in history that the field of Artificial Intelligence pretends to be just a few years away from a true <strong>general artificial intelligence</strong>.</p>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/aygSMgK3BEM' frameborder='0' allowfullscreen></iframe></div>
+<p>Based on the progress allowed by deep learning, recent declarations are of the same essence:</p>
+<blockquote>
+<div><p><em>“If a typical person can do a mental task with less than one second of thought, we can probably automate it using AI either now or in the near future.”</em></p>
+<p><strong>Andrew Ng</strong>, Stanford University, Google Brain / Baidu, 2016.</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>“The development of full artificial intelligence could spell the end of the human race… It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn’t compete, and would be superseded.”</em></p>
+<p><strong>Stephen Hawking</strong>, Cambridge University, 2014.</p>
+</div></blockquote>
+<blockquote>
+<div><p><em>“Artificial intelligence will reach human levels by around 2029. Follow that out further to, say, 2045, we will have multiplied the intelligence, the human biological machine intelligence of our civilization a billion-fold.”</em></p>
+<p><strong>Ray Kurzweil</strong>, Google, 2017.</p>
+</div></blockquote>
+<p>The reasoning is that if technological progress continues at its current rate, it will increase <strong>exponentially</strong>. Artificial Intelligence will soon reach the human intelligence level: this is the <strong>singularity</strong>.  Past that point, <strong>super artificial intelligence</strong> will be infinitely more intelligent than humans. <strong>Skynet</strong> syndrome: Will machines still need us after the singularity? Kurzweil and colleagues argue for <strong>transhumanity</strong>, i.e. the augmentation of human intelligence by super AI.</p>
+<p>The singularity hypothesis relies on an exponential increase of computational power. <strong>Moore’s law</strong> (the number of transistors in a dense integrated circuit doubles about every two years) is the only known physical process following an exponential curve, and it is coming to an end.</p>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/mooreslaw.png"><img alt="../_images/mooreslaw.png" src="../_images/mooreslaw.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.40 </span><span class="caption-text">Moore’s law. Source: <a class="reference external" href="https://www.alleywatch.com/2017/03/preparing-end-moores-law/">https://www.alleywatch.com/2017/03/preparing-end-moores-law/</a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>But is scientific knowledge exponentially increasing?</p>
+<blockquote>
+<div><p><em>“Max Planck said, ‘Science progresses one funeral at a time.’ The future depends on some graduate student who is deeply suspicious of everything I have said”</em></p>
+<p><strong>Geoffrey Hinton</strong>, Univ. Toronto, 2017.</p>
+</div></blockquote>
+<p>Is the current deep learning approach taking all the light, at the expense of more promising approaches? Science progresses with <strong>breakthroughs</strong>, which are by definition unpredictable. <strong>Serendipity</strong> (luck + curiosity) is at the heart of scientific discoveries (gravity, microwaves, etc).</p>
+</div>
+<div class="section" id="current-limitations-of-deep-learning">
+<h2><span class="section-number">1.2. </span>Current limitations of  deep learning<a class="headerlink" href="#current-limitations-of-deep-learning" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/yHnp8JBWbIE' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="data-is-never-infinite">
+<h3><span class="section-number">1.2.1. </span>Data is never infinite<a class="headerlink" href="#data-is-never-infinite" title="Permalink to this headline">¶</a></h3>
+<p>Deep networks are very powerful and complex models, which tend to <strong>overfit</strong> (bad interpolation). They learn their parameters from the training data only:</p>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/overfitting1.png"><img alt="../_images/overfitting1.png" src="../_images/overfitting1.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.41 </span><span class="caption-text">Depending on the number of available data, neural networks can generalize well or not.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/overfitting2.png"><img alt="../_images/overfitting2.png" src="../_images/overfitting2.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.42 </span><span class="caption-text">Depending on the number of available data, neural networks can generalize well or not.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<p>Datasets for deep learning are typically huge:</p>
+<ul class="simple">
+<li><p>ImageNet (14 million images)</p></li>
+<li><p>OpenImages (9 million images)</p></li>
+<li><p>Machine Translation of Various Languages (30 million sentences)</p></li>
+<li><p>Librispeech (1000 hours of speech)</p></li>
+<li><p>…</p></li>
+</ul>
+<p>The deeper your network, the more powerful, but the more data it needs to be useful. Solutions: data augmentation, transfer learning, unsupervised pre-training…</p>
+<p>Deep Reinforcement Learning has the same <strong>sample complexity</strong> problem: it needs many trial-and-errors to find a correct behavior. DQN and its variants need 200 million frames to learn to play Atari games: 38 days of uninterrupted human playing…
+On December 18th 2018, Google Deepmind defeated the human team “Mana” on Starcraft II, a much more complex game than Go for computers.</p>
+<blockquote>
+<div><p><em>“The AlphaStar league was run for 14 days, using 16 TPUs for each agent. During training, each agent experienced up to 200 years of real-time StarCraft play.”</em></p>
+<p>Source: <a class="reference external" href="https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/">https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="computational-power-and-energy">
+<h3><span class="section-number">1.2.2. </span>Computational power and energy<a class="headerlink" href="#computational-power-and-energy" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/power.png"><img alt="../_images/power.png" src="../_images/power.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.43 </span><span class="caption-text">The computational power needed by deep architectures has increased exponentially in the last decade. Source : <a class="reference external" href="https://openai.com/blog/ai-and-compute/">https://openai.com/blog/ai-and-compute/</a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>The computational power needed by deep networks increases exponentially: more layers, more parameters, more data, more everything. Training modern deep networks is now out of reach of most universities / companies. GPT-3 (OpenAI) was trained on 500B words (Wikipedia, Common Crawl) and has 175B parameters. Training it on a single V100 would take 355 years and cost 4.6 M$ in the cloud.</p>
+<p><strong>Inference times</strong> (making a prediction after training) become prohibitive: it is hard to use deep networks on low-budget hardware such as smartphones or embedded hardware (FPGA, DSP), computations must be deported to the cloud.  Can’t we make the networks smaller after training?</p>
+<div class="section" id="quantization">
+<h4><span class="section-number">1.2.2.1. </span>Quantization<a class="headerlink" href="#quantization" title="Permalink to this headline">¶</a></h4>
+<p>NN require single or double-precision floating numbers (32 or 64 bits) to represent weights during learning, as small learning rates are used (e.g. <span class="math notranslate nohighlight">\(10^{-5}\)</span>) to add very small quantities to them. After learning, do we need such a high precision? 2.378898437534897932 <span class="math notranslate nohighlight">\(\approx\)</span> 2.4</p>
+<p><strong>Quantization</strong> consists of transforming the weights into 8-bits integers or even 1 or 2 bits (binary networks) without losing (too much accuracy).
+Frameworks such as Tensorflow Lite, TensorRT or PyTorch allow to automatically apply quantization on pretrained networks and embed, or even to use Quantization-aware training (QAT).  See <a class="reference external" href="https://arxiv.org/pdf/2004.09602.pdf">https://arxiv.org/pdf/2004.09602.pdf</a> for a review.</p>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/quantization.png"><img alt="../_images/quantization.png" src="../_images/quantization.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.44 </span><span class="caption-text">Principle of quantization. Source: <a class="reference external" href="https://medium.com/&#64;kaustavtamuly/compressing-and-accelerating-high-dimensional-neural-networks-6b501983c0c8">https://medium.com/&#64;kaustavtamuly/compressing-and-accelerating-high-dimensional-neural-networks-6b501983c0c8</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="pruning">
+<h4><span class="section-number">1.2.2.2. </span>Pruning<a class="headerlink" href="#pruning" title="Permalink to this headline">¶</a></h4>
+<p>Another technique to reduce inference times by making the networks smaller is <strong>pruning</strong>: removing weights, filters, neurons or even layers that are not necessary after learning.</p>
+<p>NN need a lot of weights/neurons to find the solution (training), but not obligatorily to implement it. Several metrics or techniques can be used to decide whether or not to keep parameters:</p>
+<ul class="simple">
+<li><p>thresholds</p></li>
+<li><p>redundancy</p></li>
+<li><p>contribution to loss</p></li>
+</ul>
+<p>Some methods iteratively re-train the network after pruning, leading to reductions up to 90%. See <a class="reference external" href="https://link.springer.com/article/10.1007/s10462-020-09816-7">https://link.springer.com/article/10.1007/s10462-020-09816-7</a> for a review.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/pruning.png"><img alt="../_images/pruning.png" src="../_images/pruning.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.45 </span><span class="caption-text">Pruning. Source: <a class="reference external" href="https://towardsdatascience.com/pruning-deep-neural-network-56cae1ec5505">https://towardsdatascience.com/pruning-deep-neural-network-56cae1ec5505</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="model-distillation">
+<h4><span class="section-number">1.2.2.3. </span>Model distillation<a class="headerlink" href="#model-distillation" title="Permalink to this headline">¶</a></h4>
+<p>In model distillation <a class="bibtex reference internal" href="../zreferences.html#hinton2015" id="id1">[Hinton et al., 2015]</a>, the deep <strong>teacher</strong> learns to perform classification on the <strong>hard</strong> one-hot encoded labels. Its knowledge can be transferred (<strong>distilled</strong>) to a shallower network. The shallow <strong>student</strong> learns to perform <strong>regression</strong> on the logits <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> of the softmax output of the teacher, which is easier and leads to the same accuracy!</p>
+<div class="math notranslate nohighlight">
+\[
+    y_j = P(\text{class = j} | \mathbf{x}) = \mathcal{S}(z_j) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</div>
+<p>Logits carry information about the similarity between classes: cats are closer to dogs than to cars. See <a class="bibtex reference internal" href="../zreferences.html#gou2020" id="id2">[Gou et al., 2020]</a> for a review.</p>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/distillation.png"><img alt="../_images/distillation.png" src="../_images/distillation.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.46 </span><span class="caption-text">Model distillation <a class="bibtex reference internal" href="../zreferences.html#hinton2015" id="id3">[Hinton et al., 2015]</a>.  Source: <a class="bibtex reference internal" href="../zreferences.html#gou2020" id="id4">[Gou et al., 2020]</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="data-is-biased">
+<h3><span class="section-number">1.2.3. </span>Data is biased<a class="headerlink" href="#data-is-biased" title="Permalink to this headline">¶</a></h3>
+<p>Deep networks only learn from data, so if the data is wrong or <strong>biased</strong>, the predictions will reproduce it.</p>
+<ul class="simple">
+<li><p><strong>Scenario 1:</strong> you use AI to sort CVs based on how well your previous employees performed.</p>
+<ul>
+<li><p>If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)</p></li>
+</ul>
+</li>
+<li><p><strong>Scenario 2:</strong> you use AI to predict whether an individual is likely to commit a crime based on population statistics.</p>
+<ul>
+<li><p>Black people are 37% of the incarcerated population in the US, but only 12% of the population. Black people will be overly tagged as potential criminals. (DoJ)</p></li>
+</ul>
+</li>
+<li><p><strong>Scenario 3:</strong> You train your speech recognition system on male American voices.</p>
+<ul>
+<li><p>You will not recognize female voices or foreign accents well (everybody).</p></li>
+</ul>
+</li>
+<li><p><strong>Scenario 4:</strong> You create an AI chatbot on twitter, “Tay.ai”, learning from conversations with the twitter crowd.</p>
+<ul>
+<li><p>The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).</p></li>
+</ul>
+</li>
+</ul>
+<p>AI bias is currently taken very seriously by the major players. Sources: <a class="reference external" href="https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai">https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai</a>, <a class="reference external" href="https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/">https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/</a></p>
+</div>
+<div class="section" id="adversarial-attacks">
+<h3><span class="section-number">1.2.4. </span>Adversarial attacks<a class="headerlink" href="#adversarial-attacks" title="Permalink to this headline">¶</a></h3>
+<p>One major problem of deep networks is that they are easy to fool.</p>
+<div class="figure align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/adversarial1.png"><img alt="../_images/adversarial1.png" src="../_images/adversarial1.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.47 </span><span class="caption-text">Adversarial attacks. Source: <a class="reference external" href="https://blog.openai.com/adversarial-example-research">https://blog.openai.com/adversarial-example-research</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<p>Instead of searching for the weights which produce the right output for a given image (training), you search for the image that produces a different output for a given set of trained weights (<strong>adversarial attacks</strong>, <a class="bibtex reference internal" href="../zreferences.html#goodfellow2015" id="id5">[Goodfellow et al., 2015]</a>). It turns out that a minimal change on the input image is enough to completely change the output of a trained network. Using neural networks everywhere (self-driving cars, biometric recognition) poses serious security issues which are unsolved as of now. Many different attacks and defenses are currently investigated <a class="reference external" href="https://arxiv.org/pdf/1712.07107.pdf">https://arxiv.org/pdf/1712.07107.pdf</a>.</p>
+<p>Let’s suppose we have a network trained to recognize cats from dogs using the loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span>. As an attacker, you want to find a cat-like image <span class="math notranslate nohighlight">\(\mathbf{x}'\)</span> that makes the network answer <code class="docutils literal notranslate"><span class="pre">dog</span></code>. You define an adversarial loss making the network want to answer <code class="docutils literal notranslate"><span class="pre">dog</span></code> for a cat image:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{L}_\text{adversarial}(\mathbf{x}) = \mathbb{E}_{\mathbf{x} \in  \text{cat}} ||\text{dog} - \mathbf{y}(\mathbf{x})||^2
+\]</div>
+<p>Starting from a cat image <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, you can apply gradient descent <strong>on the image space</strong> to minimize the adversarial loss:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta \mathbf{x} = - \eta \, \frac{\partial \mathcal{L}_\text{adversarial}(\mathbf{x})}{\partial \mathbf{x}}
+\]</div>
+<p>One should add a constraint on <span class="math notranslate nohighlight">\(\Delta \mathbf{x}\)</span> to keep it small (Lagrange optimization). You only need access to the output <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> to attack the network, not its weights (<strong>blackbox attack</strong>)</p>
+<p>Adversarial attacks work even when printed on paper.</p>
+<div class="figure align-default" id="id20">
+<a class="reference internal image-reference" href="../_images/adversarial2.png"><img alt="../_images/adversarial2.png" src="../_images/adversarial2.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.48 </span><span class="caption-text">Adversarial attacks on printed images. Source: <a class="reference external" href="https://blog.openai.com/adversarial-example-research">https://blog.openai.com/adversarial-example-research</a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id21">
+<a class="reference internal image-reference" href="../_images/adversarial-dog.png"><img alt="../_images/adversarial-dog.png" src="../_images/adversarial-dog.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.49 </span><span class="caption-text">Adversarial attacks on object detection. Source: <a class="reference external" href="https://blog.openai.com/adversarial-example-research">https://blog.openai.com/adversarial-example-research</a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+<p>They also work in real life: a couple of stickers are enough to have this stop sign recognized as a speed limit sign by an autonomous car…</p>
+<div class="figure align-default" id="id22">
+<a class="reference internal image-reference" href="../_images/adversarial3.jpg"><img alt="../_images/adversarial3.jpg" src="../_images/adversarial3.jpg" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.50 </span><span class="caption-text">Real-world adversarial attacks. Source: <a class="reference external" href="https://arxiv.org/abs/1707.08945">https://arxiv.org/abs/1707.08945</a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<p>Face identification is a major issue:</p>
+<div class="figure align-default" id="id23">
+<a class="reference internal image-reference" href="../_images/adversarial-face.png"><img alt="../_images/adversarial-face.png" src="../_images/adversarial-face.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.51 </span><span class="caption-text">Facial adversarial attacks. When adding adversarial glasses to Reese Witherspoon, the face detector recognizes her as Russel Crowe. Source: <a class="reference external" href="https://arxiv.org/abs/1707.08945">https://arxiv.org/abs/1707.08945</a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="learning-is-mostly-offline">
+<h3><span class="section-number">1.2.5. </span>Learning is mostly offline<a class="headerlink" href="#learning-is-mostly-offline" title="Permalink to this headline">¶</a></h3>
+<p>NN are prone to <strong>catastrophic forgetting</strong>: if you learn A then B, you forget A.</p>
+<div class="figure align-default" id="id24">
+<a class="reference internal image-reference" href="../_images/forgetting.svg"><img alt="../_images/forgetting.svg" src="../_images/forgetting.svg" width="100%" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.52 </span><span class="caption-text">Catastrophic forgetting.</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+<p>The only solution is to mix A and B during training (<strong>stochastic</strong> gradient descent). <strong>Online learning</strong>  or <strong>lifelong learning</strong> is very difficult: you can’t adapt a NN once it has learned. Currently a hot topic of research, but not working yet.</p>
+</div>
+<div class="section" id="one-task-at-a-time">
+<h3><span class="section-number">1.2.6. </span>One task at a time<a class="headerlink" href="#one-task-at-a-time" title="Permalink to this headline">¶</a></h3>
+<p>The fact that computers can be better than humans on single tasks should not be worrying: The program written by Jim Slagle for his PhD thesis with Marvin Minsky was already better than MIT students at calculus in <strong>1961</strong>.</p>
+<p>Deep networks are still highly specialized, they do either:</p>
+<ul class="simple">
+<li><p>Computer Vision</p></li>
+<li><p>Speech processing</p></li>
+<li><p>Natural Language Processing</p></li>
+<li><p>Motor Control</p></li>
+</ul>
+<p>but never two at the same time.</p>
+<p>Some may be able to play different games at the same time (DQN, AlphaZero) but it stays in the same domain.
+The ability to perform different tasks at the same time is a criteria for <strong>general intelligence</strong>.</p>
+</div>
+<div class="section" id="explainable-interpretable-ai">
+<h3><span class="section-number">1.2.7. </span>Explainable / interpretable AI<a class="headerlink" href="#explainable-interpretable-ai" title="Permalink to this headline">¶</a></h3>
+<p>Deep networks do not learns concepts such as cats, dogs, paddles or walls: they merely learn correlations between images and labels.
+Comparative (animal) psychology sometimes call this phenomenon <strong>overattribution</strong>.
+We want AI to be intelligent, so we attribute it intelligent features.
+The only way to verify this is to have deep networks <strong>verbalize</strong> their decisions (not there yet).</p>
+<p>Research on <strong>interpretability</strong> (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions.
+Neural networks are <strong>black box models</strong>: they are able to learn many things, but one does not know how. Can we really trust their decisions? This is particularly important for safety-critical applications (self-driving cars, nuclear plants, etc).</p>
+<p><strong>Layer-wise relevance propagation</strong> <a class="bibtex reference internal" href="../zreferences.html#binder2016" id="id6">[Binder et al., 2016]</a> allows to visualize which part of the input is most resposnible for the prediction.
+It is a form of backpropagation, but from the prediction <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> to the input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, instead of from the loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span> to the parameters <span class="math notranslate nohighlight">\(\theta\)</span>. See <a class="reference external" href="http://www.heatmapping.org/">http://www.heatmapping.org/</a> for explanations and code.</p>
+<div class="figure align-default" id="id25">
+<a class="reference internal image-reference" href="../_images/LRP.png"><img alt="../_images/LRP.png" src="../_images/LRP.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.53 </span><span class="caption-text">Layer-wise relevance propagation. Source: <a class="bibtex reference internal" href="../zreferences.html#binder2016" id="id7">[Binder et al., 2016]</a>.</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
+<p>The results are sometimes surprising <a class="bibtex reference internal" href="../zreferences.html#lapuschkin2019" id="id8">[Lapuschkin et al., 2019]</a>. Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse…</p>
+<div class="figure align-default" id="id26">
+<a class="reference internal image-reference" href="../_images/cleverhans.png"><img alt="../_images/cleverhans.png" src="../_images/cleverhans.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.54 </span><span class="caption-text">Clever Hans effect: the answer is correct, but for bad reasons… Source: <a class="bibtex reference internal" href="../zreferences.html#lapuschkin2019" id="id9">[Lapuschkin et al., 2019]</a>.</span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="what-deep-learning-might-never-be-able-to-do">
+<h2><span class="section-number">1.3. </span>What deep learning might never be able to do<a class="headerlink" href="#what-deep-learning-might-never-be-able-to-do" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/mkaNS6EFBe0' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="no-real-generalization">
+<h3><span class="section-number">1.3.1. </span>No real generalization<a class="headerlink" href="#no-real-generalization" title="Permalink to this headline">¶</a></h3>
+<p>Deep networks can be forced to interpolate with <strong>enough data</strong> (generalization), but cannot <strong>extrapolate</strong>. For example, CNNs do not generalize to different viewpoints, unless you add them to the training data:</p>
+<div class="figure align-default" id="id27">
+<a class="reference internal image-reference" href="../_images/viewpoint.png"><img alt="../_images/viewpoint.png" src="../_images/viewpoint.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.55 </span><span class="caption-text">NN cann only generalize to rotated images if they have seen examples during training. Source: <a class="reference external" href="http://imatge-upc.github.io/telecombcn-2016-dlcv">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="lack-of-abstraction">
+<h3><span class="section-number">1.3.2. </span>Lack of abstraction<a class="headerlink" href="#lack-of-abstraction" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A <strong>schmister</strong> is a sister over the age of 10 but under the age of 21.</p>
+<p>Do you have a schmister?</p>
+</div></blockquote>
+<p>Deep learning currently lacks a mechanism for learning abstractions through explicit, verbal definition.
+They would need to experience thousands of sentences with schmister before they can use it.</p>
+<blockquote>
+<div><p>“Indeed even 7-month old infants can do so, acquiring learned abstract language-like rules from a small number of unlabeled examples, in just two minutes (Marcus, Vijayan, Bandi Rao, &amp; Vishton, 1999).”</p>
+<p>Marcus, G. (2018). Deep Learning: A Critical Appraisal. arXiv:1801.00631.</p>
+</div></blockquote>
+</div>
+<div class="section" id="lack-of-common-sense">
+<h3><span class="section-number">1.3.3. </span>Lack of common sense<a class="headerlink" href="#lack-of-common-sense" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>I stuck a pin in a carrot; when I pulled the pin out, it had a hole.</p>
+<p>What has a hole, the carrot or the pin?</p>
+</div></blockquote>
+<p>DL models do not have a <strong>model of physics</strong>: if the task (and the data) do not contain physics, it won’t learn it.
+DL finds <strong>correlations</strong> between the inputs and the outputs, but not the <strong>causation</strong>.
+Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks.
+DL has no <strong>theory of mind</strong>: when playing against humans (Go), it does not bother inferring the opponent’s mental state, it just plays his game.</p>
+<div class="figure align-default" id="id28">
+<a class="reference internal image-reference" href="../_images/causation.png"><img alt="../_images/causation.png" src="../_images/causation.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.56 </span><span class="caption-text">Correlations are everywhere, but not causation.</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</div>
+<p>No DL model to date has been able to show <strong>causal reasoning</strong> (or at least in a generic way).
+Other AI approaches are better at causal reasoning (hierarchical Bayesian computing, probabilistic graphical models), but they do not mix well with deep learning yet.</p>
+</div>
+<div class="section" id="game-fallacy">
+<h3><span class="section-number">1.3.4. </span>Game fallacy<a class="headerlink" href="#game-fallacy" title="Permalink to this headline">¶</a></h3>
+<p>Deep learning has only been successful on relatively “easy” tasks until now. Games like Chess or Go are easy for AI, as the rules are simple, fixed and deterministic. Things get much more complicated when you go in the real-world: think of where the Robocup is.</p>
+<p>Moravec’s paradox (<a class="reference external" href="https://blog.piekniewski.info/2016/11/15/ai-and-the-ludic-fallacy/">https://blog.piekniewski.info/2016/11/15/ai-and-the-ludic-fallacy/</a>):</p>
+<blockquote>
+<div><p>It is comparatively easy to make computers exhibit adult level performance on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility.</p>
+</div></blockquote>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/1h5147KLikU' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/jxvZ0AdM0SY' frameborder='0' allowfullscreen></iframe></div>
+</div>
+<div class="section" id="embodiment">
+<h3><span class="section-number">1.3.5. </span>Embodiment<a class="headerlink" href="#embodiment" title="Permalink to this headline">¶</a></h3>
+<p>Intelligence and cognition require a <strong>body</strong> to interact with the world.
+The brain is not an isolated number cruncher.
+The body <strong>valuates</strong> the world: it provides needs, goals, emotions.
+It can even be a co-processor of the brain: gut feelings.
+Emotions are totally absent from the current AI approach.
+Goals are set externally: so-called AIs do not form their own goals (desirable?).
+Deep Reinforcement Learning is a first small step in that direction.</p>
+</div>
+<div class="section" id="conclusion-on-the-limits-of-deep-learning">
+<h3><span class="section-number">1.3.6. </span>Conclusion on the limits of deep learning<a class="headerlink" href="#conclusion-on-the-limits-of-deep-learning" title="Permalink to this headline">¶</a></h3>
+<p>Deep learning methods are very powerful and have not reached yet their full potential for technological applications. However, there are fundamental reasons why deep learning methods may not reach <strong>general intelligence</strong>. End-to-end learning with <strong>backpropagation</strong> works very well, but what if it was the problem?</p>
+<blockquote>
+<div><p>My view is throw it all away and start again.</p>
+<p><em>Geoffrey Hinton on backpropagation.</em></p>
+</div></blockquote>
+<p>The only intelligent system we know is the <strong>brain</strong>.
+By taking inspiration from how the brain works, instead of <strike>stupidly</strike> minimizing loss functions, we <strong>may</strong> be able to reach human intelligence.</p>
+</div>
+</div>
+<div class="section" id="towards-biological-deep-learning">
+<h2><span class="section-number">1.4. </span>Towards biological deep learning?<a class="headerlink" href="#towards-biological-deep-learning" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/MX0H8MLwxeA' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="the-credit-assignment-problem">
+<h3><span class="section-number">1.4.1. </span>The credit assignment problem<a class="headerlink" href="#the-credit-assignment-problem" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>credit assignment problem</strong> is the issue of knowing which part of the brain is responsible when something goes wrong (or well) so that it can learn from it.</p>
+<div class="figure align-default" id="id29">
+<a class="reference internal image-reference" href="../_images/creditassignment1.png"><img alt="../_images/creditassignment1.png" src="../_images/creditassignment1.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.57 </span><span class="caption-text">Credit assignement problem. Source: <a class="reference external" href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+<p>Backpropagation solves the credit assignment problem by transmitting the error gradient <strong>backwards</strong> through the weights (<span class="math notranslate nohighlight">\(\sim\)</span> synapses).</p>
+<div class="math notranslate nohighlight">
+\[\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T\]</div>
+<div class="figure align-default" id="id30">
+<a class="reference internal image-reference" href="../_images/creditassignment2.png"><img alt="../_images/creditassignment2.png" src="../_images/creditassignment2.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.58 </span><span class="caption-text">Backpropagation solves the credit assignement problem by transmitting the error backwards. Source: <a class="reference external" href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</div>
+<p>But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one.
+A synapse does know not the weight of other synapses and cannot transmit anything backwards. <strong>Backpropagation is not biologically plausible</strong> in its current formulation.</p>
+</div>
+<div class="section" id="feedback-alignment">
+<h3><span class="section-number">1.4.2. </span>Feedback alignment<a class="headerlink" href="#feedback-alignment" title="Permalink to this headline">¶</a></h3>
+<p>An alternative mechanism consists of backpropagating the error through another set of <strong>feedback weights</strong> (feedback alignment, <a class="bibtex reference internal" href="../zreferences.html#lillicrap2016" id="id10">[Lillicrap et al., 2016]</a>). Feedback connections are ubiquitous in the brain, especially in the neocortex. The feedback weights do not need to learn: they can stay random but still transmit useful gradients. The mechanism only works for small networks on MNIST for now.</p>
+<div class="figure align-default" id="id31">
+<a class="reference internal image-reference" href="../_images/feedbackalignment1.png"><img alt="../_images/feedbackalignment1.png" src="../_images/feedbackalignment1.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.59 </span><span class="caption-text">Feedback alignment. Source: <a class="bibtex reference internal" href="../zreferences.html#lillicrap2016" id="id11">[Lillicrap et al., 2016]</a>.</span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="deep-learning-architectures-are-way-too-simple-and-unidirectional">
+<h3><span class="section-number">1.4.3. </span>Deep learning architectures are way too simple and unidirectional<a class="headerlink" href="#deep-learning-architectures-are-way-too-simple-and-unidirectional" title="Permalink to this headline">¶</a></h3>
+<p>Deep learning architectures are mostly unidirectional, from the input to the output, without feedback connections.
+The brain is totally differently organized: a big “mess” of interconnected areas processing everything in parallel.
+The figure on the left is only for vision, and only for the cerebral cortex: the thalamus, basal ganglia, hippocampus, cerebellum, etc, create additional shortcuts.
+Is the complex structure of the brain just a side effect of evolution, or is it the only possible solution?
+<strong>Inductive bias</strong>: the choice of the architecture constrains the functions it can perform / learn.</p>
+<div class="figure align-default" id="id32">
+<a class="reference internal image-reference" href="../_images/fellemanvanessen.png"><img alt="../_images/fellemanvanessen.png" src="../_images/fellemanvanessen.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.60 </span><span class="caption-text">Organization of the visual system. Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1</span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="biological-neurons-have-dynamics">
+<h3><span class="section-number">1.4.4. </span>Biological neurons have dynamics<a class="headerlink" href="#biological-neurons-have-dynamics" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>artificial neuron</strong> has no dynamics, it is a simple mathematical function:</p>
+<div class="math notranslate nohighlight">
+\[
+    y = f( \sum_{i=1}^d w_i \, x_i + b)
+\]</div>
+<p>If you do not change the inputs to an artificial neuron, its output won’t change.
+Time does not exist, even in a LSTM: the only temporal variable is the frequency at which inputs are set.</p>
+<p>Biological neurons have <strong>dynamics</strong>:</p>
+<ul class="simple">
+<li><p>They adapt their firing rate to constant inputs.</p></li>
+<li><p>They continue firing after an input disappears.</p></li>
+<li><p>They fire even in the absence of inputs (tonic).</p></li>
+</ul>
+<p>These dynamics are essential to information processing in the brain.</p>
+</div>
+<div class="section" id="recurrent-dynamics-and-emergence-of-functions">
+<h3><span class="section-number">1.4.5. </span>Recurrent dynamics and emergence of functions<a class="headerlink" href="#recurrent-dynamics-and-emergence-of-functions" title="Permalink to this headline">¶</a></h3>
+<p>Recurrent networks of dynamical neurons can exhibit very complex dynamics.
+Biological neural networks evolve at the <strong>edge of chaos</strong>, i.e. in a highly non-linear regime while still being deterministic.
+This allows the <strong>emergence</strong> of complex functions: <strong>the whole is more than the sum of its parts</strong>.</p>
+<div class="figure align-default" id="id33">
+<a class="reference internal image-reference" href="../_images/rc-network.jpg"><img alt="../_images/rc-network.jpg" src="../_images/rc-network.jpg" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.61 </span><span class="caption-text">Reservoir computing.</span><a class="headerlink" href="#id33" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="self-organization">
+<h3><span class="section-number">1.4.6. </span>Self-organization<a class="headerlink" href="#self-organization" title="Permalink to this headline">¶</a></h3>
+<p>There are two complementary approaches to unsupervised learning:</p>
+<ul class="simple">
+<li><p>the <strong>statistical approach</strong>,  which tries to extract the most relevant information from the distribution of unlabeled data (autoencoders, etc).</p></li>
+<li><p><strong>self-organization</strong>, which tries to understand the principles of organization of natural systems and use them to create efficient algorithms.</p></li>
+</ul>
+<p>Self-organization is a generic process relying on four basic principles: locality of computations, learning, competition and cooperation.</p>
+<p><strong>Self-organization</strong> is observed in a wide range of natural processes:</p>
+<ul class="simple">
+<li><p>Physics: formation of crystals, star formation, chemical reactions…</p></li>
+<li><p>Biology: folding of proteins, social insects, flocking behavior, brain functioning, Gaia hypothesis…</p></li>
+<li><p>Social science: critical mass, group thinking, herd behavior…</p></li>
+</ul>
+<p>A self-organizing system is composed of elementary units (particles, cells, neurons, organs, individuals…) which all perform similar deterministic functions (rule of behavior) on a small part of the available information.</p>
+<p>There is <strong>no central supervisor</strong> or coordinator that knows everything and tells each unit what to do: they have their own rule of behavior and apply it to the information they receive. The units are able to adapt their behavior to the available information: principle of <strong>localized learning</strong>. There is no <strong>explicit loss function</strong> specifying what the system should do: <strong>emergence</strong>.</p>
+<div class="figure align-default" id="id34">
+<a class="reference internal image-reference" href="../_images/gameoflife2.gif"><img alt="../_images/gameoflife2.gif" src="../_images/gameoflife2.gif" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.62 </span><span class="caption-text">Conway’s game of life. Source: <a class="reference external" href="https://www.jakubkonka.com/2015/03/15/game-of-life.html">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
+</div>
+<p>The rules of Conway’s <strong>Game of Life</strong> (1970) are extremely simple:</p>
+<ul class="simple">
+<li><p>A cell is either <strong>dead</strong> or <strong>alive</strong>.</p></li>
+<li><p>A living cell with less than 1 neighbor dies.</p></li>
+<li><p>A living cell with more than 4 neighbors dies.</p></li>
+<li><p>A dead cell with 3 neighbors relives.</p></li>
+</ul>
+<p>Despite this simplicity, GoL can exhibit very complex patterns (fractals, spaceships, pulsars).
+The GoL is an example of self-organizing <strong>cellular automata</strong> <a class="reference external" href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a>.</p>
+</div>
+<div class="section" id="key-differences-between-deep-networks-and-the-brain">
+<h3><span class="section-number">1.4.7. </span>Key differences between deep networks and the brain<a class="headerlink" href="#key-differences-between-deep-networks-and-the-brain" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>No backpropagation</strong> in the brain, at least in its current form.</p></li>
+<li><p>Information processing is <strong>local</strong> to each neuron and synapse.</p></li>
+<li><p>Highly <strong>recurrent</strong> architecture (feedback connections).</p></li>
+<li><p>Neurons have <strong>non-linear dynamics</strong>, especially as populations (edge of chaos).</p></li>
+<li><p><strong>Emergence</strong> of functions: the whole is more than the sum of its parts</p></li>
+<li><p><strong>Self-organization</strong>. There is no explicit loss function to minimize: the only task of the brain is to ensure survival of the organism (homeostasis).</p></li>
+</ul>
+<p>Some references on the limitations of deep learning:</p>
+<ul class="simple">
+<li><p>Marcus, G. (2018). Deep Learning: A Critical Appraisal. arXiv:1801.00631. Available at: <a class="reference external" href="http://arxiv.org/abs/1801.00631">http://arxiv.org/abs/1801.00631</a>.</p></li>
+<li><p>Marcus, G. (2018). In defense of skepticism about deep learning. Available at: <a class="reference external" href="https://medium.com/&#64;GaryMarcus/in-defense-of-skepticism-about-deep-learning-6e8bfd5ae0f1">https://medium.com/&#64;GaryMarcus/in-defense-of-skepticism-about-deep-learning-6e8bfd5ae0f1</a>.</p></li>
+<li><p>Piekniewski, F. (2018). AI winter is well on its way. Piekniewski’s blog. Available at: <a class="reference external" href="https://blog.piekniewski.info/2018/05/28/ai-winter-is-well-on-its-way">https://blog.piekniewski.info/2018/05/28/ai-winter-is-well-on-its-way</a>.</p></li>
+<li><p>Brooks, R. (2019). Predictions Scorecard, 2019 January 01. Available at: <a class="reference external" href="http://rodneybrooks.com/predictions-scorecard-2019-january-01">http://rodneybrooks.com/predictions-scorecard-2019-january-01</a>.</p></li>
+<li><p>Richbourg, R. (2018). ‘It’s Either a Panda or a Gibbon’: AI Winters and the Limits of Deep Learning. Available at: <a class="reference external" href="https://warontherocks.com/2018/05/its-either-a-panda-or-a-gibbon-ai-winters-and-the-limits-of-deep-learning">https://warontherocks.com/2018/05/its-either-a-panda-or-a-gibbon-ai-winters-and-the-limits-of-deep-learning</a>.</p></li>
+<li><p>Seif, G. (2019). Is Deep Learning Already Hitting its Limitations? Available at: <a class="reference external" href="https://towardsdatascience.com/is-deep-learning-already-hitting-its-limitations-c81826082ac3">https://towardsdatascience.com/is-deep-learning-already-hitting-its-limitations-c81826082ac3</a>.</p></li>
+<li><p>Hawkins, J (2015). The Terminator Is Not Coming. The Future Will Thank Us. Available at: <a class="reference external" href="https://www.recode.net/2015/3/2/11559576/the-terminator-is-not-coming-the-future-will-thank-us">https://www.recode.net/2015/3/2/11559576/the-terminator-is-not-coming-the-future-will-thank-us</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./4-neurocomputing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../3-deeplearning/9-RNN.html" title="previous page"><span class="section-number">9. </span>Recurrent neural networks</a>
+    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
