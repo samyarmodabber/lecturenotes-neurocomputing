@@ -28,9 +28,9 @@
     - file: 3-deeplearning/8-GAN
     - file: 3-deeplearning/9-RNN
 
-# - part: Neurocomputing
-#   chapters:
-#     - file: 4-neurocomputing/1-Limits
+- part: Neurocomputing
+  chapters:
+    - file: 4-neurocomputing/1-Limits
 #     - file: 4-neurocomputing/2-Hopfield
 #     - file: 4-neurocomputing/3-NeuralFields
 #     - file: 4-neurocomputing/4-Reservoir
@@ -115,6 +115,13 @@
         - file: 5-exercises/11-TransferLearning
           title: Notebook
         - file: 5-exercises/11-TransferLearning-solution
+          title: Solution
+
+    - file: 5-exercises/ex12-VAE
+      sections:
+        - file: 5-exercises/12-VAE
+          title: Notebook
+        - file: 5-exercises/12-VAE-solution
           title: Solution
 
 
