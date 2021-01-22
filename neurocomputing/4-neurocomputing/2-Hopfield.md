@@ -4,6 +4,9 @@ Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectur
 
 ##  Associative memory
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/uKHDr7Kamiw' frameborder='0' allowfullscreen></iframe></div>
+
+
 In deep learning, our biggest enemy was **overfitting**, i.e. learning by heart the training examples. 
 But what if it was actually useful in cognitive tasks?
 Deep networks implement a **procedural memory**: they know **how** to do things.
@@ -64,6 +67,8 @@ Hetero-associative memory. Source: <https://slideplayer.com/slide/7303074/>
 ```
 
 ## Hopfield networks
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/kagd3eedzoI' frameborder='0' allowfullscreen></iframe></div>
 
 ### Structure
 
@@ -446,7 +451,9 @@ A spurious pattern has never seen by the network, but is remembered like other m
 
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/fCvQcNzUZf0' frameborder='0' allowfullscreen></iframe></div>
 
-## Modern Hopfield networks / Dense Associative Memories
+## Modern Hopfield networks / Dense Associative Memories (optional)
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/isc-sVzQxwU' frameborder='0' allowfullscreen></iframe></div>
 
 The problems with Hopfield networks are:
 

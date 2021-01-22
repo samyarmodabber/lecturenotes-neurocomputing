@@ -11,6 +11,8 @@ Wolfgang Maass (TU Graz) introduced **liquid state machines** (LSM) using spikin
 
 ## Echo-state networks (ESN)
 
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/l0fRz4IbMTY' frameborder='0' allowfullscreen></iframe></div>
+
 ### Structure
 
 An ESN is a set of **recurrent** units (sparsely connected) exhibiting complex spatiotemporal dynamics.
@@ -267,6 +269,8 @@ Reservoirs are useful in computational neuroscience. Source: Cayco-Gajic, N. A.,
 ```
 
 ## Taming chaos (optional)
+
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/BWJZ_mibooc' frameborder='0' allowfullscreen></iframe></div>
 
 
 In classical RC networks, the recurrent weights are fixed and only the readout weights are trained.
