@@ -1,0 +1,980 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>13.1. Recurrent neural networks &#8212; Neurocomputing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/13-RNN.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13.2. Recurrent neural networks" href="13-RNN-solution.html" />
+    <link rel="prev" title="13. Recurrent neural networks" href="ex13-RNN.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/5-exercises/13-RNN.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Recurrent neural networks" />
+<meta property="og:description" content="Recurrent neural networks  The goal is to learn to use LSTM layers in keras for sentiment analysis and time series prediction. The code for sentiment analysis i" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-SemanticSegmentation.html">
+   5. Semantic segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-Autoencoders.html">
+   6. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-RBM.html">
+   7. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative adversarial networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Neurocomputing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
+   1. Limits of deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
+   3. Reservoir computing
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex1-Python.html">
+   1. Introduction to Python
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="1-Python.html">
+     1.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1-Python-solution.html">
+     1.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2-Numpy.html">
+     2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2-Numpy-solution.html">
+     2.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="3-LinearRegression.html">
+     3.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3-LinearRegression-solution.html">
+     3.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="4-MLR.html">
+     4.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4-MLR-solution.html">
+     4.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="5-Crossvalidation.html">
+     5.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5-Crossvalidation-solution.html">
+     5.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="6-LinearClassification.html">
+     6.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="6-LinearClassification-solution.html">
+     6.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="7-SoftmaxClassifier.html">
+     7.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="7-SoftmaxClassifier-solution.html">
+     7.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="8-MLP.html">
+     8.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="8-MLP-solution.html">
+     8.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex9-MNIST.html">
+   9. MNIST classification using keras
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="9-MNIST.html">
+     9.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="9-MNIST-solution.html">
+     9.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex10-CNN.html">
+   10. Convolutional neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-CNN.html">
+     10.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-CNN-solution.html">
+     10.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex11-TransferLearning.html">
+   11. Transfer learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="11-TransferLearning.html">
+     11.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="11-TransferLearning-solution.html">
+     11.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ex12-VAE.html">
+   12. Variational autoencoder
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="12-VAE.html">
+     12.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="12-VAE-solution.html">
+     12.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ex13-RNN.html">
+   13. Recurrent neural networks
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     13.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="13-RNN-solution.html">
+     13.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/5-exercises/13-RNN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vitay/lecturenotes-neurocomputing/master?urlpath=tree/neurocomputing/5-exercises/13-RNN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/vitay/lecturenotes-neurocomputing/blob/master/neurocomputing/5-exercises/13-RNN.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sentiment-analysis">
+   13.1.1. Sentiment analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-preparation">
+     13.1.1.1. Data preparation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-the-lstm">
+     13.1.1.2. Training the LSTM
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-series-prediction">
+   13.1.2. Time series prediction
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="recurrent-neural-networks">
+<h1><span class="section-number">13.1. </span>Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>The goal is to learn to use LSTM layers in keras for sentiment analysis and time series prediction. The code for sentiment analysis is adapted from <a class="reference external" href="https://victorzhou.com/blog/intro-to-rnns/">https://victorzhou.com/blog/intro-to-rnns/</a>. The code for time series prediction is adapted from <a class="reference external" href="https://www.tensorflow.org/tutorials/structured_data/time_series">https://www.tensorflow.org/tutorials/structured_data/time_series</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sentiment-analysis">
+<h2><span class="section-number">13.1.1. </span>Sentiment analysis<a class="headerlink" href="#sentiment-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The goal to use recurrent neural networks (LSTM) to perform <strong>sentiment analysis</strong> on short sentences, i.e. to predict whether the sentence has a positive or negative meaning.</p>
+<p>The following cells represent your training and test data. They are lists of lists, where the first element is the sentence as a string, and the second a boolean, with <code class="docutils literal notranslate"><span class="pre">True</span></code> for positive sentences, <code class="docutils literal notranslate"><span class="pre">False</span></code> for negative ones.</p>
+<p>Notice how some sentences are ambiguous (if you do not notice the “not”, the sentiment might be very different).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;not good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;not happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;not sad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;very good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;very bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;very happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;very sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not sad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am very happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am very bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am good not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is good not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am bad not good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am good and happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not good and not happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not at all sad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not at all happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am good right now&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am bad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is bad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am sad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was good earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was happy earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was bad earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was sad earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am very bad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very good right now&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very sad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was bad earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was very good earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was very bad earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was very happy earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was very sad earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was good and not bad earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was not good and not happy earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all bad or sad right now&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all good or happy right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was not happy and not good earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s1">&#39;this is happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not sad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am very good&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very bad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am very sad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is bad not good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is good and happy&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not good and not happy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i am not at all sad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not at all good&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is not at all bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is good right now&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is sad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this is very bad right now&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;this was good earlier&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;i was not happy and not good earlier&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;earlier i was good and not bad&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">N_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">N_train</span><span class="p">,</span> <span class="s2">&quot;training sentences.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">N_test</span><span class="p">,</span> <span class="s2">&quot;test sentences.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preparation">
+<h3><span class="section-number">13.1.1.1. </span>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
+<p>The most boring part when training LSTMs on text is to prepare the data correctly. Sentences are sequences of words (possibly a huge number of words), with a variable length (some sentences are shorter than others).</p>
+<p>What neural networks expect as input is a fixed-length sequence of numerical vectors <span class="math notranslate nohighlight">\(\{\mathbf{x}_t\}_{t=0}^T\)</span>, i.e. they must have a fixed size. So we need to transform each sentence into this format.</p>
+<p>The first thing to do is to identify the vocabulary, i.e. the <strong>unique</strong> words in the training set (fortunately, the test set uses the same exact words) as well as the maximal number of words in each sentence (again, the test set does not have longer sentences).</p>
+<p><strong>Q:</strong> Create a list <code class="docutils literal notranslate"><span class="pre">vocabulary</span></code> of unique words in the training set and compute the maximal length <code class="docutils literal notranslate"><span class="pre">nb_words</span></code> of a sentence.</p>
+<p>To extract the words in each sentence, the <code class="docutils literal notranslate"><span class="pre">split()</span></code> method of Python strings might come handy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;I fear this exercise will be difficult&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You will also find the <code class="docutils literal notranslate"><span class="pre">set</span></code> Python object useful to identify unique works. Check the doc. But there are many ways to do that (for loops), just do it the way you prefer.</p>
+<p>Now that we have found our list of 18 unique words, we need to able to perform <strong>one-hot encoding</strong> of each word, i.e. write a method <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">one_hot_encoding(word,</span> <span class="pre">vocabulary)</span></code> that takes a word (e.g. “good”) and the vocabulary, and returns a vector of size 18, with mostly zeros, except for a <code class="docutils literal notranslate"><span class="pre">1.0</span></code> at the location of the word in the vocabulary.</p>
+<p>For example, if your vocabulary is <code class="docutils literal notranslate"><span class="pre">[&quot;I&quot;,</span> <span class="pre">&quot;love&quot;,</span> <span class="pre">&quot;you&quot;]</span></code>, the one-hot encoding of “I” should be <code class="docutils literal notranslate"><span class="pre">np.array([1.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></code>, the one of “love” is <code class="docutils literal notranslate"><span class="pre">np.array([0.,</span> <span class="pre">1.,</span> <span class="pre">0.])</span></code>, etc.</p>
+<p><strong>Q:</strong> Implement the <code class="docutils literal notranslate"><span class="pre">one_hot_encoding()</span></code> method for single words.</p>
+<p><em>Hint:</em> you might find the method <code class="docutils literal notranslate"><span class="pre">index()</span></code> of list objects interesting.</p>
+<p><strong>Q:</strong> You can now create the training set <code class="docutils literal notranslate"><span class="pre">X_train,</span> <span class="pre">T_train</span></code> and the test set <code class="docutils literal notranslate"><span class="pre">X_test,</span> <span class="pre">T_test</span></code>.</p>
+<p>The training input data <code class="docutils literal notranslate"><span class="pre">X_train</span></code> should be a numpy array with 3 dimensions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_train</span><span class="p">,</span> <span class="n">nb_words</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>The first index corresponds to each sentence. The second index represents the index of each word in the sentence (maximally <code class="docutils literal notranslate"><span class="pre">nb_words=10</span></code>). The third index is for the one-hot encoding (18 elements).</p>
+<p><strong>Beware:</strong> most sentences are shorter than <code class="docutils literal notranslate"><span class="pre">nb_words=10</span></code>. In that case, the words should be set <strong>at the end of the sequence</strong>, i.e. you prepend zero vectors.</p>
+<p>For example, “I love you” should be encoded as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span>
+</pre></div>
+</div>
+<p>not as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The reason for that is that the LSTM will get the words one by one and only respond “positive” or “negative” after the last word has been seen. If the words are provided at the beginning of the sequence, vanishing gradients might delete them.</p>
+<p>The same holds for the test set, it only has less sentences.</p>
+</div>
+<div class="section" id="training-the-lstm">
+<h3><span class="section-number">13.1.1.2. </span>Training the LSTM<a class="headerlink" href="#training-the-lstm" title="Permalink to this headline">¶</a></h3>
+<p>Now we just have to provide the data to a recurrent network. The problem is not very complicated, so we will need a single LSTM layer, followed by a single output neuron (with the logistic transfer function) whose role is to output 1 for the positive class, 0 for the negative one.</p>
+<p><strong>Q:</strong> Check the documentation for the LSTM layer of <code class="docutils literal notranslate"><span class="pre">keras</span></code>: <a class="reference external" href="https://keras.io/api/layers/recurrent_layers/lstm/">https://keras.io/api/layers/recurrent_layers/lstm/</a>. It has many parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+    <span class="n">units</span><span class="p">,</span> 
+    <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> 
+    <span class="n">recurrent_activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> 
+    <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">,</span> 
+    <span class="n">recurrent_initializer</span><span class="o">=</span><span class="s1">&#39;orthogonal&#39;</span><span class="p">,</span> 
+    <span class="n">bias_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span> 
+    <span class="n">unit_forget_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">recurrent_regularizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_regularizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">activity_regularizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kernel_constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">recurrent_constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bias_constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">recurrent_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+    <span class="n">implementation</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+    <span class="n">return_sequences</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">go_backwards</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stateful</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unroll</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The default value for the parameters is the vanilla LSTM seen in the lectures, but you have the possibility to change the activation functions for the inputs and outputs (not the gates, it must be a sigmoid!), initialize the weights differently, add regularization or dropout, use biases or not, etc. That’s a lot to play with. For this exercise, stick to the default parameters at the beginning. The only thing you need to define is the number of neurons <code class="docutils literal notranslate"><span class="pre">units</span></code> of the layer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that an important parameter is <code class="docutils literal notranslate"><span class="pre">return_sequences</span></code>. When set to False (the default), the LSTM layer will process the complete sequence of 10 word vectors, and output a single vector of <span class="math notranslate nohighlight">\(N\)</span> values (the number of units). When set to True, the layer would return a sequence of 10 vectors of size <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>Here, we only want the LSTM layer to encode the sentence and feed a single vector to the output layer, so we can leave it to False. If we wanted to stack two LSTM layers on top of each other, we would need to set <code class="docutils literal notranslate"><span class="pre">return_sequences</span></code> to True for the first layer and False for the second one (you can try that later):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong> Create a model with one LSTM layer (with enough units) and one output layer with one neuron (<code class="docutils literal notranslate"><span class="pre">'sigmoid'</span></code> activation function). Choose an optimizer (SGD, RMSprop, Adam, etc) and a good learning rate. When compiling the model, use the <code class="docutils literal notranslate"><span class="pre">'binary_crossentropy'</span></code> loss function as it is a binary classification.</p>
+<p>The input layer of the network must take a <code class="docutils literal notranslate"><span class="pre">(nb_words,</span> <span class="pre">len(vocabulary))</span></code> matrix as input, i.e. (window, nb_features).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="n">nb_words</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>When training the model with <code class="docutils literal notranslate"><span class="pre">model.fit()</span></code>, you can pass the test set as validation data, as we do not have too many examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">T_train</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">T_test</span><span class="p">),</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Train the model for enough epochs, using a batch size big enough but not too big. In other terms: do the hyperparameter search yourself ;).</p>
+<p><strong>Q.</strong> Once you have been able to successfully train the network, vary the different parts of the model to understand their influence: learning rate, number of units, optimizer, etc. Add another LSTM layer to see what happens. Exchange the LSTM layer with the GRU layer.</p>
+</div>
+</div>
+<div class="section" id="time-series-prediction">
+<h2><span class="section-number">13.1.2. </span>Time series prediction<a class="headerlink" href="#time-series-prediction" title="Permalink to this headline">¶</a></h2>
+<p>Another useful function of RNNs is forecasting, i.e. predicting the rest of a sequence (financial markets, weather, etc.) based on its history.</p>
+<p>Let’s generate a dummy one-dimensional signal with 10000 points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">time_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">signal</span> <span class="o">=</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time_axis</span><span class="o">/</span><span class="mi">700</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time_axis</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/13-RNN_16_0.png" src="../_images/13-RNN_16_0.png" />
+</div>
+</div>
+<p>We are going to use a small window (50 points) to feed the LSTM. The goal will be to perform <strong>one-step ahead prediction</strong>: given the last 50 points, what will be the next one?</p>
+<p>The following cell prepares the data for the problem. Check that the data is what you expect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">signal</span><span class="p">[</span><span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">+</span> <span class="n">window</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time_axis</span><span class="p">[:</span><span class="o">-</span><span class="n">window</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">time_axis</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="n">window</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now split the signal into training and test sets. The training set consists of the 9000 first points, while the test set consists of the remaining 1000 points (the future). Note that the test set is not exactly contained in the training set as the function is not periodic, but quite.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb_train</span> <span class="o">=</span> <span class="mi">9000</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">nb_train</span><span class="p">]</span>
+<span class="n">T_train</span> <span class="o">=</span> <span class="n">t</span><span class="p">[:</span><span class="n">nb_train</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">nb_train</span><span class="p">:]</span>
+<span class="n">T_test</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">nb_train</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q:</strong> Create a neural network taking a <code class="docutils literal notranslate"><span class="pre">(window,</span> <span class="pre">1)</span></code> input, with one LSTM layer and one output neuron using the tanh activation function (as the targets are between -1 and 1). Train it on the data as a regression problem (use many epochs). Track the mean average error (<code class="docutils literal notranslate"><span class="pre">metrics=['mae']</span></code>) in addition to the mse, as it indicates better the prediction error. After training, plot the prediction for the test set and compare it to the ground truth.</p>
+<p>It seems possible to get a high precision on the test set, but there is a trick. The sequence fed as an input when testing consists of <strong>real</strong> measurements. The network has only learned to predict the next data point. Can we use that model to predict the next 1000 points without seeing the true data?</p>
+<p>For that, we need to build an <strong>auto-regressive model</strong>, i.e. to feed inputs to the network consisting of predictions, not of real data points. We need a structure that can represent a fixed-size window of data points, where we can append predictions one by one. The following cell provides you with a simple implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Buffer</span><span class="p">:</span>
+    <span class="s2">&quot;Fixed size buffer allowing to append predictions.&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="n">window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span>  <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">window</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])])</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can create the buffer by intializing it with the first test sample consisting of 50 real data points:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">buffer.data</span></code> can be passed directly to the model in order to make a prediction:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This prediction can be appended to the buffer, which can be used as the next input to the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Q:</strong> Make recursive prediction using your trained model. Does it work?</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./5-exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ex13-RNN.html" title="previous page"><span class="section-number">13. </span>Recurrent neural networks</a>
+    <a class='right-next' id="next-link" href="13-RNN-solution.html" title="next page"><span class="section-number">13.2. </span>Recurrent neural networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
