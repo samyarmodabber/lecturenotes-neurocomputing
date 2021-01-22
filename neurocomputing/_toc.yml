@@ -31,9 +31,9 @@
 - part: Neurocomputing
   chapters:
     - file: 4-neurocomputing/1-Limits
-#     - file: 4-neurocomputing/2-Hopfield
+    - file: 4-neurocomputing/2-Hopfield
 #     - file: 4-neurocomputing/3-NeuralFields
-#     - file: 4-neurocomputing/4-Reservoir
+    - file: 4-neurocomputing/4-Reservoir
 #     - file: 4-neurocomputing/5-Hebbian
 #     - file: 4-neurocomputing/6-Spiking
 
@@ -122,6 +122,13 @@
         - file: 5-exercises/12-VAE
           title: Notebook
         - file: 5-exercises/12-VAE-solution
+          title: Solution
+
+    - file: 5-exercises/ex13-RNN
+      sections:
+        - file: 5-exercises/13-RNN
+          title: Notebook
+        - file: 5-exercises/13-RNN-solution
           title: Solution
 
 
