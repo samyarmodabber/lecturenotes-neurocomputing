@@ -1,0 +1,1084 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Unsupervised Hebbian learning &#8212; Neurocomputing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/5-Hebbian.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Spiking neural networks" href="6-Spiking.html" />
+    <link rel="prev" title="3. Reservoir computing" href="4-Reservoir.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/5-Hebbian.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Unsupervised Hebbian learning" />
+<meta property="og:description" content="Unsupervised Hebbian learning  Guest lecturer: Dr. Michael Teichmann.  Slides: pdf  What is Hebbian learning?  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https:/" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-SemanticSegmentation.html">
+   5. Semantic segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-Autoencoders.html">
+   6. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-RBM.html">
+   7. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative adversarial networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Neurocomputing
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-Limits.html">
+   1. Limits of deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-Reservoir.html">
+   3. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Unsupervised Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-Spiking.html">
+   5. Spiking neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python.html">
+     1.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python-solution.html">
+     1.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy.html">
+     2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy-solution.html">
+     2.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
+     3.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression-solution.html">
+     3.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR.html">
+     4.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR-solution.html">
+     4.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
+     5.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation-solution.html">
+     5.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
+     6.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification-solution.html">
+     6.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
+     7.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier-solution.html">
+     7.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP.html">
+     8.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP-solution.html">
+     8.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
+   9. MNIST classification using keras
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST.html">
+     9.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST-solution.html">
+     9.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex10-CNN.html">
+   10. Convolutional neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN.html">
+     10.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN-solution.html">
+     10.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
+   11. Transfer learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
+     11.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning-solution.html">
+     11.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex12-VAE.html">
+   12. Variational autoencoder
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE.html">
+     12.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE-solution.html">
+     12.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex13-RNN.html">
+   13. Recurrent neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/13-RNN.html">
+     13.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/13-RNN-solution.html">
+     13.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/4-neurocomputing/5-Hebbian.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-hebbian-learning">
+   4.1. What is Hebbian learning?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementations-of-hebbian-learning-rules">
+   4.2. Implementations of Hebbian learning rules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-hebbian-learning-rule">
+     4.2.1. Simple Hebbian learning rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#covariance-based-hebbian-learning">
+     4.2.2. Covariance-based Hebbian learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#oja-learning-rule">
+     4.2.3. Oja learning rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bienenstock-cooper-monroe-bcm-learning-rule">
+     4.2.4. Bienenstock-Cooper-Monroe (BCM) learning rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spike-time-dependent-plasticity-stdp">
+     4.2.5. Spike-Time-Dependent Plasticity (STDP)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hebbian-neural-networks">
+   4.3. Hebbian Neural Networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#perceptron">
+     4.3.1. Perceptron
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inhibition">
+     4.3.2. Inhibition
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#information-representation-optional">
+   4.4. Information representation (optional)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#homeostasis">
+     4.4.1. Homeostasis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intrinsic-plasticity">
+     4.4.2. Intrinsic plasticity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supervised-hebbian-learning">
+     4.4.3. Supervised Hebbian learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   4.5. Summary
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="unsupervised-hebbian-learning">
+<h1><span class="section-number">4. </span>Unsupervised Hebbian learning<a class="headerlink" href="#unsupervised-hebbian-learning" title="Permalink to this headline">¶</a></h1>
+<p>Guest lecturer: Dr. Michael Teichmann.</p>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/4.6-Hebbian.pdf">pdf</a></p>
+<div class="section" id="what-is-hebbian-learning">
+<h2><span class="section-number">4.1. </span>What is Hebbian learning?<a class="headerlink" href="#what-is-hebbian-learning" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/PhS50dv6UZE' frameborder='0' allowfullscreen></iframe></div>
+<p>Donald Hebb postulates 1949 in its book <em>The Organization of Behavior</em> how long lasting cellular changes are induced in the nervous system:</p>
+<blockquote>
+<div><p>When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A’s efficiency, as one of the cells firing B, is increased.</p>
+</div></blockquote>
+<p>which is often simplified to:</p>
+<blockquote>
+<div><p>Neurons wire together if they fire together.</p>
+</div></blockquote>
+<p>Based on this principle, a basic computational rule can be formulated, where the weight change is proportional to the product of activation values:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta w_{ij} = \eta \, r_i \, r_j
+\]</div>
+<p>Hebbian learning requires no other information than the activities, such as labels or error signals: it is an <strong>unsupervised learning</strong> method.
+Hebbian learning is not a concrete learning rule, it is a postulate on the fundamental principle of biological learning.
+Because of its unsupervised nature, it will rather learn frequent properties of the input statistics than task-specific properties. It is also called a <strong>correlation-based</strong> learning rule.</p>
+<p>A useful Hebbian-based learning rule has to respect several criteria <a class="bibtex reference internal" href="../zreferences.html#dayan2001" id="id1">[Dayan &amp; Abbott, 2001]</a>:</p>
+<ol class="simple">
+<li><p><strong>Locality:</strong> The weight change should only depend on the activity of the two neurons and the synaptic weight itself.
+$<span class="math notranslate nohighlight">\(
+\Delta w_{ij} = F(w_{ij}; r_i; r_j)
+\)</span>$</p></li>
+<li><p><strong>Cooperativity:</strong> Hebb’s postulate says cell <em>A</em> “takes part in firing it”, which implicates that both neurons must be active to induce a weight increase.</p></li>
+<li><p><strong>Synaptic depression:</strong> whilw Hebb’s postulate refers only to conditions to strengthen the synapses, a mechanism for decreasing weights is necessary for any useful learning rule.</p></li>
+<li><p><strong>Boundedness:</strong> To be realistic, weights should remain bounded in a certain range. The dependence of the learning on <span class="math notranslate nohighlight">\(w_{ij}\)</span> or <span class="math notranslate nohighlight">\(r_j\)</span> can be used for bounding the weights.</p></li>
+<li><p><strong>Competition:</strong> The weights grow at the expense of other weights. This can be implemented by a local form of weight vector normalization.</p></li>
+<li><p><strong>Long-term stability:</strong> For adaptive systems, care must be taken that previously learned information is not lost. This is called the “stability-plasticity dilemma”.</p></li>
+</ol>
+</div>
+<div class="section" id="implementations-of-hebbian-learning-rules">
+<h2><span class="section-number">4.2. </span>Implementations of Hebbian learning rules<a class="headerlink" href="#implementations-of-hebbian-learning-rules" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/bQCFqxV_iPs' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="simple-hebbian-learning-rule">
+<h3><span class="section-number">4.2.1. </span>Simple Hebbian learning rule<a class="headerlink" href="#simple-hebbian-learning-rule" title="Permalink to this headline">¶</a></h3>
+<p>In the most basic formulation, learning depends only on the presynaptic <span class="math notranslate nohighlight">\(r_i\)</span> and postsynaptic <span class="math notranslate nohighlight">\(r_j\)</span> firing rates and a learning rate <span class="math notranslate nohighlight">\(\eta\)</span> (correlation-based learning principle):</p>
+<div class="math notranslate nohighlight">
+\[
+ \Delta w_{ij} = \eta \cdot r_i r_j
+\]</div>
+<p>If the postsynaptic activity is computed over multiple input synapses:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+r_j = \sum_i w_{ij} \, r_i = \mathbf{r}^T \times \mathbf{w}_j \\
+\end{split}\]</div>
+<p>then the learning rule accumulates the auto-correlation matrix <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> of the input vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta \mathbf{w}_j = \eta \, \mathbf{r} \, r_j = \eta \, \mathbf{r}  \times \mathbf{r}^T \times \mathbf{w}_j = \eta \, Q \times \mathbf{w}_j
+\]</div>
+<p>When multiple input vectors are presented, <span class="math notranslate nohighlight">\(Q\)</span> represents the correlation matrix of the inputs:</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \mathbb{E}_{\mathbf{r}} [\mathbf{r}  \times \mathbf{r}^T]
+\]</div>
+<p>Thus, Hebbian plasticity is assigning strong weights to frequently co-occurring input elements.</p>
+</div>
+<div class="section" id="covariance-based-hebbian-learning">
+<h3><span class="section-number">4.2.2. </span>Covariance-based Hebbian learning<a class="headerlink" href="#covariance-based-hebbian-learning" title="Permalink to this headline">¶</a></h3>
+<p>The covariance between two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+  \text{cov}(X,Y) &amp;= \mathbb{E}(X- \mathbb{E}(X)) \, \mathbb{E}(Y-\mathbb{E}(Y))\\
+                  &amp;\\
+                  &amp;= \mathbb{E}(XY)- \mathbb{E}(X) \, \mathbb{E}(Y) \\
+\end{aligned}\end{split}\]</div>
+<p>One property of the covariance is that it is zero for independent variables and positive for dependent variables.
+However, it just measures linear independence and ignores higher order dependencies.
+It is useful to learn meaningful weights only between statistically dependent neurons.</p>
+<p>With the following formulation, the weight change is relative to the covariance of the activity of the connected neurons:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\Delta w_{ij} &amp;= \eta \, (r_i-\theta_i) \, (r_j-\theta_j)\\
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta_i\)</span> and <span class="math notranslate nohighlight">\(\theta_j\)</span> are estimates of the expectation of the pre- and post-synaptic activities, for example though a moving average:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+  \theta_i &amp; = \alpha \, \theta_i + (1 - \alpha) \, r_i \\
+  &amp;\\
+  \theta_j &amp; = \beta \, \theta_j + (1 - \beta) \, r_j \\ 
+\end{aligned}\end{split}\]</div>
+<p>Note that with covariance-based learning, weight can both increase (LTP) and decrease (LTD).
+Some variants of covariance-based Hebbian only use a threshold on one of the terms:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\Delta w_{ij} &amp;= \eta \, r_i(r_j-\theta) = \eta \, (r_i \, r_j -  \theta \, r_i)\\
+&amp;\\
+\Delta w_{ij} &amp;= \eta (r_i-\theta)\, r_j = \eta (r_i \, r_j- \theta \, r_j)
+\end{aligned}\end{split}\]</div>
+<p>The previous implementations lack any bound for the weight increase.
+Since the correlation of input and output increases through learning the weight would grow without limits.
+In the case of anti-correlated neurons, the weights could also become negative for covariance-based learning.</p>
+<p>There are several ways to bound the weights:</p>
+<ol class="simple">
+<li><p>Hard bounds
+$<span class="math notranslate nohighlight">\(
+w_{min}\le w_{ij} \le w_{max}
+\)</span>$</p></li>
+<li><p>Soft bounds
+$<span class="math notranslate nohighlight">\(
+\Delta w_{ij} = \eta \, r_i \, r_j \, (w_{ij} - w_{min}) \, (w_{max}-w_{ij})
+\)</span>$</p></li>
+<li><p>Normalized weight vector length <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id2">[Oja, 1982]</a>:
+$<span class="math notranslate nohighlight">\(
+\Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
+\)</span>$</p></li>
+<li><p>Rate-based threshold adaption <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id3">[Bienenstock et al., 1982]</a>.</p></li>
+</ol>
+</div>
+<div class="section" id="oja-learning-rule">
+<h3><span class="section-number">4.2.3. </span>Oja learning rule<a class="headerlink" href="#oja-learning-rule" title="Permalink to this headline">¶</a></h3>
+<p>Normalized weight vector length <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id4">[Oja, 1982]</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
+\]</div>
+<p>Erkki Oja found a formulation which normalizes the length of a weight vector by a <strong>local</strong> operation, fulfilling the first criterium for Hebbian learning.</p>
+<p><span class="math notranslate nohighlight">\(\alpha \, r_j^2 \, w_{ij}\)</span> is a <strong>regularization term</strong>: when the weight <span class="math notranslate nohighlight">\(w_{ij}\)</span> or the postsynaptic activity <span class="math notranslate nohighlight">\(r_j\)</span> are too high, the term cancels the “Hebbian” part <span class="math notranslate nohighlight">\(r_i \, r_j\)</span> and decreases the weight.</p>
+<p>Oja has shown that with this equation the norm of the weight vector converges to a constant value determined by the parameter <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+||\mathbf{w}||^2 = \frac{1}{\alpha}
+\]</div>
+<p>To come to the solution the relation between input and output <span class="math notranslate nohighlight">\(r_j = \mathbf{r} \times \mathbf{w}^T\)</span> and a Taylor expansion over <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> has been used.</p>
+</div>
+<div class="section" id="bienenstock-cooper-monroe-bcm-learning-rule">
+<h3><span class="section-number">4.2.4. </span>Bienenstock-Cooper-Monroe (BCM) learning rule<a class="headerlink" href="#bienenstock-cooper-monroe-bcm-learning-rule" title="Permalink to this headline">¶</a></h3>
+<p>Rate-based threshold adaption  <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id5">[Bienenstock et al., 1982]</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\Delta w_{ij} &amp;= \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij})\\
+&amp;\\
+\theta &amp;= \mathbb{E} [r_j^2] \\
+\end{aligned}\end{split}\]</div>
+<p>In the BCM learning rule, the threshold <span class="math notranslate nohighlight">\(\theta\)</span> averages the square of the post-synaptic activity, i.e. its second moment (<span class="math notranslate nohighlight">\(\approx\)</span> variance).
+When the short-term trace <span class="math notranslate nohighlight">\(\theta\)</span> over the past activities of <span class="math notranslate nohighlight">\(r_j\)</span> increases, the fraction of events leading to synaptic depression increases.</p>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/300px-BCM_Main_figure.png"><img alt="../_images/300px-BCM_Main_figure.png" src="../_images/300px-BCM_Main_figure.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.31 </span><span class="caption-text">BCM learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id6">[Bienenstock et al., 1982]</a>. Source: <a class="reference external" href="http://www.scholarpedia.org/article/BCM_theory">http://www.scholarpedia.org/article/BCM_theory</a>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="spike-time-dependent-plasticity-stdp">
+<h3><span class="section-number">4.2.5. </span>Spike-Time-Dependent Plasticity (STDP)<a class="headerlink" href="#spike-time-dependent-plasticity-stdp" title="Permalink to this headline">¶</a></h3>
+<p>The brain transmits neuronal activity majorly via generation of short electrical impulses, called spikes.
+The timing of these spikes might convey additional information over the firing rate, which we regarded before.
+Spike-based neural networks are also a technical way to transmit information with a very high energy efficiency (neuromorphic hardware).
+An important aspect of STDP is the temporal asymmetric learning window.
+A spike that arrives slightly before the postsynaptic spike is likely to cause this one.
+Thus, STDP learning rules can incorporate temporal aspects implying causality, an important implicit aspect of  the cooperativity property of Hebbian learning.</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/Shulz_Feldman_2013-Forms_STDP.jpg"><img alt="../_images/Shulz_Feldman_2013-Forms_STDP.jpg" src="../_images/Shulz_Feldman_2013-Forms_STDP.jpg" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.32 </span><span class="caption-text">STDP learning rule. Source: <a class="reference external" href="https://doi.org/10.1016/C2011-0-07732-3">https://doi.org/10.1016/C2011-0-07732-3</a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="hebbian-neural-networks">
+<h2><span class="section-number">4.3. </span>Hebbian Neural Networks<a class="headerlink" href="#hebbian-neural-networks" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/yXfbqV77xl4' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="perceptron">
+<h3><span class="section-number">4.3.1. </span>Perceptron<a class="headerlink" href="#perceptron" title="Permalink to this headline">¶</a></h3>
+<p>What does a layer of multiple neurons learn with Hebbian learning?
+Erkki Oja (1982) has shown that his learning rule converges for linear neurons to the first principle component of the input data.
+A principle component is an eigenvector of the covariance matrix of the input data. The first principle component is the eigenvector with the largest variance, having the highest eigenvalue.
+A network of these neurons appears not very useful, as all neurons will just learn the first principle component. An additional element is required providing differentiation between the neurons.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/perceptron_FF.svg"><img alt="../_images/perceptron_FF.svg" src="../_images/perceptron_FF.svg" width="40%" /></a>
+</div>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/Dayan_Abbot_2005-Principle_Component.png"><img alt="../_images/Dayan_Abbot_2005-Principle_Component.png" src="../_images/Dayan_Abbot_2005-Principle_Component.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.33 </span><span class="caption-text">Principle components. Source: <a class="bibtex reference internal" href="../zreferences.html#dayan2001" id="id7">[Dayan &amp; Abbott, 2001]</a>.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>There are several methods existing differentiating the neuron responses, e.g.:</p>
+<ol class="simple">
+<li><p>Winner-take-all competition</p>
+<ul class="simple">
+<li><p>Only the neuron with the highest response is selected for learning.</p></li>
+<li><p>In practice k-winner-take-all is often used, letting the k strongest neurons learn.</p></li>
+</ul>
+</li>
+<li><p>A recurrent circuit providing a competitive signal.</p>
+<ul class="simple">
+<li><p>The neurons compete with their neighbors to become active to learn.</p></li>
+<li><p>In the brain this is not done directly, it is done via a special neuron type, called <strong>inhibitory neurons</strong>.</p></li>
+<li><p>Inhibitory neurons form only synapses reducing the activity of the postsynaptic neuron (Dale’s law).</p></li>
+<li><p>Inhibition can be implemented in different manners.</p></li>
+</ul>
+</li>
+</ol>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/perceptron_R.svg"><img alt="../_images/perceptron_R.svg" src="../_images/perceptron_R.svg" width="40%" /></a>
+</div>
+</div>
+<div class="section" id="inhibition">
+<h3><span class="section-number">4.3.2. </span>Inhibition<a class="headerlink" href="#inhibition" title="Permalink to this headline">¶</a></h3>
+<p><strong>Modulatory inhibition</strong> divides the excitation of the postsynaptic neuron by the received inhibition coming from the neighboring units.
+Scaling the neuronal gain and non-linearly separating the activity values of the neurons in the way that high activities remain high, but lower activities are suppressed.</p>
+<div class="math notranslate nohighlight">
+\[
+  r_j(\sigma,E,I)=\frac{E}{\sigma+E+I}
+\]</div>
+<p>with excitation E, inhibition I, and <span class="math notranslate nohighlight">\(\sigma\)</span> scaling the strength of the normalization.</p>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/Graham2011_Normalization.png"><img alt="../_images/Graham2011_Normalization.png" src="../_images/Graham2011_Normalization.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.34 </span><span class="caption-text">Models of normalization as feedback circuit for V1 cells. Source: Graham, N. V. (2011). Beyond multiple pattern analyzers modeled as linear filters (as classical V1 simple cells): useful additions of the last 25 years. Vision Research, 51(13), 1397–1430. <a class="reference external" href="https://doi.org/10.1016/j.visres.2011.02.007">https://doi.org/10.1016/j.visres.2011.02.007</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Subtractive inhibition</strong> means that the inhibitory currents are subtracted from the excitatory one.
+In a recurrent circuit highly active neurons reduce the activity of their neighboring neurons and limit their ability to inhibit other neurons. This is called <strong>shunting inhibition</strong>.</p>
+<div class="math notranslate nohighlight">
+\[
+    r_j(E,I)=E-I
+\]</div>
+<p>Depending how the weights are arranged this can implement a continuum from winner-take-all competition (equal and strong weights) to very specific competition between particular neurons (e.g. penalizing similar neurons).</p>
+<p>A method to learn weights providing a penalty for similarly active neurons is <strong>anti-Hebbian learning</strong>.
+Hebbian learning can easily turned into anti-Hebbian learning by switching the sign of the weight change or switching the effect of the weight from excitatory to inhibitory.
+Covariance-based weight change <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id8">[Vogels et al., 2011]</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta c_{ij} = r_i r_j - r_i \rho_0
+\]</div>
+<p>Weight relative to covariance:</p>
+<div class="math notranslate nohighlight">
+\[
+  \Delta c_{ij} = r_i r_j - r_i\rho_0 (1 + c_{ij})
+\]</div>
+<p>The equilibrium point of the equation is reached, when the weight indicates by which factor the product of the expectation values <span class="math notranslate nohighlight">\(r_i \rho_0\)</span> has to be multiplied to be equal to the expectation value of the product of the activities <span class="math notranslate nohighlight">\(r_i r_j\)</span>.</p>
+<p>From a theoretical viewpoint anti-Hebbian learned competition aims to minimize linear dependencies between the activities. When having independent neural activities than the information encoded by a population of neurons is maximal <a class="bibtex reference internal" href="../zreferences.html#simoncelli2001" id="id9">[Simoncelli &amp; Olshausen, 2001]</a>.</p>
+<p>What about the boundedness issue?
+Oja normalization is based on the fact that the postsynaptic activity is caused by the presynaptic activity and the weight strength. This is only true for excitatory weights.
+Inhibitory weights reduce the activity. This causes a softbound effect:</p>
+<ul class="simple">
+<li><p>When the inhibitory weight increases, the activity decreases.</p></li>
+<li><p>With lower activities the weight change gets slower, until it stops when the neuron remains inactive.</p></li>
+</ul>
+<p>Formulations where the weight is relative to the covariance additionally saturate at their equilibrium point.</p>
+</div>
+</div>
+<div class="section" id="information-representation-optional">
+<h2><span class="section-number">4.4. </span>Information representation (optional)<a class="headerlink" href="#information-representation-optional" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/rlKSlCCvvgw' frameborder='0' allowfullscreen></iframe></div>
+<p>Since Hebbian and anti-Hebbian learning are restricted to use only local information, there is no global objective what a population of these neurons should represent.
+Competition between the neurons induce differences in their response patterns, but might not control that all neurons convey information.
+There are two issues:</p>
+<ul class="simple">
+<li><p>A single pattern can get dominant because of differences in the activity.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  E(w_{ij}) = E(r_i r_j)-E(r_i)E(r_j)
+\]</div>
+<p>If the activity of a particular input neuron <span class="math notranslate nohighlight">\(r_i\)</span> is by average higher than the activity of other input neurons, then its weight value gets higher than the weight of a similarly correlated but less active neuron.
+This effect is strengthen over multiple layers, causing a dominance of a few patterns. Thus, the activities have to be balanced to avoid an imbalanced input to the next layer.</p>
+<ul class="simple">
+<li><p>Neurons can become permanently inactive or unresponsive to changing input.</p></li>
+</ul>
+<p>This can be avoided by aiming for a similar operating point of the neurons, by keeping:</p>
+<ul class="simple">
+<li><p>All neurons active, to use the full capacity of the neuronal population.</p></li>
+<li><p>All neurons in a similar range, so that no neuron can dominate the learnings of subsequent layers.</p></li>
+</ul>
+<div class="section" id="homeostasis">
+<h3><span class="section-number">4.4.1. </span>Homeostasis<a class="headerlink" href="#homeostasis" title="Permalink to this headline">¶</a></h3>
+<p>In Hebbian learning, the amount of weight decrease and increase can be regulated to achieve a certain activity range. <a class="bibtex reference internal" href="../zreferences.html#clopath2010" id="id10">[Clopath et al., 2010]</a> regulate the strength of the weight decrease <span class="math notranslate nohighlight">\(A_{LTD}\)</span> by relating the average membrane potential <span class="math notranslate nohighlight">\(\bar{\bar u}\)</span> to a reference value <span class="math notranslate nohighlight">\(u_{ref}^2\)</span>, defining a target activity with that:</p>
+<div class="math notranslate nohighlight">
+\[
+    A_{LTD}(\bar{\bar u})=A_{LTD} \frac{\bar{\bar u}^2}{u_{ref}^2}
+\]</div>
+<p>BCM learning adapts the threshold based on the average activity of the neuron, facilitating or impeding weight increases and decreases:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta w_{ij} = \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij}) \; \; \theta = \mathbb{E} [r_j^2]
+\]</div>
+<p>In anti-Hebbian learning, the amount of inhibition a neuron receives is up or downregulated to achieve a certain average activity. <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id11">[Vogels et al., 2011]</a> define a target activity of the postsynaptic neuron <span class="math notranslate nohighlight">\(\rho_0\)</span>, the amount of inhibition is up or downregulated to reach this activity:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Delta w_{ij} = r_i \, (r_j - \rho_0)
+\]</div>
+</div>
+<div class="section" id="intrinsic-plasticity">
+<h3><span class="section-number">4.4.2. </span>Intrinsic plasticity<a class="headerlink" href="#intrinsic-plasticity" title="Permalink to this headline">¶</a></h3>
+<p>First option: forcing a certain activity distribution, through adapting the activation function.</p>
+<p><a class="bibtex reference internal" href="../zreferences.html#joshi2009" id="id12">[Joshi &amp; Triesch, 2009]</a> adapt the parameters of the transfer function <span class="math notranslate nohighlight">\(g(u)\)</span>, by minimizing the Kullback-Leibler divergence between the neuron’s activity and an exponential distribution. The update rules for the parameters <span class="math notranslate nohighlight">\(r_0, u_0, u_\alpha\)</span> have been derived via stochastic gradient descent:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(u) = r_0 log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)\\
+    \Delta r_0 = \frac{\eta}{r_0} \left( 1- \frac{g}{\mu} \right)\\
+    \Delta u_0 = \frac{\eta}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right)\\
+    \Delta u_\alpha = \frac{\eta}{u_\alpha} \left( \frac{u-u_0}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right) -1 \right)
+\end{split}\]</div>
+<p>Second option: regulating the first moments of activity (mean, variance) and by adapting the activation function.</p>
+<p>Teichmann and Hamker (2015) adapt the parameters of a rectified linear transfer function, by regulating the threshold <span class="math notranslate nohighlight">\(\theta_j\)</span> and slope <span class="math notranslate nohighlight">\(a_j\)</span>, to achieve a similar mean and variance of all neurons within a layer:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j\\
+    \Delta \theta_j = (r_j - \theta_{target})\\
+    \Delta a_j = (a_{target} -r_j^2)\\
+\end{split}\]</div>
+</div>
+<div class="section" id="supervised-hebbian-learning">
+<h3><span class="section-number">4.4.3. </span>Supervised Hebbian learning<a class="headerlink" href="#supervised-hebbian-learning" title="Permalink to this headline">¶</a></h3>
+<p>Large parts of the plasticity in the brain is thought to be Hebbian, this means it uses local information and learns unsupervised.
+However the brain also is largely recurrent, information flows in all directions and this information could guide neighboring or preceding processing stages.
+If such an information influences the activity of a neuron then it also influences the learning on the other synapses of this neuron.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/Schmidt_Albada_2018-VC.png"><img alt="../_images/Schmidt_Albada_2018-VC.png" src="../_images/Schmidt_Albada_2018-VC.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.35 </span><span class="caption-text">Source: Schmidt, M., Diesmann, M., &amp; Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <a class="reference external" href="https://doi.org/10.1007/s00429-017-1554-4">https://doi.org/10.1007/s00429-017-1554-4</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+<p>In supervised Hebbian learning the postsynaptic activity is fully controlled. With that the subset of inputs which should evoke activity can be selected.</p>
+<div class="math notranslate nohighlight">
+\[
+  \Delta w_{ij} = r_i t - \alpha w_{ij}
+\]</div>
+<p>The supervised Hebbian learning principle can be extended to a form of top-down learning.
+A top-down signal, conveying additional modulatory information, modulates or contributes partially to the neuronal activity.</p>
+<p>We can illustrate the effect by splitting the plasticity term into bottom-up and the top-down parts.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  r'_j= \gamma r_j + (1-\gamma) t\\
+  \Delta w_{ij} = r_i r'_j- \alpha {r'_j}^2 w_{ij}
+\end{split}\]</div>
+<p>Depending on <span class="math notranslate nohighlight">\(\gamma\)</span>, the top-down signal contributes to the activity, it implements a continuum between unsupervised and supervised Hebbian learning.
+The weight change does not depend on the actual performance, therefore error correcting learning rules are required.</p>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/Grossberg88_TopDown.png"><img alt="../_images/Grossberg88_TopDown.png" src="../_images/Grossberg88_TopDown.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.36 </span><span class="caption-text">Source: Grossberg, S. (1988). Nonlinear neural networks: Principles, mechanisms, and architectures. Neural Networks, 1(1), 17–61. https://doi.org/10.1016/0893-6080(88)90021-4</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><span class="section-number">4.5. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/X4v9pBBAztI' frameborder='0' allowfullscreen></iframe></div>
+<ul class="simple">
+<li><p>Hebbian learning postulates properties of biological learning.</p></li>
+<li><p>There is no concrete implementation of Hebbian learning. Algorithms have to fulfill the properties: locality, cooperativity,  synaptic depression, boundedness, competition, and long term stability.</p></li>
+<li><p>Hebbian learning exploits the statistics of its input and learns frequent patterns. Like the first principle component.</p></li>
+<li><p>Beside differences from random initialization of the weights, all neurons would learn the same pattern, when having the same inputs. Thus, Hebbian learning requires a mechanism for competition for differentiation.</p></li>
+<li><p>Recurrent inhibitory connections induce competition by penalizing similar activities of the neurons. With that dependencies are reduced and the neural code gets efficient in terms of the information it conveys.</p></li>
+<li><p>However, imbalances in the activity can harm Hebbian learning in subsequent layers. Or inactive neurons reduce the information. Thus, the operating point of the neurons has to be adjusted.</p></li>
+<li><p>The operating point can be modified by set points in the Hebbian or anti-Hebbian learning rules. Or by regulating the transfer function of the neurons to achieve either a particular activity distribution or similar response properties like mean and variance.</p></li>
+<li><p>Hebbian learning can be extended by top-down signals and implement a continuum between supervised and unsupervised learning. This might help to reduce the dependency on large amounts of labeled data of supervised learning algorithms.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./4-neurocomputing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="4-Reservoir.html" title="previous page"><span class="section-number">3. </span>Reservoir computing</a>
+    <a class='right-next' id="next-link" href="6-Spiking.html" title="next page"><span class="section-number">5. </span>Spiking neural networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
