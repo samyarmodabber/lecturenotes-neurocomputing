@@ -337,9 +337,15 @@ First option: forcing a certain activity distribution, through adapting the acti
 {cite}`Joshi2009` adapt the parameters of the transfer function $g(u)$, by minimizing the Kullback-Leibler divergence between the neuron's activity and an exponential distribution. The update rules for the parameters $r_0, u_0, u_\alpha$ have been derived via stochastic gradient descent:
     
 $$
-    g(u) = r_0 log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)\\
-    \Delta r_0 = \frac{\eta}{r_0} \left( 1- \frac{g}{\mu} \right)\\
-    \Delta u_0 = \frac{\eta}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right)\\
+    g(u) = r_0 \, \log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)
+$$
+$$
+    \Delta r_0 = \frac{\eta}{r_0} \left( 1- \frac{g}{\mu} \right)
+$$
+$$
+    \Delta u_0 = \frac{\eta}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right)
+$$
+$$
     \Delta u_\alpha = \frac{\eta}{u_\alpha} \left( \frac{u-u_0}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right) -1 \right)
 $$
 
@@ -348,11 +354,16 @@ Second option: regulating the first moments of activity (mean, variance) and by 
 Teichmann and Hamker (2015) adapt the parameters of a rectified linear transfer function, by regulating the threshold $\theta_j$ and slope $a_j$, to achieve a similar mean and variance of all neurons within a layer:
   
 $$
-    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j\\
-    \Delta \theta_j = (r_j - \theta_{target})\\
-    \Delta a_j = (a_{target} -r_j^2)\\
+    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j
+$$
+$$
+    \Delta \theta_j = (r_j - \theta_{target})
+$$
+$$
+    \Delta a_j = (a_{target} -r_j^2)
 $$
 
+Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann & F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111)
 
 ### Supervised Hebbian learning
 
@@ -379,7 +390,9 @@ A top-down signal, conveying additional modulatory information, modulates or con
 We can illustrate the effect by splitting the plasticity term into bottom-up and the top-down parts.
 
 $$
-  r'_j= \gamma r_j + (1-\gamma) t\\
+  r'_j= \gamma r_j + (1-\gamma) t
+$$
+$$
   \Delta w_{ij} = r_i r'_j- \alpha {r'_j}^2 w_{ij}
 $$
 

@@ -963,20 +963,36 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 <p>First option: forcing a certain activity distribution, through adapting the activation function.</p>
 <p><a class="bibtex reference internal" href="../zreferences.html#joshi2009" id="id12">[Joshi &amp; Triesch, 2009]</a> adapt the parameters of the transfer function <span class="math notranslate nohighlight">\(g(u)\)</span>, by minimizing the Kullback-Leibler divergence between the neuron’s activity and an exponential distribution. The update rules for the parameters <span class="math notranslate nohighlight">\(r_0, u_0, u_\alpha\)</span> have been derived via stochastic gradient descent:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-    g(u) = r_0 log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)\\
-    \Delta r_0 = \frac{\eta}{r_0} \left( 1- \frac{g}{\mu} \right)\\
-    \Delta u_0 = \frac{\eta}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right)\\
+\[
+    g(u) = r_0 \, \log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \Delta r_0 = \frac{\eta}{r_0} \left( 1- \frac{g}{\mu} \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \Delta u_0 = \frac{\eta}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
     \Delta u_\alpha = \frac{\eta}{u_\alpha} \left( \frac{u-u_0}{u_\alpha} \left( \left( 1+\frac{r_0}{\mu} \right) \left( 1-e^\frac{-g}{r_0} \right) -1 \right) -1 \right)
-\end{split}\]</div>
+\]</div>
 <p>Second option: regulating the first moments of activity (mean, variance) and by adapting the activation function.</p>
 <p>Teichmann and Hamker (2015) adapt the parameters of a rectified linear transfer function, by regulating the threshold <span class="math notranslate nohighlight">\(\theta_j\)</span> and slope <span class="math notranslate nohighlight">\(a_j\)</span>, to achieve a similar mean and variance of all neurons within a layer:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j\\
-    \Delta \theta_j = (r_j - \theta_{target})\\
-    \Delta a_j = (a_{target} -r_j^2)\\
-\end{split}\]</div>
+\[
+    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \Delta \theta_j = (r_j - \theta_{target})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \Delta a_j = (a_{target} -r_j^2)
+\]</div>
+<p>Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann &amp; F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111)</p>
 </div>
 <div class="section" id="supervised-hebbian-learning">
 <h3><span class="section-number">4.4.3. </span>Supervised Hebbian learning<a class="headerlink" href="#supervised-hebbian-learning" title="Permalink to this headline">¶</a></h3>
@@ -996,10 +1012,13 @@ If such an information influences the activity of a neuron then it also influenc
 A top-down signal, conveying additional modulatory information, modulates or contributes partially to the neuronal activity.</p>
 <p>We can illustrate the effect by splitting the plasticity term into bottom-up and the top-down parts.</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-  r'_j= \gamma r_j + (1-\gamma) t\\
+\[
+  r'_j= \gamma r_j + (1-\gamma) t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
   \Delta w_{ij} = r_i r'_j- \alpha {r'_j}^2 w_{ij}
-\end{split}\]</div>
+\]</div>
 <p>Depending on <span class="math notranslate nohighlight">\(\gamma\)</span>, the top-down signal contributes to the activity, it implements a continuum between unsupervised and supervised Hebbian learning.
 The weight change does not depend on the actual performance, therefore error correcting learning rules are required.</p>
 <div class="figure align-default" id="id18">
