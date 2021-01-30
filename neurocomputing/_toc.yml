@@ -34,8 +34,8 @@
     - file: 4-neurocomputing/2-Hopfield
 #     - file: 4-neurocomputing/3-NeuralFields
     - file: 4-neurocomputing/4-Reservoir
-#     - file: 4-neurocomputing/5-Hebbian
-#     - file: 4-neurocomputing/6-Spiking
+    - file: 4-neurocomputing/5-Hebbian
+    - file: 4-neurocomputing/6-Spiking
 
 - part: Exercises
   chapters:

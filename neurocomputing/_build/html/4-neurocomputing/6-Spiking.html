@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Spiking neural networks &#8212; Neurocomputing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/6-Spiking.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Python" href="../5-exercises/ex1-Python.html" />
+    <link rel="prev" title="4. Unsupervised Hebbian learning" href="5-Hebbian.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/6-Spiking.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Spiking neural networks" />
+<meta property="og:description" content="Spiking neural networks  Slides: pdf  Spiking neurons  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/SIMDrGdit-w&#39; frameborder=&#39;0&#39; allo" />
+<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/tuc.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Neurocomputing
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/1-Introduction.html">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/2-Math.html">
+   2. Math basics (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-intro/3-Neurons.html">
+   3. Neurons
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Linear models
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/1-Optimization.html">
+   1. Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/2-LinearRegression.html">
+   2. Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/3-Regularization.html">
+   3. Regularization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/4-LinearClassification.html">
+   4. Linear classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/5-Multiclassification.html">
+   5. Multi-class classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-linear/6-LearningTheory.html">
+   6. Learning theory
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/1-NN.html">
+   1. Artificial neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/2-DNN.html">
+   2. Deep neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/3-CNN.html">
+   3. Convolutional neural networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/4-ObjectDetection.html">
+   4. Object detection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/5-SemanticSegmentation.html">
+   5. Semantic segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/6-Autoencoders.html">
+   6. Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/7-RBM.html">
+   7. Restricted Boltzmann machines (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/8-GAN.html">
+   8. Generative adversarial networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-deeplearning/9-RNN.html">
+   9. Recurrent neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Neurocomputing
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-Limits.html">
+   1. Limits of deep learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-Hopfield.html">
+   2. Hopfield networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-Reservoir.html">
+   3. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-Hebbian.html">
+   4. Unsupervised Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Spiking neural networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex1-Python.html">
+   1. Introduction to Python
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python.html">
+     1.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/1-Python-solution.html">
+     1.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
+   2. Numpy and Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy.html">
+     2.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/2-Numpy-solution.html">
+     2.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
+   3. Linear regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
+     3.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/3-LinearRegression-solution.html">
+     3.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex4-MLR.html">
+   4. Multiple Linear Regression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR.html">
+     4.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/4-MLR-solution.html">
+     4.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
+   5. Cross-validation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
+     5.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/5-Crossvalidation-solution.html">
+     5.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
+   6. Linear classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
+     6.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/6-LinearClassification-solution.html">
+     6.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
+   7. Softmax classifier
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
+     7.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier-solution.html">
+     7.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex8-MLP.html">
+   8. Multi-layer perceptron
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP.html">
+     8.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/8-MLP-solution.html">
+     8.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
+   9. MNIST classification using keras
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST.html">
+     9.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/9-MNIST-solution.html">
+     9.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex10-CNN.html">
+   10. Convolutional neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN.html">
+     10.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/10-CNN-solution.html">
+     10.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
+   11. Transfer learning
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
+     11.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/11-TransferLearning-solution.html">
+     11.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex12-VAE.html">
+   12. Variational autoencoder
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE.html">
+     12.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/12-VAE-solution.html">
+     12.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../5-exercises/ex13-RNN.html">
+   13. Recurrent neural networks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/13-RNN.html">
+     13.1. Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5-exercises/13-RNN-solution.html">
+     13.2. Solution
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   1. Bibliography
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/4-neurocomputing/6-Spiking.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spiking-neurons">
+   5.1. Spiking neurons
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spiking-neuron-models">
+     5.1.1. Spiking neuron models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#synaptic-transmission">
+     5.1.2. Synaptic transmission
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#populations-of-spiking-neurons">
+     5.1.3. Populations of spiking neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#synaptic-plasticity">
+     5.1.4. Synaptic plasticity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-convolutional-spiking-networks">
+   5.2. Deep convolutional spiking networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuromorphic-computing">
+   5.3. Neuromorphic computing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#event-based-cameras">
+     5.3.1. Event-based cameras
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intel-loihi">
+     5.3.2. Intel Loihi
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#towards-biologically-inspired-ai">
+     5.3.3. Towards biologically inspired AI
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="spiking-neural-networks">
+<h1><span class="section-number">5. </span>Spiking neural networks<a class="headerlink" href="#spiking-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>Slides: <a class="reference external" href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/4.7-Spiking.pdf">pdf</a></p>
+<div class="section" id="spiking-neurons">
+<h2><span class="section-number">5.1. </span>Spiking neurons<a class="headerlink" href="#spiking-neurons" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/SIMDrGdit-w' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="spiking-neuron-models">
+<h3><span class="section-number">5.1.1. </span>Spiking neuron models<a class="headerlink" href="#spiking-neuron-models" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../_images/spiketrain.jpg"><img alt="../_images/spiketrain.jpg" src="../_images/spiketrain.jpg" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.21 </span><span class="caption-text">Spike trains. Source: <a class="bibtex reference internal" href="../zreferences.html#rossant2011" id="id1">[Rossant et al., 2011]</a>.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>The two important dimensions of the information exchanged by neurons are:</p>
+<ol class="simple">
+<li><p>The instantaneous <strong>frequency</strong> or <strong>firing rate</strong>: number of spikes per second (Hz).</p></li>
+<li><p>The precise <strong>timing</strong> of the spikes.</p></li>
+</ol>
+<p>The shape of the spike (amplitude, duration) does not matter much.
+Spikes are binary signals (0 or 1) at precise moments of time.
+<strong>Rate-coded neurons</strong> only represent the firing rate of a neuron and ignore spike timing.
+<strong>Spiking neurons</strong> represent explicitly spike timing, but omit the details of action potentials.</p>
+<p>The <strong>leaky integrate-and-fire</strong> (LIF; Lapicque, 1907) neuron has a <strong>membrane potential</strong> <span class="math notranslate nohighlight">\(v(t)\)</span> that integrates its input current <span class="math notranslate nohighlight">\(I(t)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    C \, \frac{dv(t)}{dt} = - g_L \, (v(t) - V_L) + I(t)
+\]</div>
+<p><span class="math notranslate nohighlight">\(C\)</span> is the membrane capacitance, <span class="math notranslate nohighlight">\(g_L\)</span> the leak conductance and <span class="math notranslate nohighlight">\(V_L\)</span> the resting potential.
+In the absence of input current (<span class="math notranslate nohighlight">\(I=0\)</span>), the membrane potential is equal to the resting potential.</p>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../_images/lif-rc.png"><img alt="../_images/lif-rc.png" src="../_images/lif-rc.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.22 </span><span class="caption-text">Membrane potential of a leaky integrate-and-fire neuron. Source: <a class="reference external" href="https://neuronaldynamics.epfl.ch/online/Ch1.S3.html">https://neuronaldynamics.epfl.ch/online/Ch1.S3.html</a>.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>When the membrane potential exceeds a threshold <span class="math notranslate nohighlight">\(V_T\)</span>, the neuron emits a spike and the membrane potential is reset to the reset potential <span class="math notranslate nohighlight">\(V_r\)</span> for a fixed refractory period <span class="math notranslate nohighlight">\(t_\text{ref}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{if} \; v(t) &gt; V_T \; \text{: emit a spike and set} \, v(t) = V_r \; \text{for} \, t_\text{ref} \, \text{ms.}
+\]</div>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../_images/LIF-threshold.png"><img alt="../_images/LIF-threshold.png" src="../_images/LIF-threshold.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.23 </span><span class="caption-text">Spike emission of a leaky integrate-and-fire neuron.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>Different spiking neuron models are possible:</p>
+<ul class="simple">
+<li><p>Izhikevich quadratic IF <a class="bibtex reference internal" href="../zreferences.html#izhikevich2003" id="id2">[Izhikevich, 2003]</a>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    \frac{dv(t)}{dt} = 0.04 \, v(t)^2 + 5 \, v(t) + 140 - u(t) + I(t) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \frac{du(t)}{dt} = a \, (b \, v(t) - u(t))
+\]</div>
+<ul class="simple">
+<li><p>Adaptive exponential IF (AdEx, <a class="bibtex reference internal" href="../zreferences.html#brette2005" id="id3">[Brette &amp; Gerstner, 2005]</a>).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    C \, \frac{dv(t)}{dt} = -g_L \ (v(t) - E_L) +  g_L \, \Delta_T \, \exp(\frac{v(t) - v_T}{\Delta_T})  + I(t) - w
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    \tau_w \, \frac{dw}{dt} = a \, (v(t) - E_L) - w
+\]</div>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/LIF-Izhi-AdEx1.png"><img alt="../_images/LIF-Izhi-AdEx1.png" src="../_images/LIF-Izhi-AdEx1.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.24 </span><span class="caption-text">LIF, Izhikevich and AdEx neurons.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<p>Biological neurons do not all respond the same to an input current.</p>
+<ul class="simple">
+<li><p>Some fire regularly.</p></li>
+<li><p>Some slow down with time.</p></li>
+<li><p>Some emit bursts of spikes.</p></li>
+</ul>
+<p>Modern spiking neuron models allow to recreate these dynamics by changing a few parameters.</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/adex1.png"><img alt="../_images/adex1.png" src="../_images/adex1.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.25 </span><span class="caption-text">Variety of neural dynamics.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="synaptic-transmission">
+<h3><span class="section-number">5.1.2. </span>Synaptic transmission<a class="headerlink" href="#synaptic-transmission" title="Permalink to this headline">¶</a></h3>
+<p>Spiking neurons communicate by <strong>increasing the conductance</strong> <span class="math notranslate nohighlight">\(g_e\)</span> of the postsynaptic neuron:</p>
+<div class="math notranslate nohighlight">
+\[
+    C \, \frac{dv(t)}{dt} = - g_L \, (v(t) - V_L) - g_e(t) \, (v(t) - V_E) + I(t)
+\]</div>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../_images/LIF-synaptictransmission.png"><img alt="../_images/LIF-synaptictransmission.png" src="../_images/LIF-synaptictransmission.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.26 </span><span class="caption-text">Synaptic transmission for a single incoming spike.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>Incoming spikes increase the conductance from a constant <span class="math notranslate nohighlight">\(w\)</span> which represents the synaptic efficiency (or weight):</p>
+<div class="math notranslate nohighlight">
+\[
+    g_e(t) \leftarrow g_e(t) + w
+\]</div>
+<p>If there is no spike, the conductance decays back to zero:</p>
+<div class="math notranslate nohighlight">
+\[
+    \tau_e \, \frac{d g_e(t)}{dt} + g_e(t) = 0
+\]</div>
+<p>An incoming spike temporarily increases (or decreases if the weight <span class="math notranslate nohighlight">\(w\)</span> is negative) the membrane potential of the post-synaptic neuron.</p>
+<div class="figure align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/LIF-synaptictransmission2.png"><img alt="../_images/LIF-synaptictransmission2.png" src="../_images/LIF-synaptictransmission2.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.27 </span><span class="caption-text">Synaptic transmission for multiple incoming spikes.</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+<p>When enough spikes arrive at the post-synaptic neuron close in time:</p>
+<ul class="simple">
+<li><p>either one pre-synaptic fires very rapidly,</p></li>
+<li><p>or many different pre-synaptic neurons fire in close proximity,
+this can be enough to bring the post-synaptic membrane over the threshold, so that it it turns emits a spike.
+This is the basic principle of <strong>synaptic transmission</strong> in biological neurons.
+Neurons emit spikes, which modify the membrane potential of other neurons, which in turn emit spikes, and so on.</p></li>
+</ul>
+</div>
+<div class="section" id="populations-of-spiking-neurons">
+<h3><span class="section-number">5.1.3. </span>Populations of spiking neurons<a class="headerlink" href="#populations-of-spiking-neurons" title="Permalink to this headline">¶</a></h3>
+<p><strong>Recurrent networks of spiking neurons</strong> exhibit various dynamics.
+They can fire randomly, or tend to fire synchronously, depending on their inputs and the strength of the connections.
+<strong>Liquid State Machines</strong> are the spiking equivalent of echo-state networks.</p>
+<div class="figure align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/vibrissal-cortex-rat.jpg"><img alt="../_images/vibrissal-cortex-rat.jpg" src="../_images/vibrissal-cortex-rat.jpg" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.28 </span><span class="caption-text">Cortical column of the rat’s vibrissal cortex. Source: <a class="reference external" href="https://www.pnas.org/content/110/47/19113">https://www.pnas.org/content/110/47/19113</a>.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="synaptic-plasticity">
+<h3><span class="section-number">5.1.4. </span>Synaptic plasticity<a class="headerlink" href="#synaptic-plasticity" title="Permalink to this headline">¶</a></h3>
+<p><strong>Hebbian learning</strong> postulates that synapses strengthen based on the <strong>correlation</strong> between the activity of the pre- and post-synaptic neurons:</p>
+<blockquote>
+<div><p>When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A’s efficiency, as one of the cells firing B, is increased.</p>
+<p><strong>Donald Hebb</strong>, 1949</p>
+</div></blockquote>
+<p>Synaptic efficiencies actually evolve depending on the the <strong>causation</strong> between the neuron’s firing patterns:</p>
+<ul class="simple">
+<li><p>If the pre-synaptic neuron fires <strong>before</strong> the post-synaptic one, the weight is increased (<strong>long-term potentiation</strong>). Pre causes Post to fire.</p></li>
+<li><p>If it fires <strong>after</strong>, the weight is decreased (<strong>long-term depression</strong>). Pre does not cause Post to fire.</p></li>
+</ul>
+<div class="figure align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/stdp.jpg"><img alt="../_images/stdp.jpg" src="../_images/stdp.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.29 </span><span class="caption-text">Spike-timing dependent plasticity. Source: <a class="bibtex reference internal" href="../zreferences.html#bi2001" id="id4">[Bi &amp; Poo, 2001]</a>.</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+<p>The STDP (<strong>spike-timing dependent plasticity</strong>) plasticity rule describes how the weight of a synapse evolves when the pre-synaptic neuron fires at <span class="math notranslate nohighlight">\(t_\text{pre}\)</span> and the post-synaptic one fires at <span class="math notranslate nohighlight">\(t_\text{post}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Delta w = \begin{cases} A^+ \, \exp - \frac{t_\text{pre} - t_\text{post}}{\tau^+} \; \text{if} \; t_\text{post} &gt; t_\text{pre}\\  A^- \, \exp - \frac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\text{pre} &gt; t_\text{post}\\ \end{cases}\end{split}\]</div>
+<p>STDP can be implemented online using traces.
+More complex variants of STDP (triplet STDP) exist, but this is the main model of synaptic plasticity in spiking networks.</p>
+</div>
+</div>
+<div class="section" id="deep-convolutional-spiking-networks">
+<h2><span class="section-number">5.2. </span>Deep convolutional spiking networks<a class="headerlink" href="#deep-convolutional-spiking-networks" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/vGFoONCvRn4' frameborder='0' allowfullscreen></iframe></div>
+<p>A lot of work has lately focused on deep spiking networks, either using a modified version of backpropagation or using STDP.
+The Masquelier lab <a class="bibtex reference internal" href="../zreferences.html#kheradpisheh2018" id="id5">[Kheradpisheh et al., 2018]</a> has proposed a deep spiking convolutional network learning to extract features using STDP (<strong>unsupervised learning</strong>).
+A simple classifier (SVM) then learns to predict classes.</p>
+<div class="figure align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/masquelier-architecture.png"><img alt="../_images/masquelier-architecture.png" src="../_images/masquelier-architecture.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.30 </span><span class="caption-text">Deep convolutional spiking network of <a class="bibtex reference internal" href="../zreferences.html#kheradpisheh2018" id="id6">[Kheradpisheh et al., 2018]</a>.</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<p>The image is first transformed into a spiking population using <strong>difference-of-Gaussian</strong> (DoG) filters.</p>
+<ul class="simple">
+<li><p><strong>On-center</strong> neurons fire when a bright area at the corresponding location is surrounded by a darker area.</p></li>
+<li><p><strong>Off-center</strong> cells do the opposite.</p></li>
+</ul>
+<div class="figure align-default" id="id20">
+<a class="reference internal image-reference" href="../_images/DoG.png"><img alt="../_images/DoG.png" src="../_images/DoG.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.31 </span><span class="caption-text">Preprocessing using DoG filters.</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</div>
+<p>The convolutional and pooling layers work just as in regular CNNs (shared weights), except the neuron are <strong>integrate-and-fire</strong> (IF).
+There is additionally a <strong>temporal coding scheme</strong>, where the first neuron to emit a spike at a particular location (i.e. over all feature maps) <strong>inhibits</strong> all the others.
+This ensures selectivity of the features through <strong>sparse coding</strong>: only one feature can be detected at a given location.
+STDP allows to learn <strong>causation</strong> between the features and to extract increasingly complex features.</p>
+<div class="figure align-default" id="id21">
+<a class="reference internal image-reference" href="../_images/masquelier2.png"><img alt="../_images/masquelier2.png" src="../_images/masquelier2.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.32 </span><span class="caption-text">Spiking activity in the convolutional layers. Source: <a class="bibtex reference internal" href="../zreferences.html#kheradpisheh2018" id="id7">[Kheradpisheh et al., 2018]</a>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/u32Xnz2hDkE' frameborder='0' allowfullscreen></iframe></div>
+<p>The network is trained <strong>unsupervisedly</strong> on various datasets and obtains accuracies close to the state of the art (Caltech face/motorbike dataset, ETH-80, MNIST)</p>
+<div class="figure align-default" id="id22">
+<a class="reference internal image-reference" href="../_images/masquelier3.png"><img alt="../_images/masquelier3.png" src="../_images/masquelier3.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.33 </span><span class="caption-text">Activity in the model for different images. Source: <a class="bibtex reference internal" href="../zreferences.html#kheradpisheh2018" id="id8">[Kheradpisheh et al., 2018]</a>.</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<p>The performance on MNIST is in line with classical 3-layered CNNs, but without backpropagation!</p>
+<div class="figure align-default" id="id23">
+<a class="reference internal image-reference" href="../_images/masquelier4.png"><img alt="../_images/masquelier4.png" src="../_images/masquelier4.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.34 </span><span class="caption-text">The spiking network achieves 98.4% accuracy on MNIST fully unsupervised. Source: <a class="bibtex reference internal" href="../zreferences.html#kheradpisheh2018" id="id9">[Kheradpisheh et al., 2018]</a>.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="neuromorphic-computing">
+<h2><span class="section-number">5.3. </span>Neuromorphic computing<a class="headerlink" href="#neuromorphic-computing" title="Permalink to this headline">¶</a></h2>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/sEezxebqYjE' frameborder='0' allowfullscreen></iframe></div>
+<div class="section" id="event-based-cameras">
+<h3><span class="section-number">5.3.1. </span>Event-based cameras<a class="headerlink" href="#event-based-cameras" title="Permalink to this headline">¶</a></h3>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/kPCZESVfHoQ' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/eomALySSGVU' frameborder='0' allowfullscreen></iframe></div>
+<p>Event-based cameras are inspired from the retina (<strong>neuromorphic</strong>) and emit spikes corresponding to luminosity changes.
+Classical computers cannot cope with the high fps of event-based cameras.
+Spiking neural networks can be used to process the events (classification, control, etc). But do we have the hardware for that?</p>
+<div class="figure align-default" id="id24">
+<a class="reference internal image-reference" href="../_images/eventbased-spike.jpg"><img alt="../_images/eventbased-spike.jpg" src="../_images/eventbased-spike.jpg" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.35 </span><span class="caption-text">Event-based cameras can be used as inputs to spiking networks. Source: <a class="reference external" href="https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience">https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience</a></span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="intel-loihi">
+<h3><span class="section-number">5.3.2. </span>Intel Loihi<a class="headerlink" href="#intel-loihi" title="Permalink to this headline">¶</a></h3>
+<p>Intel Loihi is a <strong>neuromorphic chip</strong> that implements 128 neuromorphic cores, each containing 1,024 primitive spiking neural units grouped into tree-like structures in order to simplify the implementation.</p>
+<div class="figure align-default" id="id25">
+<a class="reference internal image-reference" href="../_images/lohihi-overview.png"><img alt="../_images/lohihi-overview.png" src="../_images/lohihi-overview.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.36 </span><span class="caption-text">Architecture of Intel Loihi. Source: <a class="reference external" href="https://en.wikichip.org/wiki/intel/loihi">https://en.wikichip.org/wiki/intel/loihi</a></span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id26">
+<a class="reference internal image-reference" href="../_images/loihi_core.png"><img alt="../_images/loihi_core.png" src="../_images/loihi_core.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.37 </span><span class="caption-text">Architecture of Intel Loihi. Source: <a class="reference external" href="https://en.wikichip.org/wiki/intel/loihi">https://en.wikichip.org/wiki/intel/loihi</a></span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id27">
+<a class="reference internal image-reference" href="../_images/loihi_spikes.gif"><img alt="../_images/loihi_spikes.gif" src="../_images/loihi_spikes.gif" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.38 </span><span class="caption-text">Spike propagation in Intel Loihi. Source: <a class="reference external" href="https://en.wikichip.org/wiki/intel/loihi">https://en.wikichip.org/wiki/intel/loihi</a></span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</div>
+<p>Each neuromorphic core transits spikes to the other cores.
+Fortunately, the firing rates are usually low (10 Hz), what limits the communication costs inside the chip.
+Synapses are <strong>learnable</strong> with STDP mechanisms (memristors), although offline.</p>
+<div class="figure align-default" id="id28">
+<a class="reference internal image-reference" href="../_images/loihi-algos.png"><img alt="../_images/loihi-algos.png" src="../_images/loihi-algos.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.39 </span><span class="caption-text">Intel Loihi allows to implement various ML algorithms. Source: <a class="reference external" href="https://en.wikichip.org/wiki/intel/loihi">https://en.wikichip.org/wiki/intel/loihi</a></span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</div>
+<p>Intel Loihi consumes 1/1000th of the energy needed by a modern GPU.
+Alternatives to Intel Loihi are:</p>
+<ul class="simple">
+<li><p>IBM TrueNorth</p></li>
+<li><p>Spinnaker (University of Manchester).</p></li>
+<li><p>Brainchip</p></li>
+</ul>
+<p>The number of simulated neurons and synapses is still very far away from the human brain, but getting closer!</p>
+<div class="figure align-default" id="id29">
+<a class="reference internal image-reference" href="../_images/loihi-comp.png"><img alt="../_images/loihi-comp.png" src="../_images/loihi-comp.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5.40 </span><span class="caption-text">Number of neurons and synapses in various neuromorphic architectures. Source:  <a class="reference external" href="https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/">https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/</a></span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="towards-biologically-inspired-ai">
+<h3><span class="section-number">5.3.3. </span>Towards biologically inspired AI<a class="headerlink" href="#towards-biologically-inspired-ai" title="Permalink to this headline">¶</a></h3>
+<p>Next-gen AI should overcome the limitations of deep learning by:</p>
+<ul class="simple">
+<li><p>Making use of <strong>unsupervised learning rules</strong> (Hebbian, STDP).</p></li>
+<li><p>Using neural and population <strong>dynamics</strong> (reservoir) to decompose inputs into a spatio-temporal space, instead of purely spatial.</p></li>
+<li><p>Use energy-efficient neural models (spiking neurons) able to run efficiently on <strong>neuromorphic hardware</strong>.</p></li>
+<li><p>Design more complex architectures and use <strong>embodiment</strong>.</p></li>
+</ul>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/3JQ3hYko51Y' frameborder='0' allowfullscreen></iframe></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./4-neurocomputing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="5-Hebbian.html" title="previous page"><span class="section-number">4. </span>Unsupervised Hebbian learning</a>
+    <a class='right-next' id="next-link" href="../5-exercises/ex1-Python.html" title="next page"><span class="section-number">1. </span>Introduction to Python</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

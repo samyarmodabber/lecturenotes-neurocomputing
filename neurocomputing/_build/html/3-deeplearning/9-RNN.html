@@ -118,7 +118,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../1-intro/2-Math.html">
-   2. Math basics
+   2. Math basics (optional)
   </a>
  </li>
  <li class="toctree-l1">
@@ -235,6 +235,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/4-Reservoir.html">
    3. Reservoir computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/5-Hebbian.html">
+   4. Unsupervised Hebbian learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../4-neurocomputing/6-Spiking.html">
+   5. Spiking neural networks
   </a>
  </li>
 </ul>
@@ -1068,8 +1078,8 @@ The gates also have a bias, which can be fixed (but hard to find). LSTM layers c
 <p class="caption"><span class="caption-number">Fig. 9.15 </span><span class="caption-text">Peephole connections. Source: <a class="reference external" href="http://colah.github.io/posts/2015-08-Understanding-LSTMs">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</span><a class="headerlink" href="#id35" title="Permalink to this image">¶</a></p>
 </div>
 <p>A popular variant of LSTM adds <strong>peephole connections</strong> <a class="bibtex reference internal" href="../zreferences.html#gers2000" id="id5">[Gers &amp; Schmidhuber, 2000]</a>, where the three gates have additionally access to the state <span class="math notranslate nohighlight">\(\mathbf{C}_{t-1}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-787d3d33-4284-407d-b950-23a246630392">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-787d3d33-4284-407d-b950-23a246630392" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ba0b4e13-e655-41fe-b4dc-520be175e692">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-ba0b4e13-e655-41fe-b4dc-520be175e692" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \mathbf{f}_t &amp;= \sigma(W_f \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \\
     &amp;\\
     \mathbf{i}_t &amp;= \sigma(W_i \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i) \\
@@ -1086,8 +1096,8 @@ The gates also have a bias, which can be fixed (but hard to find). LSTM layers c
 </div>
 <p>Another variant is called the <strong>Gated Recurrent Unit</strong> (GRU) <a class="bibtex reference internal" href="../zreferences.html#chung2014" id="id6">[Chung et al., 2014]</a>.
 It uses directly the output <span class="math notranslate nohighlight">\(\mathbf{h}_t\)</span> as a state, and the forget and input gates are merged into a single gate <span class="math notranslate nohighlight">\(\mathbf{r}_t\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-179ea764-70e2-45f1-baa4-b2642a7f5666">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-179ea764-70e2-45f1-baa4-b2642a7f5666" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-46bce3f7-7579-46be-ab99-3e11f95a104a">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-46bce3f7-7579-46be-ab99-3e11f95a104a" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \mathbf{z}_t &amp;= \sigma(W_z \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\
     &amp;\\
     \mathbf{r}_t &amp;= \sigma(W_r \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\

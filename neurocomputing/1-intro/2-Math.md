@@ -1,4 +1,4 @@
-# Math basics
+# Math basics (optional)
 
 Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.2-Basics.pdf)
 
