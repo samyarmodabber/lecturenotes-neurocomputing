@@ -59,7 +59,7 @@ $$
 r_j = \sum_i w_{ij} \, r_i = \mathbf{r}^T \times \mathbf{w}_j \\
 $$
 
-then the learning rule accumulates the auto-correlation matrix $\mathbf{Q}$ of the input vector $\mathbf{r}$:
+then the learning rule accumulates the auto-correlation matrix $Q$ of the input vector $\mathbf{r}$:
 
 $$
 \Delta \mathbf{w}_j = \eta \, \mathbf{r} \, r_j = \eta \, \mathbf{r}  \times \mathbf{r}^T \times \mathbf{w}_j = \eta \, Q \times \mathbf{w}_j
@@ -93,7 +93,7 @@ $$\begin{aligned}
 \Delta w_{ij} &= \eta \, (r_i-\theta_i) \, (r_j-\theta_j)\\
 \end{aligned}$$
 
-where $\theta_i$ and $\theta_j$ are estimates of the expectation of the pre- and post-synaptic activities, for example though a moving average:
+where $\theta_i$ and $\theta_j$ are estimates of the expectation of the pre- and post-synaptic activities, for example through a moving average:
 
 $$\begin{aligned}
   \theta_i & = \alpha \, \theta_i + (1 - \alpha) \, r_i \\
@@ -116,29 +116,33 @@ In the case of anti-correlated neurons, the weights could also become negative f
 
 There are several ways to bound the weights:
 
-1. Hard bounds
+* Hard bounds
+
 $$
 w_{min}\le w_{ij} \le w_{max}
 $$
-2. Soft bounds
+
+* Soft bounds
+
 $$
 \Delta w_{ij} = \eta \, r_i \, r_j \, (w_{ij} - w_{min}) \, (w_{max}-w_{ij})
 $$
-3. Normalized weight vector length {cite}`Oja1982a`:
+
+* Normalized weight vector length {cite}`Oja1982a`:
+
 $$
 \Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
 $$
-4. Rate-based threshold adaption {cite}`Bienenstock1982`.
+
+* Rate-based threshold adaption {cite}`Bienenstock1982`.
 
 ### Oja learning rule
 
-Normalized weight vector length {cite}`Oja1982a`:
+Erkki Oja {cite}`Oja1982a` found a formulation which normalizes the length of a weight vector by a **local** operation, fulfilling the first criterium for Hebbian learning.
 
 $$
 \Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
 $$
-
-Erkki Oja found a formulation which normalizes the length of a weight vector by a **local** operation, fulfilling the first criterium for Hebbian learning.
 
 $\alpha \, r_j^2 \, w_{ij}$ is a **regularization term**: when the weight $w_{ij}$ or the postsynaptic activity $r_j$ are too high, the term cancels the "Hebbian" part $r_i \, r_j$ and decreases the weight.
 
@@ -152,7 +156,7 @@ To come to the solution the relation between input and output $r_j = \mathbf{r} 
 
 ### Bienenstock-Cooper-Monroe (BCM) learning rule
 
-Rate-based threshold adaption  {cite}`Bienenstock1982`:
+In the Bienenstock-Cooper-Monroe (BCM) learning rule {cite}`Bienenstock1982`, the threshold $\theta$ averages the square of the post-synaptic activity, i.e. its second moment ($\approx$ variance).
 
 
 $$\begin{aligned}
@@ -161,7 +165,6 @@ $$\begin{aligned}
 \theta &= \mathbb{E} [r_j^2] \\
 \end{aligned}$$
 
-In the BCM learning rule, the threshold $\theta$ averages the square of the post-synaptic activity, i.e. its second moment ($\approx$ variance).
 When the short-term trace $\theta$ over the past activities of $r_j$ increases, the fraction of events leading to synaptic depression increases.
 
 ```{figure} ../img/300px-BCM_Main_figure.png
@@ -363,7 +366,7 @@ $$
     \Delta a_j = (a_{target} -r_j^2)
 $$
 
-Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann & F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111)
+Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann & F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111) <https://www.techfak.uni-bielefeld.de/~fschleif/mlr/mlr_03_2015.pdf>
 
 ### Supervised Hebbian learning
 
@@ -375,7 +378,7 @@ If such an information influences the activity of a neuron then it also influenc
 ---
 width: 100%
 ---
-Source: Schmidt, M., Diesmann, M., & Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <https://doi.org/10.1007/s00429-017-1554-4>
+Recurrent connectivity in the visual cortex. Source: Schmidt, M., Diesmann, M. and Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <https://doi.org/10.1007/s00429-017-1554-4>
 ```
 
 In supervised Hebbian learning the postsynaptic activity is fully controlled. With that the subset of inputs which should evoke activity can be selected.
