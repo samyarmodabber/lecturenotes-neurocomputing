@@ -43,7 +43,7 @@ $$
 
 ## Implementations of Hebbian learning rules
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/bQCFqxV_iPs' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/Uvuav9l-YOM' frameborder='0' allowfullscreen></iframe></div>
 
 ### Simple Hebbian learning rule
 
