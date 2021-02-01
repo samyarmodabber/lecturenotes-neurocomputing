@@ -726,7 +726,7 @@ $<span class="math notranslate nohighlight">\(
 \[\begin{split}
 r_j = \sum_i w_{ij} \, r_i = \mathbf{r}^T \times \mathbf{w}_j \\
 \end{split}\]</div>
-<p>then the learning rule accumulates the auto-correlation matrix <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> of the input vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>:</p>
+<p>then the learning rule accumulates the auto-correlation matrix <span class="math notranslate nohighlight">\(Q\)</span> of the input vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \Delta \mathbf{w}_j = \eta \, \mathbf{r} \, r_j = \eta \, \mathbf{r}  \times \mathbf{r}^T \times \mathbf{w}_j = \eta \, Q \times \mathbf{w}_j
@@ -755,7 +755,7 @@ It is useful to learn meaningful weights only between statistically dependent ne
 \[\begin{split}\begin{aligned}
 \Delta w_{ij} &amp;= \eta \, (r_i-\theta_i) \, (r_j-\theta_j)\\
 \end{aligned}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta_i\)</span> and <span class="math notranslate nohighlight">\(\theta_j\)</span> are estimates of the expectation of the pre- and post-synaptic activities, for example though a moving average:</p>
+<p>where <span class="math notranslate nohighlight">\(\theta_i\)</span> and <span class="math notranslate nohighlight">\(\theta_j\)</span> are estimates of the expectation of the pre- and post-synaptic activities, for example through a moving average:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
   \theta_i &amp; = \alpha \, \theta_i + (1 - \alpha) \, r_i \\
@@ -774,30 +774,38 @@ Some variants of covariance-based Hebbian only use a threshold on one of the ter
 Since the correlation of input and output increases through learning the weight would grow without limits.
 In the case of anti-correlated neurons, the weights could also become negative for covariance-based learning.</p>
 <p>There are several ways to bound the weights:</p>
-<ol class="simple">
-<li><p>Hard bounds
-$<span class="math notranslate nohighlight">\(
+<ul class="simple">
+<li><p>Hard bounds</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
 w_{min}\le w_{ij} \le w_{max}
-\)</span>$</p></li>
-<li><p>Soft bounds
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<ul class="simple">
+<li><p>Soft bounds</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
 \Delta w_{ij} = \eta \, r_i \, r_j \, (w_{ij} - w_{min}) \, (w_{max}-w_{ij})
-\)</span>$</p></li>
-<li><p>Normalized weight vector length <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id2">[Oja, 1982]</a>:
-$<span class="math notranslate nohighlight">\(
-\Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
-\)</span>$</p></li>
-<li><p>Rate-based threshold adaption <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id3">[Bienenstock et al., 1982]</a>.</p></li>
-</ol>
-</div>
-<div class="section" id="oja-learning-rule">
-<h3><span class="section-number">4.2.3. </span>Oja learning rule<a class="headerlink" href="#oja-learning-rule" title="Permalink to this headline">¶</a></h3>
-<p>Normalized weight vector length <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id4">[Oja, 1982]</a>:</p>
+\]</div>
+<ul class="simple">
+<li><p>Normalized weight vector length <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id2">[Oja, 1982]</a>:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 \Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
 \]</div>
-<p>Erkki Oja found a formulation which normalizes the length of a weight vector by a <strong>local</strong> operation, fulfilling the first criterium for Hebbian learning.</p>
+<ul class="simple">
+<li><p>Rate-based threshold adaption <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id3">[Bienenstock et al., 1982]</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="oja-learning-rule">
+<h3><span class="section-number">4.2.3. </span>Oja learning rule<a class="headerlink" href="#oja-learning-rule" title="Permalink to this headline">¶</a></h3>
+<p>Erkki Oja <a class="bibtex reference internal" href="../zreferences.html#oja1982a" id="id4">[Oja, 1982]</a> found a formulation which normalizes the length of a weight vector by a <strong>local</strong> operation, fulfilling the first criterium for Hebbian learning.</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta w_{ij} = \eta \, (r_i \, r_j - \alpha \, r_j^2 \, w_{ij})
+\]</div>
 <p><span class="math notranslate nohighlight">\(\alpha \, r_j^2 \, w_{ij}\)</span> is a <strong>regularization term</strong>: when the weight <span class="math notranslate nohighlight">\(w_{ij}\)</span> or the postsynaptic activity <span class="math notranslate nohighlight">\(r_j\)</span> are too high, the term cancels the “Hebbian” part <span class="math notranslate nohighlight">\(r_i \, r_j\)</span> and decreases the weight.</p>
 <p>Oja has shown that with this equation the norm of the weight vector converges to a constant value determined by the parameter <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -808,15 +816,14 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="section" id="bienenstock-cooper-monroe-bcm-learning-rule">
 <h3><span class="section-number">4.2.4. </span>Bienenstock-Cooper-Monroe (BCM) learning rule<a class="headerlink" href="#bienenstock-cooper-monroe-bcm-learning-rule" title="Permalink to this headline">¶</a></h3>
-<p>Rate-based threshold adaption  <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id5">[Bienenstock et al., 1982]</a>:</p>
+<p>In the Bienenstock-Cooper-Monroe (BCM) learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id5">[Bienenstock et al., 1982]</a>, the threshold <span class="math notranslate nohighlight">\(\theta\)</span> averages the square of the post-synaptic activity, i.e. its second moment (<span class="math notranslate nohighlight">\(\approx\)</span> variance).</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \Delta w_{ij} &amp;= \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij})\\
 &amp;\\
 \theta &amp;= \mathbb{E} [r_j^2] \\
 \end{aligned}\end{split}\]</div>
-<p>In the BCM learning rule, the threshold <span class="math notranslate nohighlight">\(\theta\)</span> averages the square of the post-synaptic activity, i.e. its second moment (<span class="math notranslate nohighlight">\(\approx\)</span> variance).
-When the short-term trace <span class="math notranslate nohighlight">\(\theta\)</span> over the past activities of <span class="math notranslate nohighlight">\(r_j\)</span> increases, the fraction of events leading to synaptic depression increases.</p>
+<p>When the short-term trace <span class="math notranslate nohighlight">\(\theta\)</span> over the past activities of <span class="math notranslate nohighlight">\(r_j\)</span> increases, the fraction of events leading to synaptic depression increases.</p>
 <div class="figure align-default" id="id13">
 <a class="reference internal image-reference" href="../_images/300px-BCM_Main_figure.png"><img alt="../_images/300px-BCM_Main_figure.png" src="../_images/300px-BCM_Main_figure.png" style="width: 50%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 4.31 </span><span class="caption-text">BCM learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id6">[Bienenstock et al., 1982]</a>. Source: <a class="reference external" href="http://www.scholarpedia.org/article/BCM_theory">http://www.scholarpedia.org/article/BCM_theory</a>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
@@ -992,7 +999,7 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 \[
     \Delta a_j = (a_{target} -r_j^2)
 \]</div>
-<p>Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann &amp; F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111)</p>
+<p>Source: Teichmann, M. and Hamker, F. H. (2015). Intrinsic Plasticity: A Simple Mechanism to Stabilize Hebbian Learning in Multilayer Neural Networks. In T. Villmann &amp; F.-M. Schleif (Eds.), Machine Learning Reports 03/2015 (pp. 103–111) <a class="reference external" href="https://www.techfak.uni-bielefeld.de/~fschleif/mlr/mlr_03_2015.pdf">https://www.techfak.uni-bielefeld.de/~fschleif/mlr/mlr_03_2015.pdf</a></p>
 </div>
 <div class="section" id="supervised-hebbian-learning">
 <h3><span class="section-number">4.4.3. </span>Supervised Hebbian learning<a class="headerlink" href="#supervised-hebbian-learning" title="Permalink to this headline">¶</a></h3>
@@ -1001,7 +1008,7 @@ However the brain also is largely recurrent, information flows in all directions
 If such an information influences the activity of a neuron then it also influences the learning on the other synapses of this neuron.</p>
 <div class="figure align-default" id="id17">
 <a class="reference internal image-reference" href="../_images/Schmidt_Albada_2018-VC.png"><img alt="../_images/Schmidt_Albada_2018-VC.png" src="../_images/Schmidt_Albada_2018-VC.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.35 </span><span class="caption-text">Source: Schmidt, M., Diesmann, M., &amp; Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <a class="reference external" href="https://doi.org/10.1007/s00429-017-1554-4">https://doi.org/10.1007/s00429-017-1554-4</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.35 </span><span class="caption-text">Recurrent connectivity in the visual cortex. Source: Schmidt, M., Diesmann, M. and Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <a class="reference external" href="https://doi.org/10.1007/s00429-017-1554-4">https://doi.org/10.1007/s00429-017-1554-4</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>In supervised Hebbian learning the postsynaptic activity is fully controlled. With that the subset of inputs which should evoke activity can be selected.</p>
 <div class="math notranslate nohighlight">
