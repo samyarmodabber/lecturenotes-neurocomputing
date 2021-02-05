@@ -695,6 +695,11 @@
 \[
 \Delta w_{ij} = \eta \, r_i \, r_j
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(r_i\)</span> is the pre-synaptic activity of neuron <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(r_j\)</span> the post-synaptic activity of neuron <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(w_{ij}\)</span> the weight from neuron <span class="math notranslate nohighlight">\(i\)</span> to <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../_images/hebb-single.svg"><img alt="../_images/hebb-single.svg" src="../_images/hebb-single.svg" width="30%" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.31 </span><span class="caption-text">Two connected neurons.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
 <p>Hebbian learning requires no other information than the activities, such as labels or error signals: it is an <strong>unsupervised learning</strong> method.
 Hebbian learning is not a concrete learning rule, it is a postulate on the fundamental principle of biological learning.
 Because of its unsupervised nature, it will rather learn frequent properties of the input statistics than task-specific properties. It is also called a <strong>correlation-based</strong> learning rule.</p>
@@ -719,7 +724,7 @@ $<span class="math notranslate nohighlight">\(
 <p>In the most basic formulation, learning depends only on the presynaptic <span class="math notranslate nohighlight">\(r_i\)</span> and postsynaptic <span class="math notranslate nohighlight">\(r_j\)</span> firing rates and a learning rate <span class="math notranslate nohighlight">\(\eta\)</span> (correlation-based learning principle):</p>
 <div class="math notranslate nohighlight">
 \[
- \Delta w_{ij} = \eta \cdot r_i r_j
+ \Delta w_{ij} = \eta \, r_i \, r_j
 \]</div>
 <p>If the postsynaptic activity is computed over multiple input synapses:</p>
 <div class="math notranslate nohighlight">
@@ -766,9 +771,9 @@ It is useful to learn meaningful weights only between statistically dependent ne
 Some variants of covariance-based Hebbian only use a threshold on one of the terms:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
-\Delta w_{ij} &amp;= \eta \, r_i(r_j-\theta) = \eta \, (r_i \, r_j -  \theta \, r_i)\\
+\Delta w_{ij} &amp;= \eta \, r_i \, (r_j-\theta) = \eta \, (r_i \, r_j -  \theta \, r_i)\\
 &amp;\\
-\Delta w_{ij} &amp;= \eta (r_i-\theta)\, r_j = \eta (r_i \, r_j- \theta \, r_j)
+\Delta w_{ij} &amp;= \eta \, (r_i-\theta) \, r_j = \eta \, (r_i \, r_j- \theta \, r_j)
 \end{aligned}\end{split}\]</div>
 <p>The previous implementations lack any bound for the weight increase.
 Since the correlation of input and output increases through learning the weight would grow without limits.
@@ -816,17 +821,17 @@ w_{min}\le w_{ij} \le w_{max}
 </div>
 <div class="section" id="bienenstock-cooper-monroe-bcm-learning-rule">
 <h3><span class="section-number">4.2.4. </span>Bienenstock-Cooper-Monroe (BCM) learning rule<a class="headerlink" href="#bienenstock-cooper-monroe-bcm-learning-rule" title="Permalink to this headline">¶</a></h3>
-<p>In the Bienenstock-Cooper-Monroe (BCM) learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id5">[Bienenstock et al., 1982]</a>, the threshold <span class="math notranslate nohighlight">\(\theta\)</span> averages the square of the post-synaptic activity, i.e. its second moment (<span class="math notranslate nohighlight">\(\approx\)</span> variance).</p>
+<p>In the Bienenstock-Cooper-Monroe (BCM) learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id5">[Bienenstock et al., 1982]</a> <a class="bibtex reference internal" href="../zreferences.html#intrator1992" id="id6">[Intrator &amp; Cooper, 1992]</a>, the threshold <span class="math notranslate nohighlight">\(\theta\)</span> averages the square of the post-synaptic activity, i.e. its second moment (<span class="math notranslate nohighlight">\(\approx\)</span> variance).</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
-\Delta w_{ij} &amp;= \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij})\\
+\Delta w_{ij} &amp;= \eta \, r_i \, (r_j - \theta) \, r_j \,  f'(net)\\
 &amp;\\
 \theta &amp;= \mathbb{E} [r_j^2] \\
 \end{aligned}\end{split}\]</div>
 <p>When the short-term trace <span class="math notranslate nohighlight">\(\theta\)</span> over the past activities of <span class="math notranslate nohighlight">\(r_j\)</span> increases, the fraction of events leading to synaptic depression increases.</p>
-<div class="figure align-default" id="id13">
+<div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/300px-BCM_Main_figure.png"><img alt="../_images/300px-BCM_Main_figure.png" src="../_images/300px-BCM_Main_figure.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.31 </span><span class="caption-text">BCM learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id6">[Bienenstock et al., 1982]</a>. Source: <a class="reference external" href="http://www.scholarpedia.org/article/BCM_theory">http://www.scholarpedia.org/article/BCM_theory</a>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.32 </span><span class="caption-text">BCM learning rule <a class="bibtex reference internal" href="../zreferences.html#bienenstock1982" id="id7">[Bienenstock et al., 1982]</a>. Source: <a class="reference external" href="http://www.scholarpedia.org/article/BCM_theory">http://www.scholarpedia.org/article/BCM_theory</a>.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="spike-time-dependent-plasticity-stdp">
@@ -837,9 +842,9 @@ Spike-based neural networks are also a technical way to transmit information wit
 An important aspect of STDP is the temporal asymmetric learning window.
 A spike that arrives slightly before the postsynaptic spike is likely to cause this one.
 Thus, STDP learning rules can incorporate temporal aspects implying causality, an important implicit aspect of  the cooperativity property of Hebbian learning.</p>
-<div class="figure align-default" id="id14">
+<div class="figure align-default" id="id16">
 <a class="reference internal image-reference" href="../_images/Shulz_Feldman_2013-Forms_STDP.jpg"><img alt="../_images/Shulz_Feldman_2013-Forms_STDP.jpg" src="../_images/Shulz_Feldman_2013-Forms_STDP.jpg" style="width: 90%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.32 </span><span class="caption-text">STDP learning rule. Source: <a class="reference external" href="https://doi.org/10.1016/C2011-0-07732-3">https://doi.org/10.1016/C2011-0-07732-3</a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.33 </span><span class="caption-text">STDP learning rule. Source: <a class="reference external" href="https://doi.org/10.1016/C2011-0-07732-3">https://doi.org/10.1016/C2011-0-07732-3</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -853,11 +858,11 @@ Erkki Oja (1982) has shown that his learning rule converges for linear neurons t
 A principle component is an eigenvector of the covariance matrix of the input data. The first principle component is the eigenvector with the largest variance, having the highest eigenvalue.
 A network of these neurons appears not very useful, as all neurons will just learn the first principle component. An additional element is required providing differentiation between the neurons.</p>
 <div class="figure align-default">
-<a class="reference internal image-reference" href="../_images/perceptron_FF.svg"><img alt="../_images/perceptron_FF.svg" src="../_images/perceptron_FF.svg" width="40%" /></a>
+<a class="reference internal image-reference" href="../_images/perceptron_FF.svg"><img alt="../_images/perceptron_FF.svg" src="../_images/perceptron_FF.svg" width="30%" /></a>
 </div>
-<div class="figure align-default" id="id15">
+<div class="figure align-default" id="id17">
 <a class="reference internal image-reference" href="../_images/Dayan_Abbot_2005-Principle_Component.png"><img alt="../_images/Dayan_Abbot_2005-Principle_Component.png" src="../_images/Dayan_Abbot_2005-Principle_Component.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.33 </span><span class="caption-text">Principle components. Source: <a class="bibtex reference internal" href="../zreferences.html#dayan2001" id="id7">[Dayan &amp; Abbott, 2001]</a>.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.34 </span><span class="caption-text">Principle components. Source: <a class="bibtex reference internal" href="../zreferences.html#dayan2001" id="id8">[Dayan &amp; Abbott, 2001]</a>.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are several methods existing differentiating the neuron responses, e.g.:</p>
 <ol class="simple">
@@ -877,7 +882,7 @@ A network of these neurons appears not very useful, as all neurons will just lea
 </li>
 </ol>
 <div class="figure align-default">
-<a class="reference internal image-reference" href="../_images/perceptron_R.svg"><img alt="../_images/perceptron_R.svg" src="../_images/perceptron_R.svg" width="40%" /></a>
+<a class="reference internal image-reference" href="../_images/perceptron_R.svg"><img alt="../_images/perceptron_R.svg" src="../_images/perceptron_R.svg" width="30%" /></a>
 </div>
 </div>
 <div class="section" id="inhibition">
@@ -889,9 +894,9 @@ Scaling the neuronal gain and non-linearly separating the activity values of the
   r_j(\sigma,E,I)=\frac{E}{\sigma+E+I}
 \]</div>
 <p>with excitation E, inhibition I, and <span class="math notranslate nohighlight">\(\sigma\)</span> scaling the strength of the normalization.</p>
-<div class="figure align-default" id="id16">
+<div class="figure align-default" id="id18">
 <a class="reference internal image-reference" href="../_images/Graham2011_Normalization.png"><img alt="../_images/Graham2011_Normalization.png" src="../_images/Graham2011_Normalization.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.34 </span><span class="caption-text">Models of normalization as feedback circuit for V1 cells. Source: Graham, N. V. (2011). Beyond multiple pattern analyzers modeled as linear filters (as classical V1 simple cells): useful additions of the last 25 years. Vision Research, 51(13), 1397–1430. <a class="reference external" href="https://doi.org/10.1016/j.visres.2011.02.007">https://doi.org/10.1016/j.visres.2011.02.007</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.35 </span><span class="caption-text">Models of normalization as feedback circuit for V1 cells. Source: Graham, N. V. (2011). Beyond multiple pattern analyzers modeled as linear filters (as classical V1 simple cells): useful additions of the last 25 years. Vision Research, 51(13), 1397–1430. <a class="reference external" href="https://doi.org/10.1016/j.visres.2011.02.007">https://doi.org/10.1016/j.visres.2011.02.007</a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
 <p><strong>Subtractive inhibition</strong> means that the inhibitory currents are subtracted from the excitatory one.
 In a recurrent circuit highly active neurons reduce the activity of their neighboring neurons and limit their ability to inhibit other neurons. This is called <strong>shunting inhibition</strong>.</p>
@@ -902,18 +907,18 @@ In a recurrent circuit highly active neurons reduce the activity of their neighb
 <p>Depending how the weights are arranged this can implement a continuum from winner-take-all competition (equal and strong weights) to very specific competition between particular neurons (e.g. penalizing similar neurons).</p>
 <p>A method to learn weights providing a penalty for similarly active neurons is <strong>anti-Hebbian learning</strong>.
 Hebbian learning can easily turned into anti-Hebbian learning by switching the sign of the weight change or switching the effect of the weight from excitatory to inhibitory.
-Covariance-based weight change <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id8">[Vogels et al., 2011]</a>:</p>
+Covariance-based weight change <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id9">[Vogels et al., 2011]</a>:</p>
 <div class="math notranslate nohighlight">
 \[
-\Delta c_{ij} = r_i r_j - r_i \rho_0
+\Delta c_{ij} = r_i \, r_j - r_i \, \rho_0
 \]</div>
 <p>Weight relative to covariance:</p>
 <div class="math notranslate nohighlight">
 \[
-  \Delta c_{ij} = r_i r_j - r_i\rho_0 (1 + c_{ij})
+  \Delta c_{ij} = r_i \, r_j - r_i \, \rho_0 \, (1 + c_{ij})
 \]</div>
 <p>The equilibrium point of the equation is reached, when the weight indicates by which factor the product of the expectation values <span class="math notranslate nohighlight">\(r_i \rho_0\)</span> has to be multiplied to be equal to the expectation value of the product of the activities <span class="math notranslate nohighlight">\(r_i r_j\)</span>.</p>
-<p>From a theoretical viewpoint anti-Hebbian learned competition aims to minimize linear dependencies between the activities. When having independent neural activities than the information encoded by a population of neurons is maximal <a class="bibtex reference internal" href="../zreferences.html#simoncelli2001" id="id9">[Simoncelli &amp; Olshausen, 2001]</a>.</p>
+<p>From a theoretical viewpoint anti-Hebbian learned competition aims to minimize linear dependencies between the activities. When having independent neural activities than the information encoded by a population of neurons is maximal <a class="bibtex reference internal" href="../zreferences.html#simoncelli2001" id="id10">[Simoncelli &amp; Olshausen, 2001]</a>.</p>
 <p>What about the boundedness issue?
 Oja normalization is based on the fact that the postsynaptic activity is caused by the presynaptic activity and the weight strength. This is only true for excitatory weights.
 Inhibitory weights reduce the activity. This causes a softbound effect:</p>
@@ -935,7 +940,7 @@ There are two issues:</p>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-  E(w_{ij}) = E(r_i r_j)-E(r_i)E(r_j)
+  E(w_{ij}) = E(r_i \, r_j) - E(r_i) \, E(r_j)
 \]</div>
 <p>If the activity of a particular input neuron <span class="math notranslate nohighlight">\(r_i\)</span> is by average higher than the activity of other input neurons, then its weight value gets higher than the weight of a similarly correlated but less active neuron.
 This effect is strengthen over multiple layers, causing a dominance of a few patterns. Thus, the activities have to be balanced to avoid an imbalanced input to the next layer.</p>
@@ -949,17 +954,21 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 </ul>
 <div class="section" id="homeostasis">
 <h3><span class="section-number">4.4.1. </span>Homeostasis<a class="headerlink" href="#homeostasis" title="Permalink to this headline">¶</a></h3>
-<p>In Hebbian learning, the amount of weight decrease and increase can be regulated to achieve a certain activity range. <a class="bibtex reference internal" href="../zreferences.html#clopath2010" id="id10">[Clopath et al., 2010]</a> regulate the strength of the weight decrease <span class="math notranslate nohighlight">\(A_{LTD}\)</span> by relating the average membrane potential <span class="math notranslate nohighlight">\(\bar{\bar u}\)</span> to a reference value <span class="math notranslate nohighlight">\(u_{ref}^2\)</span>, defining a target activity with that:</p>
+<p>In Hebbian learning, the amount of weight decrease and increase can be regulated to achieve a certain activity range. <a class="bibtex reference internal" href="../zreferences.html#clopath2010" id="id11">[Clopath et al., 2010]</a> regulate the strength of the weight decrease <span class="math notranslate nohighlight">\(A_{LTD}\)</span> by relating the average membrane potential <span class="math notranslate nohighlight">\(\bar{\bar u}\)</span> to a reference value <span class="math notranslate nohighlight">\(u_{ref}^2\)</span>, defining a target activity with that:</p>
 <div class="math notranslate nohighlight">
 \[
-    A_{LTD}(\bar{\bar u})=A_{LTD} \frac{\bar{\bar u}^2}{u_{ref}^2}
+    A_{LTD}(\bar{\bar u})=A_{LTD} \, \frac{\bar{\bar u}^2}{u_{ref}^2}
 \]</div>
 <p>BCM learning adapts the threshold based on the average activity of the neuron, facilitating or impeding weight increases and decreases:</p>
 <div class="math notranslate nohighlight">
 \[
-\Delta w_{ij} = \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij}) \; \; \theta = \mathbb{E} [r_j^2]
+\Delta w_{ij} = \eta \, r_i \, (r_j - \theta) \, r_j \, f'(net)
 \]</div>
-<p>In anti-Hebbian learning, the amount of inhibition a neuron receives is up or downregulated to achieve a certain average activity. <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id11">[Vogels et al., 2011]</a> define a target activity of the postsynaptic neuron <span class="math notranslate nohighlight">\(\rho_0\)</span>, the amount of inhibition is up or downregulated to reach this activity:</p>
+<div class="math notranslate nohighlight">
+\[
+  \theta = \mathbb{E} [r_j^2]
+\]</div>
+<p>In anti-Hebbian learning, the amount of inhibition a neuron receives is up or downregulated to achieve a certain average activity. <a class="bibtex reference internal" href="../zreferences.html#vogels2011" id="id12">[Vogels et al., 2011]</a> define a target activity of the postsynaptic neuron <span class="math notranslate nohighlight">\(\rho_0\)</span>, the amount of inhibition is up or downregulated to reach this activity:</p>
 <div class="math notranslate nohighlight">
 \[
     \Delta w_{ij} = r_i \, (r_j - \rho_0)
@@ -968,7 +977,7 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 <div class="section" id="intrinsic-plasticity">
 <h3><span class="section-number">4.4.2. </span>Intrinsic plasticity<a class="headerlink" href="#intrinsic-plasticity" title="Permalink to this headline">¶</a></h3>
 <p>First option: forcing a certain activity distribution, through adapting the activation function.</p>
-<p><a class="bibtex reference internal" href="../zreferences.html#joshi2009" id="id12">[Joshi &amp; Triesch, 2009]</a> adapt the parameters of the transfer function <span class="math notranslate nohighlight">\(g(u)\)</span>, by minimizing the Kullback-Leibler divergence between the neuron’s activity and an exponential distribution. The update rules for the parameters <span class="math notranslate nohighlight">\(r_0, u_0, u_\alpha\)</span> have been derived via stochastic gradient descent:</p>
+<p><a class="bibtex reference internal" href="../zreferences.html#joshi2009" id="id13">[Joshi &amp; Triesch, 2009]</a> adapt the parameters of the transfer function <span class="math notranslate nohighlight">\(g(u)\)</span>, by minimizing the Kullback-Leibler divergence between the neuron’s activity and an exponential distribution. The update rules for the parameters <span class="math notranslate nohighlight">\(r_0, u_0, u_\alpha\)</span> have been derived via stochastic gradient descent:</p>
 <div class="math notranslate nohighlight">
 \[
     g(u) = r_0 \, \log \left( 1 + e^\frac{u-u_0}{u_\alpha} \right)
@@ -989,7 +998,7 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 <p>Teichmann and Hamker (2015) adapt the parameters of a rectified linear transfer function, by regulating the threshold <span class="math notranslate nohighlight">\(\theta_j\)</span> and slope <span class="math notranslate nohighlight">\(a_j\)</span>, to achieve a similar mean and variance of all neurons within a layer:</p>
 <div class="math notranslate nohighlight">
 \[
-    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j
+    \Delta r_j = a_j \left( \sum_i w_{ij} \, r_i - \sum_{k, k \ne j} c_{kj} \, r_k - \theta_j \right) -r_j
 \]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -1006,31 +1015,31 @@ This effect is strengthen over multiple layers, causing a dominance of a few pat
 <p>Large parts of the plasticity in the brain is thought to be Hebbian, this means it uses local information and learns unsupervised.
 However the brain also is largely recurrent, information flows in all directions and this information could guide neighboring or preceding processing stages.
 If such an information influences the activity of a neuron then it also influences the learning on the other synapses of this neuron.</p>
-<div class="figure align-default" id="id17">
+<div class="figure align-default" id="id19">
 <a class="reference internal image-reference" href="../_images/Schmidt_Albada_2018-VC.png"><img alt="../_images/Schmidt_Albada_2018-VC.png" src="../_images/Schmidt_Albada_2018-VC.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.35 </span><span class="caption-text">Recurrent connectivity in the visual cortex. Source: Schmidt, M., Diesmann, M. and Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <a class="reference external" href="https://doi.org/10.1007/s00429-017-1554-4">https://doi.org/10.1007/s00429-017-1554-4</a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.36 </span><span class="caption-text">Recurrent connectivity in the visual cortex. Source: Schmidt, M., Diesmann, M. and Albada, S. J. Van. (2018). Multi-scale account of the network structure of macaque visual cortex. Brain Structure and Function, 223(3), 1409–1435. <a class="reference external" href="https://doi.org/10.1007/s00429-017-1554-4">https://doi.org/10.1007/s00429-017-1554-4</a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 <p>In supervised Hebbian learning the postsynaptic activity is fully controlled. With that the subset of inputs which should evoke activity can be selected.</p>
 <div class="math notranslate nohighlight">
 \[
-  \Delta w_{ij} = r_i t - \alpha w_{ij}
+  \Delta w_{ij} = r_i \, t - \alpha \, w_{ij}
 \]</div>
 <p>The supervised Hebbian learning principle can be extended to a form of top-down learning.
 A top-down signal, conveying additional modulatory information, modulates or contributes partially to the neuronal activity.</p>
 <p>We can illustrate the effect by splitting the plasticity term into bottom-up and the top-down parts.</p>
 <div class="math notranslate nohighlight">
 \[
-  r'_j= \gamma r_j + (1-\gamma) t
+  r'_j= \gamma \, r_j + (1-\gamma) \, t
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-  \Delta w_{ij} = r_i r'_j- \alpha {r'_j}^2 w_{ij}
+  \Delta w_{ij} = r_i \, r'_j- \alpha \,  {r'_j}^2 \, w_{ij}
 \]</div>
 <p>Depending on <span class="math notranslate nohighlight">\(\gamma\)</span>, the top-down signal contributes to the activity, it implements a continuum between unsupervised and supervised Hebbian learning.
 The weight change does not depend on the actual performance, therefore error correcting learning rules are required.</p>
-<div class="figure align-default" id="id18">
+<div class="figure align-default" id="id20">
 <a class="reference internal image-reference" href="../_images/Grossberg88_TopDown.png"><img alt="../_images/Grossberg88_TopDown.png" src="../_images/Grossberg88_TopDown.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4.36 </span><span class="caption-text">Source: Grossberg, S. (1988). Nonlinear neural networks: Principles, mechanisms, and architectures. Neural Networks, 1(1), 17–61. https://doi.org/10.1016/0893-6080(88)90021-4</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 4.37 </span><span class="caption-text">Source: Grossberg, S. (1988). Nonlinear neural networks: Principles, mechanisms, and architectures. Neural Networks, 1(1), 17–61. https://doi.org/10.1016/0893-6080(88)90021-4</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

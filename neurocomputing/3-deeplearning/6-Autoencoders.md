@@ -175,7 +175,7 @@ Clustering can be applied on the latent representations. Source: <doi:10.1007/97
 
 ## Variational autoencoders (VAE)
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/up6pSBxEeP0' frameborder='0' allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src='https://www.youtube.com/embed/XhBI14qOzXg' frameborder='0' allowfullscreen></iframe></div>
 
 ### Motivation
 
@@ -450,21 +450,28 @@ When generating the deepfake, the decoder of person B is used on the latent repr
 
 #### $\beta$-VAE
 
-The VAE makes the assumption that the latent space follows a **multivariate normal distribution**:
 
-$$q_\phi(\mathbf{z}|\mathbf{x}) = \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$$
+VAE does not use a regularization parameter to balance the reconstruction and regularization losses. What happens if you do?
 
-Other families of distributions can be used, for example the **beta distribution** parameterized by two parameters $\alpha$ and $\beta$:
+$$\begin{aligned}
+    \mathcal{L}(\theta, \phi) &= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \beta \, \mathcal{L}_\text{regularization}(\phi) \\
+    &= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
+\end{aligned}$$
 
-$$f(x; \alpha, \beta) = C \, x^{\alpha-1} \, (1 - x)^{\beta -1}$$
+Using $\beta > 1$ puts emphasis on learning statistically independent latent factors.
 
-The beta distribution makes less assumption about the shape of the latent distribution.  The $\beta$-VAE {cite}`Higgins2016` is more flexible than VAE and additionally allows to better **disentangle** (i.e. interpret) the latent variables.
+The $\beta$-VAE {cite}`Higgins2016` allows to **disentangle** the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).
 
-```{figure} ../img/betadistribution.gif
+
+```{figure} ../img/betavae-results.png
 ---
-width: 60%
+width: 100%
 ---
-Beta distribution. Source: <https://en.wikipedia.org/wiki/Beta_distribution>.
+$\beta$-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. {cite}`Higgins2016`.
+```
+
+```{note}
+See <https://worldmodels.github.io/> for a live demo in the RL context.
 ```
 
 
