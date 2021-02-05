@@ -25,6 +25,15 @@ $$
 \Delta w_{ij} = \eta \, r_i \, r_j
 $$
 
+where $r_i$ is the pre-synaptic activity of neuron $i$, $r_j$ the post-synaptic activity of neuron $j$ and $w_{ij}$ the weight from neuron $i$ to $j$. 
+
+```{figure} ../img/hebb-single.svg
+---
+width: 30%
+---
+Two connected neurons.
+```
+
 Hebbian learning requires no other information than the activities, such as labels or error signals: it is an **unsupervised learning** method.
 Hebbian learning is not a concrete learning rule, it is a postulate on the fundamental principle of biological learning.
 Because of its unsupervised nature, it will rather learn frequent properties of the input statistics than task-specific properties. It is also called a **correlation-based** learning rule.
@@ -50,7 +59,7 @@ $$
 In the most basic formulation, learning depends only on the presynaptic $r_i$ and postsynaptic $r_j$ firing rates and a learning rate $\eta$ (correlation-based learning principle):
 
 $$
- \Delta w_{ij} = \eta \cdot r_i r_j
+ \Delta w_{ij} = \eta \, r_i \, r_j
 $$
 
 If the postsynaptic activity is computed over multiple input synapses:
@@ -105,9 +114,9 @@ Note that with covariance-based learning, weight can both increase (LTP) and dec
 Some variants of covariance-based Hebbian only use a threshold on one of the terms:
 
 $$\begin{aligned}
-\Delta w_{ij} &= \eta \, r_i(r_j-\theta) = \eta \, (r_i \, r_j -  \theta \, r_i)\\
+\Delta w_{ij} &= \eta \, r_i \, (r_j-\theta) = \eta \, (r_i \, r_j -  \theta \, r_i)\\
 &\\
-\Delta w_{ij} &= \eta (r_i-\theta)\, r_j = \eta (r_i \, r_j- \theta \, r_j)
+\Delta w_{ij} &= \eta \, (r_i-\theta) \, r_j = \eta \, (r_i \, r_j- \theta \, r_j)
 \end{aligned}$$
 
 The previous implementations lack any bound for the weight increase. 
@@ -156,11 +165,11 @@ To come to the solution the relation between input and output $r_j = \mathbf{r} 
 
 ### Bienenstock-Cooper-Monroe (BCM) learning rule
 
-In the Bienenstock-Cooper-Monroe (BCM) learning rule {cite}`Bienenstock1982`, the threshold $\theta$ averages the square of the post-synaptic activity, i.e. its second moment ($\approx$ variance).
+In the Bienenstock-Cooper-Monroe (BCM) learning rule {cite}`Bienenstock1982` {cite}`Intrator1992`, the threshold $\theta$ averages the square of the post-synaptic activity, i.e. its second moment ($\approx$ variance).
 
 
 $$\begin{aligned}
-\Delta w_{ij} &= \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij})\\
+\Delta w_{ij} &= \eta \, r_i \, (r_j - \theta) \, r_j \,  f'(net)\\
 &\\
 \theta &= \mathbb{E} [r_j^2] \\
 \end{aligned}$$
@@ -204,7 +213,7 @@ A network of these neurons appears not very useful, as all neurons will just lea
 
 ```{figure} ../img/perceptron_FF.svg
 ---
-width: 40%
+width: 30%
 ---
 ```
 
@@ -228,7 +237,7 @@ There are several methods existing differentiating the neuron responses, e.g.:
 
 ```{figure} ../img/perceptron_R.svg
 ---
-width: 40%
+width: 30%
 ---
 ```
 
@@ -266,13 +275,13 @@ Hebbian learning can easily turned into anti-Hebbian learning by switching the s
 Covariance-based weight change {cite}`Vogels2011`:
 
 $$
-\Delta c_{ij} = r_i r_j - r_i \rho_0
+\Delta c_{ij} = r_i \, r_j - r_i \, \rho_0
 $$
 
 Weight relative to covariance:
 
 $$
-  \Delta c_{ij} = r_i r_j - r_i\rho_0 (1 + c_{ij})
+  \Delta c_{ij} = r_i \, r_j - r_i \, \rho_0 \, (1 + c_{ij})
 $$
 
 The equilibrium point of the equation is reached, when the weight indicates by which factor the product of the expectation values $r_i \rho_0$ has to be multiplied to be equal to the expectation value of the product of the activities $r_i r_j$.
@@ -300,7 +309,7 @@ There are two issues:
 * A single pattern can get dominant because of differences in the activity.
 
 $$
-  E(w_{ij}) = E(r_i r_j)-E(r_i)E(r_j)
+  E(w_{ij}) = E(r_i \, r_j) - E(r_i) \, E(r_j)
 $$
 
 If the activity of a particular input neuron $r_i$ is by average higher than the activity of other input neurons, then its weight value gets higher than the weight of a similarly correlated but less active neuron. 
@@ -318,13 +327,16 @@ This can be avoided by aiming for a similar operating point of the neurons, by k
 In Hebbian learning, the amount of weight decrease and increase can be regulated to achieve a certain activity range. {cite}`Clopath2010` regulate the strength of the weight decrease $A_{LTD}$ by relating the average membrane potential $\bar{\bar u}$ to a reference value $u_{ref}^2$, defining a target activity with that:
 
 $$
-    A_{LTD}(\bar{\bar u})=A_{LTD} \frac{\bar{\bar u}^2}{u_{ref}^2}
+    A_{LTD}(\bar{\bar u})=A_{LTD} \, \frac{\bar{\bar u}^2}{u_{ref}^2}
 $$
 
 BCM learning adapts the threshold based on the average activity of the neuron, facilitating or impeding weight increases and decreases:
 
 $$
-\Delta w_{ij} = \eta \, (r_i \, (r_j - \theta) \, r_j - \epsilon \, w_{ij}) \; \; \theta = \mathbb{E} [r_j^2]
+\Delta w_{ij} = \eta \, r_i \, (r_j - \theta) \, r_j \, f'(net)
+$$
+$$
+  \theta = \mathbb{E} [r_j^2]
 $$
 
 In anti-Hebbian learning, the amount of inhibition a neuron receives is up or downregulated to achieve a certain average activity. {cite}`Vogels2011` define a target activity of the postsynaptic neuron $\rho_0$, the amount of inhibition is up or downregulated to reach this activity:
@@ -357,7 +369,7 @@ Second option: regulating the first moments of activity (mean, variance) and by 
 Teichmann and Hamker (2015) adapt the parameters of a rectified linear transfer function, by regulating the threshold $\theta_j$ and slope $a_j$, to achieve a similar mean and variance of all neurons within a layer:
   
 $$
-    \Delta r_j = a_j \left( \sum_iw_{ij}r_i - \sum_{k, k \ne j} c_{kj}r_k - \theta_j \right) -r_j
+    \Delta r_j = a_j \left( \sum_i w_{ij} \, r_i - \sum_{k, k \ne j} c_{kj} \, r_k - \theta_j \right) -r_j
 $$
 $$
     \Delta \theta_j = (r_j - \theta_{target})
@@ -384,7 +396,7 @@ Recurrent connectivity in the visual cortex. Source: Schmidt, M., Diesmann, M. a
 In supervised Hebbian learning the postsynaptic activity is fully controlled. With that the subset of inputs which should evoke activity can be selected.
 
 $$
-  \Delta w_{ij} = r_i t - \alpha w_{ij}
+  \Delta w_{ij} = r_i \, t - \alpha \, w_{ij}
 $$
 
 The supervised Hebbian learning principle can be extended to a form of top-down learning. 
@@ -393,10 +405,10 @@ A top-down signal, conveying additional modulatory information, modulates or con
 We can illustrate the effect by splitting the plasticity term into bottom-up and the top-down parts.
 
 $$
-  r'_j= \gamma r_j + (1-\gamma) t
+  r'_j= \gamma \, r_j + (1-\gamma) \, t
 $$
 $$
-  \Delta w_{ij} = r_i r'_j- \alpha {r'_j}^2 w_{ij}
+  \Delta w_{ij} = r_i \, r'_j- \alpha \,  {r'_j}^2 \, w_{ij}
 $$
 
 Depending on $\gamma$, the top-down signal contributes to the activity, it implements a continuum between unsupervised and supervised Hebbian learning.
