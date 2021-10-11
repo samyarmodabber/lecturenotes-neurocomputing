@@ -671,7 +671,7 @@ seq2seq architecture. Source: {cite}`Sutskever2014`.
 
 
 
-The **encoder** learns for example to predict the next word in a sentence in French. The **decoder** learns to associate the **final state vector** to the corresponding English sentence. seq2seq allows automatic text translation between many languages given enough data. Modern translation tools are based on seq2seq, but with attention.
+The **encoder** learns for example to encode each word of a sentence in French. The **decoder** learns to associate the **final state vector** to the corresponding English sentence. seq2seq allows automatic text translation between many languages given enough data. Modern translation tools are based on seq2seq, but with attention.
 
 
 ## Attentional recurrent networks

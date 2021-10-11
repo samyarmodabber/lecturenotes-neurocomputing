@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6. Autoencoders &#8212; Neurocomputing</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -35,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -45,10 +42,10 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -60,23 +57,14 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Restricted Boltzmann machines (optional)" href="7-RBM.html" />
     <link rel="prev" title="5. Semantic segmentation" href="5-SemanticSegmentation.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/6-Autoencoders.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Autoencoders" />
-<meta property="og:description" content="Autoencoders  Slides: pdf  Autoencoders  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/bW2jYMdaPZk&#39; frameborder=&#39;0&#39; allowfullscreen&gt;&lt;/" />
-<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -85,32 +73,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/tuc.svg" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/tuc.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
    Neurocomputing
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../1-intro/1-Introduction.html">
    1. Introduction
@@ -127,12 +119,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Linear models
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../2-linear/1-Optimization.html">
    1. Optimization
@@ -164,12 +156,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Deep learning
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1-NN.html">
    1. Artificial neural networks
@@ -216,12 +208,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Neurocomputing
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
    1. Limits of deep learning
@@ -248,17 +240,22 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/1-Python.html">
      1.1. Notebook
@@ -270,14 +267,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
    2. Numpy and Matplotlib
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/2-Numpy.html">
      2.1. Notebook
@@ -289,14 +289,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
    3. Linear regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
      3.1. Notebook
@@ -308,14 +311,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex4-MLR.html">
    4. Multiple Linear Regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/4-MLR.html">
      4.1. Notebook
@@ -327,14 +333,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
    5. Cross-validation
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
      5.1. Notebook
@@ -346,14 +355,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
    6. Linear classification
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
      6.1. Notebook
@@ -365,14 +377,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
    7. Softmax classifier
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
      7.1. Notebook
@@ -384,14 +399,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex8-MLP.html">
    8. Multi-layer perceptron
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/8-MLP.html">
      8.1. Notebook
@@ -403,14 +421,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
    9. MNIST classification using keras
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/9-MNIST.html">
      9.1. Notebook
@@ -422,14 +443,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex10-CNN.html">
    10. Convolutional neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/10-CNN.html">
      10.1. Notebook
@@ -441,14 +465,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
    11. Transfer learning
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
      11.1. Notebook
@@ -460,14 +487,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex12-VAE.html">
    12. Variational autoencoder
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/12-VAE.html">
      12.1. Notebook
@@ -479,14 +509,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex13-RNN.html">
    13. Recurrent neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/13-RNN.html">
      13.1. Notebook
@@ -498,16 +531,14 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   References
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../zreferences.html">
    1. Bibliography
@@ -515,6 +546,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -530,21 +562,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -562,27 +594,27 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
    6.1. Autoencoders
@@ -702,8 +734,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -734,10 +766,10 @@
 \]</div>
 <p>An autoencoder uses <strong>unsupervised learning</strong>: the output data used for learning is the same as the input data: No need for labels!</p>
 <p>By forcing the projection of the input data on a feature space with less dimensions (<strong>latent space</strong>), the network has to extract relevant <strong>features</strong> from the training data: Dimensionality reduction, compression.</p>
-<p>If the latent space has more dimensions than the input space, we need to <strong>constrain</strong> the autoencoder so that it does not simply learn the identity mapping. Below is an example of a sparse autoencoder trained on natural images <a class="bibtex reference internal" href="../zreferences.html#olshausen1997" id="id2">[Olshausen &amp; Field, 1997]</a>.</p>
+<p>If the latent space has more dimensions than the input space, we need to <strong>constrain</strong> the autoencoder so that it does not simply learn the identity mapping. Below is an example of a sparse autoencoder trained on natural images <span id="id2">[<a class="reference internal" href="../zreferences.html#id140">Olshausen &amp; Field, 1997</a>]</span>.</p>
 <div class="figure align-default" id="id15">
 <a class="reference internal image-reference" href="../_images/result-autoencoder.png"><img alt="../_images/result-autoencoder.png" src="../_images/result-autoencoder.png" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Sparse autoencoder trained on natural images <a class="bibtex reference internal" href="../zreferences.html#olshausen1997" id="id3">[Olshausen &amp; Field, 1997]</a>.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Sparse autoencoder trained on natural images <span id="id3">[<a class="reference internal" href="../zreferences.html#id140">Olshausen &amp; Field, 1997</a>]</span>.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>Inputs are taken from random natural images and cut in 10*10 patches. 100 features are extracted in the hidden layer. The autoencoder is said <strong>sparse</strong> because it uses <strong>L1-regularization</strong> to make sure that only a few neurons are active in the hidden layer for a particular image. The learned features look like what the first layer of a CNN would learn, except that there was no labels at all! Can we take advantage of this to pre-train a supervised network?</p>
 </div>
@@ -799,7 +831,7 @@
 <p>The encoder and decoder can be anything: fully-connected, convolutional, recurrent, etc. When using convolutional layers, the decoder has to <strong>upsample</strong> the latent space: max-unpooling or transposed convolutions can be used as in segmentation networks.</p>
 <div class="figure align-default" id="id21">
 <a class="reference internal image-reference" href="../_images/convolutionalAE.png"><img alt="../_images/convolutionalAE.png" src="../_images/convolutionalAE.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.22 </span><span class="caption-text">Deep convolutional autoencoder. Source: <a class="bibtex reference internal" href="../zreferences.html#guo2017" id="id4">[Guo et al., 2017]</a>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.22 </span><span class="caption-text">Deep convolutional autoencoder. Source: <span id="id4">[<a class="reference internal" href="../zreferences.html#id60">Guo et al., 2017</a>]</span>.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 <p>In <strong>semi-supervised</strong> or <strong>self-taught</strong> learning, we can first train an autoencoder on huge amounts of unlabeled data, and then use the latent representations as an input to a shallow classifier on a small supervised dataset.</p>
 <div class="figure align-default" id="id22">
@@ -810,7 +842,7 @@
 </div>
 <div class="section" id="denoising-autoencoders">
 <h3><span class="section-number">6.3.2. </span>Denoising autoencoders<a class="headerlink" href="#denoising-autoencoders" title="Permalink to this headline">¶</a></h3>
-<p>A <strong>denoising autoencoder</strong> (DAE, <a class="bibtex reference internal" href="../zreferences.html#vincent2010" id="id5">[Vincent et al., 2010]</a>) is trained with noisy inputs (some pixels are dropped) but perfect desired outputs. It learns to suppress that noise.</p>
+<p>A <strong>denoising autoencoder</strong> (DAE, <span id="id5">[<a class="reference internal" href="../zreferences.html#id188">Vincent et al., 2010</a>]</span>) is trained with noisy inputs (some pixels are dropped) but perfect desired outputs. It learns to suppress that noise.</p>
 <div class="figure align-default" id="id23">
 <a class="reference internal image-reference" href="../_images/denoisingautoencoder.png"><img alt="../_images/denoisingautoencoder.png" src="../_images/denoisingautoencoder.png" style="width: 100%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.24 </span><span class="caption-text">Denoising autoencoder. Source:  <a class="reference external" href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
@@ -848,7 +880,7 @@
 </div>
 <div class="section" id="architecture">
 <h3><span class="section-number">6.4.2. </span>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h3>
-<p>The <strong>variational autoencoder</strong> (VAE) <a class="bibtex reference internal" href="../zreferences.html#kingma2013" id="id6">[Kingma &amp; Welling, 2013]</a> solves this problem by having the encoder represent the <strong>probability distribution</strong> <span class="math notranslate nohighlight">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> instead of a point <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in the latent space.</p>
+<p>The <strong>variational autoencoder</strong> (VAE) <span id="id6">[<a class="reference internal" href="../zreferences.html#id103">Kingma &amp; Welling, 2013</a>]</span> solves this problem by having the encoder represent the <strong>probability distribution</strong> <span class="math notranslate nohighlight">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> instead of a point <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> in the latent space.</p>
 <p>This probability distribution is then <strong>sampled</strong> to obtain a vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> that will be passed to the decoder <span class="math notranslate nohighlight">\(p_\theta(\mathbf{z})\)</span>. The strong hypothesis is that the latent space follows a <strong>normal distribution</strong> with mean <span class="math notranslate nohighlight">\(\mathbf{\mu_x}\)</span> and variance <span class="math notranslate nohighlight">\(\mathbf{\sigma_x}^2\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -858,7 +890,7 @@
 <div class="admonition-sampling-from-a-normal-distribution admonition">
 <p class="admonition-title">Sampling from a normal distribution</p>
 <div class="figure align-default" id="id28">
-<a class="reference internal image-reference" href="../_images/normaldistribution1.svg"><img alt="../_images/normaldistribution1.svg" src="../_images/normaldistribution1.svg" width="70%" /></a>
+<a class="reference internal image-reference" href="../_images/normaldistribution.svg"><img alt="../_images/normaldistribution.svg" src="../_images/normaldistribution.svg" width="70%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.29 </span><span class="caption-text">Sampling from a normal distribution.</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
 </div>
 <p>The normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span> is fully defined by its two parameters:</p>
@@ -901,7 +933,7 @@
 <p>The first term is the usual <strong>reconstruction loss</strong> of an autoencoder which depends on both the encoder and the decoder. One could simply compute the <strong>mse</strong> (summed over all pixels) between the input and the reconstruction:</p>
 <div class="math notranslate nohighlight">
 \[ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ ||p_\theta(\mathbf{z}) - \mathbf{x}||^2 ]\]</div>
-<p>In the expectation, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is sampled from the dataset <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> while <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is sampled from the encoder <span class="math notranslate nohighlight">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span>. In <a class="bibtex reference internal" href="../zreferences.html#kingma2013" id="id7">[Kingma &amp; Welling, 2013]</a>, pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:</p>
+<p>In the expectation, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is sampled from the dataset <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> while <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is sampled from the encoder <span class="math notranslate nohighlight">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span>. In <span id="id7">[<a class="reference internal" href="../zreferences.html#id103">Kingma &amp; Welling, 2013</a>]</span>, pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:</p>
 <div class="math notranslate nohighlight">
 \[ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]\]</div>
 <p>The justification comes from variational inference and evidence lower-bound optimization (ELBO) but is out of the scope of this lecture.</p>
@@ -937,7 +969,7 @@ $<span class="math notranslate nohighlight">\(
 \[
     \text{KL}(X ||Y) = \mathbb{E}_{x \sim X}[- \log \frac{P(Y=x)}{P(X=x)}]
 \]</div>
-<p><img alt="" src="../_images/crossentropy2.svg" /></p>
+<p><img alt="" src="../_images/crossentropy.svg" /></p>
 <p>When the two distributions are equal almost anywhere, the KL divergence is 0. Otherwise it is positive. <strong>Minimizing the KL divergence between two distributions makes them close in the statistical sense</strong>.</p>
 </div>
 <p>The advantage of minimizing the KL of <span class="math notranslate nohighlight">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> with <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> is that the KL takes a <strong>closed form</strong>, i.e. there is no need to compute the expectation over all possible latent representations <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>:</p>
@@ -1035,10 +1067,10 @@ $<span class="math notranslate nohighlight">\(
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
 \end{aligned}\end{split}\]</div>
 <p>Using <span class="math notranslate nohighlight">\(\beta &gt; 1\)</span> puts emphasis on learning statistically independent latent factors.</p>
-<p>The <span class="math notranslate nohighlight">\(\beta\)</span>-VAE <a class="bibtex reference internal" href="../zreferences.html#higgins2016" id="id8">[Higgins et al., 2016]</a> allows to <strong>disentangle</strong> the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).</p>
+<p>The <span class="math notranslate nohighlight">\(\beta\)</span>-VAE <span id="id8">[<a class="reference internal" href="../zreferences.html#id73">Higgins et al., 2016</a>]</span> allows to <strong>disentangle</strong> the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).</p>
 <div class="figure align-default" id="id38">
 <a class="reference internal image-reference" href="../_images/betavae-results.png"><img alt="../_images/betavae-results.png" src="../_images/betavae-results.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.39 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\beta\)</span>-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. <a class="bibtex reference internal" href="../zreferences.html#higgins2016" id="id9">[Higgins et al., 2016]</a>.</span><a class="headerlink" href="#id38" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.39 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\beta\)</span>-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. <span id="id9">[<a class="reference internal" href="../zreferences.html#id73">Higgins et al., 2016</a>]</span>.</span><a class="headerlink" href="#id38" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1047,14 +1079,14 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="section" id="vq-vae">
 <h4><span class="section-number">6.4.6.3. </span>VQ-VAE<a class="headerlink" href="#vq-vae" title="Permalink to this headline">¶</a></h4>
-<p>Deepmind researchers proposed VQ-VAE-2 <a class="bibtex reference internal" href="../zreferences.html#razavi2019" id="id10">[Razavi et al., 2019]</a>, a hierarchical VAE using vector-quantized priors able to generate high-resolution images.</p>
+<p>Deepmind researchers proposed VQ-VAE-2 <span id="id10">[<a class="reference internal" href="../zreferences.html#id152">Razavi et al., 2019</a>]</span>, a hierarchical VAE using vector-quantized priors able to generate high-resolution images.</p>
 <div class="figure align-default" id="id39">
 <a class="reference internal image-reference" href="../_images/vqvae.png"><img alt="../_images/vqvae.png" src="../_images/vqvae.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.40 </span><span class="caption-text">VQ-VAE-2 <a class="bibtex reference internal" href="../zreferences.html#razavi2019" id="id11">[Razavi et al., 2019]</a>.</span><a class="headerlink" href="#id39" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.40 </span><span class="caption-text">VQ-VAE-2 <span id="id11">[<a class="reference internal" href="../zreferences.html#id152">Razavi et al., 2019</a>]</span>.</span><a class="headerlink" href="#id39" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id40">
 <a class="reference internal image-reference" href="../_images/vqvae-results.png"><img alt="../_images/vqvae-results.png" src="../_images/vqvae-results.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.41 </span><span class="caption-text">Faces generated by VQ-VAE-2 <a class="bibtex reference internal" href="../zreferences.html#razavi2019" id="id12">[Razavi et al., 2019]</a>.</span><a class="headerlink" href="#id40" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6.41 </span><span class="caption-text">Faces generated by VQ-VAE-2 <span id="id12">[<a class="reference internal" href="../zreferences.html#id152">Razavi et al., 2019</a>]</span>.</span><a class="headerlink" href="#id40" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="conditional-variational-autoencoder-cvae">
@@ -1064,7 +1096,7 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="../_images/cvae-structure.svg"><img alt="../_images/cvae-structure.svg" src="../_images/cvae-structure.svg" width="100%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.42 </span><span class="caption-text">Conditional VAE. Source: <a class="reference external" href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></span><a class="headerlink" href="#id41" title="Permalink to this image">¶</a></p>
 </div>
-<p>When trained with labels, the <strong>conditional variational autoencoder</strong> (CVAE <a class="bibtex reference internal" href="../zreferences.html#sohn2015" id="id13">[Sohn et al., 2015]</a>) becomes able to sample many images of the same class.</p>
+<p>When trained with labels, the <strong>conditional variational autoencoder</strong> (CVAE <span id="id13">[<a class="reference internal" href="../zreferences.html#id175">Sohn et al., 2015</a>]</span>) becomes able to sample many images of the same class.</p>
 <div class="figure align-default" id="id42">
 <a class="reference internal image-reference" href="../_images/cvae-generation.svg"><img alt="../_images/cvae-generation.svg" src="../_images/cvae-generation.svg" width="100%" /></a>
 <p class="caption"><span class="caption-number">Fig. 6.43 </span><span class="caption-text">Conditional VAE. Source: <a class="reference external" href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></span><a class="headerlink" href="#id42" title="Permalink to this image">¶</a></p>
@@ -1268,23 +1300,43 @@ $<span class="math notranslate nohighlight">\(
 
               </div>
               
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="5-SemanticSegmentation.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">5. </span>Semantic segmentation</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="7-RBM.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">7. </span>Restricted Boltzmann machines (optional)</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
         </div>
     </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="5-SemanticSegmentation.html" title="previous page"><span class="section-number">5. </span>Semantic segmentation</a>
-    <a class='right-next' id="next-link" href="7-RBM.html" title="next page"><span class="section-number">7. </span>Restricted Boltzmann machines (optional)</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
           By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
           <div class="extra_footer">
             Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
           </div>
@@ -1296,11 +1348,9 @@ $<span class="math notranslate nohighlight">\(
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  
   </body>
 </html>
