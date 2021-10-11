@@ -15,7 +15,20 @@ sphinx:
   extra_extensions: ['IPython.sphinxext.ipython_console_highlighting']
 
 parse:
-  myst_extended_syntax: true
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    # - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+
+bibtex_bibfiles:
+    - DeepLearning.bib
 
 # Information about where the book exists on the web
 repository:
@@ -23,7 +36,8 @@ repository:
   path_to_book              : neurocomputing  # Optional path to your book, relative to the repository root
   branch                    : master  # Which branch of the repository should be used when creating links (optional)
 
-launch_buttons:
+launch_button- html_images:
+  notebook_interface        : jupyterlab
   colab_url: "https://colab.research.google.com"
   binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
 
@@ -33,7 +47,7 @@ html:
   extra_footer              : "Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence"  # Will be displayed underneath the footer.
   home_page_in_navbar       : true  # Whether to include your home page in the left Navigation Bar
   baseurl                   : "https://julien-vitay.net/lecturenotes-neurocomputing"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
-
+  use_multitoc_numbering: false
 
 execute:
   execute_notebooks         : "off"  # Whether to execute notebooks at build time. Must be one of ("auto", "force", "cache", "off")

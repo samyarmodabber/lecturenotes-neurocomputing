@@ -1,137 +1,125 @@
-- file: intro
+format: jb-book
+root: intro
+options:
   numbered: true
-
-- part: Introduction
+parts:
+- caption: Introduction
+  numbered: true
   chapters:
-    - file: 1-intro/1-Introduction
-    - file: 1-intro/2-Math
-    - file: 1-intro/3-Neurons
-
-- part: Linear models
+  - file: 1-intro/1-Introduction
+  - file: 1-intro/2-Math
+  - file: 1-intro/3-Neurons
+- caption: Linear models
+  numbered: true
   chapters:
-    - file: 2-linear/1-Optimization
-    - file: 2-linear/2-LinearRegression
-    - file: 2-linear/3-Regularization
-    - file: 2-linear/4-LinearClassification
-    - file: 2-linear/5-Multiclassification
-    - file: 2-linear/6-LearningTheory
-
-- part: Deep learning
+  - file: 2-linear/1-Optimization
+  - file: 2-linear/2-LinearRegression
+  - file: 2-linear/3-Regularization
+  - file: 2-linear/4-LinearClassification
+  - file: 2-linear/5-Multiclassification
+  - file: 2-linear/6-LearningTheory
+- caption: Deep learning
+  numbered: true
   chapters:
-    - file: 3-deeplearning/1-NN
-    - file: 3-deeplearning/2-DNN
-    - file: 3-deeplearning/3-CNN
-    - file: 3-deeplearning/4-ObjectDetection
-    - file: 3-deeplearning/5-SemanticSegmentation
-    - file: 3-deeplearning/6-Autoencoders
-    - file: 3-deeplearning/7-RBM
-    - file: 3-deeplearning/8-GAN
-    - file: 3-deeplearning/9-RNN
-
-- part: Neurocomputing
+  - file: 3-deeplearning/1-NN
+  - file: 3-deeplearning/2-DNN
+  - file: 3-deeplearning/3-CNN
+  - file: 3-deeplearning/4-ObjectDetection
+  - file: 3-deeplearning/5-SemanticSegmentation
+  - file: 3-deeplearning/6-Autoencoders
+  - file: 3-deeplearning/7-RBM
+  - file: 3-deeplearning/8-GAN
+  - file: 3-deeplearning/9-RNN
+- caption: Neurocomputing
+  numbered: true
   chapters:
-    - file: 4-neurocomputing/1-Limits
-    - file: 4-neurocomputing/2-Hopfield
-#     - file: 4-neurocomputing/3-NeuralFields
-    - file: 4-neurocomputing/4-Reservoir
-    - file: 4-neurocomputing/5-Hebbian
-    - file: 4-neurocomputing/6-Spiking
-
-- part: Exercises
+  - file: 4-neurocomputing/1-Limits
+  - file: 4-neurocomputing/2-Hopfield
+  - file: 4-neurocomputing/4-Reservoir
+  - file: 4-neurocomputing/5-Hebbian
+  - file: 4-neurocomputing/6-Spiking
+- caption: Exercises
+  numbered: true
   chapters:
-    - file: 5-exercises/ex1-Python
-      sections:
-        - file: 5-exercises/1-Python
-          title: Notebook
-        - file: 5-exercises/1-Python-solution
-          title: Solution
-          
-    - file: 5-exercises/ex2-Numpy
-      sections:
-        - file: 5-exercises/2-Numpy
-          title: Notebook
-        - file: 5-exercises/2-Numpy-solution
-          title: Solution
-
-    - file: 5-exercises/ex3-LinearRegression
-      sections:
-        - file: 5-exercises/3-LinearRegression
-          title: Notebook
-        - file: 5-exercises/3-LinearRegression-solution
-          title: Solution
-
-    - file: 5-exercises/ex4-MLR
-      sections:
-        - file: 5-exercises/4-MLR
-          title: Notebook
-        - file: 5-exercises/4-MLR-solution
-          title: Solution
-
-    - file: 5-exercises/ex5-Crossvalidation
-      sections:
-        - file: 5-exercises/5-Crossvalidation
-          title: Notebook
-        - file: 5-exercises/5-Crossvalidation-solution
-          title: Solution
-
-    - file: 5-exercises/ex6-LinearClassification
-      sections:
-        - file: 5-exercises/6-LinearClassification
-          title: Notebook
-        - file: 5-exercises/6-LinearClassification-solution
-          title: Solution
-
-
-    - file: 5-exercises/ex7-SoftmaxClassifier
-      sections:
-        - file: 5-exercises/7-SoftmaxClassifier
-          title: Notebook
-        - file: 5-exercises/7-SoftmaxClassifier-solution
-          title: Solution
-
-    - file: 5-exercises/ex8-MLP
-      sections:
-        - file: 5-exercises/8-MLP
-          title: Notebook
-        - file: 5-exercises/8-MLP-solution
-          title: Solution
-
-    - file: 5-exercises/ex9-MNIST
-      sections:
-        - file: 5-exercises/9-MNIST
-          title: Notebook
-        - file: 5-exercises/9-MNIST-solution
-          title: Solution
-
-    - file: 5-exercises/ex10-CNN
-      sections:
-        - file: 5-exercises/10-CNN
-          title: Notebook
-        - file: 5-exercises/10-CNN-solution
-          title: Solution
-
-    - file: 5-exercises/ex11-TransferLearning
-      sections:
-        - file: 5-exercises/11-TransferLearning
-          title: Notebook
-        - file: 5-exercises/11-TransferLearning-solution
-          title: Solution
-
-    - file: 5-exercises/ex12-VAE
-      sections:
-        - file: 5-exercises/12-VAE
-          title: Notebook
-        - file: 5-exercises/12-VAE-solution
-          title: Solution
-
-    - file: 5-exercises/ex13-RNN
-      sections:
-        - file: 5-exercises/13-RNN
-          title: Notebook
-        - file: 5-exercises/13-RNN-solution
-          title: Solution
-
-
-- part: References
+  - file: 5-exercises/ex1-Python
+    sections:
+    - file: 5-exercises/1-Python
+      title: Notebook
+    - file: 5-exercises/1-Python-solution
+      title: Solution
+  - file: 5-exercises/ex2-Numpy
+    sections:
+    - file: 5-exercises/2-Numpy
+      title: Notebook
+    - file: 5-exercises/2-Numpy-solution
+      title: Solution
+  - file: 5-exercises/ex3-LinearRegression
+    sections:
+    - file: 5-exercises/3-LinearRegression
+      title: Notebook
+    - file: 5-exercises/3-LinearRegression-solution
+      title: Solution
+  - file: 5-exercises/ex4-MLR
+    sections:
+    - file: 5-exercises/4-MLR
+      title: Notebook
+    - file: 5-exercises/4-MLR-solution
+      title: Solution
+  - file: 5-exercises/ex5-Crossvalidation
+    sections:
+    - file: 5-exercises/5-Crossvalidation
+      title: Notebook
+    - file: 5-exercises/5-Crossvalidation-solution
+      title: Solution
+  - file: 5-exercises/ex6-LinearClassification
+    sections:
+    - file: 5-exercises/6-LinearClassification
+      title: Notebook
+    - file: 5-exercises/6-LinearClassification-solution
+      title: Solution
+  - file: 5-exercises/ex7-SoftmaxClassifier
+    sections:
+    - file: 5-exercises/7-SoftmaxClassifier
+      title: Notebook
+    - file: 5-exercises/7-SoftmaxClassifier-solution
+      title: Solution
+  - file: 5-exercises/ex8-MLP
+    sections:
+    - file: 5-exercises/8-MLP
+      title: Notebook
+    - file: 5-exercises/8-MLP-solution
+      title: Solution
+  - file: 5-exercises/ex9-MNIST
+    sections:
+    - file: 5-exercises/9-MNIST
+      title: Notebook
+    - file: 5-exercises/9-MNIST-solution
+      title: Solution
+  - file: 5-exercises/ex10-CNN
+    sections:
+    - file: 5-exercises/10-CNN
+      title: Notebook
+    - file: 5-exercises/10-CNN-solution
+      title: Solution
+  - file: 5-exercises/ex11-TransferLearning
+    sections:
+    - file: 5-exercises/11-TransferLearning
+      title: Notebook
+    - file: 5-exercises/11-TransferLearning-solution
+      title: Solution
+  - file: 5-exercises/ex12-VAE
+    sections:
+    - file: 5-exercises/12-VAE
+      title: Notebook
+    - file: 5-exercises/12-VAE-solution
+      title: Solution
+  - file: 5-exercises/ex13-RNN
+    sections:
+    - file: 5-exercises/13-RNN
+      title: Notebook
+    - file: 5-exercises/13-RNN-solution
+      title: Solution
+- caption: References
+  numbered: true
   chapters:
-    - file: zreferences
+  - file: zreferences

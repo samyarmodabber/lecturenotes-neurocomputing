@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3. Convolutional neural networks &#8212; Neurocomputing</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -35,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -45,10 +42,10 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -60,23 +57,14 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Object detection" href="4-ObjectDetection.html" />
     <link rel="prev" title="2. Deep neural networks" href="2-DNN.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/3-deeplearning/3-CNN.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Convolutional neural networks" />
-<meta property="og:description" content="Convolutional neural networks  Slides: pdf  Convolutional neural networks  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/2KASQi7avYA&#39; " />
-<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -85,32 +73,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/tuc.svg" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/tuc.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
    Neurocomputing
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../1-intro/1-Introduction.html">
    1. Introduction
@@ -127,12 +119,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Linear models
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../2-linear/1-Optimization.html">
    1. Optimization
@@ -164,12 +156,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Deep learning
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1-NN.html">
    1. Artificial neural networks
@@ -216,12 +208,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Neurocomputing
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../4-neurocomputing/1-Limits.html">
    1. Limits of deep learning
@@ -248,17 +240,22 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/1-Python.html">
      1.1. Notebook
@@ -270,14 +267,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
    2. Numpy and Matplotlib
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/2-Numpy.html">
      2.1. Notebook
@@ -289,14 +289,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
    3. Linear regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
      3.1. Notebook
@@ -308,14 +311,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex4-MLR.html">
    4. Multiple Linear Regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/4-MLR.html">
      4.1. Notebook
@@ -327,14 +333,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
    5. Cross-validation
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
      5.1. Notebook
@@ -346,14 +355,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
    6. Linear classification
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
      6.1. Notebook
@@ -365,14 +377,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
    7. Softmax classifier
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
      7.1. Notebook
@@ -384,14 +399,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex8-MLP.html">
    8. Multi-layer perceptron
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/8-MLP.html">
      8.1. Notebook
@@ -403,14 +421,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
    9. MNIST classification using keras
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/9-MNIST.html">
      9.1. Notebook
@@ -422,14 +443,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex10-CNN.html">
    10. Convolutional neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/10-CNN.html">
      10.1. Notebook
@@ -441,14 +465,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
    11. Transfer learning
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
      11.1. Notebook
@@ -460,14 +487,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex12-VAE.html">
    12. Variational autoencoder
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/12-VAE.html">
      12.1. Notebook
@@ -479,14 +509,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex13-RNN.html">
    13. Recurrent neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/13-RNN.html">
      13.1. Notebook
@@ -498,16 +531,14 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   References
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../zreferences.html">
    1. Bibliography
@@ -515,6 +546,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -530,21 +562,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -562,27 +594,27 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
    3.1. Convolutional neural networks
@@ -748,8 +780,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -816,7 +848,7 @@
 </div>
 <div class="section" id="convolution-with-strides">
 <h3><span class="section-number">3.1.4. </span>Convolution with strides<a class="headerlink" href="#convolution-with-strides" title="Permalink to this headline">¶</a></h3>
-<p>Convolution with strides <a class="bibtex reference internal" href="../zreferences.html#springenberg2015" id="id2">[Springenberg et al., 2015]</a> is an alternative to max-pooling layers. The convolution simply “jumps” one pixel when sliding over the image (stride 2). This results in a smaller feature map, using much less operations than a convolution with stride 1 followed by max-pooling, for the same performance.
+<p>Convolution with strides <span id="id2">[<a class="reference internal" href="../zreferences.html#id176">Springenberg et al., 2015</a>]</span> is an alternative to max-pooling layers. The convolution simply “jumps” one pixel when sliding over the image (stride 2). This results in a smaller feature map, using much less operations than a convolution with stride 1 followed by max-pooling, for the same performance.
 They are particularly useful for generative models (VAE, GAN, etc).</p>
 <div class="figure align-default" id="id44">
 <a class="reference internal image-reference" href="../_images/padding_strides.gif"><img alt="../_images/padding_strides.gif" src="../_images/padding_strides.gif" style="width: 50%;" /></a>
@@ -868,7 +900,7 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>A <strong>convolutional neural network</strong> (CNN) is a cascade of convolution and pooling operations, extracting layer by layer increasingly  complex features. The spatial dimensions decrease after each pooling operation, but the number of extracted features increases after each convolution. One usually stops when the spatial dimensions are around 7x7. The last layers are fully connected (classical MLP). Training a CNN uses backpropagation all along: the convolution and pooling operations are differentiable.</p>
 <div class="figure align-default" id="id50">
 <a class="reference internal image-reference" href="../_images/lenet.png"><img alt="../_images/lenet.png" src="../_images/lenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.53 </span><span class="caption-text">Convolutional Neural Network. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id4">[LeCun et al., 1998]</a>.</span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.53 </span><span class="caption-text">Convolutional Neural Network. <span id="id4">[<a class="reference internal" href="../zreferences.html#id117">LeCun et al., 1998</a>]</span>.</span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition-implementing-a-cnn-in-keras admonition">
 <p class="admonition-title">Implementing a CNN in keras</p>
@@ -917,76 +949,76 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <div class='embed-container'><iframe src='https://www.youtube.com/embed/pw-sFY3UqG4' frameborder='0' allowfullscreen></iframe></div>
 <div class="section" id="neocognitron">
 <h3><span class="section-number">3.2.1. </span>Neocognitron<a class="headerlink" href="#neocognitron" title="Permalink to this headline">¶</a></h3>
-<p>The <strong>Neocognitron</strong> (Fukushima, 1980 <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id5">[Fukushima, 1980]</a>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
+<p>The <strong>Neocognitron</strong> (Fukushima, 1980 <span id="id5">[<a class="reference internal" href="../zreferences.html#id42">Fukushima, 1980</a>]</span>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
 <div class="figure align-default" id="id51">
 <a class="reference internal image-reference" href="../_images/Neocognitron.jpg"><img alt="../_images/Neocognitron.jpg" src="../_images/Neocognitron.jpg" style="width: 80%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.54 </span><span class="caption-text">Neocognitron. <a class="bibtex reference internal" href="../zreferences.html#fukushima1980" id="id6">[Fukushima, 1980]</a>. Source: <a class="reference external" href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.54 </span><span class="caption-text">Neocognitron. <span id="id6">[<a class="reference internal" href="../zreferences.html#id42">Fukushima, 1980</a>]</span>. Source: <a class="reference external" href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="lenet">
 <h3><span class="section-number">3.2.2. </span>LeNet<a class="headerlink" href="#lenet" title="Permalink to this headline">¶</a></h3>
-<p><strong>LeNet</strong> (1998, Yann LeCun at AT&amp;T labs <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id7">[LeCun et al., 1998]</a>) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two <strong>mean</strong>-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).</p>
+<p><strong>LeNet</strong> (1998, Yann LeCun at AT&amp;T labs <span id="id7">[<a class="reference internal" href="../zreferences.html#id117">LeCun et al., 1998</a>]</span>) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two <strong>mean</strong>-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).</p>
 <div class="figure align-default" id="id52">
 <a class="reference internal image-reference" href="../_images/lenet.png"><img alt="../_images/lenet.png" src="../_images/lenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.55 </span><span class="caption-text">LeNet5. <a class="bibtex reference internal" href="../zreferences.html#lecun1998" id="id8">[LeCun et al., 1998]</a>.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.55 </span><span class="caption-text">LeNet5. <span id="id8">[<a class="reference internal" href="../zreferences.html#id117">LeCun et al., 1998</a>]</span>.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="alexnet">
 <h3><span class="section-number">3.2.3. </span>AlexNet<a class="headerlink" href="#alexnet" title="Permalink to this headline">¶</a></h3>
-<p><strong>AlexNet</strong> (2012, Toronto University <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id9">[Krizhevsky et al., 2012]</a>) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.</p>
+<p><strong>AlexNet</strong> (2012, Toronto University <span id="id9">[<a class="reference internal" href="../zreferences.html#id109">Krizhevsky et al., 2012</a>]</span>) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.</p>
 <div class="figure align-default" id="id53">
 <a class="reference internal image-reference" href="../_images/alexnet.png"><img alt="../_images/alexnet.png" src="../_images/alexnet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.56 </span><span class="caption-text">Alexnet <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id10">[Krizhevsky et al., 2012]</a>.</span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.56 </span><span class="caption-text">Alexnet <span id="id10">[<a class="reference internal" href="../zreferences.html#id109">Krizhevsky et al., 2012</a>]</span>.</span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="vgg-16">
 <h3><span class="section-number">3.2.4. </span>VGG-16<a class="headerlink" href="#vgg-16" title="Permalink to this headline">¶</a></h3>
-<p><strong>VGG-16</strong> (2014, Visual Geometry Group, Oxford <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id11">[Simonyan &amp; Zisserman, 2015]</a>) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.</p>
+<p><strong>VGG-16</strong> (2014, Visual Geometry Group, Oxford <span id="id11">[<a class="reference internal" href="../zreferences.html#id173">Simonyan &amp; Zisserman, 2015</a>]</span>) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.</p>
 <div class="figure align-default" id="id54">
 <a class="reference internal image-reference" href="../_images/vgg16.png"><img alt="../_images/vgg16.png" src="../_images/vgg16.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.57 </span><span class="caption-text">VGG-16 <a class="bibtex reference internal" href="../zreferences.html#simonyan2015" id="id12">[Simonyan &amp; Zisserman, 2015]</a>.</span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.57 </span><span class="caption-text">VGG-16 <span id="id12">[<a class="reference internal" href="../zreferences.html#id173">Simonyan &amp; Zisserman, 2015</a>]</span>.</span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="googlenet-inception-v1">
 <h3><span class="section-number">3.2.5. </span>GoogLeNet - Inception v1<a class="headerlink" href="#googlenet-inception-v1" title="Permalink to this headline">¶</a></h3>
-<p><strong>GoogLeNet</strong> (2014, Google Brain <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id13">[Szegedy et al., 2015]</a>) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.</p>
+<p><strong>GoogLeNet</strong> (2014, Google Brain <span id="id13">[<a class="reference internal" href="../zreferences.html#id183">Szegedy et al., 2015</a>]</span>) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.</p>
 <div class="figure align-default" id="id55">
 <a class="reference internal image-reference" href="../_images/googlenet-arch.jpg"><img alt="../_images/googlenet-arch.jpg" src="../_images/googlenet-arch.jpg" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.58 </span><span class="caption-text">GoogLeNet <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id14">[Szegedy et al., 2015]</a>.</span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.58 </span><span class="caption-text">GoogLeNet <span id="id14">[<a class="reference internal" href="../zreferences.html#id183">Szegedy et al., 2015</a>]</span>.</span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
 </div>
 <p>Inside GoogleNet, each <strong>Inception</strong> module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math notranslate nohighlight">\((w, h, d_1)\)</span> tensor into <span class="math notranslate nohighlight">\((w, h, d_2)\)</span> pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.</p>
 <div class="figure align-default" id="id56">
 <a class="reference internal image-reference" href="../_images/inception.png"><img alt="../_images/inception.png" src="../_images/inception.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.59 </span><span class="caption-text">Inception module <a class="bibtex reference internal" href="../zreferences.html#szegedy2015" id="id15">[Szegedy et al., 2015]</a>.</span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.59 </span><span class="caption-text">Inception module <span id="id15">[<a class="reference internal" href="../zreferences.html#id183">Szegedy et al., 2015</a>]</span>.</span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
 </div>
 <p>Three softmax layers predict the classes at different levels of the network. The combined loss is:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]\]</div>
 <p>Only the deeper softmax layer matters for the prediction. The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.</p>
-<p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception… Xception <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id16">[Chollet, 2017b]</a> has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in <code class="docutils literal notranslate"><span class="pre">keras</span></code>:</p>
+<p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception… Xception <span id="id16">[<a class="reference internal" href="../zreferences.html#id29">Chollet, 2017b</a>]</span> has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in <code class="docutils literal notranslate"><span class="pre">keras</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">Xception</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s2">&quot;imagenet&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-default" id="id57">
 <a class="reference internal image-reference" href="../_images/inceptionv3.png"><img alt="../_images/inceptionv3.png" src="../_images/inceptionv3.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.60 </span><span class="caption-text">Inception v3 <a class="bibtex reference internal" href="../zreferences.html#chollet2017b" id="id17">[Chollet, 2017b]</a>. Source: <a class="reference external" href="https://cloud.google.com/tpu/docs/inception-v3-advanced">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.60 </span><span class="caption-text">Inception v3 <span id="id17">[<a class="reference internal" href="../zreferences.html#id29">Chollet, 2017b</a>]</span>. Source: <a class="reference external" href="https://cloud.google.com/tpu/docs/inception-v3-advanced">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="resnet">
 <h3><span class="section-number">3.2.6. </span>ResNet<a class="headerlink" href="#resnet" title="Permalink to this headline">¶</a></h3>
-<p><strong>ResNet</strong> (2015, Microsoft <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id18">[He et al., 2015a]</a>) won ImageNet 2015. Instead of learning to transform an input directly with <span class="math notranslate nohighlight">\(\mathbf{h}_n = f_W(\mathbf{h}_{n-1})\)</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p>
+<p><strong>ResNet</strong> (2015, Microsoft <span id="id18">[<a class="reference internal" href="../zreferences.html#id69">He et al., 2015a</a>]</span>) won ImageNet 2015. Instead of learning to transform an input directly with <span class="math notranslate nohighlight">\(\mathbf{h}_n = f_W(\mathbf{h}_{n-1})\)</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
 \]</div>
 <div class="figure align-default" id="id58">
 <a class="reference internal image-reference" href="../_images/resnetlayer.jpg"><img alt="../_images/resnetlayer.jpg" src="../_images/resnetlayer.jpg" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.61 </span><span class="caption-text">Residual layer with skip connections  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id19">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.61 </span><span class="caption-text">Residual layer with skip connections  <span id="id19">[<a class="reference internal" href="../zreferences.html#id69">He et al., 2015a</a>]</span>.</span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
 </div>
 <p>These <strong>skip connections</strong> allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.</p>
 <div class="figure align-default" id="id59">
 <a class="reference internal image-reference" href="../_images/resnet2.png"><img alt="../_images/resnet2.png" src="../_images/resnet2.png" style="width: 20%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.62 </span><span class="caption-text">ResNet  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id20">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.62 </span><span class="caption-text">ResNet  <span id="id20">[<a class="reference internal" href="../zreferences.html#id69">He et al., 2015a</a>]</span>.</span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
 </div>
 <p>Skip connections help overcome the <strong>vanishing gradients</strong> problem, as the contribution of bypassed layers to the backpropagated gradient is 1.</p>
 <div class="math notranslate nohighlight">
@@ -1002,12 +1034,12 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>It was the first network to make an heavy use of <strong>batch normalization</strong>.</p>
 <div class="figure align-default" id="id60">
 <a class="reference internal image-reference" href="../_images/resnet-block.png"><img alt="../_images/resnet-block.png" src="../_images/resnet-block.png" style="width: 40%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.63 </span><span class="caption-text">Residual block  <a class="bibtex reference internal" href="../zreferences.html#he2015" id="id21">[He et al., 2015a]</a>.</span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.63 </span><span class="caption-text">Residual block  <span id="id21">[<a class="reference internal" href="../zreferences.html#id69">He et al., 2015a</a>]</span>.</span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="highnets-highway-networks">
 <h3><span class="section-number">3.2.7. </span>HighNets: Highway networks<a class="headerlink" href="#highnets-highway-networks" title="Permalink to this headline">¶</a></h3>
-<p><strong>Highway networks</strong> (IDSIA <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id22">[Srivastava et al., 2015]</a>) are residual networks which also learn to balance inputs with feature extraction:</p>
+<p><strong>Highway networks</strong> (IDSIA <span id="id22">[<a class="reference internal" href="../zreferences.html#id178">Srivastava et al., 2015</a>]</span>) are residual networks which also learn to balance inputs with feature extraction:</p>
 <div class="math notranslate nohighlight">
 \[
     \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
@@ -1015,15 +1047,15 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>The balance between the <strong>primary</strong> pathway and the <strong>skip</strong> pathway adapts to the task. It has been used up to 1000 layers and improved state-of-the-art accuracy on MNIST and CIFAR-10.</p>
 <div class="figure align-default" id="id61">
 <a class="reference internal image-reference" href="../_images/highway.png"><img alt="../_images/highway.png" src="../_images/highway.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.64 </span><span class="caption-text">Highway network  <a class="bibtex reference internal" href="../zreferences.html#srivastava2015" id="id23">[Srivastava et al., 2015]</a>.</span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.64 </span><span class="caption-text">Highway network  <span id="id23">[<a class="reference internal" href="../zreferences.html#id178">Srivastava et al., 2015</a>]</span>.</span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="densenets-dense-networks">
 <h3><span class="section-number">3.2.8. </span>DenseNets: Dense networks<a class="headerlink" href="#densenets-dense-networks" title="Permalink to this headline">¶</a></h3>
-<p><strong>Dense networks</strong> (Cornell University &amp; Facebook AI <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id24">[Huang et al., 2018]</a>) are residual networks that can learn <strong>bypasses</strong> between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.</p>
+<p><strong>Dense networks</strong> (Cornell University &amp; Facebook AI <span id="id24">[<a class="reference internal" href="../zreferences.html#id82">Huang et al., 2018</a>]</span>) are residual networks that can learn <strong>bypasses</strong> between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.</p>
 <div class="figure align-default" id="id62">
 <a class="reference internal image-reference" href="../_images/densenetworks.png"><img alt="../_images/densenetworks.png" src="../_images/densenetworks.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.65 </span><span class="caption-text">Dense network  <a class="bibtex reference internal" href="../zreferences.html#huang2018" id="id25">[Huang et al., 2018]</a>.</span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.65 </span><span class="caption-text">Dense network  <span id="id25">[<a class="reference internal" href="../zreferences.html#id82">Huang et al., 2018</a>]</span>.</span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="model-zoos">
@@ -1069,31 +1101,31 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p><strong>Object recognition</strong> has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like <strong>ImageNet</strong> (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.</p>
 <div class="figure align-default" id="id64">
 <a class="reference internal image-reference" href="../_images/objrecog.png"><img alt="../_images/objrecog.png" src="../_images/objrecog.png" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.67 </span><span class="caption-text">Object recognition on ImageNet. Source <a class="bibtex reference internal" href="../zreferences.html#krizhevsky2012" id="id26">[Krizhevsky et al., 2012]</a>.</span><a class="headerlink" href="#id64" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.67 </span><span class="caption-text">Object recognition on ImageNet. Source <span id="id26">[<a class="reference internal" href="../zreferences.html#id109">Krizhevsky et al., 2012</a>]</span>.</span><a class="headerlink" href="#id64" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="facial-recognition">
 <h3><span class="section-number">3.3.2. </span>Facial recognition<a class="headerlink" href="#facial-recognition" title="Permalink to this headline">¶</a></h3>
-<p>Facebook used 4.4 million annotated faces from 4030 users to train <strong>DeepFace</strong> <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id27">[Taigman et al., 2014]</a>. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p>
+<p>Facebook used 4.4 million annotated faces from 4030 users to train <strong>DeepFace</strong> <span id="id27">[<a class="reference internal" href="../zreferences.html#id184">Taigman et al., 2014</a>]</span>. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p>
 <div class="figure align-default" id="id65">
 <a class="reference internal image-reference" href="../_images/deepface.png"><img alt="../_images/deepface.png" src="../_images/deepface.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.68 </span><span class="caption-text">DeepFace. Source <a class="bibtex reference internal" href="../zreferences.html#taigman2014" id="id28">[Taigman et al., 2014]</a>.</span><a class="headerlink" href="#id65" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.68 </span><span class="caption-text">DeepFace. Source <span id="id28">[<a class="reference internal" href="../zreferences.html#id184">Taigman et al., 2014</a>]</span>.</span><a class="headerlink" href="#id65" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="pose-estimation">
 <h3><span class="section-number">3.3.3. </span>Pose estimation<a class="headerlink" href="#pose-estimation" title="Permalink to this headline">¶</a></h3>
-<p><strong>PoseNet</strong> <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id29">[Kendall et al., 2016]</a> is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.</p>
+<p><strong>PoseNet</strong> <span id="id29">[<a class="reference internal" href="../zreferences.html#id98">Kendall et al., 2016</a>]</span> is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.</p>
 <div class="figure align-default" id="id66">
 <a class="reference internal image-reference" href="../_images/posnet-face.gif"><img alt="../_images/posnet-face.gif" src="../_images/posnet-face.gif" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.69 </span><span class="caption-text">PoseNet <a class="bibtex reference internal" href="../zreferences.html#kendall2016" id="id30">[Kendall et al., 2016]</a>. Source:  <a class="reference external" href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></span><a class="headerlink" href="#id66" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.69 </span><span class="caption-text">PoseNet <span id="id30">[<a class="reference internal" href="../zreferences.html#id98">Kendall et al., 2016</a>]</span>. Source:  <a class="reference external" href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></span><a class="headerlink" href="#id66" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="speech-recognition">
 <h3><span class="section-number">3.3.4. </span>Speech recognition<a class="headerlink" href="#speech-recognition" title="Permalink to this headline">¶</a></h3>
-<p>To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. <strong>DeepSpeech</strong> <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id31">[Hannun et al., 2014]</a> from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.</p>
+<p>To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. <strong>DeepSpeech</strong> <span id="id31">[<a class="reference internal" href="../zreferences.html#id66">Hannun et al., 2014</a>]</span> from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.</p>
 <div class="figure align-default" id="id67">
 <a class="reference internal image-reference" href="../_images/deepspeech.png"><img alt="../_images/deepspeech.png" src="../_images/deepspeech.png" style="width: 60%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.70 </span><span class="caption-text">DeepSpeech. Source <a class="bibtex reference internal" href="../zreferences.html#hannun2014" id="id32">[Hannun et al., 2014]</a>.</span><a class="headerlink" href="#id67" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.70 </span><span class="caption-text">DeepSpeech. Source <span id="id32">[<a class="reference internal" href="../zreferences.html#id66">Hannun et al., 2014</a>]</span>.</span><a class="headerlink" href="#id67" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="sentiment-analysis">
@@ -1101,19 +1133,19 @@ They are particularly useful for generative models (VAE, GAN, etc).</p>
 <p>It is also possible to apply convolutions on text. <strong>Sentiment analysis</strong> assigns a positive or negative judgment to sentences. Each word is represented by a vector of values (word2vec). The convolutional layer can slide over all over words to find out the sentiment of the sentence.</p>
 <div class="figure align-default" id="id68">
 <a class="reference internal image-reference" href="../_images/sentimentanalysis.png"><img alt="../_images/sentimentanalysis.png" src="../_images/sentimentanalysis.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.71 </span><span class="caption-text">Sentiment analysis. Source <a class="bibtex reference internal" href="../zreferences.html#kim2014" id="id33">[Kim, 2014]</a>.</span><a class="headerlink" href="#id68" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.71 </span><span class="caption-text">Sentiment analysis. Source <span id="id33">[<a class="reference internal" href="../zreferences.html#id100">Kim, 2014</a>]</span>.</span><a class="headerlink" href="#id68" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="wavenet-text-to-speech-synthesis">
 <h3><span class="section-number">3.3.6. </span>Wavenet : text-to-speech synthesis<a class="headerlink" href="#wavenet-text-to-speech-synthesis" title="Permalink to this headline">¶</a></h3>
-<p><strong>Text-To-Speech</strong> (TTS) is also possible using CNNs. Google Home relies on <strong>Wavenet</strong> <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id34">[Oord et al., 2016]</a>, a complex CNN using <em>dilated convolutions</em> to grasp long-term dependencies.</p>
+<p><strong>Text-To-Speech</strong> (TTS) is also possible using CNNs. Google Home relies on <strong>Wavenet</strong> <span id="id34">[<a class="reference internal" href="../zreferences.html#id141">Oord et al., 2016</a>]</span>, a complex CNN using <em>dilated convolutions</em> to grasp long-term dependencies.</p>
 <div class="figure align-default" id="id69">
 <a class="reference internal image-reference" href="../_images/wavenet.png"><img alt="../_images/wavenet.png" src="../_images/wavenet.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.72 </span><span class="caption-text">Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id35">[Oord et al., 2016]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id69" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.72 </span><span class="caption-text">Wavenet <span id="id35">[<a class="reference internal" href="../zreferences.html#id141">Oord et al., 2016</a>]</span>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id69" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id70">
 <a class="reference internal image-reference" href="../_images/wavenet-dilated.gif"><img alt="../_images/wavenet-dilated.gif" src="../_images/wavenet-dilated.gif" style="width: 70%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3.73 </span><span class="caption-text">Dilated convolutions in Wavenet <a class="bibtex reference internal" href="../zreferences.html#oord2016" id="id36">[Oord et al., 2016]</a>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id70" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 3.73 </span><span class="caption-text">Dilated convolutions in Wavenet <span id="id36">[<a class="reference internal" href="../zreferences.html#id141">Oord et al., 2016</a>]</span>.  Source: <a class="reference external" href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></span><a class="headerlink" href="#id70" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -1259,23 +1291,43 @@ A <strong>random forest</strong> is for example a bagging method for decision tr
 
               </div>
               
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="2-DNN.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>Deep neural networks</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="4-ObjectDetection.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">4. </span>Object detection</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
         </div>
     </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="2-DNN.html" title="previous page"><span class="section-number">2. </span>Deep neural networks</a>
-    <a class='right-next' id="next-link" href="4-ObjectDetection.html" title="next page"><span class="section-number">4. </span>Object detection</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
           By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
           <div class="extra_footer">
             Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
           </div>
@@ -1287,11 +1339,9 @@ A <strong>random forest</strong> is for example a bagging method for decision tr
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  
   </body>
 </html>

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2. Hopfield networks &#8212; Neurocomputing</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -35,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -45,10 +42,10 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -60,23 +57,14 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Reservoir computing" href="4-Reservoir.html" />
     <link rel="prev" title="1. Limits of deep learning" href="1-Limits.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://julien-vitay.net/lecturenotes-neurocomputing/4-neurocomputing/2-Hopfield.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Hopfield networks" />
-<meta property="og:description" content="Hopfield networks  Slides: pdf  Associative memory  &lt;div class=&#39;embed-container&#39;&gt;&lt;iframe src=&#39;https://www.youtube.com/embed/uKHDr7Kamiw&#39; frameborder=&#39;0&#39; allowfu" />
-<meta property="og:image"       content="https://julien-vitay.net/lecturenotes-neurocomputing/_static/tuc.svg" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -85,32 +73,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/tuc.svg" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Neurocomputing</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/tuc.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Neurocomputing</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
    Neurocomputing
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../1-intro/1-Introduction.html">
    1. Introduction
@@ -127,12 +119,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Linear models
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../2-linear/1-Optimization.html">
    1. Optimization
@@ -164,12 +156,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Deep learning
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../3-deeplearning/1-NN.html">
    1. Artificial neural networks
@@ -216,12 +208,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Neurocomputing
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1-Limits.html">
    1. Limits of deep learning
@@ -248,17 +240,22 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex1-Python.html">
    1. Introduction to Python
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/1-Python.html">
      1.1. Notebook
@@ -270,14 +267,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex2-Numpy.html">
    2. Numpy and Matplotlib
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/2-Numpy.html">
      2.1. Notebook
@@ -289,14 +289,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex3-LinearRegression.html">
    3. Linear regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/3-LinearRegression.html">
      3.1. Notebook
@@ -308,14 +311,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex4-MLR.html">
    4. Multiple Linear Regression
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/4-MLR.html">
      4.1. Notebook
@@ -327,14 +333,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex5-Crossvalidation.html">
    5. Cross-validation
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/5-Crossvalidation.html">
      5.1. Notebook
@@ -346,14 +355,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex6-LinearClassification.html">
    6. Linear classification
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/6-LinearClassification.html">
      6.1. Notebook
@@ -365,14 +377,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex7-SoftmaxClassifier.html">
    7. Softmax classifier
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/7-SoftmaxClassifier.html">
      7.1. Notebook
@@ -384,14 +399,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex8-MLP.html">
    8. Multi-layer perceptron
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/8-MLP.html">
      8.1. Notebook
@@ -403,14 +421,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex9-MNIST.html">
    9. MNIST classification using keras
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/9-MNIST.html">
      9.1. Notebook
@@ -422,14 +443,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex10-CNN.html">
    10. Convolutional neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/10-CNN.html">
      10.1. Notebook
@@ -441,14 +465,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex11-TransferLearning.html">
    11. Transfer learning
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/11-TransferLearning.html">
      11.1. Notebook
@@ -460,14 +487,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex12-VAE.html">
    12. Variational autoencoder
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/12-VAE.html">
      12.1. Notebook
@@ -479,14 +509,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../5-exercises/ex13-RNN.html">
    13. Recurrent neural networks
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../5-exercises/13-RNN.html">
      13.1. Notebook
@@ -498,16 +531,14 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   References
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../zreferences.html">
    1. Bibliography
@@ -515,6 +546,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -530,21 +562,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -562,27 +594,27 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#associative-memory">
    2.1. Associative memory
@@ -637,8 +669,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -670,7 +702,7 @@ An item can be retrieved by just knowing part of its content: <strong>content-ad
 <div class="admonition-auto-associative-memory admonition">
 <p class="admonition-title">Auto-associative memory</p>
 <p>Hmunas rmebmeer iamprtnot envtes in tiher leivs. You mihgt be albe to rlecal eervy deiatl of yuor frist eaxm at cllgeoe; or of yuor fsirt pbuilc sepceh; or of yuor frsit day in katigrneedrn; or the fisrt tmie you wnet to a new scohol atefr yuor fimlay mveod to a new ctiy. Hmaun moemry wkors wtih asncisoatois. If you haer the vicoe of an old fernid on the pnohe, you may slntesnoauopy rlaecl seortis taht you had not tghuoht of for yares. If you are hrgnuy and see a pcturie of a bnaana, you mihgt vdivliy rclael the ttsae and semll of a bnanaa and teerbhy rieazle taht you are ideend hngury. In tihs lcterue, we peesrnt modles of nrueal ntkweros taht dbriecse the rcaell of puielovsry seortd imtes form mmorey.</p>
-<p>Text scrambler by http://www.stevesachs.com/jumbler.cgi</p>
+<p>Text scrambler by <a class="reference external" href="http://www.stevesachs.com/jumbler.cgi">http://www.stevesachs.com/jumbler.cgi</a></p>
 </div>
 <p>The classical approach to auto-associative memrories is the <strong>nearest neighbour</strong> algorithm (KNN). One compares a new input to each of the training examples using a given metric (distance) and assigns the input to the closest example.</p>
 <div class="figure align-default" id="id13">
@@ -705,7 +737,7 @@ Hetero-associative memories often work in both directions (bidirectional associa
 <a class="reference internal image-reference" href="../_images/Recurrent-versus-feedforward-neural-network.png"><img alt="../_images/Recurrent-versus-feedforward-neural-network.png" src="../_images/Recurrent-versus-feedforward-neural-network.png" style="width: 80%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.62 </span><span class="caption-text">Feedforward networks and RNN have no dynamics. Source: <a class="reference external" href="https://www.researchgate.net/publication/266204519_A_Survey_on_the_Application_of_Recurrent_Neural_Networks_to_Statistical_Language_Modeling">https://www.researchgate.net/publication/266204519_A_Survey_on_the_Application_of_Recurrent_Neural_Networks_to_Statistical_Language_Modeling</a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
-<p><strong>Hopfield networks</strong> <a class="bibtex reference internal" href="../zreferences.html#hopfield1982a" id="id2">[Hopfield, 1982]</a> only depend on a single input (one constant value per neuron) and their previous output using <strong>recurrent weights</strong>:</p>
+<p><strong>Hopfield networks</strong> <span id="id2">[<a class="reference internal" href="../zreferences.html#id79">Hopfield, 1982</a>]</span> only depend on a single input (one constant value per neuron) and their previous output using <strong>recurrent weights</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{y}_t = f(\mathbf{x} + W \times \mathbf{y}_{t-1} + \mathbf{b})\]</div>
 <p>For a single constant input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, one lets the network <strong>converge</strong> for enough time steps <span class="math notranslate nohighlight">\(T\)</span> and observe what the final output <span class="math notranslate nohighlight">\(\mathbf{y}_T\)</span> is.</p>
@@ -860,7 +892,7 @@ Other patterns have higher energies and are <strong>attracted</strong> by the cl
 <a class="reference internal image-reference" href="../_images/hopfield_energy_landscape.png"><img alt="../_images/hopfield_energy_landscape.png" src="../_images/hopfield_energy_landscape.png" style="width: 100%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2.66 </span><span class="caption-text">Energy landscape. Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Hopfield_network">https://en.wikipedia.org/wiki/Hopfield_network</a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
-<p>It can be shown <a class="bibtex reference internal" href="../zreferences.html#mceliece1987" id="id3">[McEliece et al., 1987]</a> that for a network with <span class="math notranslate nohighlight">\(N\)</span> units, one can store up to <span class="math notranslate nohighlight">\(0.14 N\)</span> different patterns:</p>
+<p>It can be shown <span id="id3">[<a class="reference internal" href="../zreferences.html#id128">McEliece et al., 1987</a>]</span> that for a network with <span class="math notranslate nohighlight">\(N\)</span> units, one can store up to <span class="math notranslate nohighlight">\(0.14 N\)</span> different patterns:</p>
 <div class="math notranslate nohighlight">
 \[C \approx 0.14 \, N\]</div>
 <p>If you have 1000 neurons, you can store 140 patterns. As you need 1 million weights for it, it is not very efficient…</p>
@@ -943,7 +975,7 @@ The retrieved patterns will be a linear combination of the stored patterns, what
 <div class="math notranslate nohighlight">
 \[\mathbf{y} = \pm \, \text{sign}(\alpha_1 \, \mathbf{y}^1 + \alpha_2 \, \mathbf{y}^2 + \dots + \alpha_P \, \mathbf{y}^P)\]</div>
 <p>A spurious pattern has never seen by the network, but is remembered like other memories (hallucinations).</p>
-<p><strong>Unlearning</strong> methods <a class="bibtex reference internal" href="../zreferences.html#hopfield1983" id="id4">[Hopfield et al., 1983]</a> use a <strong>sleep / wake cycle</strong>:</p>
+<p><strong>Unlearning</strong> methods <span id="id4">[<a class="reference internal" href="../zreferences.html#id80">Hopfield et al., 1983</a>]</span> use a <strong>sleep / wake cycle</strong>:</p>
 <ul class="simple">
 <li><p>When the network is awake, it remembers patterns.</p></li>
 <li><p>When the network sleeps (dreams), it unlearns spurious patterns.</p></li>
@@ -1002,20 +1034,20 @@ The retrieved patterns will be a linear combination of the stored patterns, what
 <p><span class="math notranslate nohighlight">\(-((\mathbf{y}^k)^T \times \mathbf{y})^2\)</span> has minimum when <span class="math notranslate nohighlight">\(\mathbf{y} = \mathbf{y}^k\)</span>.
 Quadratic functions are very wide, so it is hard to avoid <strong>overlap</strong> between the patterns.
 If we had a <strong>sharper</strong> energy functions, could not we store more patterns and avoid interference?</p>
-<p>Yes. We could define the energy function as a polynomial function of order <span class="math notranslate nohighlight">\(a&gt; 2\)</span> <a class="bibtex reference internal" href="../zreferences.html#krotov2016" id="id5">[Krotov &amp; Hopfield, 2016]</a>:</p>
+<p>Yes. We could define the energy function as a polynomial function of order <span class="math notranslate nohighlight">\(a&gt; 2\)</span> <span id="id5">[<a class="reference internal" href="../zreferences.html#id110">Krotov &amp; Hopfield, 2016</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[
     E(\mathbf{y}) = -\frac{1}{P} \, \sum_{k=1}^P  ((\mathbf{y}^k)^T \times \mathbf{y})^a
 \]</div>
 <p>and get a polynomial capacity <span class="math notranslate nohighlight">\(C \approx \alpha_a \, N^{a-1}\)</span>.
-Or even an exponential function <span class="math notranslate nohighlight">\(a = \infty\)</span> <a class="bibtex reference internal" href="../zreferences.html#demircigil2017" id="id6">[Demircigil et al., 2017]</a>:</p>
+Or even an exponential function <span class="math notranslate nohighlight">\(a = \infty\)</span> <span id="id6">[<a class="reference internal" href="../zreferences.html#id33">Demircigil et al., 2017</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[
     E(\mathbf{y}) = - \frac{1}{P} \, \sum_{k=1}^P  \exp((\mathbf{y}^k)^T \times \mathbf{y})
 \]</div>
 <p>and get an exponential capacity <span class="math notranslate nohighlight">\(C \approx 2^{\frac{N}{2}}\)</span>! One could store exponentially more patterns than neurons.
 The question is then: <strong>which update rule would minimize these energies?</strong></p>
-<p><a class="bibtex reference internal" href="../zreferences.html#krotov2016" id="id7">[Krotov &amp; Hopfield, 2016]</a> and <a class="bibtex reference internal" href="../zreferences.html#demircigil2017" id="id8">[Demircigil et al., 2017]</a> show that the binary units <span class="math notranslate nohighlight">\(y_i\)</span> can still be updated asynchronously by comparing the energy of the model with the unit <strong>on or off</strong>:</p>
+<p><span id="id7">[<a class="reference internal" href="../zreferences.html#id110">Krotov &amp; Hopfield, 2016</a>]</span> and <span id="id8">[<a class="reference internal" href="../zreferences.html#id33">Demircigil et al., 2017</a>]</span> show that the binary units <span class="math notranslate nohighlight">\(y_i\)</span> can still be updated asynchronously by comparing the energy of the model with the unit <strong>on or off</strong>:</p>
 <div class="math notranslate nohighlight">
 \[y_i = \text{sign}(- E(y_i = +1) + E(y_i=-1))\]</div>
 <p>If the energy is lower with the unit on than with the unit off, turn it on! Otherwise turn it off.
@@ -1034,7 +1066,7 @@ Convergence occurs in only one step (one update per neuron).</p>
 </div>
 <div class="section" id="hopfield-networks-is-all-you-need-optional">
 <h2><span class="section-number">2.4. </span>Hopfield networks is all you need (optional)<a class="headerlink" href="#hopfield-networks-is-all-you-need-optional" title="Permalink to this headline">¶</a></h2>
-<p><a class="bibtex reference internal" href="../zreferences.html#ramsauer2020" id="id9">[Ramsauer et al., 2020]</a> extend the principle to <strong>continuous patterns</strong>, i.e. vectors.
+<p><span id="id9">[<a class="reference internal" href="../zreferences.html#id149">Ramsauer et al., 2020</a>]</span> extend the principle to <strong>continuous patterns</strong>, i.e. vectors.
 Let’s put our <span class="math notranslate nohighlight">\(P\)</span> patterns <span class="math notranslate nohighlight">\((\mathbf{y}^1, \mathbf{y}^2, \dots, \mathbf{y}^P)\)</span> in a <span class="math notranslate nohighlight">\(N \times P\)</span> matrix:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1090,7 +1122,7 @@ Which other words in the sentence are related to the current word?</p>
 \]</div>
 <p>This makes the representation of a word more context-related.
 The representations <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(X\)</span> can be learned using weight matrices, so backpropagation can be used.
-This was the key insight of the <strong>Transformer</strong> network <a class="bibtex reference internal" href="../zreferences.html#vaswani2017" id="id10">[Vaswani et al., 2017]</a> that has replaced attentional RNNs in NLP.</p>
+This was the key insight of the <strong>Transformer</strong> network <span id="id10">[<a class="reference internal" href="../zreferences.html#id187">Vaswani et al., 2017</a>]</span> that has replaced attentional RNNs in NLP.</p>
 <p><strong>Hopfield layers</strong> can replace the transformer self-attention with a better performance.
 The transformer network was introduced with the title “Attention is all you need”, hence the title of this paper…
 The authors claim that a Hopfield layer can also replace fully-connected layers, LSTM layers, attentional layers, but also SVM, KNN or LVQ…</p>
@@ -1123,23 +1155,43 @@ The authors claim that a Hopfield layer can also replace fully-connected layers,
 
               </div>
               
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="1-Limits.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title"><span class="section-number">1. </span>Limits of deep learning</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="4-Reservoir.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title"><span class="section-number">3. </span>Reservoir computing</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
         </div>
     </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="1-Limits.html" title="previous page"><span class="section-number">1. </span>Limits of deep learning</a>
-    <a class='right-next' id="next-link" href="4-Reservoir.html" title="next page"><span class="section-number">3. </span>Reservoir computing</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
           By Julien Vitay - julien.vitay@informatik.tu-chemnitz.de<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
           <div class="extra_footer">
             Technische Universität Chemnitz - Faculty of Computer Science - Professorship for Artificial Intelligence
           </div>
@@ -1151,11 +1203,9 @@ The authors claim that a Hopfield layer can also replace fully-connected layers,
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  
   </body>
 </html>
