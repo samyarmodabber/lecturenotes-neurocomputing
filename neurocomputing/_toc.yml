@@ -30,6 +30,7 @@ parts:
   - file: 3-deeplearning/7-RBM
   - file: 3-deeplearning/8-GAN
   - file: 3-deeplearning/9-RNN
+  - file: 3-deeplearning/10-Attention
 - caption: Neurocomputing
   numbered: true
   chapters:
